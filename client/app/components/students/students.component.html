@@ -1,0 +1,40 @@
+<h1>{{title}}</h1>
+<h2>Student List</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="error" *ngIf="error">{{error}}</div>
+        <div class="pull-right">
+            <button class="btn btn-success" (click)="addStudent()">Add New Student</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Object Id</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students" [class.active]="student === selectedStudent" (click)="onSelect(student)">
+                    <td>{{student._id}}</td>
+                    <td>{{student.name}}</td>
+                    <td><button class="btn btn-danger" (click)="deleteStudent(student, $event)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div *ngIf="selectedStudent">
+            <h2>
+                {{selectedStudent.name | uppercase}}
+            </h2>
+            <button class="btn btn-primary" (click)="gotoDetail()">View Details</button>
+        </div>
+    </div>
+</div>
