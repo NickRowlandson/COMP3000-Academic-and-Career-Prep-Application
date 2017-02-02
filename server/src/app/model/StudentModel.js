@@ -3,23 +3,23 @@ var StudentModel = (function () {
     function StudentModel(studentModel) {
         this._studentModel = studentModel;
     }
-    Object.defineProperty(StudentModel.prototype, "name", {
+    Object.defineProperty(StudentModel.prototype, "firstName", {
         get: function () {
-            return this._studentModel.name;
+            return this._studentModel.firstName;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(StudentModel.prototype, "power", {
+    Object.defineProperty(StudentModel.prototype, "lastName", {
         get: function () {
-            return this._studentModel.power;
+            return this._studentModel.lastName;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(StudentModel.prototype, "amountPeopleSaved", {
+    Object.defineProperty(StudentModel.prototype, "studentNumber", {
         get: function () {
-            return this._studentModel.amountPeopleSaved;
+            return this._studentModel.studentNumber;
         },
         enumerable: true,
         configurable: true

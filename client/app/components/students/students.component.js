@@ -16,12 +16,12 @@ var StudentsComponent = (function () {
         this.router = router;
         this.studentService = studentService;
     }
-    StudentsComponent.prototype.getHeroes = function () {
+    StudentsComponent.prototype.getStudents = function () {
         var _this = this;
         this.studentService.getStudents().then(function (students) { return _this.students = students; });
     };
     StudentsComponent.prototype.ngOnInit = function () {
-        this.getHeroes();
+        this.getStudents();
     };
     StudentsComponent.prototype.onSelect = function (student) { this.selectedStudent = student; };
     StudentsComponent.prototype.gotoDetail = function () {

@@ -17,11 +17,11 @@ export class StudentsComponent implements OnInit {
     constructor(
         private router: Router,
         private studentService: StudentService) { }
-    getHeroes() {
+    getStudents() {
         this.studentService.getStudents().then(students => this.students = students);
     }
     ngOnInit() {
-        this.getHeroes();
+        this.getStudents();
     }
     onSelect(student: Student) { this.selectedStudent = student; }
 

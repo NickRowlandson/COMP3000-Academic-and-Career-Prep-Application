@@ -7,16 +7,16 @@ class StudentModel {
     constructor(studentModel: IStudentModel) {
         this._studentModel = studentModel;
     }
-    get name (): string {
-        return this._studentModel.name;
+    get firstName (): string {
+        return this._studentModel.firstName;
     }
 
-    get power (): string {
-        return this._studentModel.power;
+    get lastName (): string {
+        return this._studentModel.lastName;
     }
 
-    get amountPeopleSaved (): number {
-        return this._studentModel.amountPeopleSaved;
+    get studentNumber (): number {
+        return this._studentModel.studentNumber;
     }
 
 }

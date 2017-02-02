@@ -8,15 +8,15 @@ class StudentSchema {
 
     static get schema () {
         var schema =  mongoose.Schema({
-            name : {
+            firstName : {
                 type: String,
                 required: true
             },
-            power: {
+            lastName: {
                 type: String,
                 required: true
             },
-            amountPeopleSaved: {
+            studentNumber: {
                 type: Number,
                 required: true
             }

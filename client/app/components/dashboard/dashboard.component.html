@@ -2,7 +2,7 @@
 <div class="row">
     <div *ngFor="let student of students" (click)="gotoDetail(student)" class="col-md-3">
         <div class="module student">
-            <h4>{{student.name}}</h4>
+            <h4>{{student.firstName + " " + student.lastName}}</h4>
         </div>
     </div>
 </div>

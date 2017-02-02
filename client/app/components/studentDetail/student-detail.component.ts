@@ -1,7 +1,3 @@
-/**
- * Created by Moiz.Kachwala on 02-06-2016.
- */
-
 import {Component, Input, OnInit} from '@angular/core';
 import {Student} from "../../models/Student";
 import { ActivatedRoute, Params } from '@angular/router';

@@ -21,7 +21,7 @@
             <tbody>
                 <tr *ngFor="let student of students" [class.active]="student === selectedStudent" (click)="onSelect(student)">
                     <td>{{student._id}}</td>
-                    <td>{{student.name}}</td>
+                    <td>{{student.firstName + " " + student.lastName}}</td>
                     <td><button class="btn btn-danger" (click)="deleteStudent(student, $event)">Delete</button></td>
                 </tr>
             </tbody>

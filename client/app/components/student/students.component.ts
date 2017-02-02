@@ -4,8 +4,8 @@ import {Student} from "../../models/student";
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'my-heroes',
-    templateUrl: './app/components/heroes/students.component.html'
+    selector: 'my-students',
+    templateUrl: './app/components/students/students.component.html'
 })
 
 export class StudentsComponent implements OnInit {
@@ -17,11 +17,11 @@ export class StudentsComponent implements OnInit {
     constructor(
         private router: Router,
         private studentService: StudentService) { }
-    getHeroes() {
+    getStudents() {
         this.studentService.getStudents().then(students => this.students = students);
     }
     ngOnInit() {
-        this.getHeroes();
+        this.getStudents();
     }
     onSelect(student: Student) { this.selectedStudent = student; }
 

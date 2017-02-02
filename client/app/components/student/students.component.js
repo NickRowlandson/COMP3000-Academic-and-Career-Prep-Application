@@ -16,12 +16,12 @@ var StudentsComponent = (function () {
         this.router = router;
         this.studentService = studentService;
     }
-    StudentsComponent.prototype.getHeroes = function () {
+    StudentsComponent.prototype.getStudents = function () {
         var _this = this;
         this.studentService.getStudents().then(function (students) { return _this.students = students; });
     };
     StudentsComponent.prototype.ngOnInit = function () {
-        this.getHeroes();
+        this.getStudents();
     };
     StudentsComponent.prototype.onSelect = function (student) { this.selectedStudent = student; };
     StudentsComponent.prototype.gotoDetail = function () {
@@ -48,8 +48,8 @@ var StudentsComponent = (function () {
 }());
 StudentsComponent = __decorate([
     core_1.Component({
-        selector: 'my-heroes',
-        templateUrl: './app/components/heroes/students.component.html'
+        selector: 'my-students',
+        templateUrl: './app/components/students/students.component.html'
     }),
     __metadata("design:paramtypes", [router_1.Router,
         student_service_1.StudentService])

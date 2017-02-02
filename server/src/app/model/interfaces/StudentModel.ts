@@ -1,9 +1,9 @@
 import mongoose = require("mongoose");
 
 interface StudentModel extends mongoose.Document {
-    power: string;
-    amountPeopleSaved: number;
-    name: string;
+    firstName: string;
+    lastName: string;
+    studentNumber: number;
 }
 
 export = StudentModel;
