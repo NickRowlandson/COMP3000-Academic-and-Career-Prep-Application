@@ -1,6 +1,8 @@
 #Academic and Career Preparation Administration Tool
 Georgian College
+
 COMP3000
+
 February 1, 2017
 
 ##Team Members:
