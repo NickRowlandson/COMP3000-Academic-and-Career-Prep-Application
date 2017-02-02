@@ -19,6 +19,10 @@ class StudentSchema {
             studentNumber: {
                 type: Number,
                 required: true
+            },
+            email: {
+                type: String,
+                required: true
             }
         });
 

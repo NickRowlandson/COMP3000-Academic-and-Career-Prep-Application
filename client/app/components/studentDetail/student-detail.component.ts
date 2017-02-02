@@ -38,7 +38,7 @@ export class StudentDetailComponent implements OnInit {
         this.studentService
             .save(this.student)
             .then(student => {
-                this.student = student; // saved hero, w/ id if new
+                this.student = student; // saved student, w/ id if new
                 this.goBack();
             })
             .catch(error => this.error = error); // TODO: Display error message

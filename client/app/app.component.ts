@@ -6,5 +6,5 @@ import {Component} from '@angular/core';
 })
 
 export class AppComponent {
-    title = 'Student Mongo DB';
+    title = 'Academic and Career Preparation';
 }

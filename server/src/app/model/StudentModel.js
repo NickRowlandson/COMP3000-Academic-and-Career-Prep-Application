@@ -24,6 +24,13 @@ var StudentModel = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(StudentModel.prototype, "email", {
+        get: function () {
+            return this._studentModel.email;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return StudentModel;
 }());
 Object.seal(StudentModel);

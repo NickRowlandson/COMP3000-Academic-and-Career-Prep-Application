@@ -19,6 +19,10 @@ class StudentModel {
         return this._studentModel.studentNumber;
     }
 
+    get email (): string {
+        return this._studentModel.email;
+    }
+
 }
 Object.seal(StudentModel);
 export =  StudentModel;

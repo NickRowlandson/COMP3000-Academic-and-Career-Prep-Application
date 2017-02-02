@@ -39,7 +39,7 @@ var StudentDetailComponent = (function () {
         this.studentService
             .save(this.student)
             .then(function (student) {
-            _this.student = student; // saved hero, w/ id if new
+            _this.student = student; // saved student, w/ id if new
             _this.goBack();
         })
             .catch(function (error) { return _this.error = error; }); // TODO: Display error message

@@ -69,8 +69,16 @@ gulp.task("compile", ["tslint"], () => {
  * Copy all resources that are not TypeScript files into build directory. e.g. index.html, css, images
  */
 gulp.task("clientResources", () => {
-    return gulp.src(["client/**/*", "!**/*.ts", "!client/typings", "!client/typings/**", "!client/*.json"])
+    return gulp.src(["client/**/*", "bower_components", "!**/*.ts", "!client/typings", "!client/typings/**", "!client/*.json"])
         .pipe(gulp.dest("dist/client"));
+});
+
+/**
+ * Copy all bower resources into build directory.
+ */
+gulp.task("bower_components", () => {
+    return gulp.src(["bower_components/**/*"])
+        .pipe(gulp.dest("dist/client/bower_components"));
 });
 
 /**
@@ -94,17 +102,6 @@ gulp.task("libs", () => {
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("dist/client/libs"));
 });
-
-/**
- * Copy all required libraries into build directory.
- */
-gulp.task("css", () => {
-    return gulp.src([
-        'bootstrap/dist/**/**'
-    ], { cwd: "node_modules/**" }) /* Glob required here. */
-        .pipe(gulp.dest("dist/client/css"));
-});
-
 
 /**
  * Install typings for server and client.
@@ -140,7 +137,7 @@ gulp.task('start', function () {
  */
 
 gulp.task("build", function (callback) {
-    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'serverResources', 'libs', 'css', callback);
+    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'bower_components', 'serverResources', 'libs', callback);
 });
 
 /**
@@ -170,9 +167,9 @@ gulp.task('watch', function () {
  */
 
 gulp.task("build", function (callback) {
-    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'serverResources', 'libs', 'css', callback);
+    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'bower_components', 'serverResources', 'libs', callback);
 });
 
 gulp.task('default', function () {
-    runSequence('build:server', 'build:client', 'clientResources', 'serverResources', 'libs', 'css', 'watch', 'start');
+    runSequence('build:server', 'build:client', 'clientResources', 'bower_components', 'serverResources', 'libs', 'watch', 'start');
 });
