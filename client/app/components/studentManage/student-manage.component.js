@@ -23,13 +23,16 @@ var StudentManageComponent = (function () {
     StudentManageComponent.prototype.ngOnInit = function () {
         this.getStudents();
     };
-    StudentManageComponent.prototype.onSelect = function (student) { this.selectedStudent = student; };
-    StudentManageComponent.prototype.gotoDetail = function (student, event) {
-        this.router.navigate(['/detail', student._id]);
+    StudentManageComponent.prototype.onSelect = function (student) {
+        this.selectedStudent = student;
+        console.log(this.selectedStudent);
+    };
+    StudentManageComponent.prototype.gotoEdit = function (student, event) {
+        this.router.navigate(['/edit', student._id]);
     };
     StudentManageComponent.prototype.addStudent = function () {
         this.selectedStudent = null;
-        this.router.navigate(['/detail', 'new']);
+        this.router.navigate(['/edit', 'new']);
     };
     StudentManageComponent.prototype.deleteStudent = function (student, event) {
         var _this = this;
@@ -49,10 +52,10 @@ var StudentManageComponent = (function () {
 StudentManageComponent = __decorate([
     core_1.Component({
         selector: 'student-manage',
-        templateUrl: './app/components/studentManage/student-manage.component.html'
+        templateUrl: './app/components/studentManage/student-manage.component.html',
+        styleUrls: ['./app/components/studentManage/student-manage.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.Router,
-        student_service_1.StudentService])
+    __metadata("design:paramtypes", [router_1.Router, student_service_1.StudentService])
 ], StudentManageComponent);
 exports.StudentManageComponent = StudentManageComponent;
 //# sourceMappingURL=student-manage.component.js.map

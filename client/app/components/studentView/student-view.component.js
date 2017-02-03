@@ -25,6 +25,9 @@ var StudentViewComponent = (function () {
                 .then(function (student) { return _this.student = student; });
         });
     };
+    StudentViewComponent.prototype.goBack = function () {
+        window.history.back();
+    };
     return StudentViewComponent;
 }());
 __decorate([
@@ -37,8 +40,7 @@ StudentViewComponent = __decorate([
         templateUrl: './app/components/studentView/student-view.component.html',
         styleUrls: ['./app/components/studentView/student-view.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute,
-        student_service_1.StudentService])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, student_service_1.StudentService])
 ], StudentViewComponent);
 exports.StudentViewComponent = StudentViewComponent;
 //# sourceMappingURL=student-view.component.js.map

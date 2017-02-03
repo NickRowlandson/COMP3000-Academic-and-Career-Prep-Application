@@ -12,7 +12,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <table class="table table-bordered">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Student #</th>
@@ -28,7 +28,7 @@
                     <td>{{student.email}}</td>
                     <td class="actionColumn middle">
                       <div class="padding inline">
-                        <button class="btn btn-primary" (click)="gotoDetail(student, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                        <button class="btn btn-primary" (click)="gotoEdit(student, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                       </div>
                       <div class="inline">
                         <button class="btn btn-danger" (click)="deleteStudent(student, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>

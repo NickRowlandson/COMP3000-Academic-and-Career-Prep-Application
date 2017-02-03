@@ -2,7 +2,7 @@
 var router_1 = require("@angular/router");
 var dashboard_component_1 = require("./components/dashboard/dashboard.component");
 var student_manage_component_1 = require("./components/studentManage/student-manage.component");
-var student_detail_component_1 = require("./components/studentDetail/student-detail.component");
+var student_edit_component_1 = require("./components/studentEdit/student-edit.component");
 var student_list_component_1 = require("./components/studentList/student-list.component");
 var student_view_component_1 = require("./components/studentView/student-view.component");
 var appRoutes = [
@@ -16,8 +16,8 @@ var appRoutes = [
         component: dashboard_component_1.DashboardComponent
     },
     {
-        path: 'detail/:id',
-        component: student_detail_component_1.StudentDetailComponent
+        path: 'edit/:id',
+        component: student_edit_component_1.StudentEditComponent
     },
     {
         path: 'student',

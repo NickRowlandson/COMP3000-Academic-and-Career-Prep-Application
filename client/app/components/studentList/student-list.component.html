@@ -1,9 +1,25 @@
 <h2>Student List</h2>
 <hr>
-<div>
-  <div *ngFor="let student of students">
-      <div class="">
-          <h4>{{student.firstName + " " + student.lastName}} <button (click)="gotoView(student)" class="btn btn-primary">View Info</button></h4>
-      </div>
-  </div>
-</div>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Student #</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students" [class.active]="student === selectedStudent" (click)="onSelect(student)">
+                    <td>{{student.studentNumber}}
+                    <td>{{student.firstName + " " + student.lastName}}</td>
+                    <td class="actionColumn middle">
+                      <div class="padding inline">
+                        <button (click)="gotoView(student)" class="btn btn-primary">View Info</button>
+                      </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

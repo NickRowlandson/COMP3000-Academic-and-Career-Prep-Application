@@ -23,7 +23,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-	  "@angular/common": "~2.4.1",
+    "@angular/common": "~2.4.1",
     "@angular/compiler": "~2.4.1",
     "@angular/core": "~2.4.1",
     "@angular/forms": "~2.4.1",
@@ -32,7 +32,6 @@
     "@angular/platform-browser-dynamic": "~2.4.1",
     "@angular/router": "~3.2.3",
     "@angular/upgrade": "~2.4.1",
-
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",

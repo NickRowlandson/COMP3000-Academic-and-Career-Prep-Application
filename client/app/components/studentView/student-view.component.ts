@@ -13,9 +13,8 @@ import {StudentService} from "../../services/student.service";
 export class StudentViewComponent implements OnInit {
     @Input() student: Student;
 
-    constructor(
-        private route: ActivatedRoute,
-        private studentService: StudentService) {
+    constructor(private route: ActivatedRoute, private studentService: StudentService) {
+      
     }
 
     ngOnInit() {
@@ -24,6 +23,10 @@ export class StudentViewComponent implements OnInit {
           this.studentService.getStudent(id)
             .then(student => this.student = student);
         });
+    }
+
+    goBack() {
+        window.history.back();
     }
 
 }

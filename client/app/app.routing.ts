@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
 import { StudentManageComponent }      from './components/studentManage/student-manage.component';
-import { StudentDetailComponent }  from './components/studentDetail/student-detail.component';
+import { StudentEditComponent }  from './components/studentEdit/student-edit.component';
 import { StudentListComponent }  from './components/studentList/student-list.component';
 import { StudentViewComponent }  from './components/studentView/student-view.component';
 
@@ -17,8 +17,8 @@ const appRoutes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'detail/:id',
-    component: StudentDetailComponent
+    path: 'edit/:id',
+    component: StudentEditComponent
   },
   {
     path: 'student',

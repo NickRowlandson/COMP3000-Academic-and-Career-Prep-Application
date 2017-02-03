@@ -13,9 +13,8 @@ import {StudentService} from "../../services/student.service";
 export class DashboardComponent implements OnInit {
     students: Student[] = [];
 
-    constructor(
-        private router: Router,
-        private studentService: StudentService) {
+    constructor(private router: Router, private studentService: StudentService) {
+      
     }
 
     ngOnInit() {

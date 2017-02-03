@@ -34,8 +34,7 @@ DashboardComponent = __decorate([
         templateUrl: './app/components/dashboard/dashboard.component.html',
         styleUrls: ['./app/components/dashboard/dashboard.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.Router,
-        student_service_1.StudentService])
+    __metadata("design:paramtypes", [router_1.Router, student_service_1.StudentService])
 ], DashboardComponent);
 exports.DashboardComponent = DashboardComponent;
 //# sourceMappingURL=dashboard.component.js.map

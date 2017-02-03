@@ -4,20 +4,20 @@ import { ActivatedRoute, Params } from '@angular/router';
 import {StudentService} from "../../services/student.service";
 
 @Component({
-    selector: 'student-detail',
-    templateUrl: './app/components/studentDetail/student-detail.component.html'
+    selector: 'student-edit',
+    templateUrl: './app/components/studentEdit/student-edit.component.html',
+    styleUrls: ['./app/components/studentEdit/student-edit.component.css']
 })
 
-export class StudentDetailComponent implements OnInit {
+export class StudentEditComponent implements OnInit {
     @Input() student: Student;
     newStudent = false;
     error: any;
     navigated = false; // true if navigated here
 
 
-    constructor(
-        private studentService: StudentService,
-        private route: ActivatedRoute) {
+    constructor(private studentService: StudentService, private route: ActivatedRoute) {
+
     }
 
     ngOnInit() {

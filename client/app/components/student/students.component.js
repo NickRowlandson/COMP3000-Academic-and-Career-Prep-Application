@@ -51,8 +51,7 @@ StudentsComponent = __decorate([
         selector: 'students',
         templateUrl: './app/components/students/students.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router,
-        student_service_1.StudentService])
+    __metadata("design:paramtypes", [router_1.Router, student_service_1.StudentService])
 ], StudentsComponent);
 exports.StudentsComponent = StudentsComponent;
 //# sourceMappingURL=students.component.js.map

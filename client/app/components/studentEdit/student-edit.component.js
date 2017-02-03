@@ -12,14 +12,14 @@ var core_1 = require("@angular/core");
 var Student_1 = require("../../models/Student");
 var router_1 = require("@angular/router");
 var student_service_1 = require("../../services/student.service");
-var StudentDetailComponent = (function () {
-    function StudentDetailComponent(studentService, route) {
+var StudentEditComponent = (function () {
+    function StudentEditComponent(studentService, route) {
         this.studentService = studentService;
         this.route = route;
         this.newStudent = false;
         this.navigated = false; // true if navigated here
     }
-    StudentDetailComponent.prototype.ngOnInit = function () {
+    StudentEditComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.forEach(function (params) {
             var id = params['id'];
@@ -34,7 +34,7 @@ var StudentDetailComponent = (function () {
             }
         });
     };
-    StudentDetailComponent.prototype.save = function () {
+    StudentEditComponent.prototype.save = function () {
         var _this = this;
         this.studentService
             .save(this.student)
@@ -44,22 +44,22 @@ var StudentDetailComponent = (function () {
         })
             .catch(function (error) { return _this.error = error; }); // TODO: Display error message
     };
-    StudentDetailComponent.prototype.goBack = function () {
+    StudentEditComponent.prototype.goBack = function () {
         window.history.back();
     };
-    return StudentDetailComponent;
+    return StudentEditComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", Student_1.Student)
-], StudentDetailComponent.prototype, "student", void 0);
-StudentDetailComponent = __decorate([
+], StudentEditComponent.prototype, "student", void 0);
+StudentEditComponent = __decorate([
     core_1.Component({
-        selector: 'student-detail',
-        templateUrl: './app/components/studentDetail/student-detail.component.html'
+        selector: 'student-edit',
+        templateUrl: './app/components/studentEdit/student-edit.component.html',
+        styleUrls: ['./app/components/studentEdit/student-edit.component.css']
     }),
-    __metadata("design:paramtypes", [student_service_1.StudentService,
-        router_1.ActivatedRoute])
-], StudentDetailComponent);
-exports.StudentDetailComponent = StudentDetailComponent;
-//# sourceMappingURL=student-detail.component.js.map
+    __metadata("design:paramtypes", [student_service_1.StudentService, router_1.ActivatedRoute])
+], StudentEditComponent);
+exports.StudentEditComponent = StudentEditComponent;
+//# sourceMappingURL=student-edit.component.js.map

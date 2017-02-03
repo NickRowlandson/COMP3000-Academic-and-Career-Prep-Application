@@ -5,33 +5,38 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'student-manage',
-    templateUrl: './app/components/studentManage/student-manage.component.html'
+    templateUrl: './app/components/studentManage/student-manage.component.html',
+    styleUrls: ['./app/components/studentManage/student-manage.component.css']
 })
 
-export class StudentManageComponent implements OnInit {
 
+export class StudentManageComponent implements OnInit {
     students: Student[];
     selectedStudent: Student;
     error: any;
 
-    constructor(
-        private router: Router,
-        private studentService: StudentService) { }
+    constructor(private router: Router,private studentService: StudentService) {
+
+    }
+
     getStudents() {
         this.studentService.getStudents().then(students => this.students = students);
     }
     ngOnInit() {
         this.getStudents();
     }
-    onSelect(student: Student) { this.selectedStudent = student; }
+    onSelect(student: Student) {
+      this.selectedStudent = student;
+      console.log(this.selectedStudent);
+    }
 
-    gotoDetail(student: Student, event: any) {
-        this.router.navigate(['/detail', student._id]);
+    gotoEdit(student: Student, event: any) {
+        this.router.navigate(['/edit', student._id]);
     }
 
     addStudent() {
         this.selectedStudent = null;
-        this.router.navigate(['/detail', 'new']);
+        this.router.navigate(['/edit', 'new']);
     }
 
     deleteStudent(student: Student, event: any) {

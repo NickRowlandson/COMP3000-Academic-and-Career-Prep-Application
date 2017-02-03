@@ -8,7 +8,7 @@ import { routing }       from './app.routing';
 
 import { StudentManageComponent }      from './components/studentManage/student-manage.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
-import { StudentDetailComponent }  from './components/studentDetail/student-detail.component';
+import { StudentEditComponent }  from './components/studentEdit/student-edit.component';
 import { StudentListComponent }  from './components/studentList/student-list.component';
 import { StudentViewComponent }  from './components/studentView/student-view.component';
 
@@ -25,7 +25,7 @@ import { StudentService }  from './services/student.service';
     AppComponent,
     StudentManageComponent,
     DashboardComponent,
-    StudentDetailComponent,
+    StudentEditComponent,
     StudentListComponent,
     StudentViewComponent
   ],
