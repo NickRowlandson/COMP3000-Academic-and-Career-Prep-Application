@@ -11,27 +11,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var student_service_1 = require("../../services/student.service");
 var router_1 = require("@angular/router");
-var StudentsComponent = (function () {
-    function StudentsComponent(router, studentService) {
+var StudentManageComponent = (function () {
+    function StudentManageComponent(router, studentService) {
         this.router = router;
         this.studentService = studentService;
     }
-    StudentsComponent.prototype.getStudents = function () {
+    StudentManageComponent.prototype.getStudents = function () {
         var _this = this;
         this.studentService.getStudents().then(function (students) { return _this.students = students; });
     };
-    StudentsComponent.prototype.ngOnInit = function () {
+    StudentManageComponent.prototype.ngOnInit = function () {
         this.getStudents();
     };
-    StudentsComponent.prototype.onSelect = function (student) { this.selectedStudent = student; };
-    StudentsComponent.prototype.gotoDetail = function () {
-        this.router.navigate(['/detail', this.selectedStudent._id]);
+    StudentManageComponent.prototype.onSelect = function (student) { this.selectedStudent = student; };
+    StudentManageComponent.prototype.gotoDetail = function (student, event) {
+        this.router.navigate(['/detail', student._id]);
     };
-    StudentsComponent.prototype.addStudent = function () {
+    StudentManageComponent.prototype.addStudent = function () {
         this.selectedStudent = null;
         this.router.navigate(['/detail', 'new']);
     };
-    StudentsComponent.prototype.deleteStudent = function (student, event) {
+    StudentManageComponent.prototype.deleteStudent = function (student, event) {
         var _this = this;
         event.stopPropagation();
         this.studentService
@@ -44,15 +44,15 @@ var StudentsComponent = (function () {
         })
             .catch(function (error) { return _this.error = error; });
     };
-    return StudentsComponent;
+    return StudentManageComponent;
 }());
-StudentsComponent = __decorate([
+StudentManageComponent = __decorate([
     core_1.Component({
-        selector: 'my-students',
-        templateUrl: './app/components/students/students.component.html'
+        selector: 'student-manage',
+        templateUrl: './app/components/studentManage/student-manage.component.html'
     }),
     __metadata("design:paramtypes", [router_1.Router,
         student_service_1.StudentService])
-], StudentsComponent);
-exports.StudentsComponent = StudentsComponent;
-//# sourceMappingURL=students.component.js.map
+], StudentManageComponent);
+exports.StudentManageComponent = StudentManageComponent;
+//# sourceMappingURL=student-manage.component.js.map

@@ -4,7 +4,7 @@ import {Student} from "../../models/student";
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'my-students',
+    selector: 'students',
     templateUrl: './app/components/students/students.component.html'
 })
 

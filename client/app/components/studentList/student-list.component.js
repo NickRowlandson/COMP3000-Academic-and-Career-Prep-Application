@@ -11,31 +11,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var student_service_1 = require("../../services/student.service");
-var DashboardComponent = (function () {
-    function DashboardComponent(router, studentService) {
+var StudentListComponent = (function () {
+    function StudentListComponent(router, studentService) {
         this.router = router;
         this.studentService = studentService;
         this.students = [];
     }
-    DashboardComponent.prototype.ngOnInit = function () {
+    StudentListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.studentService.getStudents()
             .then(function (students) { return _this.students = students; });
     };
-    DashboardComponent.prototype.gotoDetail = function (student) {
-        var link = ['/detail', student._id];
+    StudentListComponent.prototype.gotoView = function (student) {
+        var link = ['/view', student._id];
         this.router.navigate(link);
     };
-    return DashboardComponent;
+    return StudentListComponent;
 }());
-DashboardComponent = __decorate([
+StudentListComponent = __decorate([
     core_1.Component({
-        selector: 'dashboard',
-        templateUrl: './app/components/dashboard/dashboard.component.html',
-        styleUrls: ['./app/components/dashboard/dashboard.component.css']
+        selector: 'student-list',
+        templateUrl: './app/components/studentList/student-list.component.html',
+        styleUrls: ['./app/components/studentList/student-list.component.css']
     }),
     __metadata("design:paramtypes", [router_1.Router,
         student_service_1.StudentService])
-], DashboardComponent);
-exports.DashboardComponent = DashboardComponent;
-//# sourceMappingURL=dashboard.component.js.map
+], StudentListComponent);
+exports.StudentListComponent = StudentListComponent;
+//# sourceMappingURL=student-list.component.js.map

@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import {StudentService} from "../../services/student.service";
 
 @Component({
-    selector: 'my-student-detail',
+    selector: 'student-detail',
     templateUrl: './app/components/studentDetail/student-detail.component.html'
 })
 

@@ -4,11 +4,11 @@ import {Student} from "../../models/student";
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'my-students',
-    templateUrl: './app/components/students/students.component.html'
+    selector: 'student-manage',
+    templateUrl: './app/components/studentManage/student-manage.component.html'
 })
 
-export class StudentsComponent implements OnInit {
+export class StudentManageComponent implements OnInit {
 
     students: Student[];
     selectedStudent: Student;
@@ -25,8 +25,8 @@ export class StudentsComponent implements OnInit {
     }
     onSelect(student: Student) { this.selectedStudent = student; }
 
-    gotoDetail() {
-        this.router.navigate(['/detail', this.selectedStudent._id]);
+    gotoDetail(student: Student, event: any) {
+        this.router.navigate(['/detail', student._id]);
     }
 
     addStudent() {

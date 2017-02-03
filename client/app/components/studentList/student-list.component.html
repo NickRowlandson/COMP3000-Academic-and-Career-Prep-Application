@@ -1,0 +1,9 @@
+<h2>Student List</h2>
+<hr>
+<div>
+  <div *ngFor="let student of students">
+      <div class="">
+          <h4>{{student.firstName + " " + student.lastName}} <button (click)="gotoView(student)" class="btn btn-primary">View Info</button></h4>
+      </div>
+  </div>
+</div>

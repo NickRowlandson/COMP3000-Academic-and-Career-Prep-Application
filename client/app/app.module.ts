@@ -6,9 +6,11 @@ import { HttpModule }     from '@angular/http';
 import { AppComponent }  from './app.component';
 import { routing }       from './app.routing';
 
-import { StudentsComponent }      from './components/students/students.component';
+import { StudentManageComponent }      from './components/studentManage/student-manage.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
 import { StudentDetailComponent }  from './components/studentDetail/student-detail.component';
+import { StudentListComponent }  from './components/studentList/student-list.component';
+import { StudentViewComponent }  from './components/studentView/student-view.component';
 
 import { StudentService }  from './services/student.service';
 
@@ -21,9 +23,11 @@ import { StudentService }  from './services/student.service';
     ],
   declarations: [
     AppComponent,
-    StudentsComponent,
+    StudentManageComponent,
     DashboardComponent,
-    StudentDetailComponent
+    StudentDetailComponent,
+    StudentListComponent,
+    StudentViewComponent
   ],
   providers: [
     StudentService

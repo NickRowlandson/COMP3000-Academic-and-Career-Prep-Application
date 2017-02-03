@@ -5,12 +5,12 @@ import {Student} from "../../models/student";
 import {StudentService} from "../../services/student.service";
 
 @Component({
-    selector: 'dashboard',
-    templateUrl: './app/components/dashboard/dashboard.component.html',
-    styleUrls: ['./app/components/dashboard/dashboard.component.css']
+    selector: 'student-list',
+    templateUrl: './app/components/studentList/student-list.component.html',
+    styleUrls: ['./app/components/studentList/student-list.component.css']
 })
 
-export class DashboardComponent implements OnInit {
+export class StudentListComponent implements OnInit {
     students: Student[] = [];
 
     constructor(
@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
             .then(students => this.students = students);
     }
 
-    gotoDetail(student: Student) {
-        let link = ['/detail', student._id];
+    gotoView(student: Student) {
+        let link = ['/view', student._id];
         this.router.navigate(link);
     }
 }

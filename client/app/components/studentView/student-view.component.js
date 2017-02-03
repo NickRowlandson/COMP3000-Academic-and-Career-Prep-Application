@@ -10,32 +10,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var student_1 = require("../../models/student");
 var student_service_1 = require("../../services/student.service");
-var DashboardComponent = (function () {
-    function DashboardComponent(router, studentService) {
-        this.router = router;
+var StudentViewComponent = (function () {
+    function StudentViewComponent(route, studentService) {
+        this.route = route;
         this.studentService = studentService;
-        this.students = [];
     }
-    DashboardComponent.prototype.ngOnInit = function () {
+    StudentViewComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.studentService.getStudents()
-            .then(function (students) { return _this.students = students; });
+        this.route.params.forEach(function (params) {
+            var id = params['id'];
+            _this.studentService.getStudent(id)
+                .then(function (student) { return _this.student = student; });
+        });
     };
-    DashboardComponent.prototype.gotoDetail = function (student) {
-        var link = ['/detail', student._id];
-        this.router.navigate(link);
-    };
-    return DashboardComponent;
+    return StudentViewComponent;
 }());
-DashboardComponent = __decorate([
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", student_1.Student)
+], StudentViewComponent.prototype, "student", void 0);
+StudentViewComponent = __decorate([
     core_1.Component({
-        selector: 'dashboard',
-        templateUrl: './app/components/dashboard/dashboard.component.html',
-        styleUrls: ['./app/components/dashboard/dashboard.component.css']
+        selector: 'student-view',
+        templateUrl: './app/components/studentView/student-view.component.html',
+        styleUrls: ['./app/components/studentView/student-view.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.Router,
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
         student_service_1.StudentService])
-], DashboardComponent);
-exports.DashboardComponent = DashboardComponent;
-//# sourceMappingURL=dashboard.component.js.map
+], StudentViewComponent);
+exports.StudentViewComponent = StudentViewComponent;
+//# sourceMappingURL=student-view.component.js.map

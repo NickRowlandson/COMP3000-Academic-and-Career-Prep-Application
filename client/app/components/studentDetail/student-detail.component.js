@@ -55,7 +55,7 @@ __decorate([
 ], StudentDetailComponent.prototype, "student", void 0);
 StudentDetailComponent = __decorate([
     core_1.Component({
-        selector: 'my-student-detail',
+        selector: 'student-detail',
         templateUrl: './app/components/studentDetail/student-detail.component.html'
     }),
     __metadata("design:paramtypes", [student_service_1.StudentService,

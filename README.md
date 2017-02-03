@@ -31,9 +31,7 @@ Mark Vandenbroek
 1. git clone repository
 2. cd
 3. npm install
+4. bower install
 4. npm run build
 5. npm run deploy
 6. http://localhost:3000
-
-Remote Link
-https://github.com/NickRowlandson/COMP3000-Academic-and-Career-Prep-Application.git

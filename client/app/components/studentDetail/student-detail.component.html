@@ -1,5 +1,11 @@
 <div *ngIf="student" class="form-horizontal">
-    <h2>{{student.name}} Details</h2>
+    <div *ngIf="!newStudent">
+      <h2>Edit {{student.firstName}}'s Details</h2>
+    </div>
+    <div *ngIf="newStudent">
+      <h2>Add New Student</h2>
+    </div>
+    <hr>
     <div class="form-group">
         <div *ngIf="!newStudent">
             <label class="col-sm-2 control-label">id: </label>

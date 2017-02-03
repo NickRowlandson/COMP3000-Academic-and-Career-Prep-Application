@@ -48,7 +48,7 @@ var StudentsComponent = (function () {
 }());
 StudentsComponent = __decorate([
     core_1.Component({
-        selector: 'my-students',
+        selector: 'students',
         templateUrl: './app/components/students/students.component.html'
     }),
     __metadata("design:paramtypes", [router_1.Router,
