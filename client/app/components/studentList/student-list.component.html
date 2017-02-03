@@ -1,7 +1,7 @@
-<h2>Student List</h2>
-<hr>
 <div class="row">
     <div class="col-md-6">
+      <h2>Student List</h2>
+      <hr>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -11,15 +11,50 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let student of students" [class.active]="student === selectedStudent" (click)="onSelect(student)">
+                <tr *ngFor="let student of students" [class.active]="student === selectedStudent" >
                     <td>{{student.studentNumber}}
                     <td>{{student.firstName + " " + student.lastName}}</td>
                     <td class="actionColumn middle">
                       <div class="padding inline">
-                        <button (click)="gotoView(student)" class="btn btn-primary">View Info</button>
+                        <button (click)="showView(student)" class="btn btn-primary">View Info</button>
                       </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <div *ngIf="studentView" class="col-md-6">
+      <h2>Information for {{studentView.firstName + " " + studentView.lastName}}</h2>
+      <hr>
+      <div class="form-group">
+          <label class="control-label">id: </label>
+          <div class="">
+            {{studentView._id}}
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="control-label">First Name: </label>
+          <div class="">
+            {{studentView.firstName}}
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="control-label">Last Name: </label>
+          <div class="">
+            {{studentView.lastName}}
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="control-label">Student Number: </label>
+          <div class="">
+            {{studentView.studentNumber}}
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="control-label">Email: </label>
+          <div class="">
+            {{studentView.email}}
+          </div>
+      </div>
+    </div>
+</div>

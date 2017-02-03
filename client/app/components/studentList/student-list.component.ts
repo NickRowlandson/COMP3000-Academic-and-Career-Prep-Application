@@ -12,9 +12,10 @@ import {StudentService} from "../../services/student.service";
 
 export class StudentListComponent implements OnInit {
     students: Student[] = [];
+    studentView: Student;
 
     constructor(private router: Router, private studentService: StudentService) {
-      
+
     }
 
     ngOnInit() {
@@ -22,8 +23,7 @@ export class StudentListComponent implements OnInit {
             .then(students => this.students = students);
     }
 
-    gotoView(student: Student) {
-        let link = ['/view', student._id];
-        this.router.navigate(link);
+    showView(student: Student) {
+      this.studentView = student;
     }
 }

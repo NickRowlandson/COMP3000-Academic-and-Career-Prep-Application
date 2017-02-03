@@ -22,9 +22,8 @@ var StudentListComponent = (function () {
         this.studentService.getStudents()
             .then(function (students) { return _this.students = students; });
     };
-    StudentListComponent.prototype.gotoView = function (student) {
-        var link = ['/view', student._id];
-        this.router.navigate(link);
+    StudentListComponent.prototype.showView = function (student) {
+        this.studentView = student;
     };
     return StudentListComponent;
 }());

@@ -10,7 +10,6 @@ import { StudentManageComponent }      from './components/studentManage/student-
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
 import { StudentEditComponent }  from './components/studentEdit/student-edit.component';
 import { StudentListComponent }  from './components/studentList/student-list.component';
-import { StudentViewComponent }  from './components/studentView/student-view.component';
 
 import { StudentService }  from './services/student.service';
 
@@ -26,8 +25,7 @@ import { StudentService }  from './services/student.service';
     StudentManageComponent,
     DashboardComponent,
     StudentEditComponent,
-    StudentListComponent,
-    StudentViewComponent
+    StudentListComponent
   ],
   providers: [
     StudentService
