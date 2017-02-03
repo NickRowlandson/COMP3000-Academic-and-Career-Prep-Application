@@ -4,13 +4,11 @@
     <div class="col-md-12">
         <div class="error" *ngIf="error">{{error}}</div>
         <div class="pull-right">
-          <div class="padding">
-            <button class="btn btn-success" (click)="addStudent()"><i class="fa fa-plus" aria-hidden="true"></i> Add New Student</button>
-          </div>
+            <div class="padding">
+                <button class="btn btn-success" (click)="addStudent()"><i class="fa fa-plus" aria-hidden="true"></i> Add New Student</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
             <thead>
@@ -22,20 +20,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let student of students" [class.active]="student === selectedStudent" (click)="onSelect(student)">
+                <tr *ngFor="let student of students" [class.active]="student === selectedStudent">
                     <td>{{student.studentNumber}}</td>
                     <td>{{student.firstName + " " + student.lastName}}</td>
                     <td>{{student.email}}</td>
                     <td class="actionColumn middle">
-                      <div class="padding inline">
-                        <button class="btn btn-primary" (click)="gotoEdit(student, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-                      </div>
-                      <div class="inline">
-                        <button class="btn btn-danger" (click)="deleteStudent(student, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                      </div>
+                        <div class="padding inline">
+                            <button class="btn btn-primary" (click)="gotoEdit(student, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                        </div>
+                        <div class="inline">
+                            <button class="btn btn-danger" (click)="deleteStudent(student, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<div class="form-group">
+    <div>
+        <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>
 </div>

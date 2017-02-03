@@ -23,15 +23,10 @@ var StudentManageComponent = (function () {
     StudentManageComponent.prototype.ngOnInit = function () {
         this.getStudents();
     };
-    StudentManageComponent.prototype.onSelect = function (student) {
-        this.selectedStudent = student;
-        console.log(this.selectedStudent);
-    };
     StudentManageComponent.prototype.gotoEdit = function (student, event) {
         this.router.navigate(['/edit', student._id]);
     };
     StudentManageComponent.prototype.addStudent = function () {
-        this.selectedStudent = null;
         this.router.navigate(['/edit', 'new']);
     };
     StudentManageComponent.prototype.deleteStudent = function (student, event) {
@@ -41,11 +36,11 @@ var StudentManageComponent = (function () {
             .delete(student)
             .then(function (res) {
             _this.students = _this.students.filter(function (h) { return h !== student; });
-            if (_this.selectedStudent === student) {
-                _this.selectedStudent = null;
-            }
         })
             .catch(function (error) { return _this.error = error; });
+    };
+    StudentManageComponent.prototype.goBack = function () {
+        window.history.back();
     };
     return StudentManageComponent;
 }());

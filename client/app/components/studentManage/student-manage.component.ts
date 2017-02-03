@@ -12,10 +12,9 @@ import { Router } from '@angular/router';
 
 export class StudentManageComponent implements OnInit {
     students: Student[];
-    selectedStudent: Student;
     error: any;
 
-    constructor(private router: Router,private studentService: StudentService) {
+    constructor(private router: Router, private studentService: StudentService) {
 
     }
 
@@ -25,17 +24,12 @@ export class StudentManageComponent implements OnInit {
     ngOnInit() {
         this.getStudents();
     }
-    onSelect(student: Student) {
-      this.selectedStudent = student;
-      console.log(this.selectedStudent);
-    }
 
     gotoEdit(student: Student, event: any) {
         this.router.navigate(['/edit', student._id]);
     }
 
     addStudent() {
-        this.selectedStudent = null;
         this.router.navigate(['/edit', 'new']);
     }
 
@@ -45,8 +39,11 @@ export class StudentManageComponent implements OnInit {
             .delete(student)
             .then(res => {
                 this.students = this.students.filter(h => h !== student);
-                if (this.selectedStudent === student) { this.selectedStudent = null; }
             })
             .catch(error => this.error = error);
+    }
+
+    goBack() {
+        window.history.back();
     }
 }

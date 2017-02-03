@@ -17,7 +17,7 @@ export class StudentsComponent implements OnInit {
     constructor(private router: Router, private studentService: StudentService) {
 
     }
-    
+
     getStudents() {
         this.studentService.getStudents().then(students => this.students = students);
     }

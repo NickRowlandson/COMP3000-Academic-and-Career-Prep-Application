@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
     students: Student[] = [];
 
     constructor(private router: Router, private studentService: StudentService) {
-      
+
     }
 
     ngOnInit() {

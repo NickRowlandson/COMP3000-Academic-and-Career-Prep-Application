@@ -24,6 +24,10 @@ export class StudentListComponent implements OnInit {
     }
 
     showView(student: Student) {
-      this.studentView = student;
+        this.studentView = student;
+    }
+
+    goBack() {
+        window.history.back();
     }
 }

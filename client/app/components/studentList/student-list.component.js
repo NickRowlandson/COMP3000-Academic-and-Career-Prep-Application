@@ -25,6 +25,9 @@ var StudentListComponent = (function () {
     StudentListComponent.prototype.showView = function (student) {
         this.studentView = student;
     };
+    StudentListComponent.prototype.goBack = function () {
+        window.history.back();
+    };
     return StudentListComponent;
 }());
 StudentListComponent = __decorate([
