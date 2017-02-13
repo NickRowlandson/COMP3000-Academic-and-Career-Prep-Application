@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {Student} from "../../models/student";
-import {StudentService} from "../../services/student.service";
+import { Student } from "../../models/student";
+import { StudentService } from "../../services/student.service";
 
 @Component({
     selector: 'dashboard',

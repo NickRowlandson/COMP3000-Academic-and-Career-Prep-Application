@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {StudentService} from "../../services/student.service";
-import {Student} from "../../models/student";
+import { Component, OnInit } from '@angular/core';
+import { StudentService } from "../../services/student.service";
+import { Student } from "../../models/student";
 import { Router } from '@angular/router';
+
 
 @Component({
     selector: 'student-manage',

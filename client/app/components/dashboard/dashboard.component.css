@@ -19,5 +19,7 @@ h2 {
 
 .itemBorder {
   padding: 10px;
-  border: 1px solid #000000;
+  padding-top: 40px;
+  border: 1px solid rgba(0, 0, 0, .3);
+  box-shadow: 5px 5px 5px #888888;
 }
