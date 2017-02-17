@@ -5,6 +5,7 @@ COMP3000
 
 February 1, 2017
 
+
 ##Team Members:
 
 Nicholas Rowlandson
@@ -35,3 +36,9 @@ Mark Vandenbroek
 4. npm run build
 5. npm run deploy
 6. http://localhost:3000
+
+
+##Project Info/Status:
+
+https://comp3000-w2017-teamc.slack.com/messages/dev/
+https://trello.com/b/8JsIHLGs/comp3000-group-c
