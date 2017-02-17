@@ -13,7 +13,6 @@ import { StudentListComponent } from './components/studentList/student-list.comp
 
 import { StudentService } from './services/student.service';
 
-
 @NgModule({
   imports: [
     BrowserModule,
