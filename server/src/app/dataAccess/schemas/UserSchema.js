@@ -2,10 +2,10 @@
 var DataAccess = require("../DataAccess");
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
-var StudentSchema = (function () {
-    function StudentSchema() {
+var UserSchema = (function () {
+    function UserSchema() {
     }
-    Object.defineProperty(StudentSchema, "schema", {
+    Object.defineProperty(UserSchema, "schema", {
         get: function () {
             var schema = mongoose.Schema({
                 firstName: {
@@ -14,10 +14,6 @@ var StudentSchema = (function () {
                 },
                 lastName: {
                     type: String,
-                    required: true
-                },
-                studentNumber: {
-                    type: Number,
                     required: true
                 },
                 email: {
@@ -30,7 +26,7 @@ var StudentSchema = (function () {
         enumerable: true,
         configurable: true
     });
-    return StudentSchema;
+    return UserSchema;
 }());
-var schema = mongooseConnection.model("Student", StudentSchema.schema);
+var schema = mongooseConnection.model("User", UserSchema.schema);
 module.exports = schema;

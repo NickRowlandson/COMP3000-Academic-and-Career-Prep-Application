@@ -24,10 +24,10 @@ var StudentManageComponent = (function () {
         this.getStudents();
     };
     StudentManageComponent.prototype.gotoEdit = function (student, event) {
-        this.router.navigate(['/edit', student._id]);
+        this.router.navigate(['/studentEdit', student._id]);
     };
     StudentManageComponent.prototype.addStudent = function () {
-        this.router.navigate(['/edit', 'new']);
+        this.router.navigate(['/studentEdit', 'new']);
     };
     StudentManageComponent.prototype.deleteStudent = function (student, event) {
         var _this = this;
@@ -53,4 +53,3 @@ StudentManageComponent = __decorate([
     __metadata("design:paramtypes", [router_1.Router, student_service_1.StudentService])
 ], StudentManageComponent);
 exports.StudentManageComponent = StudentManageComponent;
-//# sourceMappingURL=student-manage.component.js.map

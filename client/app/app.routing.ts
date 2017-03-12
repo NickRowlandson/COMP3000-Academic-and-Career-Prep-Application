@@ -1,6 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
+import { UserManageComponent } from './components/userManage/user-manage.component';
+import { UserEditComponent }  from './components/userEdit/user-edit.component';
 import { StudentManageComponent } from './components/studentManage/student-manage.component';
 import { StudentEditComponent }  from './components/studentEdit/student-edit.component';
 import { StudentListComponent }  from './components/studentList/student-list.component';
@@ -16,7 +18,7 @@ const appRoutes: Routes = [
         component: DashboardComponent
     },
     {
-        path: 'edit/:id',
+        path: 'studentEdit/:id',
         component: StudentEditComponent
     },
     {
@@ -26,6 +28,14 @@ const appRoutes: Routes = [
     {
         path: 'list',
         component: StudentListComponent
+    },
+    {
+        path: 'user',
+        component: UserManageComponent
+    },
+    {
+        path: 'userEdit/:id',
+        component: UserEditComponent
     }
 ];
 

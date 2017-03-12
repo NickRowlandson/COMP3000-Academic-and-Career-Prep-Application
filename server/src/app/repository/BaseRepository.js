@@ -25,4 +25,3 @@ var RepositoryBase = (function () {
     return RepositoryBase;
 }());
 module.exports = RepositoryBase;
-//# sourceMappingURL=BaseRepository.js.map

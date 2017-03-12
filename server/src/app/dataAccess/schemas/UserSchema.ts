@@ -1,10 +1,10 @@
 import DataAccess = require('../DataAccess');
-import IStudentModel = require("./../../model/interfaces/StudentModel");
+import IUserModel = require("./../../model/interfaces/UserModel");
 
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
-class StudentSchema {
+class UserSchema {
 
     static get schema () {
         var schema =  mongoose.Schema({
@@ -16,10 +16,6 @@ class StudentSchema {
                 type: String,
                 required: true
             },
-            studentNumber: {
-                type: Number,
-                required: true
-            },
             email: {
                 type: String,
                 required: true
@@ -29,5 +25,5 @@ class StudentSchema {
         return schema;
     }
 }
-var schema = mongooseConnection.model<IStudentModel>("Student", StudentSchema.schema);
+var schema = mongooseConnection.model<IUserModel>("User", UserSchema.schema);
 export = schema;

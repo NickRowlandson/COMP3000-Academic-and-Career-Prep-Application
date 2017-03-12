@@ -21,9 +21,11 @@ export class StudentsComponent implements OnInit {
     getStudents() {
         this.studentService.getStudents().then(students => this.students = students);
     }
+
     ngOnInit() {
         this.getStudents();
     }
+
     onSelect(student: Student) { this.selectedStudent = student; }
 
     gotoDetail() {

@@ -11,11 +11,14 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
 var app_routing_1 = require("./app.routing");
-var student_manage_component_1 = require("./components/studentManage/student-manage.component");
 var dashboard_component_1 = require("./components/dashboard/dashboard.component");
+var user_manage_component_1 = require("./components/userManage/user-manage.component");
+var user_edit_component_1 = require("./components/userEdit/user-edit.component");
+var student_manage_component_1 = require("./components/studentManage/student-manage.component");
 var student_edit_component_1 = require("./components/studentEdit/student-edit.component");
 var student_list_component_1 = require("./components/studentList/student-list.component");
 var student_service_1 = require("./services/student.service");
+var user_service_1 = require("./services/user.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -31,16 +34,18 @@ AppModule = __decorate([
         ],
         declarations: [
             app_component_1.AppComponent,
-            student_manage_component_1.StudentManageComponent,
             dashboard_component_1.DashboardComponent,
+            user_manage_component_1.UserManageComponent,
+            user_edit_component_1.UserEditComponent,
+            student_manage_component_1.StudentManageComponent,
             student_edit_component_1.StudentEditComponent,
             student_list_component_1.StudentListComponent
         ],
         providers: [
-            student_service_1.StudentService
+            student_service_1.StudentService,
+            user_service_1.UserService
         ],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
 exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map

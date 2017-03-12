@@ -27,11 +27,11 @@ export class StudentManageComponent implements OnInit {
     }
 
     gotoEdit(student: Student, event: any) {
-        this.router.navigate(['/edit', student._id]);
+        this.router.navigate(['/studentEdit', student._id]);
     }
 
     addStudent() {
-        this.router.navigate(['/edit', 'new']);
+        this.router.navigate(['/studentEdit', 'new']);
     }
 
     deleteStudent(student: Student, event: any) {
