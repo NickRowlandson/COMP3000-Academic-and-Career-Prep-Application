@@ -14,9 +14,14 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string): Observable<boolean> {
-        return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
+      let headers = new Headers({
+          'Content-Type': 'application/json'});
+        var credentials = JSON.stringify({ username: username, password: password });
+        console.log("Commence login. " + credentials);
+        return this.http.post('/api/auth', credentials, {headers:headers})
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
+                console.log("Login Success!");
                 let token = response.json() && response.json().token;
                 if (token) {
                     // set token property
@@ -28,6 +33,7 @@ export class AuthenticationService {
                     // return true to indicate successful login
                     return true;
                 } else {
+                     console.log("Failed to login");
                     // return false to indicate failed login
                     return false;
                 }

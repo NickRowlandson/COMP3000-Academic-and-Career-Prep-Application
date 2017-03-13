@@ -84,5 +84,37 @@ class UserController implements IBaseController <UserBusiness> {
 
         }
     }
+    auth(req: express.Request, res: express.Response): void {
+      var _username: string = req.params.username;
+      var _password: string = req.params.password;
+      var users;
+      try {
+
+          var userBusiness = new UserBusiness();
+          userBusiness.retrieve((error, result) => {
+              if(error) res.send({"error": "UH OH"});
+              else users = result + " neat";
+          });
+      }
+      catch (e)  {
+          console.log(e);
+          res.send({"error": "error in your request"});
+
+      }
+
+      let params = JSON.parse(users);
+      console.log(params, _username, _password);
+
+      // check user credentials and return fake jwt token if valid
+      // if (params.username === testUser.username && params.password === testUser.password) {
+      //     connection.mockRespond(new Response(
+      //         new ResponseOptions({ status: 200, body: { token: 'fake-jwt-token' } })
+      //     ));
+      // } else {
+      //     connection.mockRespond(new Response(
+      //         new ResponseOptions({ status: 200 })
+      //     ));
+      // }
+    }
 }
 export = UserController;
