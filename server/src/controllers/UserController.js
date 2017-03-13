@@ -84,24 +84,27 @@ var UserController = (function () {
         }
     };
     UserController.prototype.auth = function (req, res) {
-        var _username = req.params.username;
-        var _password = req.params.password;
-        var users;
         try {
+            var _username = req.params.username;
+            var _password = req.params.password;
             var userBusiness = new UserBusiness();
             userBusiness.retrieve(function (error, result) {
                 if (error)
-                    res.send({ "error": "UH OH" });
+                    res.send({ status: 200 });
                 else
-                    users = result + " neat";
+                    for (var _i = 0, result_1 = result; _i < result_1.length; _i++) {
+                        var user = result_1[_i];
+                        if (user.username === _username && user.password === _password) {
+                            res.send({ status: 200, body: { token: 'fake-jwt-token' } });
+                        }
+                    }
+                ;
             });
         }
         catch (e) {
             console.log(e);
             res.send({ "error": "error in your request" });
         }
-        var params = JSON.parse(users);
-        console.log(params, _username, _password);
         // check user credentials and return fake jwt token if valid
         // if (params.username === testUser.username && params.password === testUser.password) {
         //     connection.mockRespond(new Response(

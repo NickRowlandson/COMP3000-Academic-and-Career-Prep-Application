@@ -124,7 +124,7 @@ gulp.task('start', function () {
     })
         .on('restart', function () {
             console.log('restarted!');
-        });
+        })
 });
 
 /**

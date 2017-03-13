@@ -10,3 +10,7 @@ server.listen(app.get('port'), function(){
     var port = server.address().port;
     console.log('This express angular app is listening on port:' + port);
 });
+
+server.on('error', function(err) {
+    console.log(err);
+});

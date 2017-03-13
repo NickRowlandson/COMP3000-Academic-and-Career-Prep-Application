@@ -38,7 +38,6 @@ System.register(["@angular/core", "@angular/router", "../../services/authenticat
                 };
                 LoginComponent.prototype.login = function () {
                     var _this = this;
-                    console.log("Login button pressed. " + this.model.username + " " + this.model.password);
                     this.loading = true;
                     this.authenticationService.login(this.model.username, this.model.password)
                         .subscribe(function (result) {

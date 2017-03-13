@@ -36,13 +36,13 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/map"], fun
                         'Content-Type': 'application/json'
                     });
                     var credentials = JSON.stringify({ username: username, password: password });
-                    console.log("Commence login. " + credentials);
                     return this.http.post('/api/auth', credentials, { headers: headers })
                         .map(function (response) {
                         // login successful if there's a jwt token in the response
-                        console.log("Login Success!");
+                        console.log(response);
                         var token = response.json() && response.json().token;
                         if (token) {
+                            console.log("Login Success!");
                             // set token property
                             _this.token = token;
                             // store username and jwt token in local storage to keep user logged in between page refreshes
