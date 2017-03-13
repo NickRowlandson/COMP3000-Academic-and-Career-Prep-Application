@@ -13,6 +13,7 @@ import { UserEditComponent } from './components/userEdit/user-edit.component';
 import { StudentManageComponent } from './components/studentManage/student-manage.component';
 import { StudentEditComponent } from './components/studentEdit/student-edit.component';
 import { StudentListComponent } from './components/studentList/student-list.component';
+import { SuitabilityFormComponent } from './components/suitabilityForm/suitabilityForm.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
@@ -34,7 +35,8 @@ import { UserService } from './services/user.service';
     UserEditComponent,
     StudentManageComponent,
     StudentEditComponent,
-    StudentListComponent
+    StudentListComponent,
+    SuitabilityFormComponent
   ],
   providers: [
     AuthGuard,

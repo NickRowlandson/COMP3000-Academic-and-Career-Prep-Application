@@ -9,6 +9,7 @@ import { UserEditComponent }  from './components/userEdit/user-edit.component';
 import { StudentManageComponent } from './components/studentManage/student-manage.component';
 import { StudentEditComponent }  from './components/studentEdit/student-edit.component';
 import { StudentListComponent }  from './components/studentList/student-list.component';
+import { SuitabilityFormComponent } from './components/suitabilityForm/suitabilityForm.component';
 
 const appRoutes: Routes = [
     {
@@ -48,6 +49,10 @@ const appRoutes: Routes = [
         path: 'userEdit/:id',
         component: UserEditComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'suitability',
+        component: SuitabilityFormComponent
     }
 ];
 

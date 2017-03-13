@@ -1,0 +1,77 @@
+
+<h2>Client Suitability Sheet</h2>
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-right">
+            
+        </div>
+    </div>
+    <div class="col-md-12">
+		<form>
+			Client Name: <br> <input type = "text" name="clientName"> <br>
+			Date: <br> <input type = "date" name="Date"> <br>
+			Gov’t ID: <br> <input type = "text" name="gov"> <br>
+			Telephone : <br> <input type = "number" name="telephone"> <br>
+			Transcript: <br> <input type = "text" name="transcript"> <br>
+			Courses: <br> <input type = "text" name="courses"> <br>
+			Goal: <br> <input type = "text" name="goal"> <br>
+			Transition Date: <br> <input type = "text" name="transitionDate"> <br>
+			<input type="checkbox" name="occGoalCheckBox" value="occGoal">Appropriate Occupational Goal
+			<input type="checkbox" name="ageCheckBox" value="19+">19+ Years Old
+			<input type="checkbox" name="notRegCheckBox" value="notReg">Not Registered In High School or Post-Sec.
+			<input type="checkbox" name="availCheckBox" value="avail">Available During Class Time<br>
+			Last Grade Completed:
+			<input type="radio" name="gradeCompRadio" value="<10"> Less Than Grade 10
+			<input type="radio" name="gradeCompRadio" value="10-11"> Grade 10-11
+			<input type="radio" name="gradeCompRadio" value="12"> Grade 12 <br>
+			Level:
+			<input type="radio" name="accLevelRadio" value="aca"> Academic/Advanced
+			<input type="radio" name="accLevelRadio" value="app"> Applied/General
+			<input type="radio" name="accLevelRadio" value="work"> Workplace/ Basic <br>
+			Post-Secondary/Job Offer start date:
+			<input type="radio" name="OfferStartRadio" value="aca"> Less than 1 Year
+			<input type="radio" name="OfferStartRadio" value="app"> In One Year
+			<input type="radio" name="OfferStartRadio" value="work"> More than a Year <br>
+			Meets Next Goals Requirements:
+			<input type="radio" name="requirementsRadio" value="no"> No
+			<input type="radio" name="requirementsRadio" value="lacking"> Yes but Lacks Skills/high enough marks
+			<input type="radio" name="requirementsRadio" value="yes"> Yes <br>
+			Time out of School/Training:
+			<input type="radio" name="timeoutRadio" value="6+"> 6 or More Years
+			<input type="radio" name="timeoutRadio" value="1-6"> 1-6 Years
+			<input type="radio" name="timeoutRadio" value="<1"> Less than 1 Year <br>
+			Has Been In Program Before:
+			<input type="radio" name="progBeforeRadio" value="no"> No/Left with Appropriate Reasons
+			<input type="radio" name="progBeforeRadio" value="yesWithApp"> Yes with Appropriate Progress
+			<input type="radio" name="progBeforeRadio" value="Yes"> Yes – No Progress <br>
+			Employment:
+			<input type="radio" name="empRadio" value="no"> Not Working
+			<input type="radio" name="empRadio" value="part"> Working Part Time
+			<input type="radio" name="empRadio" value="Yes"> Working Full Time <br>
+			Income Source:
+			<input type="radio" name="IncRadio" value="no"> OW  ODSP  EI  SC
+			<input type="radio" name="IncRadio" value="noInc"> No Income
+			<input type="radio" name="IncRadio" value="Yes"> Employed <br>
+			Age:
+			<input type="radio" name="AgeRadio" value="45-65"> 45-65 years old
+			<input type="radio" name="AgeRadio" value="19-29"> 19-29 years old
+			<input type="radio" name="AgeRadio" value="30-44"> 30-44 years old<br>
+			# of Hours/Week:
+			<input type="radio" name="numHoursRadio" value="10-20"> 10-20
+			<input type="radio" name="numHoursRadio" value="5-10"> 5-10
+			<input type="radio" name="numHoursRadio" value="<5"> less than 5<br>
+			Work History:
+			<input type="radio" name="workHisRadio" value="<1"> Less than 1 year experience in the field
+			<input type="radio" name="workHisRadio" value="1-4"> 1-4 years’ experience in the field
+			<input type="radio" name="workHisRadio" value=">4"> 4+ years’ experience in the field<br>
+			Part A total: <input type="number" name="partA" placeholder="0"><br>
+			Part B total: <input type="number" name="partB" placeholder="0"><br>
+		</form>
+    </div>
+</div>
+<div class="form-group">
+    <div>
+        <button (click)="goBack()" class="btn btn-default">Back</button>
+    </div>
+</div>

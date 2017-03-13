@@ -5,6 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
@@ -18,6 +19,7 @@ var user_edit_component_1 = require("./components/userEdit/user-edit.component")
 var student_manage_component_1 = require("./components/studentManage/student-manage.component");
 var student_edit_component_1 = require("./components/studentEdit/student-edit.component");
 var student_list_component_1 = require("./components/studentList/student-list.component");
+var suitabilityForm_component_1 = require("./components/suitabilityForm/suitabilityForm.component");
 var auth_guard_1 = require("./guards/auth.guard");
 var authentication_service_1 = require("./services/authentication.service");
 var student_service_1 = require("./services/student.service");
@@ -43,7 +45,8 @@ AppModule = __decorate([
             user_edit_component_1.UserEditComponent,
             student_manage_component_1.StudentManageComponent,
             student_edit_component_1.StudentEditComponent,
-            student_list_component_1.StudentListComponent
+            student_list_component_1.StudentListComponent,
+            suitabilityForm_component_1.SuitabilityFormComponent
         ],
         providers: [
             auth_guard_1.AuthGuard,
