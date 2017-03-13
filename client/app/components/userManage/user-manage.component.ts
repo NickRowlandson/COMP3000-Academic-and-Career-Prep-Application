@@ -3,7 +3,6 @@ import { UserService } from "../../services/user.service";
 import { User } from "../../models/user";
 import { Router } from '@angular/router';
 
-
 @Component({
     selector: 'user-manage',
     templateUrl: './app/components/userManage/user-manage.component.html',

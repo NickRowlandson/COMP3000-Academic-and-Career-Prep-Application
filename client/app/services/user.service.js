@@ -10,14 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var authentication_service_1 = require("./authentication.service");
 require("rxjs/add/operator/toPromise");
 var UserService = (function () {
-    function UserService(http) {
+    function UserService(http, authenticationService) {
         this.http = http;
+        this.authenticationService = authenticationService;
         this.usersUrl = 'api/users'; // URL to web api
     }
     UserService.prototype.getUsers = function () {
-        return this.http.get(this.usersUrl)
+        // add authorization header with jwt token
+        var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.get(this.usersUrl, options)
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
@@ -71,6 +76,7 @@ var UserService = (function () {
 }());
 UserService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [http_1.Http,
+        authentication_service_1.AuthenticationService])
 ], UserService);
 exports.UserService = UserService;

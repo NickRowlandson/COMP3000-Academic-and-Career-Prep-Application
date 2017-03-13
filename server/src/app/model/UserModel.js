@@ -3,6 +3,20 @@ var UserModel = (function () {
     function UserModel(userModel) {
         this._userModel = userModel;
     }
+    Object.defineProperty(UserModel.prototype, "userName", {
+        get: function () {
+            return this._userModel.username;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(UserModel.prototype, "password", {
+        get: function () {
+            return this._userModel.password;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(UserModel.prototype, "firstName", {
         get: function () {
             return this._userModel.firstName;

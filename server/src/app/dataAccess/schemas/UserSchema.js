@@ -8,6 +8,14 @@ var UserSchema = (function () {
     Object.defineProperty(UserSchema, "schema", {
         get: function () {
             var schema = mongoose.Schema({
+                username: {
+                    type: String,
+                    required: true
+                },
+                password: {
+                    type: String,
+                    required: true
+                },
                 firstName: {
                     type: String,
                     required: true

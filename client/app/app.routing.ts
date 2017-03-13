@@ -1,5 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuard } from './guards/auth.guard';
+
+import { LoginComponent }   from './components/login/login.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
 import { UserManageComponent } from './components/userManage/user-manage.component';
 import { UserEditComponent }  from './components/userEdit/user-edit.component';
@@ -14,28 +17,37 @@ const appRoutes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
         path: 'dashboard',
         component: DashboardComponent
     },
     {
         path: 'studentEdit/:id',
-        component: StudentEditComponent
+        component: StudentEditComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'student',
-        component: StudentManageComponent
+        component: StudentManageComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'list',
-        component: StudentListComponent
+        component: StudentListComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'user',
-        component: UserManageComponent
+        component: UserManageComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'userEdit/:id',
-        component: UserEditComponent
+        component: UserEditComponent,
+        canActivate: [AuthGuard]
     }
 ];
 

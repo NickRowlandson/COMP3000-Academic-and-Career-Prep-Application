@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
+import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserManageComponent } from './components/userManage/user-manage.component';
 import { UserEditComponent } from './components/userEdit/user-edit.component';
@@ -13,6 +14,8 @@ import { StudentManageComponent } from './components/studentManage/student-manag
 import { StudentEditComponent } from './components/studentEdit/student-edit.component';
 import { StudentListComponent } from './components/studentList/student-list.component';
 
+import { AuthGuard } from './guards/auth.guard';
+import { AuthenticationService } from './services/authentication.service';
 import { StudentService } from './services/student.service';
 import { UserService } from './services/user.service';
 
@@ -25,6 +28,7 @@ import { UserService } from './services/user.service';
     ],
   declarations: [
     AppComponent,
+    LoginComponent,
     DashboardComponent,
     UserManageComponent,
     UserEditComponent,
@@ -33,6 +37,8 @@ import { UserService } from './services/user.service';
     StudentListComponent
   ],
   providers: [
+    AuthGuard,
+    AuthenticationService,
     StudentService,
     UserService
   ],

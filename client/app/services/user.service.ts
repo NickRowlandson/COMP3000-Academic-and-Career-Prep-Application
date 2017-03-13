@@ -1,18 +1,23 @@
-import {Injectable} from '@angular/core';
-
-import { Headers, Http, Response } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import { User } from "../models/user";
+import { AuthenticationService } from './authentication.service';
 import 'rxjs/add/operator/toPromise';
-import {User} from "../models/user";
 
 @Injectable()
 export class UserService {
 
     private usersUrl = 'api/users';  // URL to web api
 
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+                private authenticationService: AuthenticationService) { }
 
     getUsers(): Promise<User[]> {
-        return this.http.get(this.usersUrl)
+        // add authorization header with jwt token
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(this.usersUrl, options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);

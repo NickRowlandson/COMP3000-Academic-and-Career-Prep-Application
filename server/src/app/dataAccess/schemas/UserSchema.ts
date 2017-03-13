@@ -8,6 +8,14 @@ class UserSchema {
 
     static get schema () {
         var schema =  mongoose.Schema({
+            username : {
+                type: String,
+                required: true
+            },
+            password : {
+                type: String,
+                required: true
+            },
             firstName : {
                 type: String,
                 required: true
