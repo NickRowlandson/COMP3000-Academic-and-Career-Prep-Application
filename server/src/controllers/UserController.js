@@ -85,36 +85,26 @@ var UserController = (function () {
     };
     UserController.prototype.auth = function (req, res) {
         try {
-            var _username = req.params.username;
-            var _password = req.params.password;
+            var _username = req.body.username;
+            var _password = req.body.password;
+            var response;
             var userBusiness = new UserBusiness();
             userBusiness.retrieve(function (error, result) {
-                if (error)
-                    res.send({ status: 200 });
-                else
-                    for (var _i = 0, result_1 = result; _i < result_1.length; _i++) {
-                        var user = result_1[_i];
-                        if (user.username === _username && user.password === _password) {
-                            res.send({ status: 200, body: { token: 'fake-jwt-token' } });
-                        }
+                for (var object in result) {
+                    if (_username === result[object].username && _password === result[object].password) {
+                        response = { status: 200, body: { token: 'fake-jwt-token' } };
                     }
-                ;
+                    else {
+                        response = { status: 404 };
+                    }
+                }
+                res.send(response);
             });
         }
         catch (e) {
             console.log(e);
             res.send({ "error": "error in your request" });
         }
-        // check user credentials and return fake jwt token if valid
-        // if (params.username === testUser.username && params.password === testUser.password) {
-        //     connection.mockRespond(new Response(
-        //         new ResponseOptions({ status: 200, body: { token: 'fake-jwt-token' } })
-        //     ));
-        // } else {
-        //     connection.mockRespond(new Response(
-        //         new ResponseOptions({ status: 200 })
-        //     ));
-        // }
     };
     return UserController;
 }());

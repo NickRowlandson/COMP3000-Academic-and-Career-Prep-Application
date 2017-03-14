@@ -86,16 +86,20 @@ class UserController implements IBaseController <UserBusiness> {
     }
     auth(req: express.Request, res: express.Response): void {
       try {
-          var _username: string = req.params.username;
-          var _password: string = req.params.password;
+          var _username: string = req.body.username;
+          var _password: string = req.body.password;
+          var response;
           var userBusiness = new UserBusiness();
+
           userBusiness.retrieve((error, result) => {
-              if(error) res.send({ status: 200 });
-              else for (let user of result) {
-                  if(user.username ===  _username && user.password === _password) {
-                    res.send({ status: 200, body: { token: 'fake-jwt-token' } });
-                  }
-              };
+            for (let object in result){
+              if(_username === result[object].username && _password === result[object].password){
+                response = { status: 200, body: { token: 'fake-jwt-token' } };
+              }else{
+                response = { status: 404 }
+              }
+            }
+            res.send(response);
           });
       }
       catch (e)  {
@@ -103,16 +107,6 @@ class UserController implements IBaseController <UserBusiness> {
           res.send({"error": "error in your request"});
 
       }
-      // check user credentials and return fake jwt token if valid
-      // if (params.username === testUser.username && params.password === testUser.password) {
-      //     connection.mockRespond(new Response(
-      //         new ResponseOptions({ status: 200, body: { token: 'fake-jwt-token' } })
-      //     ));
-      // } else {
-      //     connection.mockRespond(new Response(
-      //         new ResponseOptions({ status: 200 })
-      //     ));
-      // }
     }
 }
 export = UserController;

@@ -7,5 +7,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./app/components/suitabilityForm/suitabiltyForm.component.css']
 })
 export class SuitabilityFormComponent {
-
+  goBack() {
+      window.history.back();
+  }
 };

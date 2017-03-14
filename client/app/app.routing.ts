@@ -23,7 +23,8 @@ const appRoutes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'studentEdit/:id',
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     },
     {
         path: 'suitability',
-        component: SuitabilityFormComponent
+        component: SuitabilityFormComponent,
+        canActivate: [AuthGuard]
     }
 ];
 

@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
@@ -25,13 +24,13 @@ var AuthenticationService = (function () {
             'Content-Type': 'application/json'
         });
         var credentials = JSON.stringify({ username: username, password: password });
-        console.log("Commence login. " + credentials);
-        return this.http.post('api/auth', credentials, { headers: headers })
+        return this.http.post('/api/auth', credentials, { headers: headers })
             .map(function (response) {
             // login successful if there's a jwt token in the response
-            console.log("Login Success!");
-            var token = response.json() && response.json().token;
+            var token = response.json().body && response.json().body.token;
+            console.log(token);
             if (token) {
+                console.log("Login Success!");
                 // set token property
                 _this.token = token;
                 // store username and jwt token in local storage to keep user logged in between page refreshes

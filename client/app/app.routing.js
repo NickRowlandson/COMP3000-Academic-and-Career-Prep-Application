@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var router_1 = require("@angular/router");
 var auth_guard_1 = require("./guards/auth.guard");
 var login_component_1 = require("./components/login/login.component");
@@ -22,7 +21,8 @@ var appRoutes = [
     },
     {
         path: 'dashboard',
-        component: dashboard_component_1.DashboardComponent
+        component: dashboard_component_1.DashboardComponent,
+        canActivate: [auth_guard_1.AuthGuard]
     },
     {
         path: 'studentEdit/:id',
@@ -51,7 +51,8 @@ var appRoutes = [
     },
     {
         path: 'suitability',
-        component: suitabilityForm_component_1.SuitabilityFormComponent
+        component: suitabilityForm_component_1.SuitabilityFormComponent,
+        canActivate: [auth_guard_1.AuthGuard]
     }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes, { useHash: true });

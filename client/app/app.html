@@ -8,9 +8,11 @@
 		</button>
 		<a class="navbar-brand" href="/">{{ title }}</a>
 	</div>
-	<div class="collapse navbar-collapse navbar-menu-collapse">
-		<ul class="nav navbar-nav navbar-right">
+	<div *ngIf="loggedIn" class="collapse navbar-collapse navbar-menu-collapse">
+		<ul class="nav navbar-nav navbar-right" >
 			<li class="active"> <a routerLink="/dashboard" routerLinkActive="active"><i class="fa fa-th" aria-hidden="true"></i> Dashboard</a></li>
+			<li><button type="button" routerLink="/login" routerLinkActive="active" class="btn btn-danger"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></li>
+			<li style="color:white;">Welcome, {{ currentUser }}</li>
 		</ul>
 	</div>
 </nav>

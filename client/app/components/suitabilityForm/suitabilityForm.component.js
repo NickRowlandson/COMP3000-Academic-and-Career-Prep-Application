@@ -6,23 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = 'Academic and Career Preparation';
+var SuitabilityFormComponent = (function () {
+    function SuitabilityFormComponent() {
     }
-    AppComponent.prototype.getCurrentUser = function () {
-        if (localStorage.getItem('currentUser')) {
-            this.currentUser = JSON.parse(localStorage.getItem('currentUser')).username;
-            console.log(this.currentUser);
-            this.loggedIn = true;
-        }
+    SuitabilityFormComponent.prototype.goBack = function () {
+        window.history.back();
     };
-    return AppComponent;
+    return SuitabilityFormComponent;
 }());
-AppComponent = __decorate([
+SuitabilityFormComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        templateUrl: './app/app.html'
+        selector: 'suitabilityForm',
+        templateUrl: './app/components/suitabilityForm/suitabilityForm.component.html',
+        styleUrls: ['./app/components/suitabilityForm/suitabiltyForm.component.css']
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
+], SuitabilityFormComponent);
+exports.SuitabilityFormComponent = SuitabilityFormComponent;
+;

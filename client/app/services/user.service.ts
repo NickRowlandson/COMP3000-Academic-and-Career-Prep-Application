@@ -11,7 +11,7 @@ export class UserService {
 
     constructor(private http: Http,
                 private authenticationService: AuthenticationService) { }
-
+                
     getUsers(): Promise<User[]> {
         // add authorization header with jwt token
         let headers = new Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });
