@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Student} from "../../models/Student";
+import { Component, Input, OnInit } from '@angular/core';
+import { Student } from "../../models/Student";
 import { ActivatedRoute, Params } from '@angular/router';
-import {StudentService} from "../../services/student.service";
+import { StudentService } from "../../services/student.service";
 
 @Component({
     selector: 'student-edit',

@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
+//Import components
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserManageComponent } from './components/userManage/user-manage.component';
@@ -15,8 +16,9 @@ import { StudentEditComponent } from './components/studentEdit/student-edit.comp
 import { StudentListComponent } from './components/studentList/student-list.component';
 import { SuitabilityFormComponent } from './components/suitabilityForm/suitabilityForm.component';
 
+//Import services
 import { AuthGuard } from './guards/auth.guard';
-import { AuthenticationService } from './services/authentication.service';
+import { AuthService } from './services/authentication.service';
 import { StudentService } from './services/student.service';
 import { UserService } from './services/user.service';
 
@@ -40,7 +42,7 @@ import { UserService } from './services/user.service';
   ],
   providers: [
     AuthGuard,
-    AuthenticationService,
+    AuthService,
     StudentService,
     UserService
   ],

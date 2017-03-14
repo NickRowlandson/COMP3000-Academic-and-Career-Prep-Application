@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from './services/authentication.service';
 
 @Component({
     selector:'my-app',
@@ -7,14 +8,25 @@ import {Component} from '@angular/core';
 
 export class AppComponent {
     title = 'Academic and Career Preparation';
-    currentUser: any;
-    loggedIn: any;
+    private currentUser:any = null;
 
-    getCurrentUser() {
-      if (localStorage.getItem('currentUser')) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser')).username;
-        console.log(this.currentUser);
-        this.loggedIn = true;
-      }
+    constructor(private authService: AuthService) {
     }
+
+    ngOnInit() {
+      this.authService.loggedUser.subscribe(
+          data => {
+            if (data) {
+              var username = data.replace(/['"]+/g, '');
+              this.currentUser = username;
+            } else {
+              this.currentUser = null;
+            }
+          },
+          err => {
+              console.log(err);
+          }
+      );
+    }
+
 }

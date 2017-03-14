@@ -18,6 +18,13 @@ var UserService = (function () {
         this.authenticationService = authenticationService;
         this.usersUrl = 'api/users'; // URL to web api
     }
+    UserService.prototype.getCurrentLoggedUser = function () {
+        if (localStorage.getItem('currentUser')) {
+            this.currentUser = JSON.parse(localStorage.getItem('currentUser')).username;
+            console.log(this.currentUser);
+            this.loggedIn = true;
+        }
+    };
     UserService.prototype.getUsers = function () {
         // add authorization header with jwt token
         var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });

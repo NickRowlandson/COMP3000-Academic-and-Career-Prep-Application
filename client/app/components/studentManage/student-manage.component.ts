@@ -3,7 +3,6 @@ import { StudentService } from "../../services/student.service";
 import { Student } from "../../models/student";
 import { Router } from '@angular/router';
 
-
 @Component({
     selector: 'student-manage',
     templateUrl: './app/components/studentManage/student-manage.component.html',
