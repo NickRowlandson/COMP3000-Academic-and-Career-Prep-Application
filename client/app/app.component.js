@@ -9,20 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var user_service_1 = require("./services/user.service");
+var authentication_service_1 = require("./services/authentication.service");
 var AppComponent = (function () {
-    function AppComponent(userService) {
-        this.userService = userService;
+    function AppComponent(authService) {
+        this.authService = authService;
         this.title = 'Academic and Career Preparation';
-        this.loggedIn = userService.getCurrentLoggedUser();
+        this.currentUser = null;
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.authService.loggedUser.subscribe(function (data) {
+            if (data) {
+                var username = data.replace(/['"]+/g, '');
+                _this.currentUser = username;
+            }
+            else {
+                _this.currentUser = null;
+            }
+        }, function (err) {
+            console.log(err);
+        });
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        templateUrl: './app/app.html'
+        templateUrl: './app/app.html',
+        styleUrls: ['./app/app.component.css']
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [authentication_service_1.AuthService])
 ], AppComponent);
 exports.AppComponent = AppComponent;

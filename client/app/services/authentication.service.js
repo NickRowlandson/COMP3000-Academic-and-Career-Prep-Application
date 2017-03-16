@@ -10,15 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var ReplaySubject_1 = require("rxjs/ReplaySubject");
 require("rxjs/add/operator/map");
-var AuthenticationService = (function () {
-    function AuthenticationService(http) {
+var AuthService = (function () {
+    function AuthService(http) {
         this.http = http;
+        this.loggedUser = new ReplaySubject_1.ReplaySubject(1);
         // set token if saved in local storage
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
+        if (localStorage.getItem('currentUser')) {
+            var user = currentUser.username;
+            this.loggedUser.next(JSON.stringify(user));
+        }
     }
-    AuthenticationService.prototype.login = function (username, password) {
+    AuthService.prototype.login = function (username, password) {
         var _this = this;
         var headers = new http_1.Headers({
             'Content-Type': 'application/json'
@@ -28,13 +34,14 @@ var AuthenticationService = (function () {
             .map(function (response) {
             // login successful if there's a jwt token in the response
             var token = response.json().body && response.json().body.token;
-            console.log(token);
             if (token) {
                 console.log("Login Success!");
                 // set token property
                 _this.token = token;
                 // store username and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+                var user = JSON.parse(localStorage.getItem('currentUser')).username;
+                _this.loggedUser.next(JSON.stringify(user));
                 // return true to indicate successful login
                 return true;
             }
@@ -45,15 +52,16 @@ var AuthenticationService = (function () {
             }
         });
     };
-    AuthenticationService.prototype.logout = function () {
+    AuthService.prototype.logout = function () {
         // clear token remove user from local storage to log user out
         this.token = null;
         localStorage.removeItem('currentUser');
+        this.loggedUser.next(null);
     };
-    return AuthenticationService;
+    return AuthService;
 }());
-AuthenticationService = __decorate([
+AuthService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])
-], AuthenticationService);
-exports.AuthenticationService = AuthenticationService;
+], AuthService);
+exports.AuthService = AuthService;

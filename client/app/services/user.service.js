@@ -13,21 +13,14 @@ var http_1 = require("@angular/http");
 var authentication_service_1 = require("./authentication.service");
 require("rxjs/add/operator/toPromise");
 var UserService = (function () {
-    function UserService(http, authenticationService) {
+    function UserService(http, authService) {
         this.http = http;
-        this.authenticationService = authenticationService;
-        this.usersUrl = 'api/users'; // URL to web api
+        this.authService = authService;
+        this.usersUrl = 'api/users'; // URL to web app
     }
-    UserService.prototype.getCurrentLoggedUser = function () {
-        if (localStorage.getItem('currentUser')) {
-            this.currentUser = JSON.parse(localStorage.getItem('currentUser')).username;
-            console.log(this.currentUser);
-            this.loggedIn = true;
-        }
-    };
     UserService.prototype.getUsers = function () {
         // add authorization header with jwt token
-        var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });
+        var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + this.authService.token });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.get(this.usersUrl, options)
             .toPromise()
@@ -84,6 +77,6 @@ var UserService = (function () {
 UserService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http,
-        authentication_service_1.AuthenticationService])
+        authentication_service_1.AuthService])
 ], UserService);
 exports.UserService = UserService;
