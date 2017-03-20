@@ -31,6 +31,7 @@ app.get('/*', renderIndex);
 if(env === 'developement'){
     app.use(function(err, req: express.Request, res: express.Response, next: express.NextFunction) {
         res.status(err.status || 500);
+        console.log(err);
         res.json({
             error: err,
             message: err.message

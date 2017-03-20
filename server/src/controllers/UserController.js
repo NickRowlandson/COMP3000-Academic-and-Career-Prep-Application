@@ -3,7 +3,6 @@ var UserBusiness = require("./../app/business/UserBusiness");
 var jwt = require("jsonwebtoken");
 var UserController = (function () {
     function UserController() {
-        this.tokenSecret = 'f9b574a2fc0d77986cb7ebe21a0dea480f5f21931abfa5cf329a45ecc0c8e1ff';
     }
     UserController.prototype.create = function (req, res) {
         try {
@@ -86,7 +85,6 @@ var UserController = (function () {
         }
     };
     UserController.prototype.auth = function (req, res) {
-        var _this = this;
         try {
             var _username = req.body.username;
             var _password = req.body.password;
@@ -95,12 +93,13 @@ var UserController = (function () {
             userBusiness.retrieve(function (error, result) {
                 for (var object in result) {
                     if (_username === result[object].username && _password === result[object].password) {
-                        var token = jwt.sign({ userid: result[object]._id }, _this.tokenSecret);
+                        var token = jwt.sign({ userid: result[object]._id }, "f9b574a2fc0d77986cb7ebe21a0dea480f5f21931abfa5cf329a45ecc0c8e1ff");
                         response = { status: 200, body: { token: token } };
+                        break;
                     }
-                    else {
-                        response = { status: 404 };
-                    }
+                }
+                if (!response) {
+                    response = { status: 404 };
                 }
                 res.send(response);
             });
@@ -113,3 +112,4 @@ var UserController = (function () {
     return UserController;
 }());
 module.exports = UserController;
+//# sourceMappingURL=UserController.js.map

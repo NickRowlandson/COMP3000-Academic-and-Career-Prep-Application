@@ -23,6 +23,7 @@ app.get('/*', renderIndex);
 if (env === 'developement') {
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
+        console.log(err);
         res.json({
             error: err,
             message: err.message
@@ -43,3 +44,4 @@ app.use(function (err, req, res, next) {
         message: err.message
     });
 });
+//# sourceMappingURL=server.js.map
