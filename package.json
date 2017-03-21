@@ -32,6 +32,7 @@
     "@angular/platform-browser-dynamic": "~2.4.1",
     "@angular/router": "~3.2.3",
     "@angular/upgrade": "~2.4.1",
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",

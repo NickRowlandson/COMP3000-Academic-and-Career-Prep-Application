@@ -1,12 +1,19 @@
 "use strict";
 var UserBusiness = require("./../app/business/UserBusiness");
 var jwt = require("jsonwebtoken");
+var bcrypt = require("bcrypt");
 var UserController = (function () {
     function UserController() {
     }
     UserController.prototype.create = function (req, res) {
         try {
+            var salt = bcrypt.genSaltSync(10);
+            var password = req.body.password;
+            // Hash the password with the salt
+            password = bcrypt.hashSync(password, salt);
+            req.body.password = password;
             var user = req.body;
+            console.log(user);
             var userBusiness = new UserBusiness();
             userBusiness.create(user, function (error, result) {
                 if (error)
@@ -92,7 +99,7 @@ var UserController = (function () {
             var userBusiness = new UserBusiness();
             userBusiness.retrieve(function (error, result) {
                 for (var object in result) {
-                    if (_username === result[object].username && _password === result[object].password) {
+                    if (_username === result[object].username && bcrypt.compareSync(_password, result[object].password)) {
                         var token = jwt.sign({ userid: result[object]._id }, "f9b574a2fc0d77986cb7ebe21a0dea480f5f21931abfa5cf329a45ecc0c8e1ff");
                         response = { status: 200, body: { token: token } };
                         break;
