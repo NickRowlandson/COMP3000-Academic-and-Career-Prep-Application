@@ -8,6 +8,22 @@ class StudentSchema {
 
     static get schema () {
         var schema =  mongoose.Schema({
+            authLevel : {
+                type: String,
+                required: true
+            },
+            enquiryDate : {
+                type: String,
+                required: true
+            },
+            username : {
+                type: String,
+                required: true
+            },
+            password : {
+                type: String,
+                required: true
+            },
             firstName : {
                 type: String,
                 required: true
@@ -16,8 +32,8 @@ class StudentSchema {
                 type: String,
                 required: true
             },
-            studentNumber: {
-                type: Number,
+            birthday: {
+                type: String,
                 required: true
             },
             email: {

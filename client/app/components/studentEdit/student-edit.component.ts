@@ -11,7 +11,6 @@ import { StudentService } from "../../services/student.service";
 
 export class StudentEditComponent implements OnInit {
     @Input() student: Student;
-    newStudent = false;
     error: any;
     navigated = false; // true if navigated here
 
@@ -23,14 +22,8 @@ export class StudentEditComponent implements OnInit {
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
-            if (id === 'new') {
-                this.newStudent = true;
-                this.student = new Student();
-            } else {
-                this.newStudent = false;
-                this.studentService.getStudent(id)
-                    .then(student => this.student = student);
-            }
+            this.studentService.getStudent(id)
+                .then(student => this.student = student);
         });
     }
 

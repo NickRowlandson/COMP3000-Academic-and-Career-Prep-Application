@@ -16,7 +16,6 @@ class UserRoutes {
         router.put("/users/:_id", controller.update);
         router.get("/users/:_id", controller.findById);
         router.delete("/users/:_id", controller.delete);
-        router.post("/auth/", controller.auth);
 
         return router;
     }

@@ -39,7 +39,6 @@ if(env === 'developement'){
     });
 }
 
-
 // catch 404 and forward to error handler
 app.use(function(req: express.Request, res: express.Response, next) {
     let err = new Error("Not Found");

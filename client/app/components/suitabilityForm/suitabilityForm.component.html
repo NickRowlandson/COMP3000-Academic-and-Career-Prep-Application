@@ -1,18 +1,60 @@
-
 <h2>Client Suitability Sheet</h2>
 <hr>
+<div *ngIf="student" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Date: </label>
+        <div class="col-sm-10">
+          {{date | date: format}}
+        </div>
+        <input type="hidden" name="date" value ="YES" [(ngModel)]="student.enquiryDate" required/>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">First Name: </label>
+        <div class="col-sm-10">
+            <input class="form-control" [(ngModel)]="student.firstName" placeholder="First Name" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Last Name: </label>
+        <div class="col-sm-10">
+            <input class="form-control" [(ngModel)]="student.lastName" placeholder="Last Name" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Date of Birth: </label>
+        <div class="col-sm-10">
+            <input class="form-control" type="date" [(ngModel)]="student.birthday" placeholder="DD/MM/YYYY" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Email: </label>
+        <div class="col-sm-10">
+            <input class="form-control" type="email" [(ngModel)]="student.email" placeholder="Email" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Phone: </label>
+        <div class="col-sm-10">
+            <input class="form-control" type="phone" [(ngModel)]="student.phone" placeholder="Phone" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button (click)="goBack()" class="btn btn-default">Back</button>
+            <button (click)="save()" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
-            
+
         </div>
     </div>
     <div class="col-md-12">
 		<form>
-			Client Name: <br> <input type = "text" name="clientName"> <br>
-			Date: <br> <input type = "date" name="Date"> <br>
 			Gov’t ID: <br> <input type = "text" name="gov"> <br>
-			Telephone : <br> <input type = "number" name="telephone"> <br>
 			Transcript: <br> <input type = "text" name="transcript"> <br>
 			Courses: <br> <input type = "text" name="courses"> <br>
 			Goal: <br> <input type = "text" name="goal"> <br>
@@ -68,10 +110,5 @@
 			Part A total: <input type="number" name="partA" placeholder="0"><br>
 			Part B total: <input type="number" name="partB" placeholder="0"><br>
 		</form>
-    </div>
-</div>
-<div class="form-group">
-    <div>
-        <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>
 </div>

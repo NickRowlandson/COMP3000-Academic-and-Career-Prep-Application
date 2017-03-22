@@ -23,7 +23,7 @@ class UserModel {
     get lastName (): string {
         return this._userModel.lastName;
     }
-    
+
     get email (): string {
         return this._userModel.email;
     }

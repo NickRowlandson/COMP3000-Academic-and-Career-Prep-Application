@@ -2,6 +2,10 @@
   padding: 5px !important;
 }
 
+button {
+    min-width: 80px;
+}
+
 .inline {
   display:inline;
 }

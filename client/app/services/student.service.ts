@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Student} from "../models/student";
+import { Student } from "../models/student";
 
 @Injectable()
 export class StudentService {
@@ -32,9 +32,9 @@ export class StudentService {
     }
 
     private post(student: Student): Promise<Student> {
+        console.log(student);
         let headers = new Headers({
             'Content-Type': 'application/json'});
-
         return this.http
             .post(this.studentsUrl, JSON.stringify(student), {headers:headers})
             .toPromise()

@@ -1,9 +1,9 @@
-.padding {
-  padding: 5px !important;
-}
-
 .inline {
   display:inline;
+}
+
+button {
+    min-width: 80px;
 }
 
 .actionColumn {

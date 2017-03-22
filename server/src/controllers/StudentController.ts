@@ -2,12 +2,18 @@ import express = require("express");
 import StudentBusiness = require("./../app/business/StudentBusiness");
 import IBaseController = require("./BaseController");
 import IStudentModel = require("./../app/model/interfaces/StudentModel");
+import jwt = require('jsonwebtoken');
+import bcrypt = require('bcrypt');
 
 class StudentController implements IBaseController <StudentBusiness> {
 
     create(req: express.Request, res: express.Response): void {
         try {
-
+            var salt = bcrypt.genSaltSync(10);
+            var password: IStudentModel = <IStudentModel>req.body.password;
+            // Hash the password with the salt
+            password = bcrypt.hashSync(password, salt);
+            req.body.password = password;
             var student: IStudentModel = <IStudentModel>req.body;
             var studentBusiness = new StudentBusiness();
             studentBusiness.create(student, (error, result) => {

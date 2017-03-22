@@ -7,16 +7,27 @@ class StudentModel {
     constructor(studentModel: IStudentModel) {
         this._studentModel = studentModel;
     }
+    get authLevel (): string {
+        return this._studentModel.authLevel;
+    }
+    get enquiryDate (): string {
+        return this._studentModel.enquiryDate;
+    }
+    get username (): string {
+        return this._studentModel.username;
+    }
+    get password (): string {
+        return this._studentModel.password;
+    }
     get firstName (): string {
         return this._studentModel.firstName;
     }
-
     get lastName (): string {
         return this._studentModel.lastName;
     }
 
-    get studentNumber (): number {
-        return this._studentModel.studentNumber;
+    get birthday (): string {
+        return this._studentModel.birthday;
     }
 
     get email (): string {
