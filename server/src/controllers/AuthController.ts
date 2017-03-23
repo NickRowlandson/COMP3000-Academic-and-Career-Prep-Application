@@ -1,7 +1,6 @@
 import express = require("express");
 import jwt = require('jsonwebtoken');
 import bcrypt = require('bcrypt');
-var mysql = require('mysql');
 var sql = require('mssql');
 
 class AuthController {
