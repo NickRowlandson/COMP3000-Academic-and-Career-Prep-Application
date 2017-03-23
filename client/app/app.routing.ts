@@ -28,11 +28,13 @@ const appRoutes: Routes = [
     },
     {
         path: 'studentEdit/:id',
-        component: StudentEditComponent
+        component: StudentEditComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'student',
-        component: StudentManageComponent
+        component: StudentManageComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'list',
@@ -41,16 +43,19 @@ const appRoutes: Routes = [
     },
     {
         path: 'user',
-        component: UserManageComponent
+        component: UserManageComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'userEdit/:id',
-        component: UserEditComponent
+        component: UserEditComponent,
+        canActivate: [AuthGuard]
 
     },
     {
         path: 'suitability',
-        component: SuitabilityFormComponent
+        component: SuitabilityFormComponent,
+        canActivate: [AuthGuard]
     }
 ];
 
