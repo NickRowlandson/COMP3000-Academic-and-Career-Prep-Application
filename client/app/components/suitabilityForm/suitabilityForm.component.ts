@@ -40,7 +40,7 @@ export class SuitabilityFormComponent {
   }
 
   save() {
-      this.student["enquiryDate"] = this.date;
+      this.student["inquiryDate"] = this.date;
       this.student["authLevel"] = "client";
       this.student["username"] = this.student.firstName.charAt(0).toLowerCase() + this.student.lastName.toLowerCase();
       this.student["password"] = this.student.birthday.replace(/-/g, "");

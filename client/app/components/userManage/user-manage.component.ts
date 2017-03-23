@@ -26,7 +26,7 @@ export class UserManageComponent implements OnInit {
     }
 
     gotoEdit(user: User, event: any) {
-        this.router.navigate(['/userEdit', user._id]);
+        this.router.navigate(['/userEdit', user.staffID]);
     }
 
     addUser() {

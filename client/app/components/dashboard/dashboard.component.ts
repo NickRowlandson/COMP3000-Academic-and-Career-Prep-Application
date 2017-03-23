@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Student } from "../../models/student";
-import { StudentService } from "../../services/student.service";
 
 @Component({
     selector: 'dashboard',
@@ -9,20 +7,10 @@ import { StudentService } from "../../services/student.service";
     styleUrls: ['./app/components/dashboard/dashboard.component.css']
 })
 
-export class DashboardComponent implements OnInit {
-    students: Student[] = [];
+export class DashboardComponent {
 
-    constructor(private router: Router, private studentService: StudentService) {
+    constructor (private router: Router) {
 
     }
 
-    ngOnInit() {
-        this.studentService.getStudents()
-            .then(students => this.students = students);
-    }
-
-    gotoDetail(student: Student) {
-        let link = ['/detail', student._id];
-        this.router.navigate(link);
-    }
 }

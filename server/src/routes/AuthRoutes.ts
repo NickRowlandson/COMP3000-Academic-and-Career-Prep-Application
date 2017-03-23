@@ -1,5 +1,5 @@
 import express = require("express");
-import AuthController = require("./../../controllers/AuthController");
+import AuthController = require("../controllers/AuthController");
 
 var router = express.Router();
 class AuthRoutes {

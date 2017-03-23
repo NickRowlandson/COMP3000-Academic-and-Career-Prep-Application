@@ -1,5 +1,5 @@
 import express = require("express");
-import StudentController = require("./../../controllers/StudentController");
+import StudentController = require("../controllers/StudentController");
 
 var router = express.Router();
 class StudentRoutes {

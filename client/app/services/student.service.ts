@@ -25,7 +25,7 @@ export class StudentService {
     }
 
     save(student: Student): Promise<Student>  {
-        if (student._id) {
+        if (student.studentID) {
             return this.put(student);
         }
         return this.post(student);
@@ -46,7 +46,7 @@ export class StudentService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let url = `${this.studentsUrl}/${student._id}`;
+        let url = `${this.studentsUrl}/${student.studentID}`;
 
         return this.http
             .put(url, JSON.stringify(student), {headers: headers})
@@ -59,7 +59,7 @@ export class StudentService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let url = `${this.studentsUrl}/${student._id}`;
+        let url = `${this.studentsUrl}/${student.studentID}`;
 
         return this.http
             .delete(url, headers)

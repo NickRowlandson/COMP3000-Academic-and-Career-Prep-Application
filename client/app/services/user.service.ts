@@ -31,7 +31,7 @@ export class UserService {
     }
 
     save(user: User): Promise<User>  {
-        if (user._id) {
+        if (user.staffID) {
             return this.put(user);
         }
         return this.post(user);
@@ -52,7 +52,7 @@ export class UserService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let url = `${this.usersUrl}/${user._id}`;
+        let url = `${this.usersUrl}/${user.staffID}`;
 
         return this.http
             .put(url, JSON.stringify(user), {headers: headers})
@@ -65,7 +65,7 @@ export class UserService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let url = `${this.usersUrl}/${user._id}`;
+        let url = `${this.usersUrl}/${user.staffID}`;
 
         return this.http
             .delete(url, headers)

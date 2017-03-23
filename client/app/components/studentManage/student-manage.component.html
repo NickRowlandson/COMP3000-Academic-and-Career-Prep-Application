@@ -9,7 +9,6 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Username</th>
                     <th>Email</th>
                     <th>Action</th>
                 </tr>
@@ -17,7 +16,6 @@
             <tbody>
                 <tr *ngFor="let student of students" [class.active]="student === selectedStudent">
                     <td>{{student.firstName + " " + student.lastName}}</td>
-                    <td>{{student.username}}</td>
                     <td>{{student.email}}</td>
                     <td class="actionColumn middle">
                         <div class="inline">

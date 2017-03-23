@@ -1,11 +1,12 @@
 export class Student {
-    _id: string;
+    studentID: string;
     authLevel: string;
-    enquiryDate: string;
+    inquiryDate: string;
     username: string;
     password: string;
     firstName: string;
     lastName: string;
     birthday: string;
     email: string;
+    phone: string;
 }

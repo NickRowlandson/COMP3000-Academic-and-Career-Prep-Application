@@ -5,7 +5,7 @@
         <div class="error" *ngIf="error">{{error}}</div>
         <div class="pull-right">
             <div class="padding">
-                <button class="btn btn-success" (click)="addUser()"><i class="fa fa-plus" aria-hidden="true"></i> Add Staff</button>
+                <button class="btn btn-success" (click)="addUser()"><i class="fa fa-plus" ></i> Add Staff</button>
             </div>
         </div>
     </div>
@@ -14,7 +14,6 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Username</th>
                     <th>Email</th>
                     <th>Action</th>
                 </tr>
@@ -22,7 +21,6 @@
             <tbody>
                 <tr *ngFor="let user of users" [class.active]="user === selectedUser">
                     <td>{{user.firstName + " " + user.lastName}}</td>
-                    <td>{{user.username}}</td>
                     <td>{{user.email}}</td>
                     <td class="actionColumn middle">
                         <div class="inline">

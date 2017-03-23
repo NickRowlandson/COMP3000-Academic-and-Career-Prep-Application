@@ -23,13 +23,14 @@ export class UserEditComponent implements OnInit {
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
+            console.log(id);
             if (id === 'new') {
                 this.newUser = true;
                 this.user = new User();
             } else {
                 this.newUser = false;
-                this.userService.getUser(id)
-                    .then(user => this.user = user);
+                this.userService.getUser(id).then(user => this.user = user);
+                console.log(this.user);
             }
         });
     }

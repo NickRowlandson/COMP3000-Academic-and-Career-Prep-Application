@@ -1,25 +1,34 @@
 import express = require("express");
-import UserBusiness = require("./../app/business/UserBusiness");
-import IBaseController = require("./BaseController");
-import IUserModel = require("./../app/model/interfaces/UserModel");
 import jwt = require('jsonwebtoken');
 import bcrypt = require('bcrypt');
+var sql = require('mssql');
 
-class UserController implements IBaseController <UserBusiness> {
-
+class UserController {
     create(req: express.Request, res: express.Response): void {
         try {
             var salt = bcrypt.genSaltSync(10);
-            var password: IUserModel = <IUserModel>req.body.password;
+            var password = req.body.password;
             // Hash the password with the salt
             password = bcrypt.hashSync(password, salt);
             req.body.password = password;
-            var user: IUserModel = <IUserModel>req.body;
-            console.log(user);
-            var userBusiness = new UserBusiness();
-            userBusiness.create(user, (error, result) => {
-                if(error) res.send({"error": "error"});
-                else res.send({"success": "success"});
+            var staff = req.body;
+            sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+              new sql.Request().query("INSERT INTO Users VALUES ('"+staff.username+"','"+staff.password+"','staff','"+staff.authLevel+"')").then(function() {
+                new sql.Request().query("SELECT userID FROM Users WHERE username = '"+staff.username+"' AND password = '"+staff.password+"'").then(function(id) {
+                  new sql.Request().query("INSERT INTO Staff VALUES ('"+id[0].userID+"','"+staff.firstName+"', '"+staff.lastName+"','"+staff.email+"')").then(function() {
+                    res.send({"success": "success"});
+                  }).catch(function(err) {
+                    res.send({"error": "error"}); console.log("insert staff " + err);
+                  });
+                }).catch(function(err) {
+                    res.send({"error": "error"}); console.log("get user " + err);
+                });
+              }).catch(function(err) {
+                  res.send({"error": "error"}); console.log("insert user " + err);
+              });
+            }).catch(function(err) {
+                console.log(err);
+                res.send({"error": "error in your request"});
             });
         }
         catch (e)  {
@@ -30,12 +39,17 @@ class UserController implements IBaseController <UserBusiness> {
 
     update(req: express.Request, res: express.Response): void {
         try {
-            var user: IUserModel = <IUserModel>req.body;
+            var staff = req.body;
             var _id: string = req.params._id;
-            var userBusiness = new UserBusiness();
-            userBusiness.update(_id, user, (error, result) => {
-                if(error) res.send({"error": "error"});
-                else res.send({"success": "success"});
+            sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+              new sql.Request().query("UPDATE Staff SET '"+staff.firstName+"','"+staff.lastName+"','"+staff.email+"' WHERE staffID = '"+_id+"'").then(function() {
+                  res.send({"success": "success"});
+              }).catch(function(err) {
+                  res.send({"error": "error"}); console.log("Update staff " + err);
+              });
+            }).catch(function(err) {
+                console.log(err);
+                res.send({"error": "error in your request"});
             });
         }
         catch (e)  {
@@ -47,10 +61,15 @@ class UserController implements IBaseController <UserBusiness> {
     delete(req: express.Request, res: express.Response): void {
         try {
             var _id: string = req.params._id;
-            var userBusiness = new UserBusiness();
-            userBusiness.delete(_id, (error, result) => {
-                if(error) res.send({"error": "error"});
-                else res.send({"success": "success"});
+            sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+              new sql.Request().query("DELETE FROM Staff WHERE staffID = '"+_id+"'").then(function(recordset) {
+                  res.send({"success": "success"});
+              }).catch(function(err) {
+                  res.send({"error": "error"}); console.log("Delete staff " + err);
+              });
+            }).catch(function(err) {
+                console.log(err);
+                res.send({"error": "error in your request"});
             });
         }
         catch (e)  {
@@ -61,11 +80,16 @@ class UserController implements IBaseController <UserBusiness> {
 
     retrieve(req: express.Request, res: express.Response): void {
         try {
-            var userBusiness = new UserBusiness();
-            userBusiness.retrieve((error, result) => {
-                if(error) res.send({"error": "error"});
-                else res.send(result);
+          sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+            new sql.Request().query('SELECT * FROM Staff').then(function(recordset) {
+                res.send(recordset);
+            }).catch(function(err) {
+                res.send({"error": "error"}); console.log("Select all staff " + err);
             });
+          }).catch(function(err) {
+              console.log(err);
+              res.send({"error": "error in your request"});
+          });
         }
         catch (e)  {
             console.log(e);
@@ -76,10 +100,16 @@ class UserController implements IBaseController <UserBusiness> {
     findById(req: express.Request, res: express.Response): void {
         try {
             var _id: string = req.params._id;
-            var userBusiness = new UserBusiness();
-            userBusiness.findById(_id, (error, result) => {
-                if(error) res.send({"error": "error"});
-                else res.send(result);
+            console.log(_id);
+            sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+              new sql.Request().query("SELECT *  FROM Staff WHERE staffID = '"+_id+"'").then(function(recordset) {
+                  res.send(recordset[0]);
+              }).catch(function(err) {
+                  res.send({"error": "error"}); console.log("NOPE " + err);
+              });
+            }).catch(function(err) {
+                console.log(err);
+                res.send({"error": "error in your request"});
             });
         }
         catch (e)  {
