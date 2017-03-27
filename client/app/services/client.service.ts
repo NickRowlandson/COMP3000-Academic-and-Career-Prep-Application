@@ -1,66 +1,66 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Student } from "../models/student";
+import { Client } from "../models/client";
 
 @Injectable()
-export class StudentService {
+export class ClientService {
 
-    private studentsUrl = 'api/students';  // URL to web api
+    private clientUrl = 'api/clients';  // URL to web api
 
     constructor(private http: Http) { }
 
-    getStudents(): Promise<Student[]> {
-      console.log("Getting students...");
-        return this.http.get(this.studentsUrl)
+    getClients(): Promise<Client[]> {
+      console.log("Getting clients...");
+        return this.http.get(this.clientUrl)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
-    getStudent(id: string) {
-        return this.http.get(this.studentsUrl + '/' + id)
+    getClient(id: string) {
+        return this.http.get(this.clientUrl + '/' + id)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
-    save(student: Student): Promise<Student>  {
-        if (student.studentID) {
-            return this.put(student);
+    save(client: Client): Promise<Client>  {
+        if (client.clientID) {
+            return this.put(client);
         }
-        return this.post(student);
+        return this.post(client);
     }
 
-    private post(student: Student): Promise<Student> {
-        console.log(student);
+    private post(client: Client): Promise<Client> {
+        console.log(client);
         let headers = new Headers({
             'Content-Type': 'application/json'});
         return this.http
-            .post(this.studentsUrl, JSON.stringify(student), {headers:headers})
+            .post(this.clientUrl, JSON.stringify(client), {headers:headers})
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
 
-    private put(student: Student) {
+    private put(client: Client) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let url = `${this.studentsUrl}/${student.studentID}`;
+        let url = `${this.clientUrl}/${client.clientID}`;
 
         return this.http
-            .put(url, JSON.stringify(student), {headers: headers})
+            .put(url, JSON.stringify(client), {headers: headers})
             .toPromise()
-            .then(() => student)
+            .then(() => client)
             .catch(this.handleError);
     }
 
-    delete(student: Student) {
+    delete(client: Client) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let url = `${this.studentsUrl}/${student.studentID}`;
+        let url = `${this.clientUrl}/${client.clientID}`;
 
         return this.http
             .delete(url, headers)

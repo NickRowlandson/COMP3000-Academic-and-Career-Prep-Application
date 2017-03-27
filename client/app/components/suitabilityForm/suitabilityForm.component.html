@@ -1,6 +1,6 @@
 <h2>Client Suitability</h2>
 <hr>
-<div *ngIf="student" class="form-horizontal">
+<div *ngIf="client" class="form-horizontal">
   <div class="row">
     <ul class="sectionBtnGroup col-sm-12">
       <li *ngIf="showSectionBtn1" class="sectionButtons" [ngClass]="{active: showSection1}" title="Basic Info" (click)="clicked($event, 'section1')"><h4>Basic Info</h4></li>
@@ -10,166 +10,196 @@
     </ul>
     <div id="section1" *ngIf="showSection1" class="col-sm-12">
       <div class="form-group">
-          <label class="col-sm-2 control-label">Date: </label>
-          <div class="col-sm-10">
-            {{date | date: format}}
+          <div class="col-sm-offset-10 col-sm-1">
+              <button (click)="next($event, 'section2')" class="btn btn-primary">Next <i class="fa fa-step-forward" aria-hidden="true"></i></button>
           </div>
-          <input type="hidden" name="date" value ="YES" [(ngModel)]="student.enquiryDate" required/>
+      </div>
+      <div class="form-group">
+          <label class="col-sm-2 control-label">Date: </label>
+          <div class="col-sm-8">
+            {{date | date: format}}
+            <input type="hidden" name="date" value="{{date | date: format}}" [(ngModel)]="client.inquiryDate" required/>
+          </div>
       </div>
       <div class="form-group">
           <label class="col-sm-2 control-label">First Name: </label>
-          <div class="col-sm-10">
-              <input class="form-control" [(ngModel)]="student.firstName" placeholder="First Name" required />
+          <div class="col-sm-8">
+              <input class="form-control" [(ngModel)]="client.firstName" placeholder="First Name" required />
           </div>
       </div>
       <div class="form-group">
           <label class="col-sm-2 control-label">Last Name: </label>
-          <div class="col-sm-10">
-              <input class="form-control" [(ngModel)]="student.lastName" placeholder="Last Name" required />
+          <div class="col-sm-8">
+              <input class="form-control" [(ngModel)]="client.lastName" placeholder="Last Name" required />
           </div>
       </div>
       <div class="form-group">
           <label class="col-sm-2 control-label">Date of Birth: </label>
-          <div class="col-sm-10">
-              <input class="form-control" type="date" [(ngModel)]="student.birthday" placeholder="DD/MM/YYYY" required />
+          <div class="col-sm-8">
+              <input class="form-control" type="date" [(ngModel)]="client.birthday" placeholder="DD/MM/YYYY" required />
           </div>
       </div>
       <div class="form-group">
           <label class="col-sm-2 control-label">Email: </label>
-          <div class="col-sm-10">
-              <input class="form-control" type="email" [(ngModel)]="student.email" placeholder="Email" required />
+          <div class="col-sm-8">
+              <input class="form-control" type="email" [(ngModel)]="client.email" placeholder="Email" required />
           </div>
       </div>
       <div class="form-group">
           <label class="col-sm-2 control-label">Phone: </label>
-          <div class="col-sm-10">
-              <input class="form-control" type="phone" [(ngModel)]="student.phone" placeholder="Phone" required />
-          </div>
-      </div>
-      <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-              <button (click)="goBack()" class="btn btn-default">Back</button>
-              <button (click)="next($event, 'section2')" class="btn btn-primary">Next</button>
+          <div class="col-sm-8">
+              <input class="form-control" type="phone" [(ngModel)]="client.phone" placeholder="Phone" required />
           </div>
       </div>
     </div><!-- end of section 1 -->
     <div id="section2" *ngIf="showSection2" class="">
         <div class="form-group">
-      		<label class="col-sm-2 control-label">Gov’t ID: </label>
-          <div class="col-sm-10">
-            <input class="form-control" type="text" name="gov">
-          </div>
+            <div class="col-sm-offset-10 col-sm-1">
+                <button (click)="next($event, 'section3')" class="btn btn-primary">Next <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+            </div>
         </div>
         <div class="form-group">
       		<label class="col-sm-2 control-label">Transcript: </label>
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <input class="form-control" type="text" name="transcript">
           </div>
         </div>
         <div class="form-group">
       		<label class="col-sm-2 control-label">Courses: </label>
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <input class="form-control" type="text" name="courses">
           </div>
         </div>
         <div class="form-group">
       		<label class="col-sm-2 control-label">Goal: </label>
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <input class="form-control" type="text" name="goal">
           </div>
         </div>
         <div class="form-group">
   		    <label class="col-sm-2 control-label">Transition Date: </label>
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <input class="form-control" type="text" name="transitionDate">
           </div>
         </div>
         <div class="form-group">
-      		<input type="checkbox" name="occGoalCheckBox" value="occGoal">Appropriate Occupational Goal
-      		<input type="checkbox" name="ageCheckBox" value="19+">19+ Years Old
-      		<input type="checkbox" name="notRegCheckBox" value="notReg">Not Registered In High School or Post-Sec.
-      		<input type="checkbox" name="availCheckBox" value="avail">Available During Class Time
+      		<label class="col-sm-2 control-label">Gov’t ID: </label>
+          <div class="col-sm-8">
+            <input type="checkbox" name="gov">
+          </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button (click)="next($event, 'section3')" class="btn btn-primary">Next</button>
-            </div>
+          <div class="col-sm-8">
+            <ul>
+          		<li><input type="checkbox" name="occGoalCheckBox" value="occGoal"> Appropriate Occupational Goal</li>
+          		<li><input type="checkbox" name="ageCheckBox" value="19+"> 19+ Years Old</li>
+          		<li><input type="checkbox" name="notRegCheckBox" value="notReg"> Not Registered In High School or Post-Sec.</li>
+          		<li><input type="checkbox" name="availCheckBox" value="avail"> Available During Class Time</li>
+            </ul>
+          </div>
         </div>
     </div><!-- end of section 2 -->
     <div id="section3" *ngIf="showSection3" class="">
       <div class="form-group">
+          <div class="col-sm-offset-10 col-sm-1">
+              <button (click)="next($event, 'section4')" class="btn btn-primary">Next <i class="fa fa-step-forward" aria-hidden="true"></i></button>
+          </div>
+      </div>
+      <div class="form-group">
         <label class="col-sm-2 control-label">Last Grade Completed: </label>
-        <input type="radio" name="gradeCompRadio" value="<10"> Less Than Grade 10
-        <input type="radio" name="gradeCompRadio" value="10-11"> Grade 10-11
-        <input type="radio" name="gradeCompRadio" value="12"> Grade 12
+        <div class="col-sm-10">
+          <input type="radio" name="gradeCompRadio" value="<10"> Less Than Grade 10
+          <input type="radio" name="gradeCompRadio" value="10-11"> Grade 10-11
+          <input type="radio" name="gradeCompRadio" value="12"> Grade 12
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Level: </label>
-        <input type="radio" name="accLevelRadio" value="aca"> Academic/Advanced
-        <input type="radio" name="accLevelRadio" value="app"> Applied/General
-        <input type="radio" name="accLevelRadio" value="work"> Workplace/ Basic
+        <div class="col-sm-10">
+          <input type="radio" name="accLevelRadio" value="aca"> Academic/Advanced
+          <input type="radio" name="accLevelRadio" value="app"> Applied/General
+          <input type="radio" name="accLevelRadio" value="work"> Workplace/ Basic
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Post-Secondary/Job Offer start date: </label>
-        <input type="radio" name="OfferStartRadio" value="aca"> Less than 1 Year
-        <input type="radio" name="OfferStartRadio" value="app"> In One Year
-        <input type="radio" name="OfferStartRadio" value="work"> More than a Year
+        <div class="col-sm-10">
+          <input type="radio" name="OfferStartRadio" value="aca"> Less than 1 Year
+          <input type="radio" name="OfferStartRadio" value="app"> In One Year
+          <input type="radio" name="OfferStartRadio" value="work"> More than a Year
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Meets Next Goals Requirements: </label>
-        <input type="radio" name="requirementsRadio" value="no"> No
-        <input type="radio" name="requirementsRadio" value="lacking"> Yes but Lacks Skills/high enough marks
-        <input type="radio" name="requirementsRadio" value="yes"> Yes
+        <div class="col-sm-10">
+          <input type="radio" name="requirementsRadio" value="no"> No
+          <input type="radio" name="requirementsRadio" value="lacking"> Yes but Lacks Skills/high enough marks
+          <input type="radio" name="requirementsRadio" value="yes"> Yes
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Time out of School/Training: </label>
-        <input type="radio" name="timeoutRadio" value="6+"> 6 or More Years
-        <input type="radio" name="timeoutRadio" value="1-6"> 1-6 Years
-        <input type="radio" name="timeoutRadio" value="<1"> Less than 1 Year
+        <div class="col-sm-10">
+          <input type="radio" name="timeoutRadio" value="6+"> 6 or More Years
+          <input type="radio" name="timeoutRadio" value="1-6"> 1-6 Years
+          <input type="radio" name="timeoutRadio" value="<1"> Less than 1 Year
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Has Been In Program Before: </label>
-        <input type="radio" name="progBeforeRadio" value="no"> No/Left with Appropriate Reasons
-        <input type="radio" name="progBeforeRadio" value="yesWithApp"> Yes with Appropriate Progress
-        <input type="radio" name="progBeforeRadio" value="Yes"> Yes – No Progress
+        <div class="col-sm-10">
+          <input type="radio" name="progBeforeRadio" value="no"> No/Left with Appropriate Reasons
+          <input type="radio" name="progBeforeRadio" value="yesWithApp"> Yes with Appropriate Progress
+          <input type="radio" name="progBeforeRadio" value="Yes"> Yes – No Progress
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Employment: </label>
-        <input type="radio" name="empRadio" value="no"> Not Working
-        <input type="radio" name="empRadio" value="part"> Working Part Time
-        <input type="radio" name="empRadio" value="Yes"> Working Full Time
+        <div class="col-sm-10">
+          <input type="radio" name="empRadio" value="no"> Not Working
+          <input type="radio" name="empRadio" value="part"> Working Part Time
+          <input type="radio" name="empRadio" value="Yes"> Working Full Time
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Income Source: </label>
-        <input type="radio" name="IncRadio" value="no"> OW  ODSP  EI  SC
-        <input type="radio" name="IncRadio" value="noInc"> No Income
-        <input type="radio" name="IncRadio" value="Yes"> Employed
+        <div class="col-sm-10">
+          <input type="radio" name="IncRadio" value="no"> OW  ODSP  EI  SC
+          <input type="radio" name="IncRadio" value="noInc"> No Income
+          <input type="radio" name="IncRadio" value="Yes"> Employed
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Age: </label>
-        <input type="radio" name="AgeRadio" value="45-65"> 45-65 years old
-        <input type="radio" name="AgeRadio" value="19-29"> 19-29 years old
-        <input type="radio" name="AgeRadio" value="30-44"> 30-44 years old
+        <div class="col-sm-10">
+          <input type="radio" name="AgeRadio" value="45-65"> 45-65 years old
+          <input type="radio" name="AgeRadio" value="19-29"> 19-29 years old
+          <input type="radio" name="AgeRadio" value="30-44"> 30-44 years old
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label"># of Hours/Week: </label>
-        <input type="radio" name="numHoursRadio" value="10-20"> 10-20
-        <input type="radio" name="numHoursRadio" value="5-10"> 5-10
-        <input type="radio" name="numHoursRadio" value="<5"> less than 5
+        <div class="col-sm-10">
+          <input type="radio" name="numHoursRadio" value="10-20"> 10-20
+          <input type="radio" name="numHoursRadio" value="5-10"> 5-10
+          <input type="radio" name="numHoursRadio" value="<5"> less than 5
+        </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Work History: </label>
-        <input type="radio" name="workHisRadio" value="<1"> Less than 1 year experience in the field
-        <input type="radio" name="workHisRadio" value="1-4"> 1-4 years’ experience in the field
-        <input type="radio" name="workHisRadio" value=">4"> 4+ years’ experience in the field
-      </div>
-      <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-              <button (click)="next($event, 'section4')" class="btn btn-primary">Next</button>
-          </div>
+        <div class="col-sm-10">
+          <input type="radio" name="workHisRadio" value="<1"> Less than 1 year experience in the field
+          <input type="radio" name="workHisRadio" value="1-4"> 1-4 years’ experience in the field
+          <input type="radio" name="workHisRadio" value=">4"> 4+ years’ experience in the field
+        </div>
       </div>
     </div><!-- end of section 3 -->
     <div id="section4" *ngIf="showSection4" class="">
+      <div class="form-group">
+          <div class="col-sm-offset-10 col-sm-1">
+              <button (click)="save()" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save Client</button>
+          </div>
+      </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">Part A total: </label>
         <div class="col-sm-2">
@@ -181,11 +211,6 @@
         <div class="col-sm-2">
           <input class="form-control" type="number" name="partB" placeholder="0">
         </div>
-      </div>
-      <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-              <button (click)="save()" class="btn btn-success">Save</button>
-          </div>
       </div>
     </div><!-- end of section 4 -->
   </div><!-- close row -->

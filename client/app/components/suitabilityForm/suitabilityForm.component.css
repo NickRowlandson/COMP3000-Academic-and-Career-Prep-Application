@@ -4,6 +4,7 @@
   margin: 0 2 0 2;
   float: left;
   font-weight: bold;
+  box-shadow: 2px 2px 3px #888888;
 }
 
 .sectionBtnGroup {

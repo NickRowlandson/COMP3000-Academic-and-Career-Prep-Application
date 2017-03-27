@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Student } from "../../models/student";
-import { StudentService } from "../../services/student.service";
+import { Client } from "../../models/client";
+import { ClientService } from "../../services/client.service";
 import { AuthService } from "../../services/authentication.service";
 
 @Component({
@@ -11,45 +11,48 @@ import { AuthService } from "../../services/authentication.service";
 })
 
 export class ClientStatusComponent implements OnInit {
-    students: Student[];
-    clients = [];
-    studentView: Student;
+  clients: Client[];
+  error: any;
+  clientView: Client;
 
-    constructor(private router: Router, private studentService: StudentService, private authService: AuthService) {
+  constructor(private router: Router, private clientService: ClientService, private authService: AuthService) {
 
-    }
+  }
 
-    ngOnInit() {
+  ngOnInit() {
       this.getData();
-    }
+  }
 
-    getData() {
-      this.studentService.getStudents()
-      .then(data =>
-        this.getClients(data)
-      );
-    }
+  getData() {
+    this.clientService.getClients()
+    .then(data =>
+      this.clients = data
+    );
+  }
 
-    getClients(data) {
-      for (let client of data) {
-        this.authService.getAuthLevel(client.userID)
-        .then(data =>
-          this.addToTable(data.authLevel, client)
-        );
-      }
-    }
+  addClient() {
+    this.router.navigate(['/suitability']);
+  }
 
-    addToTable(authLevel, client) {
-      if (authLevel === 'client') {
-        this.clients.push(client);
-      }
-    }
+  gotoEdit(client: Client, event: any) {
+      this.router.navigate(['/clientEdit', client.clientID]);
+  }
 
-    showView(student: Student) {
-      this.studentView = student;
-    }
+  deleteClient(client: Client, event: any) {
+      event.stopPropagation();
+      this.clientService
+          .delete(client)
+          .then(res => {
+              this.clients = this.clients.filter(h => h !== client);
+          })
+          .catch(error => this.error = error);
+  }
 
-    goBack() {
-        window.history.back();
-    }
+  showView(client: Client) {
+    this.clientView = client;
+  }
+
+  goBack() {
+      window.history.back();
+  }
 }

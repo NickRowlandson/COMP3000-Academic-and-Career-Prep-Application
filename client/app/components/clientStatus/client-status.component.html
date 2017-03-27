@@ -1,71 +1,81 @@
-<div class="row">
-    <div class="col-md-6">
+        <div class="row">
         <h2>Client Status</h2>
         <hr>
-        <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let student of clients" [class.active]="student === selectedStudent">
-                <td>{{student.firstName + " " + student.lastName}}</td>
-                <td></td>
-                <td class="actionColumn middle">
-                    <div class="padding inline">
-                        <button (click)="showView(student)" class="btn btn-primary">View Info</button>
-                    </div>
-                </td>
-              </tr>
-            </tbody>
-        </table>
-    </div>
-    <div *ngIf="studentView" class="col-md-6">
-        <h2>Information for {{studentView.firstName + " " + studentView.lastName}}</h2>
+
+            <div class="col-md-12">
+                <div class="error" *ngIf="error">{{error}}</div>
+            </div>
+            <div class="col-md-12">
+              <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let client of clients">
+                        <td>{{client.firstName + " " + client.lastName}}</td>
+                        <td>{{client.email}}</td>
+                        <td class="actionColumn middle">
+                            <!-- <div class="inline">
+                                <button class="btn btn-primary" (click)="gotoEdit(client, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                            </div> -->
+                            <div class="inline">
+                                <button class="btn btn-danger" (click)="deleteClient(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                            </div>
+                            <div class="padding inline">
+                                <button (click)="showView(client)" class="btn btn-primary">View Info</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <div *ngIf="clientView" class="col-md-6">
+        <h2>Information for {{clientView.firstName + " " + clientView.lastName}}</h2>
         <hr>
         <div class="form-group">
             <label class="control-label">id: </label>
             <div class="">
-                {{studentView._id}}
+                {{clientView._id}}
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">Inquiry Date: </label>
             <div class="">
-                {{studentView.inquiryDate}}
+                {{clientView.inquiryDate}}
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">First Name: </label>
             <div class="">
-                {{studentView.firstName}}
+                {{clientView.firstName}}
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">Last Name: </label>
             <div class="">
-                {{studentView.lastName}}
+                {{clientView.lastName}}
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">Birth Date: </label>
             <div class="">
-                {{studentView.birthdate}}
+                {{clientView.birthdate}}
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">Email: </label>
             <div class="">
-                {{studentView.email}}
+                {{clientView.email}}
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">Phone: </label>
             <div class="">
-                {{studentView.phone}}
+                {{clientView.phone}}
             </div>
         </div>
     </div>

@@ -12,7 +12,7 @@ import { AuthService } from "../../services/authentication.service";
 
 
 export class StudentManageComponent implements OnInit {
-    students = [];
+    students: Student [];
     error: any;
 
     constructor(private router: Router, private studentService: StudentService, private authService: AuthService) {
@@ -26,27 +26,12 @@ export class StudentManageComponent implements OnInit {
     getData() {
       this.studentService.getStudents()
       .then(data =>
-        this.getStudents(data)
+        this.students = data
       );
     }
 
-    getStudents(data) {
-      for (let student of data) {
-        this.authService.getAuthLevel(student.userID)
-        .then(data =>
-          this.addToTable(data.authLevel, student)
-        );
-      }
-    }
-    
     addClient() {
       this.router.navigate(['/suitability']);
-    }
-
-    addToTable(authLevel, student) {
-      if (authLevel === 'student') {
-        this.students.push(student);
-      }
     }
 
     gotoEdit(student: Student, event: any) {

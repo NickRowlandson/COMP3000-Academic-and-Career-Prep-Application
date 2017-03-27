@@ -20,6 +20,7 @@ import { SuitabilityFormComponent } from './components/suitabilityForm/suitabili
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/authentication.service';
 import { StudentService } from './services/student.service';
+import { ClientService } from './services/client.service';
 import { StaffService } from './services/staff.service';
 
 @NgModule({
@@ -44,7 +45,8 @@ import { StaffService } from './services/staff.service';
     AuthGuard,
     AuthService,
     StudentService,
-    StaffService
+    StaffService,
+    ClientService
   ],
   bootstrap: [AppComponent]
 })

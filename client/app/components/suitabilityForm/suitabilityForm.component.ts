@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Student } from "../../models/Student";
+import { Client } from "../../models/client";
 import { ActivatedRoute, Params } from '@angular/router';
-import { StudentService } from "../../services/student.service";
+import { ClientService } from "../../services/client.service";
 import { AuthService } from '../../services/authentication.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { AuthService } from '../../services/authentication.service';
 })
 
 export class SuitabilityFormComponent {
-  @Input() student: Student;
+  @Input() client: Client;
   error: any;
   date: any;
   currentUser:any;
@@ -27,8 +27,8 @@ export class SuitabilityFormComponent {
   showSectionBtn3 = false;
   showSectionBtn4 = false;
 
-  constructor(private studentService: StudentService, private route: ActivatedRoute, private authService: AuthService) {
-    this.student = new Student();
+  constructor(private clientService: ClientService, private route: ActivatedRoute, private authService: AuthService) {
+    this.client = new Client();
     this.date =  new Date();
   }
 
@@ -89,15 +89,15 @@ export class SuitabilityFormComponent {
   }
 
   save() {
-      this.student["inquiryDate"] = this.date;
-      this.student["authLevel"] = "client";
-      this.student["username"] = this.student.firstName + this.student.lastName;
-      this.student["password"] = this.student.birthday.replace(/-/g, "");
-      console.log(this.student);
-      this.studentService
-          .save(this.student)
-          .then(student => {
-              this.student = student; // saved student, w/ id if new
+      this.client["inquiryDate"] = this.date;
+      this.client["authLevel"] = "client";
+      this.client["username"] = this.client.firstName + this.client.lastName;
+      this.client["password"] = this.client.birthday.replace(/-/g, "");
+      console.log(this.client);
+      this.clientService
+          .save(this.client)
+          .then(client => {
+              this.client = client; // saved client, w/ id if new
               this.goBack();
           })
           .catch(error => this.error = error); // TODO: Display error message

@@ -1,3 +1,18 @@
 h2 {
     margin-bottom: 25;
 }
+.inline {
+  display:inline;
+}
+
+button {
+    min-width: 80px;
+}
+
+.actionColumn {
+  width:20%;
+}
+
+.middle{
+  text-align:center;
+}
