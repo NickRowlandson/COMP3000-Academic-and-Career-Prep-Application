@@ -12,10 +12,7 @@ class UserRoutes {
         var controller = this._userController;
 
         router.get("/users", controller.retrieve);
-        router.post("/users", controller.create);
-        router.put("/users/:_id", controller.update);
         router.get("/users/:_id", controller.findById);
-        router.delete("/users/:_id", controller.delete);
 
         return router;
     }

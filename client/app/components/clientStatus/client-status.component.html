@@ -4,22 +4,22 @@
         <hr>
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
+              <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let student of students" [class.active]="student === selectedStudent">
-                        <td>{{student.firstName + " " + student.lastName}}</td>
-                        <td></td>
-                        <td class="actionColumn middle">
-                            <div class="padding inline">
-                                <button (click)="showView(student)" class="btn btn-primary">View Info</button>
-                            </div>
-                        </td>
-                </tr>
+              <tr *ngFor="let student of clients" [class.active]="student === selectedStudent">
+                <td>{{student.firstName + " " + student.lastName}}</td>
+                <td></td>
+                <td class="actionColumn middle">
+                    <div class="padding inline">
+                        <button (click)="showView(student)" class="btn btn-primary">View Info</button>
+                    </div>
+                </td>
+              </tr>
             </tbody>
         </table>
     </div>
@@ -30,6 +30,12 @@
             <label class="control-label">id: </label>
             <div class="">
                 {{studentView._id}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Inquiry Date: </label>
+            <div class="">
+                {{studentView.inquiryDate}}
             </div>
         </div>
         <div class="form-group">
@@ -45,15 +51,21 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label">Student Number: </label>
+            <label class="control-label">Birth Date: </label>
             <div class="">
-                {{studentView.studentNumber}}
+                {{studentView.birthdate}}
             </div>
         </div>
         <div class="form-group">
             <label class="control-label">Email: </label>
             <div class="">
                 {{studentView.email}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Phone: </label>
+            <div class="">
+                {{studentView.phone}}
             </div>
         </div>
     </div>

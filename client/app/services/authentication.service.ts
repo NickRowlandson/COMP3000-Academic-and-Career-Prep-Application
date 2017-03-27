@@ -20,6 +20,13 @@ export class AuthService {
         }
     }
 
+    getAuthLevel(id: string) {
+      return this.http.get('api/users/' + id)
+          .toPromise()
+          .then(response => response.json())
+          .catch(this.handleError);
+    }
+
     login(username: string, password: string): Observable<boolean> {
         let headers = new Headers({
           'Content-Type': 'application/json'});
@@ -55,5 +62,10 @@ export class AuthService {
         this.token = null;
         localStorage.removeItem('currentUser');
         this.loggedUser.next(null);
+    }
+
+    private handleError(error: any) {
+        console.log('An error occurred', error);
+        return Promise.reject(error.message || error);
     }
 }

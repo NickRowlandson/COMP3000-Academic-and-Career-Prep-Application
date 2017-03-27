@@ -1,22 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from "../../models/User";
 import { ActivatedRoute, Params } from '@angular/router';
-import { UserService } from "../../services/user.service";
+import { StaffService } from "../../services/staff.service";
 
 @Component({
-    selector: 'user-edit',
-    templateUrl: './app/components/userEdit/user-edit.component.html',
-    styleUrls: ['./app/components/userEdit/user-edit.component.css']
+    selector: 'staff-edit',
+    templateUrl: './app/components/staffEdit/staff-edit.component.html',
+    styleUrls: ['./app/components/staffEdit/staff-edit.component.css']
 })
 
-export class UserEditComponent implements OnInit {
+export class StaffEditComponent implements OnInit {
     @Input() user: User;
     newUser = false;
     error: any;
     navigated = false; // true if navigated here
 
 
-    constructor(private userService: UserService, private route: ActivatedRoute) {
+    constructor(private userService: StaffService, private route: ActivatedRoute) {
 
     }
 

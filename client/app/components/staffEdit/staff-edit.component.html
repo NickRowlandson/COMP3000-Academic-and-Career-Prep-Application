@@ -16,10 +16,12 @@
     </div>
     <div class="form-group" *ngIf="newUser">
         <label class="col-sm-2 control-label">Authorization Level: </label>
-        <select class="custom-select" [(ngModel)]="user.authLevel">
-          <option value="Staff" selected>Staff</option>
-          <option value="Admin">Admin</option>
-        </select>
+        <div class="col-sm-2">
+          <select class="form-control">
+            <option value="Staff" selected="selected">Staff</option>
+            <option value="Admin">Admin</option>        
+          </select>
+        </div>
     </div>
     <div class="form-group" *ngIf="newUser">
         <label class="col-sm-2 control-label">User Name: </label>

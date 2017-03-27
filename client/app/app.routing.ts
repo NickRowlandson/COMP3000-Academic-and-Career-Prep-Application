@@ -4,11 +4,11 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { LoginComponent }   from './components/login/login.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
-import { UserManageComponent } from './components/userManage/user-manage.component';
-import { UserEditComponent }  from './components/userEdit/user-edit.component';
+import { StaffManageComponent } from './components/staffManage/staff-manage.component';
+import { StaffEditComponent }  from './components/staffEdit/staff-edit.component';
 import { StudentManageComponent } from './components/studentManage/student-manage.component';
 import { StudentEditComponent }  from './components/studentEdit/student-edit.component';
-import { StudentListComponent }  from './components/studentList/student-list.component';
+import { ClientStatusComponent }  from './components/clientStatus/client-status.component';
 import { SuitabilityFormComponent } from './components/suitabilityForm/suitabilityForm.component';
 
 const appRoutes: Routes = [
@@ -32,23 +32,23 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'student',
+        path: 'students',
         component: StudentManageComponent,
         canActivate: [AuthGuard]
     },
     {
-        path: 'list',
-        component: StudentListComponent,
+        path: 'clients',
+        component: ClientStatusComponent,
         canActivate: [AuthGuard]
     },
     {
-        path: 'user',
-        component: UserManageComponent,
+        path: 'staff',
+        component: StaffManageComponent,
         canActivate: [AuthGuard]
     },
     {
-        path: 'userEdit/:id',
-        component: UserEditComponent,
+        path: 'staffEdit/:id',
+        component: StaffEditComponent,
         canActivate: [AuthGuard]
 
     },

@@ -1,0 +1,26 @@
+.sectionButtons {
+  display: inline;
+  padding: 5 10 5 10;
+  margin: 0 2 0 2;
+  float: left;
+  font-weight: bold;
+}
+
+.sectionBtnGroup {
+  margin-bottom:40px;
+}
+
+.sectionBtnGroup>li:focus, .sectionBtnGroup>li:hover {
+    background-color: #004B87;
+    color:white;
+    cursor:pointer;
+    /* Firefox */
+    -moz-transition: all 1s ease-in;
+    /* Standard */
+    transition: all 0.4s ease-in;
+}
+
+.active {
+  background-color: #004B87;
+  color:white;
+}

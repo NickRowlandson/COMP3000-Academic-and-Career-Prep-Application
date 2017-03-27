@@ -6,21 +6,22 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class UserService {
-    private usersUrl = 'api/users';  // URL to web app
+export class StaffService {
+
+    private usersUrl = 'api/staff';  // URL to web app
 
     constructor(private http: Http,
                 private authService: AuthService) { }
 
     getUsers(): Promise<User[]> {
-        // add authorization header with jwt token
-        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token });
-        let options = new RequestOptions({ headers: headers });
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(this.usersUrl, options)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
+      return this.http.get(this.usersUrl, options)
+          .toPromise()
+          .then(response => response.json())
+          .catch(this.handleError);
     }
 
     getUser(id: string) {

@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../services/user.service";
+import { StaffService } from "../../services/staff.service";
 import { User } from "../../models/user";
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'user-manage',
-    templateUrl: './app/components/userManage/user-manage.component.html',
-    styleUrls: ['./app/components/userManage/user-manage.component.css']
+    selector: 'staff-manage',
+    templateUrl: './app/components/staffManage/staff-manage.component.html',
+    styleUrls: ['./app/components/staffManage/staff-manage.component.css']
 })
 
 
-export class UserManageComponent implements OnInit {
+export class StaffManageComponent implements OnInit {
     users: User[];
     error: any;
 
-    constructor(private router: Router, private userService: UserService) {
+    constructor(private router: Router, private userService: StaffService) {
 
     }
 
@@ -26,11 +26,11 @@ export class UserManageComponent implements OnInit {
     }
 
     gotoEdit(user: User, event: any) {
-        this.router.navigate(['/userEdit', user.staffID]);
+        this.router.navigate(['/staffEdit', user.staffID]);
     }
 
     addUser() {
-        this.router.navigate(['/userEdit', 'new']);
+        this.router.navigate(['/staffEdit', 'new']);
     }
 
     deleteUser(user: User, event: any) {

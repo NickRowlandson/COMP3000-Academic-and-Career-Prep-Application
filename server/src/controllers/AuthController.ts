@@ -36,5 +36,34 @@ class AuthController {
       res.send({"error": "error in your request"});
     }
   }
+
+  authUser(req: express.Request, res: express.Response, data: Object): void {
+    try {
+      console.log(req.headers.authorization);
+      // data will contain authLevel usertype that are required
+      // data will also have callback function
+      // check for auth header
+        // if auth header, get token and decode it
+        // if decode
+          // get user id from decoded token and check
+            // if authLevel and userType valid
+              // data.done()
+            //else
+              // res.send(unauthorized)
+        // else
+          // send unauthorized res
+    // sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+    //   new sql.Request().query('SELECT authLevel, userType FROM Users WHERE userID = "'userID'"').then(function(user) {
+    //
+    //   }).catch(function(err) {
+    //       res.send({"error": err});
+    //   });
+    // });
+    }
+    catch (e) {
+      console.log(e);
+      res.send({"error": "error in your request"});
+    }
+  }
 }
 export = AuthController;
