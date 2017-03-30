@@ -5,12 +5,14 @@ var isPublic = typeof window != "undefined";
   var map = {
     'app':                        'app', // 'dist',
     '@angular':                   (isPublic)? '@angular' : 'node_modules/@angular',
+    'ng2-charts':                 (isPublic)? 'ng2-charts': 'node_modules/ng2-charts/charts/charts',
     'rxjs':                       (isPublic)? 'rxjs' : 'node_modules/rxjs'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
-    'rxjs':                       { defaultExtension: 'js' }
+    'rxjs':                       { defaultExtension: 'js' },
+    'ng2-charts':                 { main: 'charts.js', defaultExtension: 'js' }
   };
   var ngPackageNames = [
     'common',

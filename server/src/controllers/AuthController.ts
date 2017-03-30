@@ -4,6 +4,7 @@ import bcrypt = require('bcrypt');
 var sql = require('mssql');
 
 class AuthController {
+
   auth(req: express.Request, res: express.Response): void {
     try {
       var _username: string = req.body.username;
@@ -39,26 +40,24 @@ class AuthController {
 
   authUser(req: express.Request, res: express.Response, data: Object): void {
     try {
-      console.log(req.headers.authorization);
-      // data will contain authLevel usertype that are required
-      // data will also have callback function
-      // check for auth header
-        // if auth header, get token and decode it
-        // if decode
-          // get user id from decoded token and check
-            // if authLevel and userType valid
-              // data.done()
-            //else
-              // res.send(unauthorized)
-        // else
-          // send unauthorized res
-    // sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-    //   new sql.Request().query('SELECT authLevel, userType FROM Users WHERE userID = "'userID'"').then(function(user) {
-    //
-    //   }).catch(function(err) {
-    //       res.send({"error": err});
-    //   });
-    // });
+      if(req.headers) {
+        jwt.verify(req.headers.authorization, 'f9b574a2fc0d77986cb7ebe21a0dea480f5f21931abfa5cf329a45ecc0c8e1ff', function(err, decoded) {
+          var _id = decoded.userid;
+          sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+            new sql.Request().query("SELECT * FROM Users WHERE userID = '"+_id+"'").then(function(user) {
+                if(user[0].authLevel == data.authLevel && user[0].userType == data.userType) {
+                  console.log("AUTHENTICATED");
+                  data.done();
+                }
+                else {
+                  res.send({status: '403'});
+                }
+            }).catch(function(err) {
+                res.send({"error": "error"}); console.log("Select staff " + err);
+            });
+          });
+        });
+      }
     }
     catch (e) {
       console.log(e);

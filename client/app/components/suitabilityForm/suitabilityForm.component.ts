@@ -90,7 +90,7 @@ export class SuitabilityFormComponent {
 
   save() {
       this.client["inquiryDate"] = this.date;
-      this.client["authLevel"] = "client";
+      this.client["authLevel"] = "Client";
       this.client["username"] = this.client.firstName + this.client.lastName;
       this.client["password"] = this.client.birthday.replace(/-/g, "");
       console.log(this.client);

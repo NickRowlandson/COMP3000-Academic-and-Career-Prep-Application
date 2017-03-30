@@ -1,11 +1,9 @@
-        <div class="row">
-        <h2>Client Status</h2>
-        <hr>
-
-            <div class="col-md-12">
-                <div class="error" *ngIf="error">{{error}}</div>
-            </div>
-            <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+            <h2>Clients</h2>
+            <hr>
+            <div class="error" *ngIf="error">{{error}}</div>
+            <div class="">
               <table class="table table-striped">
                 <thead>
                     <tr>
@@ -22,17 +20,32 @@
                             <!-- <div class="inline">
                                 <button class="btn btn-primary" (click)="gotoEdit(client, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             </div> -->
-                            <div class="inline">
-                                <button class="btn btn-danger" (click)="deleteClient(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                            </div>
                             <div class="padding inline">
                                 <button (click)="showView(client)" class="btn btn-primary">View Info</button>
+                            </div>
+                            <div class="inline">
+                                <button class="btn btn-danger" (click)="deleteClient(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+      </div>
+      <div *ngIf="!clientView" class="col-md-6">
+          <h2>Status</h2>
+          <hr>
+          <div><h3>Total clients: {{ clientTotal }}</h3></div>
+          <div style="display: block">
+            <canvas baseChart
+                        [data]="doughnutChartData"
+                        [labels]="doughnutChartLabels"
+                        [colors]="doughnutChartColors"
+                        [chartType]="doughnutChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+          </div>
+      </div>
     <div *ngIf="clientView" class="col-md-6">
         <h2>Information for {{clientView.firstName + " " + clientView.lastName}}</h2>
         <hr>

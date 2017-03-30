@@ -60,8 +60,12 @@ class ClientController {
         try {
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-              new sql.Request().query("DELETE FROM Clients WHERE clientID = '"+_id+"'").then(function(recordset) {
-                  res.send({"success": "success"});
+              new sql.Request().query("DELETE FROM Clients WHERE clientID = '"+_id+"'").then(function() {
+                new sql.Request().query("DELETE FROM Users WHERE userID = '"+_id+"'").then(function() {
+                    res.send({"success": "success"});
+                }).catch(function(err) {
+                    res.send({"error": "error"}); console.log("Delete user " + err);
+                });
               }).catch(function(err) {
                   res.send({"error": "error"}); console.log("Delete client " + err);
               });

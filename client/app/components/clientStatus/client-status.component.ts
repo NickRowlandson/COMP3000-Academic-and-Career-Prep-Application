@@ -12,8 +12,13 @@ import { AuthService } from "../../services/authentication.service";
 
 export class ClientStatusComponent implements OnInit {
   clients: Client[];
+  clientTotal: any;
   error: any;
   clientView: Client;
+  doughnutChartLabels:string[] = ['Stage 1', 'Stage 2', 'Stage 3'];
+  doughnutChartData:number[] = [350, 450, 100];
+  doughnutChartType:string = 'doughnut';
+  doughnutChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];
 
   constructor(private router: Router, private clientService: ClientService, private authService: AuthService) {
 
@@ -26,9 +31,14 @@ export class ClientStatusComponent implements OnInit {
   getData() {
     this.clientService.getClients()
     .then(data =>
-      this.clients = data
+      this.setData(data)
     );
   }
+
+   setData(data) {
+      this.clients = data;
+      this.clientTotal = data.length;
+   }
 
   addClient() {
     this.router.navigate(['/suitability']);
@@ -50,6 +60,14 @@ export class ClientStatusComponent implements OnInit {
 
   showView(client: Client) {
     this.clientView = client;
+  }
+
+  chartClicked(e:any):void {
+
+  }
+
+  chartHovered(e:any):void {
+
   }
 
   goBack() {

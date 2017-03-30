@@ -14,7 +14,7 @@ class StudentController {
             req.body.password = password;
             var student = req.body;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-              new sql.Request().query("INSERT INTO Users VALUES ('"+student.username+"','"+student.password+"','student','client')").then(function() {
+              new sql.Request().query("INSERT INTO Users VALUES ('"+student.username+"','"+student.password+"','Client','Client')").then(function() {
                 new sql.Request().query("SELECT userID FROM Users WHERE username = '"+student.username+"' AND password = '"+student.password+"'").then(function(id) {
                   new sql.Request().query("INSERT INTO Students VALUES ('"+id[0].userID+"','"+student.firstName+"', '"+student.lastName+"','"+student.email+"','"+student.inquiryDate+"','"+student.birthday+"','"+student.phone+"')").then(function() {
                     res.send({"success": "success"});
@@ -42,7 +42,7 @@ class StudentController {
             var student = req.body;
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-              new sql.Request().query("UPDATE students SET firstName='"+student.firstName+"', lastName='"+student.lastName+"', birthdate='"+student.birthday+"', email='"+student.email+"', phone='"+student.phone+"' WHERE studentID = '"+_id+"'").then(function(recordset) {
+              new sql.Request().query("UPDATE Students SET firstName='"+student.firstName+"', lastName='"+student.lastName+"', birthdate='"+student.birthday+"', email='"+student.email+"', phone='"+student.phone+"' WHERE studentID = '"+_id+"'").then(function(recordset) {
                   res.send({"success": "success"});
               }).catch(function(err) {
                   res.send({"error": "error"}); console.log("Update student " + err);
@@ -61,8 +61,12 @@ class StudentController {
         try {
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-              new sql.Request().query("DELETE FROM students WHERE studentID = '"+_id+"'").then(function(recordset) {
-                  res.send({"success": "success"});
+              new sql.Request().query("DELETE FROM Students WHERE studentID = '"+_id+"'").then(function() {
+                new sql.Request().query("DELETE FROM Users WHERE userID = '"+_id+"'").then(function() {
+                    res.send({"success": "success"});
+                }).catch(function(err) {
+                    res.send({"error": "error"}); console.log("Delete user " + err);
+                });
               }).catch(function(err) {
                   res.send({"error": "error"}); console.log("Delete student " + err);
               });
