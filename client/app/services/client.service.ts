@@ -11,7 +11,6 @@ export class ClientService {
     constructor(private http: Http) { }
 
     getClients(): Promise<Client[]> {
-      console.log("Getting clients...");
         return this.http.get(this.clientUrl)
             .toPromise()
             .then(response => response.json())

@@ -46,8 +46,9 @@ class StaffController {
           new AuthController().authUser(req, res, {authLevel: 'Admin', userType: 'Staff', done: function(){
             var staff = req.body;
             var _id: string = req.params._id;
+            console.log(staff);
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-              new sql.Request().query("UPDATE Staff SET '"+staff.firstName+"','"+staff.lastName+"','"+staff.email+"' WHERE staffID = '"+_id+"'").then(function() {
+              new sql.Request().query("UPDATE Staff SET firstName='"+staff.firstName+"', lastName='"+staff.lastName+"', email='"+staff.email+"' WHERE staffID = '"+_id+"'").then(function() {
                   res.send({"success": "success"});
               }).catch(function(err) {
                   res.send({"error": "error"}); console.log("Update staff " + err);
@@ -93,7 +94,6 @@ class StaffController {
     retrieve(req: express.Request, res: express.Response): void {
         try {
           new AuthController().authUser(req, res, {authLevel: 'Admin', userType: 'Staff', done: function(){
-            console.log("Getting staff data...");
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query('SELECT * FROM Staff').then(function(recordset) {
                   res.send(recordset);
@@ -116,7 +116,6 @@ class StaffController {
         try {
           new AuthController().authUser(req, res, {authLevel: 'Admin', userType: 'Staff', done: function(){
             var _id: string = req.params._id;
-            console.log(_id);
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query("SELECT *  FROM Staff WHERE staffID = '"+_id+"'").then(function(recordset) {
                   res.send(recordset[0]);

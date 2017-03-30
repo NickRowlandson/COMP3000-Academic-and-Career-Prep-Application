@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {ChartsModule} from 'ng2-charts/charts/charts';
+import { ChartsModule } from 'ng2-charts/charts/charts';
+//import { CronModule } from 'node-cron/src/node-cron';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
@@ -30,6 +31,7 @@ import { StaffService } from './services/staff.service';
     FormsModule,
     routing,
     ChartsModule
+    //CronModule
     ],
   declarations: [
     AppComponent,

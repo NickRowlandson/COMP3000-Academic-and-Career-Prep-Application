@@ -25,10 +25,14 @@ export class StaffService {
     }
 
     getUser(id: string) {
-        return this.http.get(this.usersUrl + '/' + id)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
+
+      return this.http.get(this.usersUrl + '/' + id, options)
+          .toPromise()
+          .then(response => response.json())
+          .catch(this.handleError);
     }
 
     save(user: User): Promise<User>  {
@@ -39,39 +43,44 @@ export class StaffService {
     }
 
     private post(user: User): Promise<User> {
-        let headers = new Headers({
-            'Content-Type': 'application/json'});
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
 
-        return this.http
-            .post(this.usersUrl, JSON.stringify(user), {headers:headers})
-            .toPromise()
-            .then(response => response.json().data)
-            .catch(this.handleError);
+      return this.http
+          .post(this.usersUrl, JSON.stringify(user), options)
+          .toPromise()
+          .then(response => response.json().data)
+          .catch(this.handleError);
     }
 
     private put(user: User) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
 
-        let url = `${this.usersUrl}/${user.staffID}`;
-
-        return this.http
-            .put(url, JSON.stringify(user), {headers: headers})
-            .toPromise()
-            .then(() => user)
-            .catch(this.handleError);
+      let url = `${this.usersUrl}/${user.staffID}`;
+      console.log(user);
+      return this.http
+          .put(url, JSON.stringify(user), options)
+          .toPromise()
+          .then(() => user)
+          .catch(this.handleError);
     }
 
     delete(user: User) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
 
-        let url = `${this.usersUrl}/${user.staffID}`;
+      //headers.append('Content-Type', 'application/json');
 
-        return this.http
-            .delete(url, headers)
-            .toPromise()
-            .catch(this.handleError);
+      let url = `${this.usersUrl}/${user.staffID}`;
+
+      return this.http
+          .delete(url, options)
+          .toPromise()
+          .catch(this.handleError);
     }
 
     private handleError(error: any) {

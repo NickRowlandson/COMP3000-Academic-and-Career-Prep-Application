@@ -46,7 +46,6 @@ class AuthController {
           sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
             new sql.Request().query("SELECT * FROM Users WHERE userID = '"+_id+"'").then(function(user) {
                 if(user[0].authLevel == data.authLevel && user[0].userType == data.userType) {
-                  console.log("AUTHENTICATED");
                   data.done();
                 }
                 else {

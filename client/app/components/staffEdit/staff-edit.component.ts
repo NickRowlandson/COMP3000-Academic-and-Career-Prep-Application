@@ -16,27 +16,25 @@ export class StaffEditComponent implements OnInit {
     navigated = false; // true if navigated here
 
 
-    constructor(private userService: StaffService, private route: ActivatedRoute) {
+    constructor(private staffService: StaffService, private route: ActivatedRoute) {
 
     }
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
-            console.log(id);
             if (id === 'new') {
                 this.newUser = true;
                 this.user = new User();
             } else {
                 this.newUser = false;
-                this.userService.getUser(id).then(user => this.user = user);
-                console.log(this.user);
+                this.staffService.getUser(id).then(user => this.user = user);
             }
         });
     }
 
     save() {
-        this.userService
+        this.staffService
             .save(this.user)
             .then(user => {
                 this.user = user; // saved user, w/ id if new
