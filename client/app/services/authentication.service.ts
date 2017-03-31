@@ -34,10 +34,8 @@ export class AuthService {
         return this.http.post('/api/auth', credentials, {headers:headers})
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
-                console.log("THIS! " + response.json().body);
                 let token = response.json().body && response.json().body.token;
                 if (token) {
-                    console.log("Login Success!");
                     // set token property
                     this.token = token;
 

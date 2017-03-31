@@ -11,7 +11,6 @@ export class StudentService {
     constructor(private http: Http) { }
 
     getStudents(): Promise<Student[]> {
-      console.log("Getting students...");
         return this.http.get(this.studentsUrl)
             .toPromise()
             .then(response => response.json())
@@ -33,7 +32,6 @@ export class StudentService {
     }
 
     private post(student: Student): Promise<Student> {
-        console.log(student);
         let headers = new Headers({
             'Content-Type': 'application/json'});
         return this.http
