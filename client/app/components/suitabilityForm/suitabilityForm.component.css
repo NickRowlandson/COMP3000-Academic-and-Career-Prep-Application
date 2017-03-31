@@ -25,3 +25,12 @@
   background-color: #004B87;
   color:white;
 }
+
+.formInput{
+  padding-top: 7px;
+}
+
+.formInput span{
+  margin-right: 10px;
+  white-space: nowrap;
+}

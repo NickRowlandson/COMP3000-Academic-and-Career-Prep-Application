@@ -16,7 +16,7 @@
       </div>
       <div class="form-group">
           <label class="col-sm-2 control-label">Date: </label>
-          <div class="col-sm-8">
+          <div class="col-sm-8 formInput">
             {{date | date: format}}
             <input type="hidden" name="date" value="{{date | date: format}}" [(ngModel)]="client.inquiryDate" required/>
           </div>
@@ -83,19 +83,33 @@
           </div>
         </div>
         <div class="form-group">
-      		<label class="col-sm-2 control-label">Gov’t ID: </label>
-          <div class="col-sm-8">
+      		<label class="col-sm-6 control-label">Gov’t ID: </label>
+          <div class="col-sm-4 formInput">
             <input type="checkbox" name="gov">
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-8">
-            <ul>
-          		<li><input type="checkbox" name="occGoalCheckBox" value="occGoal"> Appropriate Occupational Goal</li>
-          		<li><input type="checkbox" name="ageCheckBox" value="19+"> 19+ Years Old</li>
-          		<li><input type="checkbox" name="notRegCheckBox" value="notReg"> Not Registered In High School or Post-Sec.</li>
-          		<li><input type="checkbox" name="availCheckBox" value="avail"> Available During Class Time</li>
-            </ul>
+      		<label class="col-sm-6 control-label">Appropriate Occupational Goal: </label>
+          <div class="col-sm-4 formInput">
+            <input type="checkbox" name="occGoalCheckBox" value="occGoal">
+          </div>
+        </div>
+        <div class="form-group">
+      		<label class="col-sm-6 control-label">19+ Years Old: </label>
+          <div class="col-sm-4 formInput">
+            <input type="checkbox" name="ageCheckBox" value="19+">
+          </div>
+        </div>
+        <div class="form-group">
+      		<label class="col-sm-6 control-label">Not Registered In High School or Post-Sec: </label>
+          <div class="col-sm-4 formInput">
+            <input type="checkbox" name="notRegCheckBox" value="notReg">
+          </div>
+        </div>
+        <div class="form-group">
+      		<label class="col-sm-6 control-label">Available During Class Time: </label>
+          <div class="col-sm-4 formInput">
+            <input type="checkbox" name="availCheckBox" value="avail">
           </div>
         </div>
     </div><!-- end of section 2 -->
@@ -106,91 +120,91 @@
           </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Last Grade Completed: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="gradeCompRadio" value="<10"> Less Than Grade 10
-          <input type="radio" name="gradeCompRadio" value="10-11"> Grade 10-11
-          <input type="radio" name="gradeCompRadio" value="12"> Grade 12
+        <label class="col-sm-4 text-nowrap control-label">Last Grade Completed: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="gradeCompRadio" value="<10"> Less Than Grade 10</span>
+          <span><input type="radio" name="gradeCompRadio" value="10-11"> Grade 10-11</span>
+          <span><input type="radio" name="gradeCompRadio" value="12"> Grade 12</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Level: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="accLevelRadio" value="aca"> Academic/Advanced
-          <input type="radio" name="accLevelRadio" value="app"> Applied/General
-          <input type="radio" name="accLevelRadio" value="work"> Workplace/ Basic
+        <label class="col-sm-4 text-nowrap control-label">Level: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="accLevelRadio" value="aca"> Academic/Advanced</span>
+          <span><input type="radio" name="accLevelRadio" value="app"> Applied/General</span>
+          <span><input type="radio" name="accLevelRadio" value="work"> Workplace/ Basic</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Post-Secondary/Job Offer start date: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="OfferStartRadio" value="aca"> Less than 1 Year
-          <input type="radio" name="OfferStartRadio" value="app"> In One Year
-          <input type="radio" name="OfferStartRadio" value="work"> More than a Year
+        <label class="col-sm-4 text-nowrap control-label">Post-Secondary/Job Offer start date: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="OfferStartRadio" value="aca"> Less than 1 Year</span>
+          <span><input type="radio" name="OfferStartRadio" value="app"> In One Year</span>
+          <span><input type="radio" name="OfferStartRadio" value="work"> More than a Year</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Meets Next Goals Requirements: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="requirementsRadio" value="no"> No
-          <input type="radio" name="requirementsRadio" value="lacking"> Yes but Lacks Skills/high enough marks
-          <input type="radio" name="requirementsRadio" value="yes"> Yes
+        <label class="col-sm-4 text-nowrap control-label">Meets Next Goals Requirements: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="requirementsRadio" value="no"> No</span>
+          <span><input type="radio" name="requirementsRadio" value="lacking"> Yes but Lacks Skills/high enough marks</span>
+          <span><input type="radio" name="requirementsRadio" value="yes"> Yes</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Time out of School/Training: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="timeoutRadio" value="6+"> 6 or More Years
-          <input type="radio" name="timeoutRadio" value="1-6"> 1-6 Years
-          <input type="radio" name="timeoutRadio" value="<1"> Less than 1 Year
+        <label class="col-sm-4 text-nowrap control-label">Time out of School/Training: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="timeoutRadio" value="6+"> 6 or More Years</span>
+          <span><input type="radio" name="timeoutRadio" value="1-6"> 1-6 Years</span>
+          <span><input type="radio" name="timeoutRadio" value="<1"> Less than 1 Year</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Has Been In Program Before: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="progBeforeRadio" value="no"> No/Left with Appropriate Reasons
-          <input type="radio" name="progBeforeRadio" value="yesWithApp"> Yes with Appropriate Progress
-          <input type="radio" name="progBeforeRadio" value="Yes"> Yes – No Progress
+        <label class="col-sm-4 text-nowrap control-label">Has Been In Program Before: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="progBeforeRadio" value="no"> No/Left with Appropriate Reasons</span>
+          <span><input type="radio" name="progBeforeRadio" value="yesWithApp"> Yes with Appropriate Progress</span>
+          <span><input type="radio" name="progBeforeRadio" value="Yes"> Yes – No Progress</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Employment: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="empRadio" value="no"> Not Working
-          <input type="radio" name="empRadio" value="part"> Working Part Time
-          <input type="radio" name="empRadio" value="Yes"> Working Full Time
+        <label class="col-sm-4 text-nowrap control-label">Employment: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="empRadio" value="no"> Not Working</span>
+          <span><input type="radio" name="empRadio" value="part"> Working Part Time</span>
+          <span><input type="radio" name="empRadio" value="Yes"> Working Full Time</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Income Source: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="IncRadio" value="no"> OW  ODSP  EI  SC
-          <input type="radio" name="IncRadio" value="noInc"> No Income
-          <input type="radio" name="IncRadio" value="Yes"> Employed
+        <label class="col-sm-4 text-nowrap control-label">Income Source: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="IncRadio" value="no"> OW  ODSP  EI  SC</span>
+          <span><input type="radio" name="IncRadio" value="noInc"> No Income</span>
+          <span><input type="radio" name="IncRadio" value="Yes"> Employed</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Age: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="AgeRadio" value="45-65"> 45-65 years old
-          <input type="radio" name="AgeRadio" value="19-29"> 19-29 years old
-          <input type="radio" name="AgeRadio" value="30-44"> 30-44 years old
+        <label class="col-sm-4 text-nowrap control-label">Age: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="AgeRadio" value="45-65"> 45-65 years old</span>
+          <span><input type="radio" name="AgeRadio" value="19-29"> 19-29 years old</span>
+          <span><input type="radio" name="AgeRadio" value="30-44"> 30-44 years old</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label"># of Hours/Week: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="numHoursRadio" value="10-20"> 10-20
-          <input type="radio" name="numHoursRadio" value="5-10"> 5-10
-          <input type="radio" name="numHoursRadio" value="<5"> less than 5
+        <label class="col-sm-4 text-nowrap control-label"># of Hours/Week: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="numHoursRadio" value="10-20"> 10-20</span>
+          <span><input type="radio" name="numHoursRadio" value="5-10"> 5-10</span>
+          <span><input type="radio" name="numHoursRadio" value="<5"> less than 5</span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Work History: </label>
-        <div class="col-sm-10">
-          <input type="radio" name="workHisRadio" value="<1"> Less than 1 year experience in the field
-          <input type="radio" name="workHisRadio" value="1-4"> 1-4 years’ experience in the field
-          <input type="radio" name="workHisRadio" value=">4"> 4+ years’ experience in the field
+        <label class="col-sm-4 text-nowrap control-label">Work History: </label>
+        <div class="col-sm-8 formInput">
+          <span><input type="radio" name="workHisRadio" value="<1"> Less than 1 year experience in the field</span>
+          <span><input type="radio" name="workHisRadio" value="1-4"> 1-4 years’ experience in the field</span>
+          <span><input type="radio" name="workHisRadio" value=">4"> 4+ years’ experience in the field</span>
         </div>
       </div>
     </div><!-- end of section 3 -->

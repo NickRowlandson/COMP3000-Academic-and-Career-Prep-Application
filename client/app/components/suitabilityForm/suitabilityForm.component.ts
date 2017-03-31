@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from "../../models/client";
+import { SuitabilityForm } from "../../models/suitabilityForm";
 import { ActivatedRoute, Params } from '@angular/router';
 import { ClientService } from "../../services/client.service";
 import { AuthService } from '../../services/authentication.service';
