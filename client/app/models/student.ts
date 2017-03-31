@@ -1,5 +1,6 @@
 export class Student {
     studentID: string;
+    userID: string;
     authLevel: string;
     inquiryDate: string;
     username: string;

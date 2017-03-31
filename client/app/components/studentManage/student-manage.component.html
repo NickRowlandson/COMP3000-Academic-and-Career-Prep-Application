@@ -1,6 +1,22 @@
 <h2>Manage Students</h2>
 <hr>
-<div class="row">
+<div class="" *ngIf="!students">
+    <div class="cs-loader">
+        <div class="cs-loader-inner">
+            <label>	L</label>
+            <label>	O</label>
+            <label>	A</label>
+            <label>	D</label>
+            <label>	I</label>
+            <label>	N</label>
+            <label>	G</label>
+            <label>	.</label>
+            <label>	.</label>
+            <label>	.</label>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="students">
     <div class="col-md-12">
         <div class="error" *ngIf="error">{{error}}</div>
     </div>

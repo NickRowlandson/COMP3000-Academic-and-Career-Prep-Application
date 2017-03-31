@@ -50,7 +50,6 @@ const appRoutes: Routes = [
         path: 'staffEdit/:id',
         component: StaffEditComponent,
         canActivate: [AuthGuard]
-
     },
     {
         path: 'suitability',

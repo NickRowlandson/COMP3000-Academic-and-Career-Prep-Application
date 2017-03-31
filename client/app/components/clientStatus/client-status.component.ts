@@ -25,19 +25,25 @@ export class ClientStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.getData();
+      this.getClients();
   }
 
-  getData() {
-    this.clientService.getClients()
-    .then(data =>
-      this.setData(data)
-    );
+  getClients() {
+    this.clientService
+      .getClients()
+      .then(clients => {
+        if (clients.status === "403") {
+          this.clients = null;
+        } else {
+            this.setData(clients);
+        }
+      })
+      .catch(error => this.error = error);
   }
 
-   setData(data) {
-      this.clients = data;
-      this.clientTotal = data.length;
+   setData(clients) {
+      this.clients = clients;
+      this.clientTotal = clients.length;
    }
 
   addClient() {

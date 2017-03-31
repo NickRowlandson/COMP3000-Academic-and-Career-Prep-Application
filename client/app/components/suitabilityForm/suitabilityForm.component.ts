@@ -28,7 +28,7 @@ export class SuitabilityFormComponent {
   showSectionBtn3 = false;
   showSectionBtn4 = false;
 
-  constructor(private clientService: ClientService, private route: ActivatedRoute, private authService: AuthService) {
+  constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
     this.client = new Client();
     this.date =  new Date();
   }
@@ -91,15 +91,13 @@ export class SuitabilityFormComponent {
 
   save() {
       this.client["inquiryDate"] = this.date;
-      this.client["authLevel"] = "Client";
       this.client["username"] = this.client.firstName + this.client.lastName;
       this.client["password"] = this.client.birthday.replace(/-/g, "");
-      console.log(this.client);
       this.clientService
           .save(this.client)
           .then(client => {
               this.client = client; // saved client, w/ id if new
-              this.goBack();
+              this.router.navigate(['/clients']);
           })
           .catch(error => this.error = error); // TODO: Display error message
   }

@@ -20,14 +20,20 @@ export class StudentManageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getData();
+        this.getStudents();
     }
 
-    getData() {
-      this.studentService.getStudents()
-      .then(data =>
-        this.students = data
-      );
+    getStudents() {
+      this.studentService
+        .getStudents()
+        .then(students => {
+          if (students.status === "403") {
+            this.students = null;
+          } else {
+            this.students = students;
+          }
+        })
+        .catch(error => this.error = error);
     }
 
     addClient() {

@@ -71,7 +71,7 @@ export class StudentService {
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
-        let url = `${this.studentsUrl}/${student.studentID}`;
+        let url = `${this.studentsUrl}/${student.userID}`;
 
         return this.http
             .delete(url, options)

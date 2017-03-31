@@ -11,8 +11,7 @@ class UserRoutes {
     get routes () {
         var controller = this._userController;
 
-        router.get("/users", controller.retrieve);
-        router.get("/users/:_id", controller.findById);
+        router.get("/users/:token", controller.findCurrentUserId);
 
         return router;
     }

@@ -71,7 +71,7 @@ export class ClientService {
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
-        let url = `${this.clientUrl}/${client.clientID}`;
+        let url = `${this.clientUrl}/${client.userID}`;
 
         return this.http
             .delete(url, options)

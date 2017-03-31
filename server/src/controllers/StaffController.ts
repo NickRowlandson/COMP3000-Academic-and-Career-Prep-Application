@@ -69,14 +69,14 @@ class StaffController {
           new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: '', userType: 'Staff', done: function(){
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-              new sql.Request().query("DELETE FROM Staff WHERE staffID = '"+_id+"'").then(function() {
+              new sql.Request().query("DELETE FROM Staff WHERE userID = '"+_id+"'").then(function() {
                 new sql.Request().query("DELETE FROM Users WHERE userID = '"+_id+"'").then(function() {
                     res.send({"success": "success"});
                 }).catch(function(err) {
-                    res.send({"error": "error"}); console.log("Delete user " + err);
+                    res.send({"error": "error"}); console.log("Delete user with id "+ _id + ". " + err);
                 });
               }).catch(function(err) {
-                  res.send({"error": "error"}); console.log("Delete staff " + err);
+                  res.send({"error": "error"}); console.log("Delete staff with id "+ _id + ". "  + err);
               });
             }).catch(function(err) {
                 console.log(err);

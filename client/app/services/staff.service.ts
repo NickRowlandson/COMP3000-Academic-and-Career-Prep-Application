@@ -75,7 +75,7 @@ export class StaffService {
 
       //headers.append('Content-Type', 'application/json');
 
-      let url = `${this.usersUrl}/${user.staffID}`;
+      let url = `${this.usersUrl}/${user.userID}`;
 
       return this.http
           .delete(url, options)

@@ -20,8 +20,8 @@ export class AuthService {
         }
     }
 
-    getAuthLevel(id: string) {
-      return this.http.get('api/users/' + id)
+    getAuthLevel(token: string) {
+      return this.http.get('api/users/' + token)
           .toPromise()
           .then(response => response.json())
           .catch(this.handleError);

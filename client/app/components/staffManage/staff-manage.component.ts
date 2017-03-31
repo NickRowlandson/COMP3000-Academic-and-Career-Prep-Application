@@ -18,11 +18,21 @@ export class StaffManageComponent implements OnInit {
 
     }
 
-    getUsers() {
-        this.userService.getUsers().then(users => this.users = users);
-    }
     ngOnInit() {
         this.getUsers();
+    }
+
+    getUsers() {
+        this.userService
+          .getUsers()
+          .then(users => {
+            if (users.status === "403") {
+              this.users = null;
+            } else {
+              this.users = users;
+            }
+          })
+          .catch(error => this.error = error);
     }
 
     gotoEdit(user: User, event: any) {
@@ -36,11 +46,11 @@ export class StaffManageComponent implements OnInit {
     deleteUser(user: User, event: any) {
         event.stopPropagation();
         this.userService
-            .delete(user)
-            .then(res => {
-                this.users = this.users.filter(h => h !== user);
-            })
-            .catch(error => this.error = error);
+          .delete(user)
+          .then(res => {
+              this.users = this.users.filter(h => h !== user);
+          })
+          .catch(error => this.error = error);
     }
 
     goBack() {
