@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import { AuthService } from './authentication.service';
 import 'rxjs/add/operator/toPromise';
 import { Client } from "../models/client";
 
@@ -8,17 +9,25 @@ export class ClientService {
 
     private clientUrl = 'api/clients';  // URL to web api
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private authService: AuthService) { }
 
     getClients(): Promise<Client[]> {
-        return this.http.get(this.clientUrl)
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(this.clientUrl, options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
     getClient(id: string) {
-        return this.http.get(this.clientUrl + '/' + id)
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(this.clientUrl + '/' + id, options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
@@ -32,37 +41,40 @@ export class ClientService {
     }
 
     private post(client: Client): Promise<Client> {
-        console.log(client);
-        let headers = new Headers({
-            'Content-Type': 'application/json'});
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
         return this.http
-            .post(this.clientUrl, JSON.stringify(client), {headers:headers})
+            .post(this.clientUrl, client, options)
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
 
     private put(client: Client) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
 
         let url = `${this.clientUrl}/${client.clientID}`;
 
         return this.http
-            .put(url, JSON.stringify(client), {headers: headers})
+            .put(url, client, options)
             .toPromise()
             .then(() => client)
             .catch(this.handleError);
     }
 
     delete(client: Client) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
 
         let url = `${this.clientUrl}/${client.clientID}`;
 
         return this.http
-            .delete(url, headers)
+            .delete(url, options)
             .toPromise()
             .catch(this.handleError);
     }

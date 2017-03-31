@@ -48,7 +48,7 @@ export class StaffService {
       let options = new RequestOptions({ headers: headers });
 
       return this.http
-          .post(this.usersUrl, JSON.stringify(user), options)
+          .post(this.usersUrl, user, options)
           .toPromise()
           .then(response => response.json().data)
           .catch(this.handleError);
@@ -62,7 +62,7 @@ export class StaffService {
       let url = `${this.usersUrl}/${user.staffID}`;
       console.log(user);
       return this.http
-          .put(url, JSON.stringify(user), options)
+          .put(url, user, options)
           .toPromise()
           .then(() => user)
           .catch(this.handleError);

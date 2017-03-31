@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { AuthService } from './authentication.service';
 import { Student } from "../models/student";
 
 @Injectable()
@@ -8,17 +9,25 @@ export class StudentService {
 
     private studentsUrl = 'api/students';  // URL to web api
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private authService: AuthService) { }
 
     getStudents(): Promise<Student[]> {
-        return this.http.get(this.studentsUrl)
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(this.studentsUrl, options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
     getStudent(id: string) {
-        return this.http.get(this.studentsUrl + '/' + id)
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(this.studentsUrl + '/' + id, options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
@@ -32,36 +41,40 @@ export class StudentService {
     }
 
     private post(student: Student): Promise<Student> {
-        let headers = new Headers({
-            'Content-Type': 'application/json'});
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
         return this.http
-            .post(this.studentsUrl, JSON.stringify(student), {headers:headers})
+            .post(this.studentsUrl, student, options)
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
 
     private put(student: Student) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
 
         let url = `${this.studentsUrl}/${student.studentID}`;
 
         return this.http
-            .put(url, JSON.stringify(student), {headers: headers})
+            .put(url, student, options)
             .toPromise()
             .then(() => student)
             .catch(this.handleError);
     }
 
     delete(student: Student) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
 
         let url = `${this.studentsUrl}/${student.studentID}`;
 
         return this.http
-            .delete(url, headers)
+            .delete(url, options)
             .toPromise()
             .catch(this.handleError);
     }

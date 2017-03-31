@@ -1,12 +1,14 @@
 import express = require("express");
 import jwt = require('jsonwebtoken');
 import bcrypt = require('bcrypt');
+import AuthController = require("../controllers/AuthController");
 var sql = require('mssql');
 
 class StudentController {
 
     create(req: express.Request, res: express.Response): void {
         try {
+          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
             var salt = bcrypt.genSaltSync(10);
             var password = req.body.password;
             // Hash the password with the salt
@@ -31,6 +33,7 @@ class StudentController {
                 console.log(err);
                 res.send({"error": "error"});
             });
+          }});
         }
         catch (e)  {
             console.log(e);
@@ -39,6 +42,7 @@ class StudentController {
     }
     update(req: express.Request, res: express.Response): void {
         try {
+          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
             var student = req.body;
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
@@ -51,6 +55,7 @@ class StudentController {
                 console.log(err);
                 res.send({"error": "error"});
             });
+          }});
         }
         catch (e)  {
             console.log(e);
@@ -59,6 +64,7 @@ class StudentController {
     }
     delete(req: express.Request, res: express.Response): void {
         try {
+          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query("DELETE FROM Students WHERE studentID = '"+_id+"'").then(function() {
@@ -74,6 +80,7 @@ class StudentController {
                 console.log(err);
                 res.send({"error": "error"});
             });
+          }});
         }
         catch (e)  {
             console.log(e);
@@ -82,16 +89,18 @@ class StudentController {
     }
     retrieve(req: express.Request, res: express.Response): void {
         try {
-          sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-            new sql.Request().query('SELECT * FROM Students').then(function(recordset) {
-                res.send(recordset);
+          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
+            sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+              new sql.Request().query('SELECT * FROM Students').then(function(recordset) {
+                  res.send(recordset);
+              }).catch(function(err) {
+                  res.send({"error": "error"}); console.log("Get students " + err);
+              });
             }).catch(function(err) {
-                res.send({"error": "error"}); console.log("Get students " + err);
+                console.log(err);
+                res.send({"error": "error"});
             });
-          }).catch(function(err) {
-              console.log(err);
-              res.send({"error": "error"});
-          });
+          }});
         }
         catch (e)  {
             console.log(e);
@@ -100,6 +109,7 @@ class StudentController {
     }
     findById(req: express.Request, res: express.Response): void {
         try {
+          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query("SELECT *  FROM Students WHERE studentID = '"+_id+"'").then(function(recordset) {
@@ -111,6 +121,7 @@ class StudentController {
                 console.log(err);
                 res.send({"error": "error"});
             });
+          }});
         }
         catch (e)  {
             console.log(e);

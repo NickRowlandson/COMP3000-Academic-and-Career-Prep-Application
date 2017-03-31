@@ -5,6 +5,7 @@ var sql = require('mssql');
 
 class AuthController {
 
+  // Login Authentication
   auth(req: express.Request, res: express.Response): void {
     try {
       var _username: string = req.body.username;
@@ -38,6 +39,7 @@ class AuthController {
     }
   }
 
+  //Decode token and check if user is authorized
   authUser(req: express.Request, res: express.Response, data: Object): void {
     try {
       if(req.headers) {
@@ -45,14 +47,24 @@ class AuthController {
           var _id = decoded.userid;
           sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
             new sql.Request().query("SELECT * FROM Users WHERE userID = '"+_id+"'").then(function(user) {
-                if(user[0].authLevel == data.authLevel && user[0].userType == data.userType) {
+              if(data.authLevel2){
+                if(user[0].authLevel == data.authLevel1 || user[0].authLevel == data.authLevel2 && user[0].userType == data.userType) {
                   data.done();
                 }
                 else {
                   res.send({status: '403'});
                 }
+              }
+              else {
+                if(user[0].authLevel == data.authLevel1 && user[0].userType == data.userType) {
+                  data.done();
+                }
+                else {
+                  res.send({status: '403'});
+                }
+              }
             }).catch(function(err) {
-                res.send({"error": "error"}); console.log("Select staff " + err);
+                res.send({"error": "error"}); console.log("Authenticate user 'Select staff' statement " + err);
             });
           });
         });
