@@ -1,6 +1,10 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { StaffGuard } from './guards/staff.guard';
+import { StudentGuard } from './guards/student.guard';
+import { ClientGuard } from './guards/client.guard';
 
 import { LoginComponent }   from './components/login/login.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
@@ -29,32 +33,32 @@ const appRoutes: Routes = [
     {
         path: 'studentEdit/:id',
         component: StudentEditComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, StaffGuard]
     },
     {
         path: 'students',
         component: StudentManageComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, StaffGuard]
     },
     {
         path: 'clients',
         component: ClientStatusComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, StaffGuard]
     },
     {
         path: 'staff',
         component: StaffManageComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, AdminGuard]
     },
     {
         path: 'staffEdit/:id',
         component: StaffEditComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, AdminGuard]
     },
     {
         path: 'suitability',
         component: SuitabilityFormComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, StaffGuard]
     }
 ];
 

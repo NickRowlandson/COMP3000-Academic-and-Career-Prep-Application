@@ -3,11 +3,12 @@ import jwt = require('jsonwebtoken');
 import bcrypt = require('bcrypt');
 import AuthController = require("../controllers/AuthController");
 var sql = require('mssql');
+var auth = ["Admin", "Staff"];
 
 class ClientController {
     create(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             var salt = bcrypt.genSaltSync(10);
             var password = req.body.password;
             // Hash the password with the salt
@@ -15,7 +16,7 @@ class ClientController {
             req.body.password = password;
             var client = req.body;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-              new sql.Request().query("INSERT INTO Users VALUES ('"+client.username+"','"+client.password+"','Client','Client')").then(function() {
+              new sql.Request().query("INSERT INTO Users VALUES ('"+client.username+"','"+client.password+"','Client')").then(function() {
                 new sql.Request().query("SELECT userID FROM Users WHERE username = '"+client.username+"' AND password = '"+client.password+"'").then(function(id) {
                   new sql.Request().query("INSERT INTO Clients VALUES ('"+id[0].userID+"','"+client.firstName+"', '"+client.lastName+"','"+client.email+"','"+client.inquiryDate+"','"+client.birthday+"','"+client.phone+"')").then(function() {
                     res.send({"success": "success"});
@@ -41,7 +42,7 @@ class ClientController {
     }
     update(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             var client = req.body;
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
@@ -63,7 +64,7 @@ class ClientController {
     }
     delete(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query("DELETE FROM Clients WHERE userID = '"+_id+"'").then(function() {
@@ -89,7 +90,7 @@ class ClientController {
     }
     retrieve(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query('SELECT * FROM Clients').then(function(recordset) {
                   res.send(recordset);
@@ -109,7 +110,7 @@ class ClientController {
     }
     findById(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: 'Staff', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query("SELECT *  FROM Clients WHERE clientID = '"+_id+"'").then(function(recordset) {

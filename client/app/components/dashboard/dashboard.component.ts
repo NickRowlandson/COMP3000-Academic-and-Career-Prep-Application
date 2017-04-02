@@ -21,38 +21,34 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.authService
-            .getAuthLevel(currentUser.token)
-            .then(authLevel => {
-                this.checkAuth(authLevel.authLevel);
-            })
-            .catch(error => console.log(error));
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      var userType = currentUser.userType;
+      this.checkAuth(userType);
     }
 
-    checkAuth(authLevel) {
-        if (authLevel === 'Admin') {
+    checkAuth(userType) {
+        if (userType === 'Admin') {
             this.clientStatus = true;
             this.manageStudents = true;
             this.manageStaff = true;
             this.suitability = true;
             this.dashboardItem5 = true;
             this.dashboardItem6 = true;
-        } else if (authLevel === 'Staff') {
+        } else if (userType === 'Staff') {
             this.clientStatus = true;
             this.manageStudents = true;
             this.manageStaff = false;
             this.suitability = true;
             this.dashboardItem5 = true;
             this.dashboardItem6 = true;
-        } else if (authLevel === 'Student') {
+        } else if (userType === 'Student') {
             this.clientStatus = false;
             this.manageStudents = false;
             this.manageStaff = false;
             this.suitability = false;
             this.dashboardItem5 = false;
             this.dashboardItem6 = false;
-        } else if (authLevel === 'Client') {
+        } else if (userType === 'Client') {
             this.clientStatus = false;
             this.manageStudents = false;
             this.manageStaff = false;

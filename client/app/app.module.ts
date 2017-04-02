@@ -19,6 +19,10 @@ import { SuitabilityFormComponent } from './components/suitabilityForm/suitabili
 
 //Import services
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { StaffGuard } from './guards/staff.guard';
+import { StudentGuard } from './guards/student.guard';
+import { ClientGuard } from './guards/client.guard';
 import { AuthService } from './services/authentication.service';
 import { StudentService } from './services/student.service';
 import { ClientService } from './services/client.service';
@@ -46,6 +50,10 @@ import { StaffService } from './services/staff.service';
   ],
   providers: [
     AuthGuard,
+    AdminGuard,
+    StaffGuard,
+    StudentGuard,
+    ClientGuard,
     AuthService,
     StudentService,
     StaffService,

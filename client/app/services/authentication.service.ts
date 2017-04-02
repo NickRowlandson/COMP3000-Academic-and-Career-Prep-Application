@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 export class AuthService {
     public token: string;
     public loggedUser : ReplaySubject<any> = new ReplaySubject(1);
+    public userType : ReplaySubject<any> = new ReplaySubject(1);
 
     constructor(private http: Http) {
         // set token if saved in local storage
@@ -20,13 +21,6 @@ export class AuthService {
         }
     }
 
-    getAuthLevel(token: string) {
-      return this.http.get('api/users/' + token)
-          .toPromise()
-          .then(response => response.json())
-          .catch(this.handleError);
-    }
-
     login(username: string, password: string): Observable<boolean> {
         let headers = new Headers({
           'Content-Type': 'application/json'});
@@ -34,16 +28,17 @@ export class AuthService {
         return this.http.post('/api/auth', credentials, {headers:headers})
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
+                var body = response.json().body;
                 let token = response.json().body && response.json().body.token;
                 if (token) {
                     // set token property
                     this.token = token;
 
                     // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+                    localStorage.setItem('currentUser', JSON.stringify(body));
 
-                    var user = JSON.parse(localStorage.getItem('currentUser')).username;
-                    this.loggedUser.next(JSON.stringify(user));
+                    var username = JSON.parse(localStorage.getItem('currentUser')).username;
+                    this.loggedUser.next(JSON.stringify(username));
 
                     // return true to indicate successful login
                     return true;

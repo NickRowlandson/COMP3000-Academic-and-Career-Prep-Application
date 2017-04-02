@@ -3,12 +3,13 @@ import jwt = require('jsonwebtoken');
 import bcrypt = require('bcrypt');
 import AuthController = require("../controllers/AuthController");
 var sql = require('mssql');
+var auth = ["Admin"];
 
 class StaffController {
 
     create(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: '', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             var salt = bcrypt.genSaltSync(10);
             var password = req.body.password;
             // Hash the password with the salt
@@ -16,7 +17,7 @@ class StaffController {
             req.body.password = password;
             var staff = req.body;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-              new sql.Request().query("INSERT INTO Users VALUES ('"+staff.username+"','"+staff.password+"','Staff','"+staff.authLevel+"')").then(function() {
+              new sql.Request().query("INSERT INTO Users VALUES ('"+staff.username+"','"+staff.password+"','"+staff.authLevel+"')").then(function() {
                 new sql.Request().query("SELECT userID FROM Users WHERE username = '"+staff.username+"' AND password = '"+staff.password+"'").then(function(id) {
                   new sql.Request().query("INSERT INTO Staff VALUES ('"+id[0].userID+"','"+staff.firstName+"', '"+staff.lastName+"','"+staff.email+"')").then(function() {
                     res.send({"success": "success"});
@@ -43,7 +44,7 @@ class StaffController {
 
     update(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: '', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             var staff = req.body;
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
@@ -66,7 +67,7 @@ class StaffController {
 
     delete(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: '', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query("DELETE FROM Staff WHERE userID = '"+_id+"'").then(function() {
@@ -92,7 +93,7 @@ class StaffController {
 
     retrieve(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: '', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query('SELECT * FROM Staff').then(function(recordset) {
                   res.send(recordset);
@@ -113,7 +114,7 @@ class StaffController {
 
     findById(req: express.Request, res: express.Response): void {
         try {
-          new AuthController().authUser(req, res, {authLevel1: 'Admin', authLevel2: '', userType: 'Staff', done: function(){
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
             var _id: string = req.params._id;
             sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
               new sql.Request().query("SELECT *  FROM Staff WHERE staffID = '"+_id+"'").then(function(recordset) {
