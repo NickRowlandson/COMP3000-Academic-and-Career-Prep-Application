@@ -1,58 +1,60 @@
-<h2>Manage Staff</h2>
-<hr>
-<div class="" *ngIf="!users">
-    <div class="cs-loader">
-        <div class="cs-loader-inner">
-            <label>	L</label>
-            <label>	O</label>
-            <label>	A</label>
-            <label>	D</label>
-            <label>	I</label>
-            <label>	N</label>
-            <label>	G</label>
-            <label>	.</label>
-            <label>	.</label>
-            <label>	.</label>
-        </div>
-    </div>
-</div>
-<div class="row" *ngIf="users">
-    <div class="col-md-12">
-        <div class="error" *ngIf="error">{{error}}</div>
-        <div class="pull-right">
-            <div class="padding">
-                <button class="btn btn-success" (click)="addUser()"><i class="fa fa-plus" ></i> Add Staff</button>
+<div class="staff">
+    <h2>Manage Staff</h2>
+    <hr>
+    <div class="" *ngIf="!users">
+        <div class="cs-loader">
+            <div class="cs-loader-inner">
+                <label>	L</label>
+                <label>	O</label>
+                <label>	A</label>
+                <label>	D</label>
+                <label>	I</label>
+                <label>	N</label>
+                <label>	G</label>
+                <label>	.</label>
+                <label>	.</label>
+                <label>	.</label>
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let user of users" [class.active]="user === selectedUser">
-                    <td>{{user.firstName + " " + user.lastName}}</td>
-                    <td>{{user.email}}</td>
-                    <td class="actionColumn middle">
-                        <div class="inline">
-                            <button class="btn btn-primary" (click)="gotoEdit(user, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-                        </div>
-                        <div class="inline">
-                            <button class="btn btn-danger" (click)="deleteUser(user, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row" *ngIf="users">
+        <div class="col-md-12">
+            <div class="error" *ngIf="error">{{error}}</div>
+            <div class="pull-right">
+                <div class="padding">
+                    <button class="btn btn-success" (click)="addUser()"><i class="fa fa-plus" ></i> Add Staff</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users" [class.active]="user === selectedUser">
+                        <td>{{user.firstName + " " + user.lastName}}</td>
+                        <td>{{user.email}}</td>
+                        <td class="actionColumn middle">
+                            <div class="inline">
+                                <button class="btn btn-primary" (click)="gotoEdit(user, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                            </div>
+                            <div class="inline">
+                                <button class="btn btn-danger" (click)="deleteUser(user, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<div class="form-group">
-    <div>
-        <button (click)="goBack()" class="btn btn-default">Back</button>
+    <div class="form-group">
+        <div>
+            <button (click)="goBack()" class="btn btn-default">Back</button>
+        </div>
     </div>
 </div>

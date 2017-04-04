@@ -1,76 +1,78 @@
-<h2>Dashboard</h2>
-<hr>
-<div class="row">
-    <div class="col-md-4 dashboardItem" *ngIf="clientStatus">
-        <div class="itemBorder">
-            <a routerLink="/clients" routerLinkActive="active">
-                <div>
-                    <i class="fa fa-book fa-lg-icon" aria-hidden="true"></i>
-                </div>
-                <div>
-                    <h1 class="dashboardItemText">Client Status</h1>
-                </div>
-            </a>
+<div class="dashboard">
+    <h2>Dashboard</h2>
+    <hr>
+    <div class="row">
+        <div class="col-md-4 dashboardItem" *ngIf="clientStatus">
+            <div class="itemBorder">
+                <a routerLink="/clients" routerLinkActive="active">
+                    <div>
+                        <i class="fa fa-book fa-lg-icon" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h1 class="dashboardItemText">Client Status</h1>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4 dashboardItem" *ngIf="manageStudents">
-        <div class="itemBorder">
-            <a routerLink="/students" routerLinkActive="active">
-                <div>
-                    <i class="fa fa-graduation-cap fa-lg-icon" aria-hidden="true"></i>
-                </div>
-                <div>
-                    <h1 class="dashboardItemText">Manage Students</h1>
-                </div>
-            </a>
+        <div class="col-md-4 dashboardItem" *ngIf="manageStudents">
+            <div class="itemBorder">
+                <a routerLink="/students" routerLinkActive="active">
+                    <div>
+                        <i class="fa fa-graduation-cap fa-lg-icon" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h1 class="dashboardItemText">Manage Students</h1>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4 dashboardItem" *ngIf="manageStaff">
-        <div class="itemBorder">
-            <a routerLink="/staff" routerLinkActive="active">
-                <div>
-                    <i class="fa fa-users fa-lg-icon" aria-hidden="true"></i>
-                </div>
-                <div>
-                    <h1 class="dashboardItemText">Manage Staff</h1>
-                </div>
-            </a>
+        <div class="col-md-4 dashboardItem" *ngIf="manageStaff">
+            <div class="itemBorder">
+                <a routerLink="/staff" routerLinkActive="active">
+                    <div>
+                        <i class="fa fa-users fa-lg-icon" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h1 class="dashboardItemText">Manage Staff</h1>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4 dashboardItem" *ngIf="suitability">
-        <div class="itemBorder">
-            <a routerLink="/suitability" routerLinkActive="active">
-                <div>
-                    <i class="fa fa-question fa-lg-icon" aria-hidden="true"></i>
-                </div>
-                <div>
-                    <h1 class="dashboardItemText">Suitability</h1>
-                </div>
-            </a>
+        <div class="col-md-4 dashboardItem" *ngIf="suitability">
+            <div class="itemBorder">
+                <a routerLink="/suitability" routerLinkActive="active">
+                    <div>
+                        <i class="fa fa-question fa-lg-icon" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h1 class="dashboardItemText">Suitability</h1>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4 dashboardItem" *ngIf="dashboardItem5">
-        <div class="itemBorder">
-            <a routerLink="/" routerLinkActive="active">
-                <div>
-                    <i class="fa fa-ban fa-lg-icon" aria-hidden="true"></i>
-                </div>
-                <div>
-                    <h1 class="dashboardItemText">TBD</h1>
-                </div>
-            </a>
+        <div class="col-md-4 dashboardItem" *ngIf="dashboardItem5">
+            <div class="itemBorder">
+                <a routerLink="/" routerLinkActive="active">
+                    <div>
+                        <i class="fa fa-ban fa-lg-icon" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h1 class="dashboardItemText">TBD</h1>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4 dashboardItem" *ngIf="dashboardItem6">
-        <div class="itemBorder">
-            <a routerLink="/" routerLinkActive="active">
-                <div>
-                    <i class="fa fa-ban fa-lg-icon" aria-hidden="true"></i>
-                </div>
-                <div>
-                    <h1 class="dashboardItemText">TBD</h1>
-                </div>
-            </a>
+        <div class="col-md-4 dashboardItem" *ngIf="dashboardItem6">
+            <div class="itemBorder">
+                <a routerLink="/" routerLinkActive="active">
+                    <div>
+                        <i class="fa fa-ban fa-lg-icon" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h1 class="dashboardItemText">TBD</h1>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -1,25 +1,27 @@
 h2 {
     margin-bottom: 25;
+
 }
 
 .dashboardItem {
-  text-align:center;
-  padding: 10px;
-  white-space: nowrap;
+    text-align: center;
+    padding: 10px;
+    white-space: nowrap;
 }
 
 .dashboardItemText {
-    color:#222;
+    color: #333f48;
+    font-family: Avenir, Calibri, Minion;
 }
 
 .fa-lg-icon {
-  font-size: 6em;
-  color:#222
+    font-size: 6em;
+    color: #333f48;
 }
 
 .itemBorder {
-  padding: 10px;
-  padding-top: 40px;
-  border: 1px solid rgba(0, 0, 0, .3);
-  box-shadow: 5px 5px 5px #888888;
+    padding: 10px;
+    padding-top: 40px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    box-shadow: 5px 5px 5px #888888;
 }

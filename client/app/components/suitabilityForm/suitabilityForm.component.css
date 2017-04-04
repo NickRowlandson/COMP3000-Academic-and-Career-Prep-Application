@@ -1,20 +1,24 @@
+.suitability {
+    font-family: Avenir, Calibri, Minion;
+}
+
 .sectionButtons {
-  display: inline;
-  padding: 5 10 5 10;
-  margin: 0 2 0 2;
-  float: left;
-  font-weight: bold;
-  box-shadow: 2px 2px 3px #888888;
+    display: inline;
+    padding: 5 10 5 10;
+    margin: 0 2 0 2;
+    float: left;
+    font-weight: bold;
+    box-shadow: 2px 2px 3px #888888;
 }
 
 .sectionBtnGroup {
-  margin-bottom:40px;
+    margin-bottom: 40px;
 }
 
 .sectionBtnGroup>li:focus, .sectionBtnGroup>li:hover {
     background-color: #004B87;
-    color:white;
-    cursor:pointer;
+    color: white;
+    cursor: pointer;
     /* Firefox */
     -moz-transition: all 1s ease-in;
     /* Standard */
@@ -22,15 +26,15 @@
 }
 
 .active {
-  background-color: #004B87;
-  color:white;
+    background-color: #004B87;
+    color: white;
 }
 
-.formInput{
-  padding-top: 7px;
+.formInput {
+    padding-top: 7px;
 }
 
-.formInput span{
-  margin-right: 10px;
-  white-space: nowrap;
+.formInput span {
+    margin-right: 10px;
+    white-space: nowrap;
 }

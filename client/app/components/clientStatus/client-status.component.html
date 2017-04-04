@@ -1,113 +1,115 @@
-<div class="" *ngIf="!clients">
-    <h2>Clients</h2>
-    <hr>
-    <div class="cs-loader">
-        <div class="cs-loader-inner">
-            <label>	L</label>
-            <label>	O</label>
-            <label>	A</label>
-            <label>	D</label>
-            <label>	I</label>
-            <label>	N</label>
-            <label>	G</label>
-            <label>	.</label>
-            <label>	.</label>
-            <label>	.</label>
-        </div>
-    </div>
-</div>
-<div class="row" *ngIf="clients">
-    <div class="col-md-6">
+<div class="clients">
+    <div *ngIf="!clients">
         <h2>Clients</h2>
         <hr>
-        <div class="error" *ngIf="error">{{error}}</div>
-        <div class="">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let client of clients">
-                        <td>{{client.firstName + " " + client.lastName}}</td>
-                        <td>{{client.email}}</td>
-                        <td class="actionColumn middle">
-                            <!-- <div class="inline">
+        <div class="cs-loader">
+            <div class="cs-loader-inner">
+                <label>	L</label>
+                <label>	O</label>
+                <label>	A</label>
+                <label>	D</label>
+                <label>	I</label>
+                <label>	N</label>
+                <label>	G</label>
+                <label>	.</label>
+                <label>	.</label>
+                <label>	.</label>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="clients">
+        <div class="col-md-6">
+            <h2>Clients</h2>
+            <hr>
+            <div class="error" *ngIf="error">{{error}}</div>
+            <div class="">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let client of clients">
+                            <td>{{client.firstName + " " + client.lastName}}</td>
+                            <td>{{client.email}}</td>
+                            <td class="actionColumn middle">
+                                <!-- <div class="inline">
                                 <button class="btn btn-primary" (click)="gotoEdit(client, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             </div> -->
-                            <div class="padding inline">
-                                <button (click)="showView(client)" class="btn btn-primary">View Info</button>
-                            </div>
-                            <div class="inline">
-                                <button class="btn btn-danger" (click)="deleteClient(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                                <div class="padding inline">
+                                    <button (click)="showView(client)" class="btn btn-primary">View Info</button>
+                                </div>
+                                <div class="inline">
+                                    <button class="btn btn-danger" (click)="deleteClient(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div *ngIf="!clientView" class="col-md-6">
+            <h2>Status</h2>
+            <hr>
+            <div>
+                <h3>Total clients: {{ clientTotal }}</h3></div>
+            <div style="display: block">
+                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutChartColors" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+        <div *ngIf="clientView" class="col-md-6">
+            <h2>Information for {{clientView.firstName + " " + clientView.lastName}}</h2>
+            <hr>
+            <div class="form-group">
+                <label class="control-label">id: </label>
+                <div class="">
+                    {{clientView._id}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Inquiry Date: </label>
+                <div class="">
+                    {{clientView.inquiryDate}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">First Name: </label>
+                <div class="">
+                    {{clientView.firstName}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last Name: </label>
+                <div class="">
+                    {{clientView.lastName}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Birth Date: </label>
+                <div class="">
+                    {{clientView.birthdate}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email: </label>
+                <div class="">
+                    {{clientView.email}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Phone: </label>
+                <div class="">
+                    {{clientView.phone}}
+                </div>
+            </div>
         </div>
     </div>
-    <div *ngIf="!clientView" class="col-md-6">
-        <h2>Status</h2>
-        <hr>
+    <div class="form-group">
         <div>
-            <h3>Total clients: {{ clientTotal }}</h3></div>
-        <div style="display: block">
-            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutChartColors" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+            <button (click)="goBack()" class="btn btn-default">Back</button>
         </div>
-    </div>
-    <div *ngIf="clientView" class="col-md-6">
-        <h2>Information for {{clientView.firstName + " " + clientView.lastName}}</h2>
-        <hr>
-        <div class="form-group">
-            <label class="control-label">id: </label>
-            <div class="">
-                {{clientView._id}}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label">Inquiry Date: </label>
-            <div class="">
-                {{clientView.inquiryDate}}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label">First Name: </label>
-            <div class="">
-                {{clientView.firstName}}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label">Last Name: </label>
-            <div class="">
-                {{clientView.lastName}}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label">Birth Date: </label>
-            <div class="">
-                {{clientView.birthdate}}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label">Email: </label>
-            <div class="">
-                {{clientView.email}}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label">Phone: </label>
-            <div class="">
-                {{clientView.phone}}
-            </div>
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div>
-        <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>
 </div>

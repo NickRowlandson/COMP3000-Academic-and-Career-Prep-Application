@@ -5,6 +5,7 @@
 
 .navbarItem {
   color:white !important;
+  font-family: Avenir, Calibri, Minion;
 }
 
 .nav>li>a:focus, .nav>li>a:hover {
