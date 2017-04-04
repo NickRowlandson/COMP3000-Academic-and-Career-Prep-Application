@@ -19,10 +19,7 @@
     background-color: #004B87;
     color: white;
     cursor: pointer;
-    /* Firefox */
-    -moz-transition: all 1s ease-in;
-    /* Standard */
-    transition: all 0.4s ease-in;
+    transition: .6s;
 }
 
 .active {
@@ -37,4 +34,44 @@
 .formInput span {
     margin-right: 10px;
     white-space: nowrap;
+}
+
+.nextButton {
+  cursor:pointer;
+  background-color: #004B87;
+  width: 60px;
+  color: white;
+  display: inline;
+  padding: 5 10 5 10;
+  margin: 0 2 0 2;
+  float: left;
+  border: 1px solid #004B87;
+  box-shadow: 2px 2px 3px #888888;
+}
+
+.nextButton:hover {
+  background-color: #FFF;
+  color: #004B87;
+  border: 1px solid #004B87;
+  transition: .4s;
+}
+
+.saveButton {
+  cursor:pointer;
+  background-color: #64a70b;
+  width: 60px;
+  color: white;
+  display: inline;
+  padding: 5 10 5 10;
+  margin: 0 2 0 2;
+  float: left;
+  border: 1px solid #64a70b;
+  box-shadow: 2px 2px 3px #888888;
+}
+
+.saveButton:hover {
+  background-color: #FFF;
+  color: #64a70b;
+  border: 1px solid #64a70b;
+  transition: .4s;
 }

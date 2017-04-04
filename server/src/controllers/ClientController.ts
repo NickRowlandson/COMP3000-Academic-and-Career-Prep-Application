@@ -2,6 +2,7 @@ import express = require("express");
 import jwt = require('jsonwebtoken');
 import bcrypt = require('bcrypt');
 import AuthController = require("../controllers/AuthController");
+import MailService = require("../services/mail.service");
 var sql = require('mssql');
 var auth = ["Admin", "Staff"];
 
@@ -19,7 +20,11 @@ class ClientController {
               new sql.Request().query("INSERT INTO Users VALUES ('"+client.username+"','"+client.password+"','Client')").then(function() {
                 new sql.Request().query("SELECT userID FROM Users WHERE username = '"+client.username+"' AND password = '"+client.password+"'").then(function(id) {
                   new sql.Request().query("INSERT INTO Clients VALUES ('"+id[0].userID+"','"+client.firstName+"', '"+client.lastName+"','"+client.email+"','"+client.inquiryDate+"','"+client.birthday+"','"+client.phone+"')").then(function() {
-                    res.send({"success": "success"});
+                    this.MailService
+                      .sendMail()
+                      .then(users => {
+                        res.send({"success": "success"});
+                      });
                   }).catch(function(err) {
                     res.send({"error": "error"}); console.log("insert client " + err);
                   });

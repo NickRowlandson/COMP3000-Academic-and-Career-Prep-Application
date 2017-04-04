@@ -1,6 +1,10 @@
 .georgianBlue {
   background-color: #004B87;
   color: white;
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
 }
 
 .navbarItem {
