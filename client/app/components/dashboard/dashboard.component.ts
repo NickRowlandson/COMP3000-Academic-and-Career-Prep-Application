@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
     manageStudents = false;
     manageStaff = false;
     suitability = false;
-    dashboardItem5 = false;
+    consent = false;
     dashboardItem6 = false;
 
     constructor(private router: Router, private authService: AuthService) {
@@ -32,35 +32,35 @@ export class DashboardComponent implements OnInit {
             this.manageStudents = true;
             this.manageStaff = true;
             this.suitability = true;
-            this.dashboardItem5 = true;
+            this.consent = false;
             this.dashboardItem6 = true;
         } else if (userType === 'Staff') {
             this.clientStatus = true;
             this.manageStudents = true;
             this.manageStaff = false;
             this.suitability = true;
-            this.dashboardItem5 = true;
+            this.consent = false;
             this.dashboardItem6 = true;
         } else if (userType === 'Student') {
             this.clientStatus = false;
             this.manageStudents = false;
             this.manageStaff = false;
             this.suitability = false;
-            this.dashboardItem5 = false;
+            this.consent = false;
             this.dashboardItem6 = false;
         } else if (userType === 'Client') {
             this.clientStatus = false;
             this.manageStudents = false;
             this.manageStaff = false;
             this.suitability = false;
-            this.dashboardItem5 = false;
+            this.consent = true;
             this.dashboardItem6 = false;
         } else {
             this.clientStatus = false;
             this.manageStudents = false;
             this.manageStaff = false;
             this.suitability = false;
-            this.dashboardItem5 = false;
+            this.consent = false;
             this.dashboardItem6 = false;
         }
     }
