@@ -10,4 +10,5 @@ export class Client {
     birthday: string;
     email: string;
     phone: string;
+    status: string;
 }

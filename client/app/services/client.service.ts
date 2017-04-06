@@ -3,6 +3,7 @@ import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { AuthService } from './authentication.service';
 import 'rxjs/add/operator/toPromise';
 import { Client } from "../models/client";
+import { SuitabilityForm } from "../models/suitabilityForm";
 
 @Injectable()
 export class ClientService {
@@ -26,41 +27,39 @@ export class ClientService {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
-
         return this.http.get(this.clientUrl + '/' + id, options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
-    save(client: Client): Promise<Client>  {
+    save(client: Client, suitabilityForm: SuitabilityForm): Promise<Client> {
         if (client.clientID) {
-            return this.put(client);
+            return this.put(client, suitabilityForm);
         }
-        return this.post(client);
+        return this.post(client, suitabilityForm);
     }
 
-    private post(client: Client): Promise<Client> {
+    private post(client: Client, suitabilityForm: SuitabilityForm): Promise<Client> {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
-
+        let objects = ({ client: client, suitabilityForm: suitabilityForm });
         return this.http
-            .post(this.clientUrl, client, options)
+            .post(this.clientUrl, objects, options)
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
 
-    private put(client: Client) {
+    private put(client: Client, suitabilityForm: SuitabilityForm) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
-
+        let objects = ({ client: client, suitabilityForm: suitabilityForm });
         let url = `${this.clientUrl}/${client.clientID}`;
-
         return this.http
-            .put(url, client, options)
+            .put(url, objects, options)
             .toPromise()
             .then(() => client)
             .catch(this.handleError);

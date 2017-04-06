@@ -1,16 +1,17 @@
 export class SuitabilityForm {
+  userID: any;
   transcript: string;
   courses: string;
   goal: string;
   transitionDate: string;
-  governmentID: string;
-  appropriateGoal: string;
-  isValidAge: string;
-  schoolRegistration: string;
-  isAvailableClass: string;
+  governmentID: boolean;
+  appropriateGoal: boolean;
+  isValidAge: boolean;
+  schoolRegistration: boolean;
+  availableDuringClass: boolean;
   lastGrade: string;
   level: string;
-  jobStartDate: string;
+  offerStartDate: string;
   meetsGoal: string;
   timeOutOfSchool: string;
   inProgramBefore: string;

@@ -14,6 +14,7 @@ import { AuthService } from '../../services/authentication.service';
 
 export class SuitabilityFormComponent {
   @Input() client: Client;
+  @Input() suitabilityForm: SuitabilityForm;
   error: any;
   date: any;
   currentUser:any;
@@ -30,6 +31,7 @@ export class SuitabilityFormComponent {
 
   constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
     this.client = new Client();
+    this.suitabilityForm = new SuitabilityForm();
     this.date =  new Date();
   }
 
@@ -94,7 +96,7 @@ export class SuitabilityFormComponent {
       this.client["username"] = this.client.firstName + this.client.lastName;
       this.client["password"] = this.client.birthday.replace(/-/g, "");
       this.clientService
-          .save(this.client)
+          .save(this.client, this.suitabilityForm)
           .then(client => {
               this.client = client; // saved client, w/ id if new
               this.router.navigate(['/clients']);

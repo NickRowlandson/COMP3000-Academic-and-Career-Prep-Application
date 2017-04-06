@@ -2,6 +2,39 @@
   font-family: Avenir, Calibri, Minion;
 }
 
+.sectionButtons {
+    display: inline;
+    padding: 5 10 5 10;
+    margin: 0 2 0 2;
+    float: left;
+    font-weight: bold;
+    box-shadow: 2px 2px 3px #888888;
+}
+
+.sectionBtnGroup {
+    margin-bottom: 40px;
+}
+
+.sectionBtnGroup>li:focus, .sectionBtnGroup>li:hover {
+    background-color: #004B87;
+    color: white;
+    cursor: pointer;
+    transition: .6s;
+}
+
+.active {
+    background-color: #004B87;
+    color: white;
+}
+
+#actionMenu {
+  cursor:pointer;
+}
+
+th:first-of-type, th:last-of-type {
+  text-align: center;
+}
+
 h2 {
     margin-bottom: 25;
 }
@@ -20,4 +53,33 @@ button {
 
 .middle {
     text-align: center;
+}
+
+.backButton {
+  position: fixed;
+  bottom: 25px;
+}
+
+.statusStage1 {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+  background-color: red;
+  margin: 0 auto;
+}
+
+.statusStage2 {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+  background-color: yellow;
+  margin: 0 auto;
+}
+
+.statusStage3 {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+  background-color: green;
+  margin: 0 auto;
 }

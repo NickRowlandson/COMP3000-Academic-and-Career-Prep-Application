@@ -3,6 +3,8 @@
 import express = require('express');
 import BaseRoutes = require("./routes/Routes");
 import bodyParser = require("body-parser");
+import cron = require('node-cron');
+import nodemailer = require('nodemailer');
 
 import path = require('path');
 var port: number = process.env.PORT || 3000;
