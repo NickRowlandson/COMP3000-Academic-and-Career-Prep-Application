@@ -13,6 +13,7 @@ import { AuthService } from "../../services/authentication.service";
 
 export class ClientStatusComponent implements OnInit {
     clients: Client[];
+    allClients: Client[];
     suitabilityForms: SuitabilityForm[];
     clientTotal: any;
     error: any;
@@ -51,6 +52,7 @@ export class ClientStatusComponent implements OnInit {
 
     setData(objects) {
         this.clients = objects.clients;
+        this.allClients = objects.clients;
         this.clientTotal = objects.clients.length;
         this.suitabilityForms = objects.suitabilityForms;
         var stage1 = this.clients.filter(x => x.status === '1');
@@ -100,8 +102,23 @@ export class ClientStatusComponent implements OnInit {
       }
     }
 
-    chartClicked(e: any): void {
+    statusReport(event) {
+      this.clientView = null;
+    }
 
+    chartClicked(e: any): void {
+      try {
+        var index = e.active[0]._index;
+        if (index === 0) {
+          this.clients = this.allClients.filter(x => x.status === '1');
+        } else if (index === 1) {
+          this.clients = this.allClients.filter(x => x.status === '2');
+        } else if (index === 2) {
+          this.clients = this.allClients.filter(x => x.status === '3');
+        }
+      } catch (err) {
+        this.clients = this.allClients;
+      }
     }
 
     chartHovered(e: any): void {

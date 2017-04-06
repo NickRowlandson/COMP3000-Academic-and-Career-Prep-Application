@@ -52,7 +52,7 @@
                                 <div class="dropdown-toggle" id="actionMenu" title="Click to view options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i>
                                 </div>
-                                <ul class="dropdown-menu" aria-labelledby="actionMenu">
+                                <ul class="dropdown-menu actionMenu" aria-labelledby="actionMenu">
                                     <li><a (click)="showClientView(client)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
                                     <li><a (click)="deleteClient(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
                                 </ul>
@@ -62,8 +62,8 @@
                 </table>
             </div>
         </div>
-        <div *ngIf="!clientView && !suitabilityView" class="col-md-6">
-            <h2>Status</h2>
+        <div *ngIf="!clientView" class="col-md-6">
+            <h2>Status Report</h2>
             <hr>
             <div>
                 <h3>Total clients: {{ clientTotal }}</h3></div>
@@ -72,7 +72,8 @@
             </div>
         </div>
         <div *ngIf="clientView" class="col-md-6">
-            <h2>Viewing Information for {{clientView.firstName + " " + clientView.lastName}}</h2>
+            <h2>Information for {{clientView.firstName + " " + clientView.lastName}}</h2>
+            <div (click)="statusReport($event)" class="statusButton" title="Status report"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
             <hr>
             <ul class="sectionBtnGroup col-sm-12">
                 <li class="sectionButtons" [ngClass]="{active: showGeneral}" title="General Info" (click)="sectionBtnClicked($event, 'general')">

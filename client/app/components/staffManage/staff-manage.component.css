@@ -1,5 +1,6 @@
 .staff {
   font-family: Avenir, Calibri, Minion;
+  color: #333f48;
 }
 
 .padding {
@@ -20,4 +21,9 @@ button {
 
 .middle{
   text-align:center;
+}
+
+.backButton {
+  position: fixed;
+  bottom: 25px;
 }

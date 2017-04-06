@@ -7,8 +7,7 @@
     padding: 5 10 5 10;
     margin: 0 2 0 2;
     float: left;
-    font-weight: bold;
-    box-shadow: 2px 2px 3px #888888;
+    box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
 }
 
 .sectionBtnGroup {
@@ -16,15 +15,15 @@
 }
 
 .sectionBtnGroup>li:focus, .sectionBtnGroup>li:hover {
-    background-color: #004B87;
-    color: white;
+    background-color: #333f48;
+    color: #fff;
     cursor: pointer;
     transition: .6s;
 }
 
 .active {
-    background-color: #004B87;
-    color: white;
+    background-color: #333f48;
+    color: #fff;
 }
 
 .formInput {
@@ -37,41 +36,37 @@
 }
 
 .nextButton {
+  position: absolute;
+  top:-80px;
   cursor:pointer;
-  background-color: #004B87;
-  width: 60px;
-  color: white;
+  background-color: #fff;
+  color: #333f48;
   display: inline;
   padding: 5 10 5 10;
-  margin: 0 2 0 2;
-  float: left;
-  border: 1px solid #004B87;
-  box-shadow: 2px 2px 3px #888888;
+  border: 0px solid;
 }
 
 .nextButton:hover {
-  background-color: #FFF;
-  color: #004B87;
-  border: 1px solid #004B87;
-  transition: .4s;
+  background-color: #333f48;
+  color:  #fff;
+  border: 0px solid;
+  transition: .2s;
 }
 
 .saveButton {
+  position: absolute;
+  top:-80px;
   cursor:pointer;
-  background-color: #64a70b;
-  width: 60px;
-  color: white;
+  background-color: #fff;
+  color: #64a70b;
   display: inline;
   padding: 5 10 5 10;
-  margin: 0 2 0 2;
-  float: left;
-  border: 1px solid #64a70b;
-  box-shadow: 2px 2px 3px #888888;
+  border: 0px solid;
 }
 
 .saveButton:hover {
-  background-color: #FFF;
-  color: #64a70b;
-  border: 1px solid #64a70b;
-  transition: .4s;
+  background-color: #64a70b;
+  color: #fff;
+  border: 0px solid;
+  transition: .2s;
 }

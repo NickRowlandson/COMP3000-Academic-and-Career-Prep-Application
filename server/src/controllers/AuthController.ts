@@ -8,8 +8,8 @@ class AuthController {
   // Login Authentication
   auth(req: express.Request, res: express.Response): void {
     try {
-      var _username: string = req.body.client.username;
-      var _password: string = req.body.client.password;
+      var _username: string = req.body.username;
+      var _password: string = req.body.password;
       var response;
 
       sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {

@@ -1,5 +1,6 @@
 .clients {
   font-family: Avenir, Calibri, Minion;
+  color: #333f48 !important;
 }
 
 .sectionButtons {
@@ -8,7 +9,7 @@
     margin: 0 2 0 2;
     float: left;
     font-weight: bold;
-    box-shadow: 2px 2px 3px #888888;
+    box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
 }
 
 .sectionBtnGroup {
@@ -16,19 +17,24 @@
 }
 
 .sectionBtnGroup>li:focus, .sectionBtnGroup>li:hover {
-    background-color: #004B87;
+    background-color: #333f48;
     color: white;
     cursor: pointer;
     transition: .6s;
 }
 
 .active {
-    background-color: #004B87;
+    background-color: #333f48;
     color: white;
 }
 
 #actionMenu {
   cursor:pointer;
+
+}
+
+.actionMenu {
+  position: relative !important;
 }
 
 th:first-of-type, th:last-of-type {
@@ -82,4 +88,24 @@ button {
 	height: 20px;
   background-color: green;
   margin: 0 auto;
+}
+
+.statusButton {
+  position: absolute;
+  right: 10;
+  top: 20;
+  cursor:pointer;
+  background-color: #fff;
+  color: #333f48;
+  display: inline;
+  padding: 5 10 5 10;
+  margin: 0 2 0 2;
+  float: left;
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
+}
+
+.statusButton:hover {
+  background-color: #333f48;
+  color: #fff;
+  transition: .4s;
 }
