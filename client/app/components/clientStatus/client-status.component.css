@@ -1,12 +1,20 @@
 .clients {
   font-family: Avenir, Calibri, Minion;
-  color: #333f48 !important;
+}
+
+.addClient {
+  position:absolute;
+  top: 25;
+  right: 50;
+  float: right;
+  min-width: 0px
 }
 
 .sectionButtons {
     display: inline;
     padding: 5 10 5 10;
     margin: 0 2 0 2;
+    color: #333f48;
     float: left;
     font-weight: bold;
     box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
@@ -18,7 +26,7 @@
 
 .sectionBtnGroup>li:focus, .sectionBtnGroup>li:hover {
     background-color: #333f48;
-    color: white;
+    color: #fff;
     cursor: pointer;
     transition: .6s;
 }
@@ -30,11 +38,11 @@
 
 #actionMenu {
   cursor:pointer;
-
 }
 
 .actionMenu {
   position: relative !important;
+  min-width: 0px !important;
 }
 
 th:first-of-type, th:last-of-type {
@@ -54,7 +62,7 @@ button {
 }
 
 .actionColumn {
-    width: 20%;
+    width: 24%;
 }
 
 .middle {
@@ -67,6 +75,7 @@ button {
 }
 
 .statusStage1 {
+  vertical-align: middle;
 	border-radius: 50%;
 	width: 20px;
 	height: 20px;
@@ -92,7 +101,7 @@ button {
 
 .statusButton {
   position: absolute;
-  right: 10;
+  right: 20;
   top: 20;
   cursor:pointer;
   background-color: #fff;

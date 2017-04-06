@@ -4,7 +4,7 @@
 
 .sectionButtons {
     display: inline;
-    padding: 5 10 5 10;
+    padding: 0 10 0 10;
     margin: 0 2 0 2;
     float: left;
     box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
@@ -62,6 +62,7 @@
   display: inline;
   padding: 5 10 5 10;
   border: 0px solid;
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
 }
 
 .saveButton:hover {
