@@ -23,11 +23,15 @@ export class SuitabilityFormComponent {
   showSection2 = false;
   showSection3 = false;
   showSection4 = false;
+  showSection5 = false;
+  showSection6 = false;
 
   showSectionBtn1 = true;
   showSectionBtn2 = false;
   showSectionBtn3 = false;
   showSectionBtn4 = false;
+  showSectionBtn5 = false;
+  showSectionBtn6 = false;
 
   constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
     this.client = new Client();
@@ -52,24 +56,48 @@ export class SuitabilityFormComponent {
         this.showSection2 = true;
         this.showSection3 = false;
         this.showSection4 = false;
+        this.showSection5 = false;
+        this.showSection6 = false;
         break;
       case 'section3':
         this.showSection1 = false;
         this.showSection2 = false;
         this.showSection3 = true;
         this.showSection4 = false;
+        this.showSection5 = false;
+        this.showSection6 = false;
         break;
       case 'section4':
         this.showSection1 = false;
         this.showSection2 = false;
         this.showSection3 = false;
         this.showSection4 = true;
+        this.showSection5 = false;
+        this.showSection6 = false;
+        break;
+      case 'section5':
+        this.showSection1 = false;
+        this.showSection2 = false;
+        this.showSection3 = false;
+        this.showSection4 = false;
+        this.showSection5 = true;
+        this.showSection6 = false;
+        break;
+      case 'section6':
+        this.showSection1 = false;
+        this.showSection2 = false;
+        this.showSection3 = false;
+        this.showSection4 = false;
+        this.showSection5 = false;
+        this.showSection6 = true;
         break;
       default:
         this.showSection1 = true;
         this.showSection2 = false;
         this.showSection3 = false;
         this.showSection4 = false;
+        this.showSection5 = false;
+        this.showSection6 = false;
     }
   }
 
@@ -85,6 +113,14 @@ export class SuitabilityFormComponent {
         break;
       case 'section4':
         this.showSectionBtn4 = true;
+        this.clicked(event, nextSection);
+        break;
+      case 'section5':
+        this.showSectionBtn5 = true;
+        this.clicked(event, nextSection);
+        break;
+      case 'section6':
+        this.showSectionBtn6 = true;
         this.clicked(event, nextSection);
         break;
       default:

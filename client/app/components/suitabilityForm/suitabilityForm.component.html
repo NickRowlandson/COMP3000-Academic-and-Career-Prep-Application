@@ -4,13 +4,17 @@
     <div *ngIf="client" class="form-horizontal">
         <div class="row">
             <ul class="sectionBtnGroup col-sm-12">
-                <li *ngIf="showSectionBtn1" class="sectionButtons" [ngClass]="{active: showSection1}" title="Basic Info" (click)="clicked($event, 'section1')">
-                    <h4>Basic Info</h4></li>
+                <li *ngIf="showSectionBtn1" class="sectionButtons" [ngClass]="{active: showSection1}" title="General Info" (click)="clicked($event, 'section1')">
+                    <h4>General Info</h4></li>
                 <li *ngIf="showSectionBtn2" class="sectionButtons" [ngClass]="{active: showSection2}" title="Question Group 2" (click)="clicked($event, 'section2')">
                     <h4>Question Group 2</h4></li>
                 <li *ngIf="showSectionBtn3" class="sectionButtons" [ngClass]="{active: showSection3}" title="Question Group 3" (click)="clicked($event, 'section3')">
                     <h4>Question Group 3</h4></li>
-                <li *ngIf="showSectionBtn4" class="sectionButtons" [ngClass]="{active: showSection4}" title="Question Group 4" (click)="clicked($event, 'section4')">
+                <li *ngIf="showSectionBtn4" class="sectionButtons" [ngClass]="{active: showSection4}" title="Success Factors" (click)="clicked($event, 'section4')">
+                    <h4>Success Factors</h4></li>
+                <li *ngIf="showSectionBtn5" class="sectionButtons" [ngClass]="{active: showSection5}" title="Summary Notes" (click)="clicked($event, 'section5')">
+                    <h4>Summary Notes</h4></li>
+                <li *ngIf="showSectionBtn6" class="sectionButtons" [ngClass]="{active: showSection6}" title="Review" (click)="clicked($event, 'section6')">
                     <h4>Review</h4></li>
             </ul>
             <div id="section1" *ngIf="showSection1" class="col-sm-12">
@@ -229,6 +233,44 @@
             </div>
             <!-- end of section 3 -->
             <div id="section4" *ngIf="showSection4" class="col-sm-12">
+              <div class="form-group">
+                  <div class="col-sm-offset-10 col-sm-1">
+                      <button (click)="next($event, 'section5')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                  </div>
+              </div>
+              <h3>Factors Affecting Client Success</h3>
+                <input type="radio" value="1">Client has health problems that may prevent client from working effectively <br>
+                <input type="radio" value="1">Client has difficulty understanding instructions <br>
+                <input type="radio" value="1">Client has difficulty communicating <br>
+                <input type="radio" value="1">Client has language barrier <br>
+                <input type="radio" value="1">Client has limited computer skills <br>
+                <input type="radio" value="1">Client has housing instability <br>
+                <input type="radio" value="1">Transportation is limited restricted (no license/ no $s for bus/gas) <br>
+                <input type="radio" value="1">Client does not have reliable daycare <br>
+                <input type="radio" value="1">Client does not have phone/internet access <br>
+                <input type="radio" value="1">Client is going through difficulties in his/her personal life, (legal, family, substance abuse, financial) <br>
+
+                Other:<input type="text" name="other"> <br>
+                  <input type="radio" value="9-11">High To Exceptional 9-11 <br>
+                  <input type="radio" value="5-8">Moderate To Intermediate 5-8 <br>
+                  <input type="radio" value="1-4">Low To Moderate 1-4 <br>
+              </div>
+            <!-- end of section 4 -->
+            <div id="section5" *ngIf="showSection5" class="col-sm-12">
+              <div class="form-group">
+                  <div class="col-sm-offset-10 col-sm-1">
+                      <button (click)="next($event, 'section6')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                  </div>
+              </div>
+              <h3>Summary Notes</h3>
+              Transportation:<input type="text" name="transportation"> <br>
+              Housing:<input type="text" name="housing"> <br>
+              Childcare:<input type="text" name="childcare"> <br>
+              Health:<input type="text" name="health"> <br>
+              Other:<input type="text" name="summaryother"> <br>
+            </div>
+            <!-- end of section 5 -->
+            <div id="section6" *ngIf="showSection6" class="col-sm-12">
                 <div class="form-group">
                     <div class="col-sm-offset-10 col-sm-1">
                         <button (click)="save()" class="saveButton" title="Save client"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>
@@ -247,7 +289,7 @@
                     </div>
                 </div>
             </div>
-            <!-- end of section 4 -->
+            <!-- end of section 6 -->
         </div>
         <!-- close row -->
     </div>
