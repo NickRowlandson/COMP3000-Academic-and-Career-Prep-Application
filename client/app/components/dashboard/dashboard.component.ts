@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
     manageStudents = false;
     manageStaff = false;
     suitability = false;
-    consent = true;
+    consent = false;
     dashboardItem6 = false;
 
     constructor(private router: Router, private authService: AuthService) {
@@ -32,14 +32,14 @@ export class DashboardComponent implements OnInit {
             this.manageStudents = true;
             this.manageStaff = true;
             this.suitability = true;
-            this.consent = true;
+            this.consent = false;
             this.dashboardItem6 = true;
         } else if (userType === 'Staff') {
             this.clientStatus = true;
             this.manageStudents = true;
             this.manageStaff = false;
             this.suitability = true;
-            this.consent = true;
+            this.consent = false;
             this.dashboardItem6 = true;
         } else if (userType === 'Student') {
             this.clientStatus = false;
