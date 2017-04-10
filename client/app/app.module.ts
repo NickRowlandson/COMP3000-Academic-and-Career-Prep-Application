@@ -16,6 +16,8 @@ import { StudentEditComponent } from './components/studentEdit/student-edit.comp
 import { ClientStatusComponent } from './components/clientStatus/client-status.component';
 import { SuitabilityFormComponent } from './components/suitabilityForm/suitabilityForm.component';
 import { ConsentFormComponent } from './components/consentForm/consentForm.component';
+import { CaseNotesComponent } from './components/caseNotes/caseNotes.component';
+import { CourseManageComponent } from './components/courseManage/courseManage.component';
 
 //Import services
 import { AuthGuard } from './guards/auth.guard';
@@ -46,7 +48,9 @@ import { StaffService } from './services/staff.service';
     StudentEditComponent,
     ClientStatusComponent,
     SuitabilityFormComponent,
-    ConsentFormComponent
+    ConsentFormComponent,
+    CaseNotesComponent,
+    CourseManageComponent
   ],
   providers: [
     AuthGuard,

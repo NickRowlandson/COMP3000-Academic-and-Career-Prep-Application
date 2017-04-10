@@ -15,6 +15,8 @@ import { StudentEditComponent }  from './components/studentEdit/student-edit.com
 import { ClientStatusComponent }  from './components/clientStatus/client-status.component';
 import { SuitabilityFormComponent } from './components/suitabilityForm/suitabilityForm.component';
 import { ConsentFormComponent } from './components/consentForm/consentForm.component';
+import { CaseNotesComponent } from './components/caseNotes/caseNotes.component';
+import { CourseManageComponent } from './components/courseManage/courseManage.component';
 
 const appRoutes: Routes = [
     {
@@ -65,6 +67,16 @@ const appRoutes: Routes = [
         path: 'consent',
         component: ConsentFormComponent,
         canActivate: [AuthGuard, ClientGuard]
+    },
+    {
+        path: 'caseNotes',
+        component: CaseNotesComponent,
+        canActivate: [AuthGuard, StaffGuard]
+    },
+    {
+        path: 'courses',
+        component: CourseManageComponent,
+        canActivate: [AuthGuard, StaffGuard]
     }
 ];
 

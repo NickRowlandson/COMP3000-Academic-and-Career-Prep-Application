@@ -50,6 +50,8 @@ export class SuitabilityFormComponent {
         this.showSection2 = false;
         this.showSection3 = false;
         this.showSection4 = false;
+        this.showSection5 = false;
+        this.showSection6 = false;
         break;
       case 'section2':
         this.showSection1 = false;

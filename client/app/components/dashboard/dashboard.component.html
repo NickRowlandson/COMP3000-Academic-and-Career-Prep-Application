@@ -38,6 +38,18 @@
                 </a>
             </div>
         </div>
+        <div class="col-md-4 dashboardItem" *ngIf="manageCourses">
+            <div class="itemBorder">
+                <a routerLink="/courses" routerLinkActive="active">
+                    <div>
+                        <i class="fa fa-calendar-check-o fa-lg-icon" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h1 class="dashboardItemText">Manage Courses</h1>
+                    </div>
+                </a>
+            </div>
+        </div>
         <div class="col-md-4 dashboardItem" *ngIf="suitability">
             <div class="itemBorder">
                 <a routerLink="/suitability" routerLinkActive="active">
@@ -62,14 +74,14 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-4 dashboardItem" *ngIf="dashboardItem6">
+        <div class="col-md-4 dashboardItem" *ngIf="caseNotes">
             <div class="itemBorder">
-                <a routerLink="/" routerLinkActive="active">
+                <a routerLink="/caseNotes" routerLinkActive="active">
                     <div>
-                        <i class="fa fa-ban fa-lg-icon" aria-hidden="true"></i>
+                        <i class="fa fa-commenting fa-lg-icon" aria-hidden="true"></i>
                     </div>
                     <div>
-                        <h1 class="dashboardItemText">TBD</h1>
+                        <h1 class="dashboardItemText">Case Notes</h1>
                     </div>
                 </a>
             </div>
