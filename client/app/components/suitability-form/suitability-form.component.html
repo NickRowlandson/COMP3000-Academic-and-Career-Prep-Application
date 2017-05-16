@@ -1,0 +1,293 @@
+<div class="suitability">
+    <h2>Client Suitability</h2>
+    <hr>
+    <div *ngIf="client" class="form-horizontal">
+        <div class="row">
+            <ul class="sectionBtnGroup col-sm-12">
+                <li *ngIf="showSectionBtn1" class="sectionButtons" [ngClass]="{active: showSection1}" title="General Info" (click)="clicked($event, 'section1')">
+                    <h4>General Info</h4></li>
+                <li *ngIf="showSectionBtn2" class="sectionButtons" [ngClass]="{active: showSection2}" title="Question Group 2" (click)="clicked($event, 'section2')">
+                    <h4>Question Group 2</h4></li>
+                <li *ngIf="showSectionBtn3" class="sectionButtons" [ngClass]="{active: showSection3}" title="Question Group 3" (click)="clicked($event, 'section3')">
+                    <h4>Question Group 3</h4></li>
+                <li *ngIf="showSectionBtn4" class="sectionButtons" [ngClass]="{active: showSection4}" title="Success Factors" (click)="clicked($event, 'section4')">
+                    <h4>Success Factors</h4></li>
+                <li *ngIf="showSectionBtn5" class="sectionButtons" [ngClass]="{active: showSection5}" title="Summary Notes" (click)="clicked($event, 'section5')">
+                    <h4>Summary Notes</h4></li>
+                <li *ngIf="showSectionBtn6" class="sectionButtons" [ngClass]="{active: showSection6}" title="Review" (click)="clicked($event, 'section6')">
+                    <h4>Review</h4></li>
+            </ul>
+            <div id="section1" *ngIf="showSection1" class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-offset-10 col-sm-1">
+                        <div (click)="next($event, 'section2')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Date: </label>
+                    <div class="col-sm-8 formInput">
+                        {{date | date: format}}
+                        <input type="hidden" name="date" value="{{date | date: format}}" [(ngModel)]="client.inquiryDate" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">First Name: </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" [(ngModel)]="client.firstName" placeholder="First Name" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Last Name: </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" [(ngModel)]="client.lastName" placeholder="Last Name" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Date of Birth: </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="date" [(ngModel)]="client.birthday" placeholder="DD/MM/YYYY" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email: </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="email" [(ngModel)]="client.email" placeholder="Email" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Phone: </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="phone" [(ngModel)]="client.phone" placeholder="Phone" required />
+                    </div>
+                </div>
+            </div>
+            <!-- end of section 1 -->
+            <div id="section2" *ngIf="showSection2" class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-offset-10 col-sm-1">
+                        <button (click)="next($event, 'section3')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Courses: </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" [(ngModel)]="suitabilityForm.courses" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Goal: </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" [(ngModel)]="suitabilityForm.goal" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Transition Date: </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="date" [(ngModel)]="suitabilityForm.transitionDate" />
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-offset-3">
+                    <div class="col-sm-5">
+                        <label class="checkbox">
+                            <input type="checkbox" [(ngModel)]="suitabilityForm.transcript"> Transcript
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" [(ngModel)]="suitabilityForm.governmentID"> Gov't ID
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" [(ngModel)]="suitabilityForm.appropriateGoal"> Appropriate Occupational Goal
+                        </label>
+                    </div>
+                    <div class="col-sm-5">
+                        <label class="checkbox">
+                            <input type="checkbox" [(ngModel)]="suitabilityForm.isValidAge"> 19+ Years Old
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" [(ngModel)]="suitabilityForm.schoolRegistration"> Not Registered In High School or Post-Sec
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" [(ngModel)]="suitabilityForm.availableDuringClass"> Available During Class Time
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end of section 2 -->
+            <div id="section3" *ngIf="showSection3" class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-offset-10 col-sm-1">
+                        <button (click)="next($event, 'section4')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Last Grade Completed: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.lastGrade">
+                        <option value="10">Less than grade 10</option>
+                        <option value="10-11">Grade 10-11</option>
+                        <option value="12">Grade 12</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Level: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.level">
+                        <option value="aca">Academic/Advanced</option>
+                        <option value="app">Applied/General</option>
+                        <option value="work">Workplace/Basic</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Post-Secondary/Job Offer start date: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.offerStartDate">
+                        <option value="< 1 year">Less than one year</option>
+                        <option value="1 year">In one year</option>
+                        <option value="> 1 year">More than a Year</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Meets Next Goals Requirements: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.meetsGoal">
+                        <option value="no">No</option>
+                        <option value="lacking">Yes but lacks skills/high enough marks</option>
+                        <option value="yes">Yes</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Time out of School/Training: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.timeOutOfSchool">
+                        <option value="6+">6 or more years</option>
+                        <option value="1-6">1-6 years</option>
+                        <option value="<1">Less than 1 year</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Has Been In Program Before: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.inProgramBefore">
+                        <option value="no">No/Left with appropriate reasons</option>
+                        <option value="yesWithApp">Yes - Appropriate progress</option>
+                        <option value="yes">Yes – No progress</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Employment: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.employment">
+                        <option value="no">Not working</option>
+                        <option value="part">Working part time</option>
+                        <option value="full">Working full time</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Income Source: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.incomeSource">
+                        <option value="no">OW  ODSP  EI  SC</option>
+                        <option value="noInc">No income</option>
+                        <option value="yes">Employed</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Age: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.ageRange">
+                        <option value="45-65">45-65 years old</option>
+                        <option value="19-29">19-29 years old</option>
+                        <option value="30-44">30-44 years old</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label"># of Hours/Week: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.hoursPerWeek">
+                        <option value="10-20">10-20</option>
+                        <option value="5-10">5-10</option>
+                        <option value="<5">Less than 5</option>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 text-nowrap control-label">Work History: </label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="suitabilityForm.workHistory">
+                        <option value="<1">Less than 1 year experience in the field</option>
+                        <option value="1-4">1-4 years experience in the field</option>
+                        <option value=">4">4+ years experience in the field</option>
+                      </select>
+                    </div>
+                </div>
+            </div>
+            <!-- end of section 3 -->
+            <div id="section4" *ngIf="showSection4" class="col-sm-12">
+              <div class="form-group">
+                  <div class="col-sm-offset-10 col-sm-1">
+                      <button (click)="next($event, 'section5')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                  </div>
+              </div>
+              <h3>Factors Affecting Client Success</h3>
+                <input type="radio" value="1">Client has health problems that may prevent client from working effectively <br>
+                <input type="radio" value="1">Client has difficulty understanding instructions <br>
+                <input type="radio" value="1">Client has difficulty communicating <br>
+                <input type="radio" value="1">Client has language barrier <br>
+                <input type="radio" value="1">Client has limited computer skills <br>
+                <input type="radio" value="1">Client has housing instability <br>
+                <input type="radio" value="1">Transportation is limited restricted (no license/ no $s for bus/gas) <br>
+                <input type="radio" value="1">Client does not have reliable daycare <br>
+                <input type="radio" value="1">Client does not have phone/internet access <br>
+                <input type="radio" value="1">Client is going through difficulties in his/her personal life, (legal, family, substance abuse, financial) <br>
+
+                Other:<input type="text" name="other"> <br>
+              </div>
+            <!-- end of section 4 -->
+            <div id="section5" *ngIf="showSection5" class="col-sm-12">
+              <div class="form-group">
+                  <div class="col-sm-offset-10 col-sm-1">
+                      <button (click)="next($event, 'section6')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                  </div>
+              </div>
+              <h3>Summary Notes</h3>
+              Transportation:<input type="text" name="transportation"> <br>
+              Housing:<input type="text" name="housing"> <br>
+              Childcare:<input type="text" name="childcare"> <br>
+              Health:<input type="text" name="health"> <br>
+              Other:<input type="text" name="summaryother"> <br>
+            </div>
+            <!-- end of section 5 -->
+            <div id="section6" *ngIf="showSection6" class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-offset-10 col-sm-1">
+                        <button (click)="save()" class="saveButton" title="Save client"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Part A total: </label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" name="partA" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Part B total: </label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" name="partB" placeholder="0">
+                    </div>
+                </div>
+            </div>
+            <!-- end of section 6 -->
+        </div>
+        <!-- close row -->
+    </div>
+</div>

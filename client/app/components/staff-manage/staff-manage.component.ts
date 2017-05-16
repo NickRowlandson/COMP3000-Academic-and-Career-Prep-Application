@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'staff-manage',
-    templateUrl: './app/components/staffManage/staff-manage.component.html',
-    styleUrls: ['./app/components/staffManage/staff-manage.component.css']
+    templateUrl: './app/components/staff-manage/staff-manage.component.html',
+    styleUrls: ['./app/components/staff-manage/staff-manage.component.css']
 })
 
 
@@ -36,11 +36,11 @@ export class StaffManageComponent implements OnInit {
     }
 
     gotoEdit(user: User, event: any) {
-        this.router.navigate(['/staffEdit', user.staffID]);
+        this.router.navigate(['/staff-edit', user.staffID]);
     }
 
     addUser() {
-        this.router.navigate(['/staffEdit', 'new']);
+        this.router.navigate(['/staff-edit', 'new']);
     }
 
     deleteUser(user: User, event: any) {

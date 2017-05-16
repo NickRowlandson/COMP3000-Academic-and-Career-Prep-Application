@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'caseNotes',
-    templateUrl: './app/components/caseNotes/caseNotes.component.html',
-    styleUrls: ['./app/components/caseNotes/caseNotes.component.css']
+    templateUrl: './app/components/case-notes/case-notes.component.html',
+    styleUrls: ['./app/components/case-notes/case-notes.component.css']
 })
 
 export class CaseNotesComponent implements OnInit {

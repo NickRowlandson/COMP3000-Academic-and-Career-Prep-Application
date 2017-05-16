@@ -5,8 +5,8 @@ import { StudentService } from "../../services/student.service";
 
 @Component({
     selector: 'student-edit',
-    templateUrl: './app/components/studentEdit/student-edit.component.html',
-    styleUrls: ['./app/components/studentEdit/student-edit.component.css']
+    templateUrl: './app/components/student-edit/student-edit.component.html',
+    styleUrls: ['./app/components/student-edit/student-edit.component.css']
 })
 
 export class StudentEditComponent implements OnInit {

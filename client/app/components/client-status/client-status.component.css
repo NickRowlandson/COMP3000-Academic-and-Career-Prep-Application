@@ -117,3 +117,7 @@ button {
   color: #fff;
   transition: .4s;
 }
+
+.infoPanel {
+  margin-left: 50px;
+}

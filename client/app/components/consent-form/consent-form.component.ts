@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'consentForm',
-    templateUrl: './app/components/consentForm/consentForm.component.html',
-    styleUrls: ['./app/components/consentForm/consentForm.component.css']
+    templateUrl: './app/components/consent-form/consent-form.component.html',
+    styleUrls: ['./app/components/consent-form/consent-form.component.css']
 })
 
 export class ConsentFormComponent {

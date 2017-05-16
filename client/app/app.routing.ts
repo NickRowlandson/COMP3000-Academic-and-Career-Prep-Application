@@ -8,15 +8,15 @@ import { ClientGuard } from './guards/client.guard';
 
 import { LoginComponent }   from './components/login/login.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
-import { StaffManageComponent } from './components/staffManage/staff-manage.component';
-import { StaffEditComponent }  from './components/staffEdit/staff-edit.component';
-import { StudentManageComponent } from './components/studentManage/student-manage.component';
-import { StudentEditComponent }  from './components/studentEdit/student-edit.component';
-import { ClientStatusComponent }  from './components/clientStatus/client-status.component';
-import { SuitabilityFormComponent } from './components/suitabilityForm/suitabilityForm.component';
-import { ConsentFormComponent } from './components/consentForm/consentForm.component';
-import { CaseNotesComponent } from './components/caseNotes/caseNotes.component';
-import { CourseManageComponent } from './components/courseManage/courseManage.component';
+import { StaffManageComponent } from './components/staff-manage/staff-manage.component';
+import { StaffEditComponent }  from './components/staff-edit/staff-edit.component';
+import { StudentManageComponent } from './components/student-manage/student-manage.component';
+import { StudentEditComponent }  from './components/student-edit/student-edit.component';
+import { ClientStatusComponent }  from './components/client-status/client-status.component';
+import { SuitabilityFormComponent } from './components/suitability-form/suitability-form.component';
+import { ConsentFormComponent } from './components/consent-form/consent-form.component';
+import { CaseNotesComponent } from './components/case-notes/case-notes.component';
+import { CourseManageComponent } from './components/course-manage/course-manage.component';
 
 const appRoutes: Routes = [
     {
@@ -34,7 +34,7 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'studentEdit/:id',
+        path: 'student-edit/:id',
         component: StudentEditComponent,
         canActivate: [AuthGuard, StaffGuard]
     },
@@ -54,7 +54,7 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard, AdminGuard]
     },
     {
-        path: 'staffEdit/:id',
+        path: 'staff-edit/:id',
         component: StaffEditComponent,
         canActivate: [AuthGuard, AdminGuard]
     },
@@ -69,7 +69,7 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard, ClientGuard]
     },
     {
-        path: 'caseNotes',
+        path: 'case-notes',
         component: CaseNotesComponent,
         canActivate: [AuthGuard, StaffGuard]
     },

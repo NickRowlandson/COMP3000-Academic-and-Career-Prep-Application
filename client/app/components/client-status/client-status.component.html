@@ -82,169 +82,117 @@
                 <li class="sectionButtons" [ngClass]="{active: showSuitability}" title="Suitability" (click)="sectionBtnClicked($event, 'suitability')">
                     <h4>Suitability</h4></li>
             </ul>
-            <div *ngIf="showGeneral">
+            <div *ngIf="showGeneral" class="infoPanel">
+              <br />
                 <div class="form-group">
                     <label class="control-label">id: </label>
-                    <div class="">
                         {{clientView.userID}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Inquiry Date: </label>
-                    <div class="">
                         {{clientView.inquiryDate}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">First Name: </label>
-                    <div class="">
                         {{clientView.firstName}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Last Name: </label>
-                    <div class="">
                         {{clientView.lastName}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Birth Date: </label>
-                    <div class="">
                         {{clientView.birthdate}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Email: </label>
-                    <div class="">
                         {{clientView.email}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Phone: </label>
-                    <div class="">
                         {{clientView.phone}}
-                    </div>
                 </div>
             </div>
-            <div *ngIf="showSuitability">
+            <div *ngIf="showSuitability" class="infoPanel">
+              <br />
                 <div class="form-group">
                     <label class="control-label">Transcript: </label>
-                    <div class="">
                         {{suitabilityView.transcript}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Courses: </label>
-                    <div class="">
                         {{suitabilityView.courses}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Goal: </label>
-                    <div class="">
                         {{suitabilityView.goal}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Transition Date: </label>
-                    <div class="">
                         {{suitabilityView.transitionDate}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Governament ID: </label>
-                    <div class="">
                         {{suitabilityView.governmentID}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Appropriate Goal: </label>
-                    <div class="">
                         {{suitabilityView.appropriateGoal}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">19+ Years Old: </label>
-                    <div class="">
                         {{suitabilityView.isValidAge}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Not Registered In High School or Post-Sec: </label>
-                    <div class="">
                         {{suitabilityView.schoolRegistration}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Available During Class Time: </label>
-                    <div class="">
                         {{suitabilityView.availableDuringClass}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Last Grade Completed: </label>
-                    <div class="">
                         {{suitabilityView.lastGrade}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Level: </label>
-                    <div class="">
                         {{suitabilityView.level}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Post-Secondary/Job Offer start date: </label>
-                    <div class="">
                         {{suitabilityView.offerStartDate}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Meets Next Goals Requirements: </label>
-                    <div class="">
                         {{suitabilityView.meetsGoal}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Time out of School/Training: </label>
-                    <div class="">
                         {{suitabilityView.timeOutOfSchool}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Has Been In Program Before: </label>
-                    <div class="">
                         {{suitabilityView.inProgramBefore}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Employment: </label>
-                    <div class="">
                         {{suitabilityView.employment}}
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Income Source: </label>
-                    <div class="">
                         {{suitabilityView.incomeSource}}
-                    </div>
                     <div class="form-group">
                         <label class="control-label">Age: </label>
-                        <div class="">
                             {{suitabilityView.age}}
-                        </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label"># of Hours/Week: </label>
-                        <div class="">
                             {{suitabilityView.hoursPerWeek}}
-                        </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Work History: </label>
-                        <div class="">
                             {{suitabilityView.workHistory}}
-                        </div>
                     </div>
                 </div>
             </div>

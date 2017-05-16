@@ -7,8 +7,8 @@ import { AuthService } from "../../services/authentication.service";
 
 @Component({
     selector: 'client-status',
-    templateUrl: './app/components/clientStatus/client-status.component.html',
-    styleUrls: ['./app/components/clientStatus/client-status.component.css']
+    templateUrl: './app/components/client-status/client-status.component.html',
+    styleUrls: ['./app/components/client-status/client-status.component.css']
 })
 
 export class ClientStatusComponent implements OnInit {
@@ -58,7 +58,7 @@ export class ClientStatusComponent implements OnInit {
         var stage1 = this.clients.filter(x => x.status === '1');
         var stage2 = this.clients.filter(x => x.status === '2');
         var stage3 = this.clients.filter(x => x.status === '3');
-        this.doughnutChartLabels = ['Stage 1', 'Stage 2', 'Stage 3'];
+        this.doughnutChartLabels = ['Suitability', 'Consent', 'PRF'];
         this.doughnutChartData = [stage1.length, stage2.length, stage3.length];
         this.doughnutChartType = 'doughnut';
         this.doughnutChartColors = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];

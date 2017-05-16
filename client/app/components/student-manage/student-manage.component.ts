@@ -6,10 +6,9 @@ import { AuthService } from "../../services/authentication.service";
 
 @Component({
     selector: 'student-manage',
-    templateUrl: './app/components/studentManage/student-manage.component.html',
-    styleUrls: ['./app/components/studentManage/student-manage.component.css']
+    templateUrl: './app/components/student-manage/student-manage.component.html',
+    styleUrls: ['./app/components/student-manage/student-manage.component.css']
 })
-
 
 export class StudentManageComponent implements OnInit {
     students: Student [];

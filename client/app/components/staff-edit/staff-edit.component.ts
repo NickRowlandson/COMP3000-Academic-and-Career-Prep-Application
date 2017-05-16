@@ -5,8 +5,8 @@ import { StaffService } from "../../services/staff.service";
 
 @Component({
     selector: 'staff-edit',
-    templateUrl: './app/components/staffEdit/staff-edit.component.html',
-    styleUrls: ['./app/components/staffEdit/staff-edit.component.css']
+    templateUrl: './app/components/staff-edit/staff-edit.component.html',
+    styleUrls: ['./app/components/staff-edit/staff-edit.component.css']
 })
 
 export class StaffEditComponent implements OnInit {
