@@ -4,6 +4,7 @@ import { AuthService } from './authentication.service';
 import 'rxjs/add/operator/toPromise';
 import { Client } from "../models/client";
 import { SuitabilityForm } from "../models/suitabilityForm";
+//import * as pdfFiller from 'pdffiller';
 
 @Injectable()
 export class ClientService {
@@ -25,6 +26,7 @@ export class ClientService {
 
     getClient(id: string) {
         // add authorization header with jwt token
+        console.log(id);
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.clientUrl + '/' + id, options)
@@ -82,4 +84,5 @@ export class ClientService {
         console.log('An error occurred', error);
         return Promise.reject(error.message || error);
     }
+
 }

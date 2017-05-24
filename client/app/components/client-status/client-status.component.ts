@@ -4,6 +4,7 @@ import { Client } from "../../models/client";
 import { SuitabilityForm } from "../../models/suitabilityForm";
 import { ClientService } from "../../services/client.service";
 import { AuthService } from "../../services/authentication.service";
+//var pdffiller = require('./pdffiller');
 
 @Component({
     selector: 'client-status',
@@ -50,6 +51,28 @@ export class ClientStatusComponent implements OnInit {
             .catch(error => this.error = error);
     }
 
+    // generatePRF(client) {
+    //     this.clientService
+    //         .getClient(client.clientID)
+    //         .then(object => {
+    //             console.log(object);
+    //             var sourcePDF = "../../assets/pdf/prf-source.pdf";
+    //             var destinationPDF = "../../assets/pdf/test_complete.pdf";
+    //             var data = {
+    //                 "First Name": "John",
+    //                 "Last Name": "Doe",
+    //             };
+    //
+    //             pdffiller.fillForm(sourcePDF, destinationPDF, data, function(err) {
+    //                 // if (err) {
+    //                 //     throw err;
+    //                 // }
+    //                 // console.log("In callback (we're done).");
+    //             });
+    //         })
+    //         .catch(error => console.log(error));
+    // }
+
     setData(objects) {
         this.clients = objects.clients;
         this.allClients = objects.clients;
@@ -89,36 +112,36 @@ export class ClientStatusComponent implements OnInit {
     }
 
     getSuitabilityFormByFilter(id) {
-      return this.suitabilityForms.filter(x => x.userID === id);
+        return this.suitabilityForms.filter(x => x.userID === id);
     }
 
     sectionBtnClicked(event, section) {
-      if (section === "general") {
-        this.showGeneral = true;
-        this.showSuitability = false;
-      } else if (section === "suitability") {
-        this.showGeneral = false;
-        this.showSuitability = true;
-      }
+        if (section === "general") {
+            this.showGeneral = true;
+            this.showSuitability = false;
+        } else if (section === "suitability") {
+            this.showGeneral = false;
+            this.showSuitability = true;
+        }
     }
 
     statusReport(event) {
-      this.clientView = null;
+        this.clientView = null;
     }
 
     chartClicked(e: any): void {
-      try {
-        var index = e.active[0]._index;
-        if (index === 0) {
-          this.clients = this.allClients.filter(x => x.status === '1');
-        } else if (index === 1) {
-          this.clients = this.allClients.filter(x => x.status === '2');
-        } else if (index === 2) {
-          this.clients = this.allClients.filter(x => x.status === '3');
+        try {
+            var index = e.active[0]._index;
+            if (index === 0) {
+                this.clients = this.allClients.filter(x => x.status === '1');
+            } else if (index === 1) {
+                this.clients = this.allClients.filter(x => x.status === '2');
+            } else if (index === 2) {
+                this.clients = this.allClients.filter(x => x.status === '3');
+            }
+        } catch (err) {
+            this.clients = this.allClients;
         }
-      } catch (err) {
-        this.clients = this.allClients;
-      }
     }
 
     chartHovered(e: any): void {
