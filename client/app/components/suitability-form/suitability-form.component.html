@@ -140,6 +140,7 @@
                       </select>
                     </div>
                 </div>
+                <!-- PART A: START -->
                 <div class="form-group">
                     <label class="col-sm-3 text-nowrap control-label">Post-Secondary/Job Offer start date: </label>
                     <div class="col-sm-4">
@@ -210,6 +211,8 @@
                       </select>
                     </div>
                 </div>
+                <!-- PART A: ENDS -->
+                <!-- PART B: START -->
                 <div class="form-group">
                     <label class="col-sm-3 text-nowrap control-label"># of Hours/Week: </label>
                     <div class="col-sm-4">
@@ -220,6 +223,7 @@
                       </select>
                     </div>
                 </div>
+                <!-- Apply judgement? -->
                 <div class="form-group">
                     <label class="col-sm-3 text-nowrap control-label">Work History: </label>
                     <div class="col-sm-4">
@@ -253,6 +257,7 @@
 
                 Other:<input type="text" name="other" [(ngModel)]="suitabilityForm.factorOther"> <br>
               </div>
+            <!-- PART B: ENDS -->
             <!-- end of section 4 -->
             <div id="section5" *ngIf="showSection5" class="col-sm-12">
               <div class="form-group">
@@ -277,19 +282,19 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Part A total: </label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="number" name="partA" placeholder="0">
+                        <input class="form-control" value="{{partAPoints}}" type="number" name="partA">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Part B total: </label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="number" name="partB" placeholder="0">
+                        <input class="form-control" value="{{partBPoints}}" type="number" name="partB">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Total: </label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="number" name="totalPoints" placeholder="0" [(ngModel)]="suitabilityForm.totalPoints">
+                        <input class="form-control" value="{{totalPoints}}" type="number" name="totalPoints">
                     </div>
                 </div>
             </div>
