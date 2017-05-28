@@ -33,6 +33,10 @@ export class SuitabilityFormComponent {
   showSectionBtn5 = false;
   showSectionBtn6 = false;
 
+  partAPoints = 0;
+  partBPoints = 0;
+  totalPoints = 0;
+
   constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
     this.client = new Client();
     this.suitabilityForm = new SuitabilityForm();
@@ -92,6 +96,7 @@ export class SuitabilityFormComponent {
         this.showSection4 = false;
         this.showSection5 = false;
         this.showSection6 = true;
+        this.tallyPoints();
         break;
       default:
         this.showSection1 = true;
@@ -101,6 +106,64 @@ export class SuitabilityFormComponent {
         this.showSection5 = false;
         this.showSection6 = false;
     }
+  }
+
+  tallyPoints(){
+    var factorPoints = 0;
+    this.partAPoints = 0;
+    this.partBPoints = 0;
+    this.totalPoints = 0;
+
+    // PART A
+    if(this.suitabilityForm.offerStartDate == '< 1 year'){this.partAPoints += 3;}
+    else if(this.suitabilityForm.offerStartDate == '1 year'){this.partAPoints += 2;}
+    else if(this.suitabilityForm.offerStartDate == '> 1 year'){this.partAPoints += 1;}
+
+    if(this.suitabilityForm.meetsGoal == 'no'){this.partAPoints += 3;}
+    else if(this.suitabilityForm.meetsGoal == 'lacking'){this.partAPoints += 2;}
+    else if(this.suitabilityForm.meetsGoal == 'yes'){this.partAPoints += 1;}
+
+    if(this.suitabilityForm.timeOutOfSchool == '6+'){this.partAPoints += 3;}
+    else if(this.suitabilityForm.timeOutOfSchool == '1-6'){this.partAPoints += 2;}
+    else if(this.suitabilityForm.timeOutOfSchool == '<1'){this.partAPoints += 1;}
+
+    if(this.suitabilityForm.inProgramBefore == 'no'){this.partAPoints += 3;}
+    else if(this.suitabilityForm.inProgramBefore == 'yesWithApp'){this.partAPoints += 2;}
+    else if(this.suitabilityForm.inProgramBefore == 'yes'){this.partAPoints += 1;}
+
+    if(this.suitabilityForm.employment == 'no'){this.partAPoints += 3;}
+    else if(this.suitabilityForm.employment == 'part'){this.partAPoints += 2;}
+    else if(this.suitabilityForm.employment == 'full'){this.partAPoints += 1;}
+
+    if(this.suitabilityForm.incomeSource == 'no'){this.partAPoints += 3;}
+    else if(this.suitabilityForm.incomeSource == 'noInc'){this.partAPoints += 2;}
+    else if(this.suitabilityForm.incomeSource == 'yes'){this.partAPoints += 1;}
+
+    if(this.suitabilityForm.ageRange == '45-65'){this.partAPoints += 3;}
+    else if(this.suitabilityForm.ageRange == '19-29'){this.partAPoints += 2;}
+    else if(this.suitabilityForm.ageRange == '30-44'){this.partAPoints += 1;}
+
+    //PART B
+    if(this.suitabilityForm.hoursPerWeek == '10-20'){this.partBPoints += 3;}
+    else if(this.suitabilityForm.hoursPerWeek == '5-10'){this.partBPoints += 2;}
+    else if(this.suitabilityForm.hoursPerWeek == '<5'){this.partBPoints += 1;}
+
+    if(this.suitabilityForm.factorHealth == 'true'){factorPoints++;}
+    if(this.suitabilityForm.factorInstructions == 'true'){factorPoints++;}
+    if(this.suitabilityForm.factorCommunication == 'true'){factorPoints++;}
+    if(this.suitabilityForm.factorLanguage == 'true'){factorPoints++;}
+    if(this.suitabilityForm.factorComputer == 'true'){factorPoints++;}
+    if(this.suitabilityForm.factorHousing == 'true'){factorPoints++;}
+    if(this.suitabilityForm.factorTransportation == 'true'){factorPoints++;}
+    if(this.suitabilityForm.factorDaycare == 'true'){factorPoints++;}
+    if(this.suitabilityForm.factorInternet == 'true'){factorPoints++;}
+    if(this.suitabilityForm.factorPersonal == 'true'){factorPoints++;}
+
+    if(factorPoints >= 0 && factorPoints <= 4){this.partBPoints += 3;}
+    else if(factorPoints > 4 && factorPoints <= 8){this.partBPoints += 2;}
+    else if(factorPoints > 8){this.partBPoints += 1;}
+
+    this.totalPoints = this.partAPoints + this.partBPoints;
   }
 
   next(event, nextSection) {
