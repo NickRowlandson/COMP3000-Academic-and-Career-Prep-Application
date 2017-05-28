@@ -33,6 +33,8 @@ export class SuitabilityFormComponent {
   showSectionBtn5 = false;
   showSectionBtn6 = false;
 
+  partAWarning = false;
+  partBWarning = false;
   partAPoints = 0;
   partBPoints = 0;
   totalPoints = 0;
@@ -113,7 +115,8 @@ export class SuitabilityFormComponent {
     this.partAPoints = 0;
     this.partBPoints = 0;
     this.totalPoints = 0;
-
+    this.partAWarning = false;
+    this.partBWarning = false;
     // PART A
     if(this.suitabilityForm.offerStartDate == '< 1 year'){this.partAPoints += 3;}
     else if(this.suitabilityForm.offerStartDate == '1 year'){this.partAPoints += 2;}
@@ -148,22 +151,29 @@ export class SuitabilityFormComponent {
     else if(this.suitabilityForm.hoursPerWeek == '5-10'){this.partBPoints += 2;}
     else if(this.suitabilityForm.hoursPerWeek == '<5'){this.partBPoints += 1;}
 
-    if(this.suitabilityForm.factorHealth == 'true'){factorPoints++;}
-    if(this.suitabilityForm.factorInstructions == 'true'){factorPoints++;}
-    if(this.suitabilityForm.factorCommunication == 'true'){factorPoints++;}
-    if(this.suitabilityForm.factorLanguage == 'true'){factorPoints++;}
-    if(this.suitabilityForm.factorComputer == 'true'){factorPoints++;}
-    if(this.suitabilityForm.factorHousing == 'true'){factorPoints++;}
-    if(this.suitabilityForm.factorTransportation == 'true'){factorPoints++;}
-    if(this.suitabilityForm.factorDaycare == 'true'){factorPoints++;}
-    if(this.suitabilityForm.factorInternet == 'true'){factorPoints++;}
-    if(this.suitabilityForm.factorPersonal == 'true'){factorPoints++;}
+    if(this.suitabilityForm.workHistory == '<1'){this.partBPoints += 3;}
+    else if(this.suitabilityForm.workHistory == '1-4'){this.partBPoints += 2;}
+    else if(this.suitabilityForm.workHistory == '>4'){this.partBPoints += 1;}
+
+    if(this.suitabilityForm.factorHealth){factorPoints++;}
+    if(this.suitabilityForm.factorInstructions){factorPoints++;}
+    if(this.suitabilityForm.factorCommunication){factorPoints++;}
+    if(this.suitabilityForm.factorLanguage){factorPoints++;}
+    if(this.suitabilityForm.factorComputer){factorPoints++;}
+    if(this.suitabilityForm.factorHousing){factorPoints++;}
+    if(this.suitabilityForm.factorTransportation){factorPoints++;}
+    if(this.suitabilityForm.factorDaycare){factorPoints++;}
+    if(this.suitabilityForm.factorInternet){factorPoints++;}
+    if(this.suitabilityForm.factorPersonal){factorPoints++;}
 
     if(factorPoints >= 0 && factorPoints <= 4){this.partBPoints += 3;}
     else if(factorPoints > 4 && factorPoints <= 8){this.partBPoints += 2;}
     else if(factorPoints > 8){this.partBPoints += 1;}
 
     this.totalPoints = this.partAPoints + this.partBPoints;
+
+    if(this.partAPoints < 14){this.partAWarning = true;}
+    if(this.partBPoints < 4){this.partBWarning = true;}
   }
 
   next(event, nextSection) {

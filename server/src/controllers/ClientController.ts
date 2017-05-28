@@ -67,7 +67,8 @@ class ClientController {
                                     + "', '" + suitabilityForm.summaryHousing
                                     + "', '" + suitabilityForm.summaryChildcare
                                     + "', '" + suitabilityForm.summaryHealth
-                                    + "', '" + suitabilityForm.summaryOther + "'";
+                                    + "', '" + suitabilityForm.summaryOther
+                                    + "', '" + suitabilityForm.dbTotalPoints + "'";
                                     new sql.Request().query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")").then(function() {
                                         this.mailService = new MailService();
                                         this.mailService.sendMail()

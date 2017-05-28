@@ -282,19 +282,22 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Part A total: </label>
                     <div class="col-sm-2">
-                        <input class="form-control" value="{{partAPoints}}" type="number" name="partA">
+                        <input class="form-control" value="{{partAPoints}}" type="number" name="partA" disabled>
+                        <div *ngIf="partAWarning"><label>Warning</label></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Part B total: </label>
                     <div class="col-sm-2">
-                        <input class="form-control" value="{{partBPoints}}" type="number" name="partB">
+                        <input class="form-control" value="{{partBPoints}}" type="number" name="partB" disabled>
+                        <div *ngIf="partBWarning"><label>Warning</label></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Total: </label>
                     <div class="col-sm-2">
-                        <input class="form-control" value="{{totalPoints}}" type="number" name="totalPoints">
+                        <input class="form-control" value="{{totalPoints}}" type="number" name="totalPoints" disabled>
+                        <input class="form-control" value="{{totalPoints}}" type="hidden" name="totalPoints" [(ngModel)]="suitabilityForm.dbTotalPoints">
                     </div>
                 </div>
             </div>

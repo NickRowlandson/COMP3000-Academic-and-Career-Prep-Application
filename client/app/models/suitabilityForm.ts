@@ -36,5 +36,5 @@ export class SuitabilityForm {
   summaryChildcare: string;
   summaryHealth: string;
   summaryOther: string;
-  totalPoints: any;
+  dbTotalPoints: any;
 }
