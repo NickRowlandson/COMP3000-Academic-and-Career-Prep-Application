@@ -18,6 +18,7 @@ import { SuitabilityFormComponent } from './components/suitability-form/suitabil
 import { ConsentFormComponent } from './components/consent-form/consent-form.component';
 import { CaseNotesComponent } from './components/case-notes/case-notes.component';
 import { CourseManageComponent } from './components/course-manage/course-manage.component';
+import { PrfFormComponent } from './components/prf-form/prf-form.component';
 
 //Import services
 import { AuthGuard } from './guards/auth.guard';
@@ -50,7 +51,8 @@ import { StaffService } from './services/staff.service';
     SuitabilityFormComponent,
     ConsentFormComponent,
     CaseNotesComponent,
-    CourseManageComponent
+    CourseManageComponent,
+    PrfFormComponent
   ],
   providers: [
     AuthGuard,
