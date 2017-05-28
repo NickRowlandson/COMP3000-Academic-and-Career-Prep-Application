@@ -4,7 +4,7 @@ import { Client } from "../../models/client";
 import { SuitabilityForm } from "../../models/suitabilityForm";
 import { ClientService } from "../../services/client.service";
 import { AuthService } from "../../services/authentication.service";
-//var pdffiller = require('./pdffiller');
+//import { pdfiller } from 'pdffiller';
 
 @Component({
     selector: 'client-status',
@@ -13,6 +13,7 @@ import { AuthService } from "../../services/authentication.service";
 })
 
 export class ClientStatusComponent implements OnInit {
+    //pdffiller = new pdfiller();
     clients: Client[];
     allClients: Client[];
     suitabilityForms: SuitabilityForm[];
@@ -52,6 +53,7 @@ export class ClientStatusComponent implements OnInit {
     }
 
     // generatePRF(client) {
+    //   console.log("generating pdf...");
     //     this.clientService
     //         .getClient(client.clientID)
     //         .then(object => {
@@ -63,11 +65,11 @@ export class ClientStatusComponent implements OnInit {
     //                 "Last Name": "Doe",
     //             };
     //
-    //             pdffiller.fillForm(sourcePDF, destinationPDF, data, function(err) {
-    //                 // if (err) {
-    //                 //     throw err;
-    //                 // }
-    //                 // console.log("In callback (we're done).");
+    //             this.pdffiller.fillForm(sourcePDF, destinationPDF, data, function(err) {
+    //                 if (err) {
+    //                     throw err;
+    //                 }
+    //                 console.log("In callback (we're done).");
     //             });
     //         })
     //         .catch(error => console.log(error));
