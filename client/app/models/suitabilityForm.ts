@@ -20,4 +20,21 @@ export class SuitabilityForm {
   ageRange: string;
   hoursPerWeek: string;
   workHistory: string;
+  factorHealth: string;
+  factorInstructions: string;
+  factorCommunication: string;
+  factorLanguage: string;
+  factorComputer: string;
+  factorHousing: string;
+  factorTransportation: string;
+  factorDaycare: string;
+  factorInternet: string;
+  factorPersonal: string;
+  factorOther: string;
+  summaryTransportation: string;
+  summaryHousing: string;
+  summaryChildcare: string;
+  summaryHealth: string;
+  summaryOther: string;
+  totalPoints: any;
 }
