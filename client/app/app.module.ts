@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts/charts/charts';
+//import { Pdffiller } from 'pdffiller';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
@@ -38,6 +39,7 @@ import { StaffService } from './services/staff.service';
     FormsModule,
     routing,
     ChartsModule
+    //Pdffiller
     ],
   declarations: [
     AppComponent,
