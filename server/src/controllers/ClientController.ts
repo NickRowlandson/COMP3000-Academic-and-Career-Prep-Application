@@ -5,8 +5,39 @@ import AuthController = require("../controllers/AuthController");
 import MailService = require("../services/mail.service");
 var sql = require('mssql');
 var auth = ["Admin", "Staff"];
+const nodemailer = require('nodemailer');
+const schedule = require('node-schedule');
+
+// create reusable transporter object using the default SMTP transport
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'test2017531@gmail.com',
+    pass: 'gc200282965'
+  }
+});
+
+var j = schedule.scheduleJob('0 17 ? * 0,4-6', function(){
+  let mailOptions = {
+    from: '"Test Ghost 👻" <ghost@test.com>', // sender address
+    to: 'chaodyz@gmail.com', // list of receivers
+    subject: 'SCHEDULER ✔', // Subject line
+    text: 'Sending every hour...', // plain text body
+    html: '<b>Hello world ?</b>' // html body
+  };
+
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    } else {
+      return console.log('Message %s sent: %s', info.messageId, info.response);
+    }
+  });
+});
 
 class ClientController {
+
     create(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -30,7 +61,25 @@ class ClientController {
                                     client.birthday + "', '" +
                                     client.phone + "', '" +
                                     1 + "'";
-                                new sql.Request().query("INSERT INTO Clients VALUES (" + clientQuery + ")").then(function() {
+                                    console.log("SENDING MAIL");
+                                    // setup email data with unicode symbols
+                                    let mailOptions = {
+                                      from: '"Test Ghost 👻" <ghost@test.com>', // sender address
+                                      to: 'chaodyz@gmail.com', // list of receivers
+                                      subject: 'Hello ✔', // Subject line
+                                      text: 'Hello world ?', // plain text body
+                                      html: '<b>Hello world ?</b>' // html body
+                                    };
+
+                                    // send mail with defined transport object
+                                    transporter.sendMail(mailOptions, (error, info) => {
+                                      if (error) {
+                                        return console.log(error);
+                                      } else {
+                                        return console.log('Message %s sent: %s', info.messageId, info.response);
+                                      }
+                                    });
+                                new sql.Request().qunery("INSERT INTO Clients VALUES (" + clientQuery + ")").then(function() {
                                     var suitabilityFormQuery = "'" + id[0].userID
                                     + "', '" + suitabilityForm.transcript
                                     + "', '" + suitabilityForm.courses
@@ -70,11 +119,7 @@ class ClientController {
                                     + "', '" + suitabilityForm.summaryOther
                                     + "', '" + suitabilityForm.dbTotalPoints + "'";
                                     new sql.Request().query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")").then(function() {
-                                        this.mailService = new MailService();
-                                        this.mailService.sendMail()
-                                            .then(users => {
-                                                res.send({ "success": "success" });
-                                            });
+
                                     }).catch(function(err) {
                                         res.send({ "error": "error" }); console.log("insert suitabilityForm " + err);
                                     });
