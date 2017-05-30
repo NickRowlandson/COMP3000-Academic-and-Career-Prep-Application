@@ -79,7 +79,7 @@ class ClientController {
                                         return console.log('Message %s sent: %s', info.messageId, info.response);
                                       }
                                     });
-                                new sql.Request().qunery("INSERT INTO Clients VALUES (" + clientQuery + ")").then(function() {
+                                new sql.Request().query("INSERT INTO Clients VALUES (" + clientQuery + ")").then(function() {
                                     var suitabilityFormQuery = "'" + id[0].userID
                                     + "', '" + suitabilityForm.transcript
                                     + "', '" + suitabilityForm.courses
