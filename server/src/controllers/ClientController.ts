@@ -17,7 +17,7 @@ let transporter = nodemailer.createTransport({
   }
 });
 
-var j = schedule.scheduleJob('0 17 ? * 0,4-6', function(){
+var j = schedule.scheduleJob([{minute: 1}], function(){
   let mailOptions = {
     from: '"Test Ghost 👻" <ghost@test.com>', // sender address
     to: 'chaodyz@gmail.com', // list of receivers
