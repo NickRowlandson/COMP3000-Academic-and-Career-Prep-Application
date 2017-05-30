@@ -51,7 +51,24 @@ class ClientController {
                                     + "', '" + suitabilityForm.incomeSource
                                     + "', '" + suitabilityForm.ageRange
                                     + "', '" + suitabilityForm.hoursPerWeek
-                                    + "', '" + suitabilityForm.workHistory + "'";
+                                    + "', '" + suitabilityForm.workHistory
+                                    + "', '" + suitabilityForm.factorHealth
+                                    + "', '" + suitabilityForm.factorInstructions
+                                    + "', '" + suitabilityForm.factorCommunication
+                                    + "', '" + suitabilityForm.factorLanguage
+                                    + "', '" + suitabilityForm.factorComputer
+                                    + "', '" + suitabilityForm.factorHousing
+                                    + "', '" + suitabilityForm.factorTransportation
+                                    + "', '" + suitabilityForm.factorDaycare
+                                    + "', '" + suitabilityForm.factorInternet
+                                    + "', '" + suitabilityForm.factorPersonal
+                                    + "', '" + suitabilityForm.factorOther
+                                    + "', '" + suitabilityForm.summaryTransportation
+                                    + "', '" + suitabilityForm.summaryHousing
+                                    + "', '" + suitabilityForm.summaryChildcare
+                                    + "', '" + suitabilityForm.summaryHealth
+                                    + "', '" + suitabilityForm.summaryOther
+                                    + "', '" + suitabilityForm.dbTotalPoints + "'";
                                     new sql.Request().query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")").then(function() {
                                         this.mailService = new MailService();
                                         this.mailService.sendMail()

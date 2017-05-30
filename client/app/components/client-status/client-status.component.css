@@ -10,6 +10,10 @@
   min-width: 0px
 }
 
+.deleteClient>a {
+  color: red;
+}
+
 .sectionButtons {
     display: inline;
     padding: 5 10 5 10;

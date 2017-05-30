@@ -1,206 +1,130 @@
 <div class="clients">
-    <div *ngIf="!clients">
-        <h2>Clients</h2>
-        <hr>
-        <div class="cs-loader">
-            <div class="cs-loader-inner">
-                <label>	L</label>
-                <label>	O</label>
-                <label>	A</label>
-                <label>	D</label>
-                <label>	I</label>
-                <label>	N</label>
-                <label>	G</label>
-                <label>	.</label>
-                <label>	.</label>
-                <label>	.</label>
-            </div>
-        </div>
+  <div *ngIf="!clients">
+    <h2>Clients</h2>
+    <hr>
+    <div class="cs-loader">
+      <div class="cs-loader-inner">
+        <label>	L</label>
+        <label>	O</label>
+        <label>	A</label>
+        <label>	D</label>
+        <label>	I</label>
+        <label>	N</label>
+        <label>	G</label>
+        <label>	.</label>
+        <label>	.</label>
+        <label>	.</label>
+      </div>
     </div>
-    <div class="row" *ngIf="clients">
-        <div class="col-md-6">
-            <h2>Clients</h2>
-            <button class="addClient btn btn-success" (click)="addClient()" title="Add new client"><i class="fa fa-plus" aria-hidden="true"></i></button>
-            <hr>
-            <div class="error" *ngIf="error">{{error}}</div>
-            <div class="">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Status</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let client of clients">
-                            <td>
-                                <div [class.statusStage1]="client.status === '1'" [class.statusStage2]="client.status === '2'" [class.statusStage3]="client.status === '3'"></div>
-                            </td>
-                            <td>{{client.firstName + " " + client.lastName}}</td>
-                            <td>{{client.email}}</td>
-                            <td class="actionColumn middle">
-                                <!-- <div class="inline">
+  </div>
+  <div class="row" *ngIf="clients">
+    <div class="col-md-6">
+      <h2>Clients</h2>
+      <button class="addClient btn btn-success" (click)="addClient()" title="Add new client"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      <hr>
+      <div class="error" *ngIf="error">{{error}}</div>
+      <div class="">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of clients">
+              <td>
+                <div [class.statusStage1]="client.status === '1'" [class.statusStage2]="client.status === '2'" [class.statusStage3]="client.status === '3'"></div>
+              </td>
+              <td>{{client.firstName + " " + client.lastName}}</td>
+              <td>{{client.email}}</td>
+              <td class="actionColumn middle">
+                <!-- <div class="inline">
                                 <button class="btn btn-primary" (click)="gotoEdit(client, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             </div> -->
-                                <!-- <div class="padding inline">
+                <!-- <div class="padding inline">
                                     <button (click)="showClientView(client)" class="btn btn-primary">View Info</button>
                                 </div>
                                 <div class="inline">
                                     <button class="btn btn-danger" (click)="deleteClient(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                 </div> -->
-                                <div class="dropdown-toggle" id="actionMenu" title="Click to view options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i>
-                                </div>
-                                <ul class="dropdown-menu actionMenu" aria-labelledby="actionMenu">
-                                    <li><a (click)="showClientView(client)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
-                                    <li><a (click)="generatePRF(client)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</a></li>
-                                    <li><a (click)="deleteClient(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div *ngIf="!clientView" class="col-md-6">
-            <h2>Status Report</h2>
-            <hr>
-            <div>
-                <h3>Total clients: {{ clientTotal }}</h3></div>
-            <div style="display: block">
-                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutChartColors" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-            </div>
-        </div>
-        <div *ngIf="clientView" class="col-md-6">
-            <h2>Information for {{clientView.firstName + " " + clientView.lastName}}</h2>
-            <div (click)="statusReport($event)" class="statusButton" title="View status report"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
-            <hr>
-            <ul class="sectionBtnGroup col-sm-12">
-                <li class="sectionButtons" [ngClass]="{active: showGeneral}" title="General Info" (click)="sectionBtnClicked($event, 'general')">
-                    <h4>General Info</h4></li>
-                <li class="sectionButtons" [ngClass]="{active: showSuitability}" title="Suitability" (click)="sectionBtnClicked($event, 'suitability')">
-                    <h4>Suitability</h4></li>
-            </ul>
-            <div *ngIf="showGeneral" class="infoPanel">
-              <br />
-                <div class="form-group">
-                    <label class="control-label">id: </label>
-                        {{clientView.userID}}
+                <div class="dropdown-toggle" id="actionMenu" title="Click to view options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Inquiry Date: </label>
-                        {{clientView.inquiryDate}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">First Name: </label>
-                        {{clientView.firstName}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Last Name: </label>
-                        {{clientView.lastName}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Birth Date: </label>
-                        {{clientView.birthdate}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Email: </label>
-                        {{clientView.email}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Phone: </label>
-                        {{clientView.phone}}
-                </div>
-            </div>
-            <div *ngIf="showSuitability" class="infoPanel">
-              <br />
-                <div class="form-group">
-                    <label class="control-label">Transcript: </label>
-                        {{suitabilityView.transcript}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Courses: </label>
-                        {{suitabilityView.courses}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Goal: </label>
-                        {{suitabilityView.goal}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Transition Date: </label>
-                        {{suitabilityView.transitionDate}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Governament ID: </label>
-                        {{suitabilityView.governmentID}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Appropriate Goal: </label>
-                        {{suitabilityView.appropriateGoal}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">19+ Years Old: </label>
-                        {{suitabilityView.isValidAge}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Not Registered In High School or Post-Sec: </label>
-                        {{suitabilityView.schoolRegistration}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Available During Class Time: </label>
-                        {{suitabilityView.availableDuringClass}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Last Grade Completed: </label>
-                        {{suitabilityView.lastGrade}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Level: </label>
-                        {{suitabilityView.level}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Post-Secondary/Job Offer start date: </label>
-                        {{suitabilityView.offerStartDate}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Meets Next Goals Requirements: </label>
-                        {{suitabilityView.meetsGoal}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Time out of School/Training: </label>
-                        {{suitabilityView.timeOutOfSchool}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Has Been In Program Before: </label>
-                        {{suitabilityView.inProgramBefore}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Employment: </label>
-                        {{suitabilityView.employment}}
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Income Source: </label>
-                        {{suitabilityView.incomeSource}}
-                    <div class="form-group">
-                        <label class="control-label">Age: </label>
-                            {{suitabilityView.age}}
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label"># of Hours/Week: </label>
-                            {{suitabilityView.hoursPerWeek}}
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Work History: </label>
-                            {{suitabilityView.workHistory}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="backButton">
-            <div>
-                <button (click)="goBack()" class="btn btn-default">Back</button>
-            </div>
-        </div>
+                <ul class="dropdown-menu actionMenu" aria-labelledby="actionMenu">
+                  <li><a (click)="showClientView(client)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
+                  <!--<li><a (click)="generatePRF(client)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</a></li> -->
+                  <li class="deleteClient"><a (click)="showAlert(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+    <div *ngIf="!clientView" class="col-md-6">
+      <h2>Status Report</h2>
+      <hr>
+      <div>
+        <h3>Total clients: {{ clientTotal }}</h3></div>
+      <div style="display: block">
+        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutChartColors" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+    <div *ngIf="clientView" class="col-md-6">
+      <h2>Information for {{clientView.firstName + " " + clientView.lastName}}</h2>
+      <div (click)="statusReport($event)" class="statusButton" title="View status report"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
+      <hr>
+      <ul class="sectionBtnGroup col-sm-12">
+        <li class="sectionButtons" [ngClass]="{active: showGeneral}" title="General Info" (click)="sectionBtnClicked($event, 'general')">
+          <h4>General Info</h4></li>
+        <li class="sectionButtons" [ngClass]="{active: showSuitability}" title="Suitability" (click)="sectionBtnClicked($event, 'suitability')">
+          <h4>Suitability</h4></li>
+      </ul>
+      <div *ngIf="showGeneral" class="infoPanel">
+        <br />
+        <div class="form-group">
+          <label class="control-label">id: </label> {{clientView.userID}} <br />
+          <label class="control-label">Inquiry Date: </label> {{clientView.inquiryDate}} <br />
+          <label class="control-label">First Name: </label> {{clientView.firstName}} <br />
+          <label class="control-label">Last Name: </label> {{clientView.lastName}} <br />
+          <label class="control-label">Birth Date: </label> {{clientView.birthdate}} <br />
+          <label class="control-label">Email: </label> {{clientView.email}} <br />
+          <label class="control-label">Phone: </label> {{clientView.phone}} <br />
+        </div>
+      </div>
+      <div *ngIf="showSuitability" class="infoPanel">
+        <br />
+        <div class="form-group">
+          <label class="control-label">Transcript: </label> {{suitabilityView.transcript}} <br />
+          <label class="control-label">Courses: </label> {{suitabilityView.courses}} <br />
+          <label class="control-label">Goal: </label> {{suitabilityView.goal}} <br />
+          <label class="control-label">Transition Date: </label> {{suitabilityView.transitionDate}} <br />
+          <label class="control-label">Governament ID: </label> {{suitabilityView.governmentID}} <br />
+          <label class="control-label">Appropriate Goal: </label> {{suitabilityView.appropriateGoal}} <br />
+          <label class="control-label">19+ Years Old: </label> {{suitabilityView.isValidAge}} <br />
+          <label class="control-label">Not Registered In High School or Post-Sec: </label> {{suitabilityView.schoolRegistration}} <br />
+          <label class="control-label">Available During Class Time: </label> {{suitabilityView.availableDuringClass}} <br />
+          <label class="control-label">Last Grade Completed: </label> {{suitabilityView.lastGrade}} <br />
+          <label class="control-label">Level: </label> {{suitabilityView.level}} <br />
+          <label class="control-label">Post-Secondary/Job Offer start date: </label> {{suitabilityView.offerStartDate}} <br />
+          <label class="control-label">Meets Next Goals Requirements: </label> {{suitabilityView.meetsGoal}} <br />
+          <label class="control-label">Time out of School/Training: </label> {{suitabilityView.timeOutOfSchool}} <br />
+          <label class="control-label">Has Been In Program Before: </label> {{suitabilityView.inProgramBefore}} <br />
+          <label class="control-label">Employment: </label> {{suitabilityView.employment}} <br />
+          <label class="control-label">Income Source: </label> {{suitabilityView.incomeSource}} <br />
+          <label class="control-label">Age: </label> {{suitabilityView.age}} <br />
+          <label class="control-label"># of Hours/Week: </label> {{suitabilityView.hoursPerWeek}} <br />
+          <label class="control-label">Work History: </label> {{suitabilityView.workHistory}} <br />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="backButton">
+    <div>
+      <button (click)="goBack()" class="btn btn-default">Back</button>
+    </div>
+  </div>
+</div>

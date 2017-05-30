@@ -140,6 +140,7 @@
                       </select>
                     </div>
                 </div>
+                <!-- PART A: START -->
                 <div class="form-group">
                     <label class="col-sm-3 text-nowrap control-label">Post-Secondary/Job Offer start date: </label>
                     <div class="col-sm-4">
@@ -210,6 +211,8 @@
                       </select>
                     </div>
                 </div>
+                <!-- PART A: ENDS -->
+                <!-- PART B: START -->
                 <div class="form-group">
                     <label class="col-sm-3 text-nowrap control-label"># of Hours/Week: </label>
                     <div class="col-sm-4">
@@ -220,6 +223,7 @@
                       </select>
                     </div>
                 </div>
+                <!-- Apply judgement? -->
                 <div class="form-group">
                     <label class="col-sm-3 text-nowrap control-label">Work History: </label>
                     <div class="col-sm-4">
@@ -239,19 +243,21 @@
                   </div>
               </div>
               <h3>Factors Affecting Client Success</h3>
-                <input type="radio" value="1">Client has health problems that may prevent client from working effectively <br>
-                <input type="radio" value="1">Client has difficulty understanding instructions <br>
-                <input type="radio" value="1">Client has difficulty communicating <br>
-                <input type="radio" value="1">Client has language barrier <br>
-                <input type="radio" value="1">Client has limited computer skills <br>
-                <input type="radio" value="1">Client has housing instability <br>
-                <input type="radio" value="1">Transportation is limited restricted (no license/ no $s for bus/gas) <br>
-                <input type="radio" value="1">Client does not have reliable daycare <br>
-                <input type="radio" value="1">Client does not have phone/internet access <br>
-                <input type="radio" value="1">Client is going through difficulties in his/her personal life, (legal, family, substance abuse, financial) <br>
+              <h4>Check all options that apply.</h4>
+                <input type="checkbox" value="health problems" [(ngModel)]="suitabilityForm.factorHealth">Client has health problems that may prevent client from working effectively <br>
+                <input type="checkbox" value="difficulty understanding instructions" [(ngModel)]="suitabilityForm.factorInstructions">Client has difficulty understanding instructions <br>
+                <input type="checkbox" value="difficulty communicating" [(ngModel)]="suitabilityForm.factorCommunication">Client has difficulty communicating <br>
+                <input type="checkbox" value="language barrier" [(ngModel)]="suitabilityForm.factorLanguage">Client has language barrier <br>
+                <input type="checkbox" value="limited computer skills" [(ngModel)]="suitabilityForm.factorComputer">Client has limited computer skills <br>
+                <input type="checkbox" value="housing instability" [(ngModel)]="suitabilityForm.factorHousing">Client has housing instability <br>
+                <input type="checkbox" value="transportation limited" [(ngModel)]="suitabilityForm.factorTransportation">Transportation is limited restricted (no license/ no $s for bus/gas) <br>
+                <input type="checkbox" value="unreliable daycare" [(ngModel)]="suitabilityForm.factorDaycare">Client does not have reliable daycare <br>
+                <input type="checkbox" value="no phone or internet" [(ngModel)]="suitabilityForm.factorInternet">Client does not have phone/internet access <br>
+                <input type="checkbox" value="personal problems" [(ngModel)]="suitabilityForm.factorPersonal">Client is going through difficulties in his/her personal life, (legal, family, substance abuse, financial) <br>
 
-                Other:<input type="text" name="other"> <br>
+                Other:<input type="text" name="other" [(ngModel)]="suitabilityForm.factorOther"> <br>
               </div>
+            <!-- PART B: ENDS -->
             <!-- end of section 4 -->
             <div id="section5" *ngIf="showSection5" class="col-sm-12">
               <div class="form-group">
@@ -260,11 +266,11 @@
                   </div>
               </div>
               <h3>Summary Notes</h3>
-              Transportation:<input type="text" name="transportation"> <br>
-              Housing:<input type="text" name="housing"> <br>
-              Childcare:<input type="text" name="childcare"> <br>
-              Health:<input type="text" name="health"> <br>
-              Other:<input type="text" name="summaryother"> <br>
+              Transportation:<input type="text" name="transportation" [(ngModel)]="suitabilityForm.summaryTransportation"> <br>
+              Housing:<input type="text" name="housing" [(ngModel)]="suitabilityForm.summaryHousing"> <br>
+              Childcare:<input type="text" name="childcare" [(ngModel)]="suitabilityForm.summaryChildcare"> <br>
+              Health:<input type="text" name="health" [(ngModel)]="suitabilityForm.summaryHealth"> <br>
+              Other:<input type="text" name="summaryother" [(ngModel)]="suitabilityForm.summaryOther"> <br>
             </div>
             <!-- end of section 5 -->
             <div id="section6" *ngIf="showSection6" class="col-sm-12">
@@ -276,13 +282,22 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Part A total: </label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="number" name="partA" placeholder="0">
+                        <input class="form-control" value="{{partAPoints}}" type="number" name="partA" disabled>
+                        <div *ngIf="partAWarning"><label>Warning</label></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Part B total: </label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="number" name="partB" placeholder="0">
+                        <input class="form-control" value="{{partBPoints}}" type="number" name="partB" disabled>
+                        <div *ngIf="partBWarning"><label>Warning</label></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Total: </label>
+                    <div class="col-sm-2">
+                        <input class="form-control" value="{{totalPoints}}" type="number" name="totalPoints" disabled>
+                        <input class="form-control" value="{{totalPoints}}" type="hidden" name="totalPoints" [(ngModel)]="suitabilityForm.dbTotalPoints">
                     </div>
                 </div>
             </div>
