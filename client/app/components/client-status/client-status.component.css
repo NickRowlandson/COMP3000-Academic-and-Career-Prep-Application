@@ -83,7 +83,7 @@ button {
 	border-radius: 50%;
 	width: 20px;
 	height: 20px;
-  background-color: red;
+  background-color: #EB3700;
   margin: 0 auto;
 }
 
@@ -91,7 +91,7 @@ button {
 	border-radius: 50%;
 	width: 20px;
 	height: 20px;
-  background-color: yellow;
+  background-color: #F8E903;
   margin: 0 auto;
 }
 
@@ -99,7 +99,7 @@ button {
 	border-radius: 50%;
 	width: 20px;
 	height: 20px;
-  background-color: green;
+  background-color: #21C700;
   margin: 0 auto;
 }
 

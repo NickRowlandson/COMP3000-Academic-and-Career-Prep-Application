@@ -170,7 +170,7 @@ export class SuitabilityFormComponent {
         (factorPoints > 4 && factorPoints <= 8) { this.partBPoints += 2; } else if
         (factorPoints > 8) { this.partBPoints += 1; }
 
-        this.totalPoints = this.partAPoints + this.partBPoints;
+        this.totalPoints = this.partAPoints - this.partBPoints;
 
         if (this.partAPoints < 14) { this.partAWarning = true; }
         if (this.partBPoints < 4) { this.partBWarning = true; }
