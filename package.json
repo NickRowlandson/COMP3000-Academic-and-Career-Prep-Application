@@ -5,8 +5,9 @@
   "scripts": {
     "clean": "gulp clean",
     "compile": "gulp compile",
-    "build": "gulp build",
+    "build": "gulp build ",
     "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/bin/www\"",
+    "quickstart":"gulp build &&concurrently --kill-others \"gulp watch\" \"nodemon ./dist/server/bin/www\"",
     "postinstall": "gulp installTypings"
   },
   "repository": {

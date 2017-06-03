@@ -63,11 +63,11 @@ class ClientController {
 
                                     // setup email data with unicode symbols
                                     let mailOptions = {
-                                      from: '"Test Ghost 👻" <ghost@test.com>', // sender address
-                                      to: 'nicholasrowlandson@gmail.com', // list of receivers
-                                      subject: 'Hello ✔', // Subject line
-                                      text: 'Hello world ?', // plain text body
-                                      html: '<b>Hello world ?</b>' // html body
+                                      from: '"Georgian Academic & Career Prep"', // sender address
+                                      to: client.email, // list of receivers
+                                      subject: 'Welcome, ' + client.firstName, // Subject line
+                                      text: '', // plain text body
+                                      html: 'Youre username is <b>' + client.username + '</b> and your password is your birthday in the following format: yyyymmdd<br /> Please login and complete the required forms. <br /><br /> Thankyou' // html body
                                     };
 
                                     // send mail with defined transport object
