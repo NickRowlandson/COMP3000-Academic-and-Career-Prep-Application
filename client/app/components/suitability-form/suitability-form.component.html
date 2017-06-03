@@ -244,18 +244,42 @@
               </div>
               <h3>Factors Affecting Client Success</h3>
               <h4>Check all options that apply.</h4>
-                <input type="checkbox" value="health problems" [(ngModel)]="suitabilityForm.factorHealth">Client has health problems that may prevent client from working effectively <br>
-                <input type="checkbox" value="difficulty understanding instructions" [(ngModel)]="suitabilityForm.factorInstructions">Client has difficulty understanding instructions <br>
-                <input type="checkbox" value="difficulty communicating" [(ngModel)]="suitabilityForm.factorCommunication">Client has difficulty communicating <br>
-                <input type="checkbox" value="language barrier" [(ngModel)]="suitabilityForm.factorLanguage">Client has language barrier <br>
-                <input type="checkbox" value="limited computer skills" [(ngModel)]="suitabilityForm.factorComputer">Client has limited computer skills <br>
-                <input type="checkbox" value="housing instability" [(ngModel)]="suitabilityForm.factorHousing">Client has housing instability <br>
-                <input type="checkbox" value="transportation limited" [(ngModel)]="suitabilityForm.factorTransportation">Transportation is limited restricted (no license/ no $s for bus/gas) <br>
-                <input type="checkbox" value="unreliable daycare" [(ngModel)]="suitabilityForm.factorDaycare">Client does not have reliable daycare <br>
-                <input type="checkbox" value="no phone or internet" [(ngModel)]="suitabilityForm.factorInternet">Client does not have phone/internet access <br>
-                <input type="checkbox" value="personal problems" [(ngModel)]="suitabilityForm.factorPersonal">Client is going through difficulties in his/her personal life, (legal, family, substance abuse, financial) <br>
-
-                Other:<input type="text" name="other" [(ngModel)]="suitabilityForm.factorOther"> <br>
+                <label class="checkbox">
+                    <input type="checkbox" value="health problems" [(ngModel)]="suitabilityForm.factorHealth">Client has health problems that may prevent client from working effectively
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" value="difficulty understanding instructions" [(ngModel)]="suitabilityForm.factorInstructions">Client has difficulty understanding instructions
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" value="difficulty communicating" [(ngModel)]="suitabilityForm.factorCommunication">Client has difficulty communicating
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" value="language barrier" [(ngModel)]="suitabilityForm.factorLanguage">Client has language barrier
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" value="limited computer skills" [(ngModel)]="suitabilityForm.factorComputer">Client has limited computer skills
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" value="housing instability" [(ngModel)]="suitabilityForm.factorHousing">Client has housing instability
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" value="transportation limited" [(ngModel)]="suitabilityForm.factorTransportation">Transportation is limited restricted (no license/ no $s for bus/gas)
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" value="unreliable daycare" [(ngModel)]="suitabilityForm.factorDaycare">Client does not have reliable daycare
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" value="no phone or internet" [(ngModel)]="suitabilityForm.factorInternet">Client does not have phone/internet access
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" value="personal problems" [(ngModel)]="suitabilityForm.factorPersonal">Client is going through difficulties in his/her personal life, (legal, family, substance abuse, financial)
+                </label>
+                <br />
+                <div class="col-sm-8">
+                  <label class="textbox">
+                    Other:<input class="form-control" type="text" name="other" [(ngModel)]="suitabilityForm.factorOther" />
+                  </label>
+                </div>
               </div>
             <!-- PART B: ENDS -->
             <!-- end of section 4 -->
@@ -266,11 +290,26 @@
                   </div>
               </div>
               <h3>Summary Notes</h3>
-              Transportation:<input type="text" name="transportation" [(ngModel)]="suitabilityForm.summaryTransportation"> <br>
-              Housing:<input type="text" name="housing" [(ngModel)]="suitabilityForm.summaryHousing"> <br>
-              Childcare:<input type="text" name="childcare" [(ngModel)]="suitabilityForm.summaryChildcare"> <br>
-              Health:<input type="text" name="health" [(ngModel)]="suitabilityForm.summaryHealth"> <br>
-              Other:<input type="text" name="summaryother" [(ngModel)]="suitabilityForm.summaryOther"> <br>
+                <div class="form-group col-sm-8">
+                  <label for="comment">Transportation:</label>
+                  <textarea class="form-control" rows="2" name="transportation" [(ngModel)]="suitabilityForm.summaryTransportation"></textarea>
+                </div>
+                <div class="form-group col-sm-8">
+                  <label for="comment">Housing:</label>
+                  <textarea class="form-control" rows="2" name="housing" [(ngModel)]="suitabilityForm.summaryHousing"></textarea>
+                </div>
+                <div class="form-group col-sm-8">
+                  <label for="comment">Childcare:</label>
+                  <textarea class="form-control" rows="2" name="childcare" [(ngModel)]="suitabilityForm.summaryChildcare"></textarea>
+                </div>
+                <div class="form-group col-sm-8">
+                  <label for="comment">Health:</label>
+                  <textarea class="form-control" rows="2" name="health" [(ngModel)]="suitabilityForm.summaryHealth"></textarea>
+                </div>
+                <div class="form-group col-sm-8">
+                  <label for="comment">Other:</label>
+                  <textarea class="form-control" rows="2" name="summaryother" [(ngModel)]="suitabilityForm.summaryOther"></textarea>
+                </div>
             </div>
             <!-- end of section 5 -->
             <div id="section6" *ngIf="showSection6" class="col-sm-12">
