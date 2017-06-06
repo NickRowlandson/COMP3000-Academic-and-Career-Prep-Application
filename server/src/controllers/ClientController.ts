@@ -3,6 +3,7 @@ import jwt = require('jsonwebtoken');
 import bcrypt = require('bcrypt');
 import AuthController = require("../controllers/AuthController");
 const MailService = require("../services/MailService");
+const PRFService = require("../services/PRFService");
 var sql = require('mssql');
 var auth = ["Admin", "Staff"];
 
@@ -33,47 +34,47 @@ class ClientController {
                                     client.phone + "', '" +
                                     1 + "'";
 
-                                    new MailService().welcomeMessage(client);
+                                new MailService().welcomeMessage(client);
 
                                 new sql.Request().query("INSERT INTO Clients VALUES (" + clientQuery + ")").then(function() {
                                     var suitabilityFormQuery = "'" + id[0].userID
-                                    + "', '" + suitabilityForm.transcript
-                                    + "', '" + suitabilityForm.courses
-                                    + "', '" + suitabilityForm.goal
-                                    + "', '" + suitabilityForm.transitionDate
-                                    + "', '" + suitabilityForm.governmentID
-                                    + "', '" + suitabilityForm.appropriateGoal
-                                    + "', '" + suitabilityForm.isValidAge
-                                    + "', '" + suitabilityForm.schoolRegistration
-                                    + "', '" + suitabilityForm.availableDuringClass
-                                    + "', '" + suitabilityForm.lastGrade
-                                    + "', '" + suitabilityForm.level
-                                    + "', '" + suitabilityForm.offerStartDate
-                                    + "', '" + suitabilityForm.meetsGoal
-                                    + "', '" + suitabilityForm.timeOutOfSchool
-                                    + "', '" + suitabilityForm.inProgramBefore
-                                    + "', '" + suitabilityForm.employment
-                                    + "', '" + suitabilityForm.incomeSource
-                                    + "', '" + suitabilityForm.ageRange
-                                    + "', '" + suitabilityForm.hoursPerWeek
-                                    + "', '" + suitabilityForm.workHistory
-                                    + "', '" + suitabilityForm.factorHealth
-                                    + "', '" + suitabilityForm.factorInstructions
-                                    + "', '" + suitabilityForm.factorCommunication
-                                    + "', '" + suitabilityForm.factorLanguage
-                                    + "', '" + suitabilityForm.factorComputer
-                                    + "', '" + suitabilityForm.factorHousing
-                                    + "', '" + suitabilityForm.factorTransportation
-                                    + "', '" + suitabilityForm.factorDaycare
-                                    + "', '" + suitabilityForm.factorInternet
-                                    + "', '" + suitabilityForm.factorPersonal
-                                    + "', '" + suitabilityForm.factorOther
-                                    + "', '" + suitabilityForm.summaryTransportation
-                                    + "', '" + suitabilityForm.summaryHousing
-                                    + "', '" + suitabilityForm.summaryChildcare
-                                    + "', '" + suitabilityForm.summaryHealth
-                                    + "', '" + suitabilityForm.summaryOther
-                                    + "', '" + suitabilityForm.dbTotalPoints + "'";
+                                        + "', '" + suitabilityForm.transcript
+                                        + "', '" + suitabilityForm.courses
+                                        + "', '" + suitabilityForm.goal
+                                        + "', '" + suitabilityForm.transitionDate
+                                        + "', '" + suitabilityForm.governmentID
+                                        + "', '" + suitabilityForm.appropriateGoal
+                                        + "', '" + suitabilityForm.isValidAge
+                                        + "', '" + suitabilityForm.schoolRegistration
+                                        + "', '" + suitabilityForm.availableDuringClass
+                                        + "', '" + suitabilityForm.lastGrade
+                                        + "', '" + suitabilityForm.level
+                                        + "', '" + suitabilityForm.offerStartDate
+                                        + "', '" + suitabilityForm.meetsGoal
+                                        + "', '" + suitabilityForm.timeOutOfSchool
+                                        + "', '" + suitabilityForm.inProgramBefore
+                                        + "', '" + suitabilityForm.employment
+                                        + "', '" + suitabilityForm.incomeSource
+                                        + "', '" + suitabilityForm.ageRange
+                                        + "', '" + suitabilityForm.hoursPerWeek
+                                        + "', '" + suitabilityForm.workHistory
+                                        + "', '" + suitabilityForm.factorHealth
+                                        + "', '" + suitabilityForm.factorInstructions
+                                        + "', '" + suitabilityForm.factorCommunication
+                                        + "', '" + suitabilityForm.factorLanguage
+                                        + "', '" + suitabilityForm.factorComputer
+                                        + "', '" + suitabilityForm.factorHousing
+                                        + "', '" + suitabilityForm.factorTransportation
+                                        + "', '" + suitabilityForm.factorDaycare
+                                        + "', '" + suitabilityForm.factorInternet
+                                        + "', '" + suitabilityForm.factorPersonal
+                                        + "', '" + suitabilityForm.factorOther
+                                        + "', '" + suitabilityForm.summaryTransportation
+                                        + "', '" + suitabilityForm.summaryHousing
+                                        + "', '" + suitabilityForm.summaryChildcare
+                                        + "', '" + suitabilityForm.summaryHealth
+                                        + "', '" + suitabilityForm.summaryOther
+                                        + "', '" + suitabilityForm.dbTotalPoints + "'";
                                     new sql.Request().query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")").then(function() {
 
                                     }).catch(function(err) {
@@ -105,6 +106,7 @@ class ClientController {
             res.send({ "error": "error in your request" });
         }
     }
+
     update(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -129,6 +131,7 @@ class ClientController {
             res.send({ "error": "error in your request" });
         }
     }
+
     delete(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -157,17 +160,18 @@ class ClientController {
             res.send({ "error": "error in your request" });
         }
     }
+
     retrieve(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
                         new sql.Request().query('SELECT * FROM Clients').then(function(clients) {
-                          new sql.Request().query('SELECT * FROM SuitabilityForm').then(function(suitabilityForms) {
-                              res.send({clients: clients, suitabilityForms: suitabilityForms});
-                          }).catch(function(err) {
-                              res.send({ "error": "error" }); console.log("Get suitabilityForms " + err);
-                          });
+                            new sql.Request().query('SELECT * FROM SuitabilityForm').then(function(suitabilityForms) {
+                                res.send({ clients: clients, suitabilityForms: suitabilityForms });
+                            }).catch(function(err) {
+                                res.send({ "error": "error" }); console.log("Get suitabilityForms " + err);
+                            });
                         }).catch(function(err) {
                             res.send({ "error": "error" }); console.log("Get clients " + err);
                         });
@@ -183,16 +187,18 @@ class ClientController {
             res.send({ "error": "error in your request" });
         }
     }
+
     findById(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {
                     var _id: string = req.params._id;
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-                        new sql.Request().query("SELECT *  FROM Clients WHERE clientID = '" + _id + "'").then(function(recordset) {
+                        new sql.Request().query("SELECT * FROM Clients WHERE clientID = '" + _id + "'").then(function(recordset) {
                             res.send(recordset[0]);
                         }).catch(function(err) {
-                            res.send({ "error": "error" }); console.log("Get client by id " + err);
+                            console.log("Get client by id " + err);
+                            res.send({ "error": "error" });
                         });
                     }).catch(function(err) {
                         console.log(err);
@@ -205,6 +211,27 @@ class ClientController {
             console.log(e);
             res.send({ "error": "error in your request" });
         }
+    }
+
+    populatePRF(req: express.Request, res: express.Response): void {
+        console.log("Populating PRF...");
+        new AuthController().authUser(req, res, {
+            requiredAuth: auth, done: function() {
+                var _id: string = req.params._id;
+                sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+                    new sql.Request().query("SELECT * FROM Clients C INNER JOIN SuitabilityForm S ON C.userID = S.userID WHERE C.userID = '" + _id + "' AND S.userID = '" + _id + "'").then(function(recordset) {
+                        new PRFService().populatePRF(recordset[0]);
+                  res.send({ "success": "success" });
+              }).catch(function(err) {
+                  console.log("Get client by id for prf " + err);
+                  res.send({ "error": "error" });
+              });
+          }).catch(function(err) {
+              console.log(err);
+              res.send({ "error": "error" });
+          });
+        }
+      });
     }
 }
 export = ClientController;

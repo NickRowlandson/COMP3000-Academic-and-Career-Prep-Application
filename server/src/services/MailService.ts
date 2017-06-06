@@ -9,7 +9,7 @@ let transporter = nodemailer.createTransport({
   }
 });
 
-class MailController {
+class MailService {
 
 welcomeMessage(client): void {
   // setup email data with unicode symbols
@@ -43,4 +43,4 @@ scheduledMessage(mailOptions): void {
 }
 
 }
-export = MailController;
+export = MailService;

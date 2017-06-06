@@ -10,5 +10,5 @@ var attendance = schedule.scheduleJob([{minute: 1}], function(){
     text: 'Sending every 10 seconds...', // plain text body
     html: '<b>Hello world ?</b>' // html body
   }
-  //new MailController().scheduledMessage(mailOptions);
+  //new MailService().scheduledMessage(mailOptions);
 });

@@ -53,28 +53,12 @@ export class ClientStatusComponent implements OnInit {
             .catch(error => this.error = error);
     }
 
-    // generatePRF(client) {
-    //   console.log("generating pdf...");
-    //     this.clientService
-    //         .getClient(client.clientID)
-    //         .then(object => {
-    //             console.log(object);
-    //             var sourcePDF = "../../assets/pdf/prf-source.pdf";
-    //             var destinationPDF = "../../assets/pdf/test_complete.pdf";
-    //             var data = {
-    //                 "First Name": "John",
-    //                 "Last Name": "Doe",
-    //             };
-    //
-    //             this.pdffiller.fillForm(sourcePDF, destinationPDF, data, function(err) {
-    //                 if (err) {
-    //                     throw err;
-    //                 }
-    //                 console.log("In callback (we're done).");
-    //             });
-    //         })
-    //         .catch(error => console.log(error));
-    // }
+    populatePRF(client) {
+      console.log("generating pdf...");
+        this.clientService
+            .populatePRF(client.userID)
+            .catch(error => console.log(error));
+    }
 
     setData(objects) {
         this.clients = objects.clients;

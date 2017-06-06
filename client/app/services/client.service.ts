@@ -26,12 +26,21 @@ export class ClientService {
 
     getClient(id: string) {
         // add authorization header with jwt token
-        console.log(id);
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.clientUrl + '/' + id, options)
             .toPromise()
             .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    populatePRF(id: string) {
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.clientUrl + '/' + id + '/prf', options)
+            .toPromise()
+            .then(response => console.log(response.json()))
             .catch(this.handleError);
     }
 

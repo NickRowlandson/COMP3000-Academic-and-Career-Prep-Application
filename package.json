@@ -7,7 +7,7 @@
     "compile": "gulp compile",
     "build": "gulp build ",
     "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/bin/www\"",
-    "quickstart":"gulp build &&concurrently --kill-others \"gulp watch\" \"nodemon ./dist/server/bin/www\"",
+    "quickstart": "gulp build &&concurrently --kill-others \"gulp watch\" \"nodemon ./dist/server/bin/www\"",
     "postinstall": "gulp installTypings"
   },
   "repository": {
@@ -43,6 +43,7 @@
     "ng2-charts": "1.5.0",
     "node-schedule": "^1.2.3",
     "nodemailer": "^3.1.8",
+    "pdffiller": "0.0.10",
     "reflect-metadata": "^0.1.10",
     "rxjs": "5.0.2",
     "systemjs": "0.19.41",
