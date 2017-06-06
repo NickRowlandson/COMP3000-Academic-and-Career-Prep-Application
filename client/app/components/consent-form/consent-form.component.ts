@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
 })
 
 export class ConsentFormComponent {
+  saveConsent() {
+
+  }
+
   goBack() {
       window.history.back();
   }

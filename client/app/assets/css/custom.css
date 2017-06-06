@@ -110,3 +110,21 @@
     -webkit-animation: lol 3s 900ms infinite ease-in-out;
     animation: lol 3s 900ms infinite ease-in-out;
 }
+
+.saveButton {
+  position: absolute;
+  top:-78px;
+  cursor:pointer;
+  background-color: #fff;
+  color: #64a70b;
+  display: inline;
+  padding: 5 10 5 10;
+  border: 0px solid;
+}
+
+.saveButton:hover {
+  background-color: #64a70b;
+  color: #fff;
+  border: 0px solid;
+  transition: .2s;
+}

@@ -3,10 +3,10 @@
 import express = require('express');
 import BaseRoutes = require("./routes/Routes");
 import bodyParser = require("body-parser");
-import cron = require('node-cron');
-import nodemailer = require('nodemailer');
-
 import path = require('path');
+
+const ScheduleService = require("./services/ScheduleService");
+
 var port: number = process.env.PORT || 3000;
 var env:string = process.env.NODE_ENV || 'developement';
 
@@ -40,10 +40,6 @@ if(env === 'developement'){
         });
     });
 }
-
-app.post('/populate', function(req, res, next) {
-  console.log("ready");
-});
 
 // catch 404 and forward to error handler
 app.use(function(req: express.Request, res: express.Response, next) {
