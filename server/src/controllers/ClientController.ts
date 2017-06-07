@@ -7,7 +7,6 @@ const PRFService = require("../services/PRFService");
 var sql = require('mssql');
 var auth = ["Admin", "Staff"];
 
-
 class ClientController {
 
     create(req: express.Request, res: express.Response): void {
@@ -232,6 +231,41 @@ class ClientController {
           });
         }
       });
+    }
+
+    consentForm(req: express.Request, res: express.Response): void
+    {
+      try {
+        new AuthController().authUser(req, res, {
+          requiredAuth: auth, done: function() {
+            var consentForm = req.body.consentForm;
+            var _id: string = req.params._id;
+            sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+                var consentQuery = "'" + _id + "', '" +
+                     consentForm.firstName + "', '" +
+                     consentForm.lastName + "', '" +
+                     consentForm.date + "', '" +
+                     consentForm.phone + "', '" +
+                     consentForm.detailedMessageYes + "', '" +
+                     consentForm.detailedMessageNo + "', '" +
+                     consentForm.ontarioWorks + "', '" +
+                     consentForm.ontarioDisabilityProgram + "', '" +
+                     consentForm.employmentServices + "', '" +
+                     consentForm.employmentInsurance + "', '" +
+                     consentForm.employmentServices + "', '" +
+                     consentForm.other + "', '" +
+                     consentForm.contactName + "', '" +
+                     consentForm.contactNum + "', '" +
+                     consentForm.literacyAgencies + "', '" +
+                     consentForm.literacyWitness + "'";
+              new sql.Request().query("INSERT INTO Consent VALUES ("+consentQuery+")");
+            });
+          }
+        });
+      }catch (e) {
+          console.log(e);
+          res.send({ "error": "error in your request" });
+      }
     }
 }
 export = ClientController;
