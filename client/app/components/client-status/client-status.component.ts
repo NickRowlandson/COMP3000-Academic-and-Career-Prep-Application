@@ -57,6 +57,13 @@ export class ClientStatusComponent implements OnInit {
       console.log("generating pdf...");
         this.clientService
             .populatePRF(client.userID)
+            .then(response => {
+              swal(
+                  'PRF Generated!',
+                  client.username,
+                  'success'
+              );
+            })
             .catch(error => console.log(error));
     }
 

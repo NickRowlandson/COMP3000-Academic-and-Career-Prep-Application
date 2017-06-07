@@ -40,7 +40,7 @@ export class ClientService {
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.clientUrl + '/' + id + '/prf', options)
             .toPromise()
-            .then(response => console.log(response.json()))
+            .then(response => response.json())
             .catch(this.handleError);
     }
 

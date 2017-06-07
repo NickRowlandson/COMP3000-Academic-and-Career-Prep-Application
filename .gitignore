@@ -37,6 +37,9 @@ build/Release
 .vscode
 *.iml
 
+# pdffiller
+*.fdf
+
 /tools/**/*.js
 dist
 dev
