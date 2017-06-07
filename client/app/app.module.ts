@@ -30,6 +30,8 @@ import { AuthService } from './services/authentication.service';
 import { StudentService } from './services/student.service';
 import { ClientService } from './services/client.service';
 import { StaffService } from './services/staff.service';
+import {CourseService } from './services/course.service';
+
 
 @NgModule({
   imports: [
@@ -63,7 +65,8 @@ import { StaffService } from './services/staff.service';
     AuthService,
     StudentService,
     StaffService,
-    ClientService
+    ClientService,
+    CourseService
   ],
   bootstrap: [AppComponent]
 })
