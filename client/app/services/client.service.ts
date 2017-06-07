@@ -3,6 +3,7 @@ import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { AuthService } from './authentication.service';
 import 'rxjs/add/operator/toPromise';
 import { Client } from "../models/client";
+import { ConsentForm } from "../models/consentForm";
 import { SuitabilityForm } from "../models/suitabilityForm";
 //import * as pdfFiller from 'pdffiller';
 
@@ -51,6 +52,21 @@ export class ClientService {
         return this.post(client, suitabilityForm);
     }
 
+    saveConsent(consentForm: ConsentForm): Promise<Client> {
+      // add authorization header with jwt token
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      var currentUserID = currentUser.userID;
+      let url = `api/clientForms/${currentUserID}/consent`;
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
+      let objects = ({ consentForm: consentForm });
+      return this.http
+          .post(url, objects, options)
+          .toPromise()
+          .then(response => response.json().data)
+          .catch(this.handleError);
+    }
+
     private post(client: Client, suitabilityForm: SuitabilityForm): Promise<Client> {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
@@ -93,5 +109,4 @@ export class ClientService {
         console.log('An error occurred', error);
         return Promise.reject(error.message || error);
     }
-
 }

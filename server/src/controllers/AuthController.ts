@@ -17,7 +17,7 @@ class AuthController {
             for (let object in user) {
               if(_username === user[object].username && bcrypt.compareSync(_password, user[object].password)){
                 var token = jwt.sign({ userid: user[object].userID }, "f9b574a2fc0d77986cb7ebe21a0dea480f5f21931abfa5cf329a45ecc0c8e1ff");
-                var statusToken = { status: 200, body: { token: token, username: user[object].username, userType: user[object].userType } };
+                var statusToken = { status: 200, body: { token: token, userID: user[object].userID, username: user[object].username, userType: user[object].userType } };
                 response = JSON.stringify(statusToken);
                 res.send(response);
                 break;
