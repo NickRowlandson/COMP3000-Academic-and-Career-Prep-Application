@@ -1,8 +1,36 @@
 .courseManage {
   font-family: Avenir, Calibri, Minion;
+  color: #333f48;
 }
 
 .backButton {
   position: fixed;
   bottom: 25px;
 }
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Avenir, Calibri, Minion;
+  color: #333f48;
+}
+
+.padding {
+  padding: 5px !important;
+}
+
+button {
+    min-width: 80px;
+}
+
+.inline {
+  display:inline;
+}
+
+.actionColumn {
+  width:20%;
+}
+
+.middle{
+  text-align:center;
+}
+

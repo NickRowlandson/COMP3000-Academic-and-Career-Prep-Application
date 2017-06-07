@@ -1,7 +1,7 @@
 <div class="course">
     <h2>Manage Courses</h2>
     <hr>
-   
+
     <div class="cs-loader">
         <div class="cs-loader-inner">
             <label>	L</label>
@@ -18,12 +18,27 @@
     </div>
 
     <!-- front end  for courses-->
-    <div class="row" *ngIf="users">
-        <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="">Sample Dropdown</label>
+            <select>
+  <option value="volvo">Barrie</option>
+  <option value="saab">Saab</option>
+  <option value="mercedes">Mercedes</option>
+  <option value="audi">Audi</option>
+</select>
+
+        </div>
+
+        <div class="col-md-3">
+            <label for="">Search</label>
+            <input type="text">
+        </div>
+        <div class="col-md-6">
             <div class="error" *ngIf="error">{{error}}</div>
             <div class="pull-right">
                 <div class="padding">
-                    <button class="btn btn-success" (click)="addUser()"><i class="fa fa-plus"></i> Add Staff</button>
+                    <button class="btn btn-success" (click)="addCourse()"><i class="fa fa-plus"></i> Add a Course</button>
                 </div>
             </div>
         </div>
@@ -31,15 +46,18 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
+                        <th>Course Name</th>
+                        <th>Professor</th>
+                        <th>Course Start</th>
+                        <th>Course End</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of users" [class.active]="user === selectedUser">
-                        <td>{{user.firstName + " " + user.lastName}}</td>
-                        <td>{{user.email}}</td>
+                    <tr *ngFor="let course of courses">
+                        <td>{{course.courseName}}</td>
+                        <td>{{course.ProfessorId}}</td>
+                        <td>{{course.scheduleStart}}</td>
+                        <td>{{course.scheduleEnd}}</td>
                         <td class="actionColumn middle">
                             <div class="inline">
                                 <button class="btn btn-primary" (click)="gotoEdit(user, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>

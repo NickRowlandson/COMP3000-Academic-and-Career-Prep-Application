@@ -27,7 +27,6 @@ export class CourseManageComponent implements OnInit {
                     this.courses = null;
                 } else {
                     this.courses = result;
-                    console.log('hello world');
                     console.log(this.courses);
                 }
             })
