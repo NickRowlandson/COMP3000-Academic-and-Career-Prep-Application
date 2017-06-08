@@ -19,6 +19,7 @@ import { ConsentFormComponent } from './components/consent-form/consent-form.com
 import { CaseNotesComponent } from './components/case-notes/case-notes.component';
 import { CourseManageComponent } from './components/course-manage/course-manage.component';
 import { PrfFormComponent } from './components/prf-form/prf-form.component';
+import { LearningStyleComponent } from './components/learning-style-form/learning-style-form.component';
 
 const appRoutes: Routes = [
     {
@@ -83,6 +84,11 @@ const appRoutes: Routes = [
     {
         path: 'prf',
         component: PrfFormComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'learning-style',
+        component: LearningStyleComponent,
         canActivate: [AuthGuard]
     }
 ];

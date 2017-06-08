@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
     consent = false;
     manageCourses = false;
     caseNotes = false;
+    learningStyle = false;
+    maesdprf = false;
 
     constructor(private router: Router, private authService: AuthService) {
 
@@ -34,6 +36,8 @@ export class DashboardComponent implements OnInit {
             this.manageStaff = true;
             this.suitability = true;
             this.consent = false;
+            this.learningStyle = false;
+            this.maesdprf = false;
             this.caseNotes = true;
             this.manageCourses = true;
         } else if (userType === 'Staff') {
@@ -42,6 +46,8 @@ export class DashboardComponent implements OnInit {
             this.manageStaff = false;
             this.suitability = true;
             this.consent = false;
+            this.learningStyle = false;
+            this.maesdprf = false;
             this.caseNotes = true;
             this.manageCourses = true;
         } else if (userType === 'Student') {
@@ -50,6 +56,8 @@ export class DashboardComponent implements OnInit {
             this.manageStaff = false;
             this.suitability = false;
             this.consent = false;
+            this.learningStyle = false;
+            this.maesdprf = false;
             this.caseNotes = false;
             this.manageCourses = false;
         } else if (userType === 'Client') {
@@ -58,6 +66,8 @@ export class DashboardComponent implements OnInit {
             this.manageStaff = false;
             this.suitability = false;
             this.consent = true;
+            this.learningStyle = true;
+            this.maesdprf = true;
             this.caseNotes = false;
             this.manageCourses = false;
         } else {
@@ -66,6 +76,8 @@ export class DashboardComponent implements OnInit {
             this.manageStaff = false;
             this.suitability = false;
             this.consent = false;
+            this.learningStyle = false;
+            this.maesdprf = false;
             this.caseNotes = false;
             this.manageCourses = false;
         }
