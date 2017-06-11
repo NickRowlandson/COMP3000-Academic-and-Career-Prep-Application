@@ -12,6 +12,7 @@ class ClientFormsRoutes {
         var controller = this._clientFormsController;
 
         router.post("/clientForms/:_id/consent", controller.consentForm);
+        router.post("/clientForms/:_id/learningStyle", controller.learningStyleForm);
         return router;
     }
 

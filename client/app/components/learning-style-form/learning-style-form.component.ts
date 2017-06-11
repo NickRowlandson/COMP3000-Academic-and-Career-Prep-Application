@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivatedRoute, Params } from '@angular/router';
+import { LearningStyleForm } from "../../models/learningStyleForm";
+import { ClientService } from "../../services/client.service";
 import { AuthService } from '../../services/authentication.service';
 
 @Component({
@@ -10,7 +11,21 @@ import { AuthService } from '../../services/authentication.service';
 })
 
 export class LearningStyleComponent {
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+  @Input() learningStyleForm: LearningStyleForm;
+  error: any;
+  constructor(private clientService: ClientService, private router: Router, private authService: AuthService) {
+    this.learningStyleForm = new LearningStyleForm();
+  }
+  saveLearningStyle() {
+    this.clientService
+        .saveLearningStyle(this.learningStyleForm)
+        .then(client => {
+            this.router.navigate(['/dashboard']);
+        })
+        .catch(error => this.error = error); // TODO: Display error message
+  }
 
+  goBack() {
+      window.history.back();
   }
 }

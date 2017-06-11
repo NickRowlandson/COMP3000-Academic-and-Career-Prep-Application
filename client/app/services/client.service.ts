@@ -4,6 +4,7 @@ import { AuthService } from './authentication.service';
 import 'rxjs/add/operator/toPromise';
 import { Client } from "../models/client";
 import { ConsentForm } from "../models/consentForm";
+import { LearningStyleForm } from "../models/learningStyleForm";
 import { SuitabilityForm } from "../models/suitabilityForm";
 //import * as pdfFiller from 'pdffiller';
 
@@ -53,13 +54,30 @@ export class ClientService {
     }
 
     saveConsent(consentForm: ConsentForm): Promise<Client> {
-      // add authorization header with jwt token
+      // get current user id from web token
       var currentUser = JSON.parse(localStorage.getItem('currentUser'));
       var currentUserID = currentUser.userID;
       let url = `api/clientForms/${currentUserID}/consent`;
+      // add authorization header with jwt token
       let headers = new Headers({ authorization: this.authService.token });
       let options = new RequestOptions({ headers: headers });
       let objects = ({ consentForm: consentForm });
+      return this.http
+          .post(url, objects, options)
+          .toPromise()
+          .then(response => response.json().data)
+          .catch(this.handleError);
+    }
+
+    saveLearningStyle(learningStyleForm: LearningStyleForm): Promise<Client> {
+      // get current user id from web token
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      var currentUserID = currentUser.userID;
+      let url = `api/clientForms/${currentUserID}/learningStyle`;
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
+      let objects = ({ learningStyleForm: learningStyleForm });
       return this.http
           .post(url, objects, options)
           .toPromise()
