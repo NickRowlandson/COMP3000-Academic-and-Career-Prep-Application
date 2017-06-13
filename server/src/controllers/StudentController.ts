@@ -1,6 +1,5 @@
 import express = require("express");
 import jwt = require('jsonwebtoken');
-import bcrypt = require('bcrypt');
 import AuthController = require("../controllers/AuthController");
 var sql = require('mssql');
 var auth = ["Admin", "Staff"];
@@ -11,26 +10,13 @@ class StudentController {
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {
-                    var salt = bcrypt.genSaltSync(10);
-                    var password = req.body.password;
-                    // Hash the password with the salt
-                    password = bcrypt.hashSync(password, salt);
-                    req.body.password = password;
                     var student = req.body;
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-                        new sql.Request().query("INSERT INTO Users VALUES ('" + student.username + "','" + student.password + "','Student')").then(function() {
-                            new sql.Request().query("SELECT userID FROM Users WHERE username = '" + student.username + "' AND password = '" + student.password + "'").then(function(id) {
-                                new sql.Request().query("INSERT INTO Students VALUES ('" + id[0].userID + "','" + student.firstName + "', '" + student.lastName + "','" + student.email + "','" + student.inquiryDate + "','" + student.birthday + "','" + student.phone + "')").then(function() {
-                                    res.send({ "success": "success" });
-                                }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("insert student " + err);
-                                });
+                            new sql.Request().query("INSERT INTO Students VALUES ('" + student.userID + "','" + student.firstName + "', '" + student.lastName + "','" + student.email + "','" + student.inquiryDate + "','" + student.birthdate + "','" + student.phone + "')").then(function() {
+                                res.send({ "success": "success" });
                             }).catch(function(err) {
-                                res.send({ "error": "error" }); console.log("get user " + err);
+                                res.send({ "error": "error" }); console.log("insert student " + err);
                             });
-                        }).catch(function(err) {
-                            res.send({ "error": "error" }); console.log("insert user " + err);
-                        });
                     }).catch(function(err) {
                         console.log(err);
                         res.send({ "error": "error" });
@@ -77,10 +63,10 @@ class StudentController {
                             new sql.Request().query("DELETE FROM Users WHERE userID = '" + _id + "'").then(function() {
                                 res.send({ "success": "success" });
                             }).catch(function(err) {
-                                res.send({ "error": "error" }); console.log("Delete user with id "+ _id + ". " + err);
+                                res.send({ "error": "error" }); console.log("Delete user with id " + _id + ". " + err);
                             });
                         }).catch(function(err) {
-                            res.send({ "error": "error" }); console.log("Delete student with id "+ _id + ". " + err);
+                            res.send({ "error": "error" }); console.log("Delete student with id " + _id + ". " + err);
                         });
                     }).catch(function(err) {
                         console.log(err);

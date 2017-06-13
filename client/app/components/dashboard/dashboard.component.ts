@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/authentication.service';
+import { Client } from "../../models/client";
+import { ClientService } from "../../services/client.service";
 
 @Component({
     selector: 'dashboard',
@@ -9,6 +11,12 @@ import { AuthService } from '../../services/authentication.service';
 })
 
 export class DashboardComponent implements OnInit {
+    client: Client[];
+
+    consentForm: boolean;
+    learningStyleForm: boolean;
+
+    //variables used to toggle dahsboard items
     clientStatus = false;
     manageStudents = false;
     manageStaff = false;
@@ -19,17 +27,22 @@ export class DashboardComponent implements OnInit {
     learningStyle = false;
     maesdprf = false;
 
-    constructor(private router: Router, private authService: AuthService) {
+    //
+    userType: any;
+
+    constructor(private router: Router, private authService: AuthService, private clientService: ClientService) {
 
     }
 
     ngOnInit() {
-      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      var userType = currentUser.userType;
-      this.checkAuth(userType);
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        var userType = currentUser.userType;
+        var userID = currentUser.userID;
+        this.checkAuth(userType, userID);
     }
 
-    checkAuth(userType) {
+    checkAuth(userType, userID) {
+        this.userType = userType;
         if (userType === 'Admin') {
             this.clientStatus = true;
             this.manageStudents = true;
@@ -70,6 +83,7 @@ export class DashboardComponent implements OnInit {
             this.maesdprf = true;
             this.caseNotes = false;
             this.manageCourses = false;
+            this.checkFormStatus(userID);
         } else {
             this.clientStatus = false;
             this.manageStudents = false;
@@ -81,5 +95,21 @@ export class DashboardComponent implements OnInit {
             this.caseNotes = false;
             this.manageCourses = false;
         }
+    }
+
+    checkFormStatus(userID) {
+        this.clientService
+            .getClient(userID)
+            .then(object => {
+                if (object.status === "403") {
+                    this.client = null;
+                    console.log("Error");
+                } else {
+                    this.client = object.client[0].firstName;
+                    this.consentForm = object.client[0].consent;
+                    this.learningStyleForm = object.client[0].learningStyle;
+                }
+            })
+            .catch(error => console.log(error));
     }
 }

@@ -10,5 +10,7 @@ export class Client {
     birthday: string;
     email: string;
     phone: string;
-    status: string;
+    suitability: boolean;
+    consent: boolean;
+    learningStyle: boolean;
 }

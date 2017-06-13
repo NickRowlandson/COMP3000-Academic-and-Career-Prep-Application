@@ -7,7 +7,7 @@ export class Student {
     password: string;
     firstName: string;
     lastName: string;
-    birthday: string;
+    birthdate: string;
     email: string;
     phone: string;
 }

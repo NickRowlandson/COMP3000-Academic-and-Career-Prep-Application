@@ -34,9 +34,6 @@ export class StudentService {
     }
 
     save(student: Student): Promise<Student>  {
-        if (student.studentID) {
-            return this.put(student);
-        }
         return this.post(student);
     }
 

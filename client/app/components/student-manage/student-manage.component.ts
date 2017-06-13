@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { StudentService } from "../../services/student.service";
 import { AuthService } from "../../services/authentication.service";
 
+declare var swal: any;
+
 @Component({
     selector: 'student-manage',
     templateUrl: './app/components/student-manage/student-manage.component.html',
@@ -40,21 +42,35 @@ export class StudentManageComponent implements OnInit {
     }
 
     gotoEdit(student: Student, event: any) {
-        this.router.navigate(['/studentEdit', student.studentID]);
+        this.router.navigate(['/student-edit', student.studentID]);
     }
 
     addStudent() {
-        this.router.navigate(['/studentEdit', 'new']);
+        this.router.navigate(['/student-edit', 'new']);
     }
 
-    deleteStudent(student: Student, event: any) {
-        event.stopPropagation();
-        this.studentService
-            .delete(student)
-            .then(res => {
-                this.students = this.students.filter(h => h !== student);
-            })
-            .catch(error => this.error = error);
+    archiveAlert(student: Student, event: any) {
+      swal({
+          title: 'Archive student (' + student.firstName + ' ' + student.lastName + ')',
+          text: "Are you sure want to do this?",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Archive it!'
+      }).then(isConfirm => {
+        if (isConfirm) {
+          this.archiveStudent(student, event);
+        }
+      });
+    }
+
+    archiveStudent(student, event): void {
+      swal(
+          'Sorry...',
+          'This functionality is not yet available',
+          'info'
+      );
     }
 
     goBack() {

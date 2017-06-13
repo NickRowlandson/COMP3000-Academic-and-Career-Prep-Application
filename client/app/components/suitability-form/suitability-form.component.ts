@@ -206,9 +206,11 @@ export class SuitabilityFormComponent {
         this.client["inquiryDate"] = this.date;
         this.client["username"] = this.client.firstName + this.client.lastName;
         this.client["password"] = this.client.birthday.replace(/-/g, "");
+        console.log('save clicked');
         this.clientService
             .save(this.client, this.suitabilityForm)
             .then(client => {
+              console.log('then');
                 this.client = client; // saved client, w/ id if new
                 this.router.navigate(['/clients']);
             })

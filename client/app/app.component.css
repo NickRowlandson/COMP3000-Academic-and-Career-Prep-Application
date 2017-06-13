@@ -19,3 +19,7 @@
     /* Standard */
     transition: all 0.4s ease-in;
 }
+
+.marginBottom {
+  margin-bottom:50px;
+}

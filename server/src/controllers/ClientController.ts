@@ -31,54 +31,64 @@ class ClientController {
                                     client.inquiryDate + "', '" +
                                     client.birthday + "', '" +
                                     client.phone + "', '" +
-                                    1 + "'";
+                                    true + "', '" +
+                                    true + "', '" +
+                                    true + "'";
 
                                 new MailService().welcomeMessage(client);
 
                                 new sql.Request().query("INSERT INTO Clients VALUES (" + clientQuery + ")").then(function() {
-                                    var suitabilityFormQuery = "'" + id[0].userID
-                                        + "', '" + suitabilityForm.transcript
-                                        + "', '" + suitabilityForm.courses
-                                        + "', '" + suitabilityForm.goal
-                                        + "', '" + suitabilityForm.transitionDate
-                                        + "', '" + suitabilityForm.governmentID
-                                        + "', '" + suitabilityForm.appropriateGoal
-                                        + "', '" + suitabilityForm.isValidAge
-                                        + "', '" + suitabilityForm.schoolRegistration
-                                        + "', '" + suitabilityForm.availableDuringClass
-                                        + "', '" + suitabilityForm.lastGrade
-                                        + "', '" + suitabilityForm.level
-                                        + "', '" + suitabilityForm.offerStartDate
-                                        + "', '" + suitabilityForm.meetsGoal
-                                        + "', '" + suitabilityForm.timeOutOfSchool
-                                        + "', '" + suitabilityForm.inProgramBefore
-                                        + "', '" + suitabilityForm.employment
-                                        + "', '" + suitabilityForm.incomeSource
-                                        + "', '" + suitabilityForm.ageRange
-                                        + "', '" + suitabilityForm.hoursPerWeek
-                                        + "', '" + suitabilityForm.workHistory
-                                        + "', '" + suitabilityForm.factorHealth
-                                        + "', '" + suitabilityForm.factorInstructions
-                                        + "', '" + suitabilityForm.factorCommunication
-                                        + "', '" + suitabilityForm.factorLanguage
-                                        + "', '" + suitabilityForm.factorComputer
-                                        + "', '" + suitabilityForm.factorHousing
-                                        + "', '" + suitabilityForm.factorTransportation
-                                        + "', '" + suitabilityForm.factorDaycare
-                                        + "', '" + suitabilityForm.factorInternet
-                                        + "', '" + suitabilityForm.factorPersonal
-                                        + "', '" + suitabilityForm.factorOther
-                                        + "', '" + suitabilityForm.summaryTransportation
-                                        + "', '" + suitabilityForm.summaryHousing
-                                        + "', '" + suitabilityForm.summaryChildcare
-                                        + "', '" + suitabilityForm.summaryHealth
-                                        + "', '" + suitabilityForm.summaryOther
-                                        + "', '" + suitabilityForm.dbTotalPoints + "'";
-                                    new sql.Request().query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")").then(function() {
-
-                                    }).catch(function(err) {
-                                        res.send({ "error": "error" }); console.log("insert suitabilityForm " + err);
-                                    });
+                                    if (Object.keys(suitabilityForm).length != 0) {
+                                        var suitabilityFormQuery = "'" + id[0].userID
+                                            + "', '" + suitabilityForm.transcript
+                                            + "', '" + suitabilityForm.courses
+                                            + "', '" + suitabilityForm.goal
+                                            + "', '" + suitabilityForm.transitionDate
+                                            + "', '" + suitabilityForm.governmentID
+                                            + "', '" + suitabilityForm.appropriateGoal
+                                            + "', '" + suitabilityForm.isValidAge
+                                            + "', '" + suitabilityForm.schoolRegistration
+                                            + "', '" + suitabilityForm.availableDuringClass
+                                            + "', '" + suitabilityForm.lastGrade
+                                            + "', '" + suitabilityForm.level
+                                            + "', '" + suitabilityForm.offerStartDate
+                                            + "', '" + suitabilityForm.meetsGoal
+                                            + "', '" + suitabilityForm.timeOutOfSchool
+                                            + "', '" + suitabilityForm.inProgramBefore
+                                            + "', '" + suitabilityForm.employment
+                                            + "', '" + suitabilityForm.incomeSource
+                                            + "', '" + suitabilityForm.ageRange
+                                            + "', '" + suitabilityForm.hoursPerWeek
+                                            + "', '" + suitabilityForm.workHistory
+                                            + "', '" + suitabilityForm.factorHealth
+                                            + "', '" + suitabilityForm.factorInstructions
+                                            + "', '" + suitabilityForm.factorCommunication
+                                            + "', '" + suitabilityForm.factorLanguage
+                                            + "', '" + suitabilityForm.factorComputer
+                                            + "', '" + suitabilityForm.factorHousing
+                                            + "', '" + suitabilityForm.factorTransportation
+                                            + "', '" + suitabilityForm.factorDaycare
+                                            + "', '" + suitabilityForm.factorInternet
+                                            + "', '" + suitabilityForm.factorPersonal
+                                            + "', '" + suitabilityForm.factorOther
+                                            + "', '" + suitabilityForm.summaryTransportation
+                                            + "', '" + suitabilityForm.summaryHousing
+                                            + "', '" + suitabilityForm.summaryChildcare
+                                            + "', '" + suitabilityForm.summaryHealth
+                                            + "', '" + suitabilityForm.summaryOther
+                                            + "', '" + suitabilityForm.dbTotalPoints + "'";
+                                        new sql.Request().query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")").then(function() {
+                                            new sql.Request().query("UPDATE Clients SET suitability= 'false' WHERE userID = '" + id[0].userID + "'").then(function() {
+                                                res.send({ "success": "success" });
+                                            }).catch(function(err) {
+                                                res.send({ "error": "error" }); console.log("Update client " + err);
+                                            });
+                                        }).catch(function(err) {
+                                            res.send({ "error": "error" }); console.log("insert suitabilityForm " + err);
+                                        });
+                                    } else {
+                                      res.send({ "success": "success" });
+                                    }
                                 }).catch(function(err) {
                                     res.send({ "error": "error" }); console.log("insert client " + err);
                                     new sql.Request().query("DELETE FROM Users WHERE userID = '" + id[0] + "'").then(function() {
@@ -160,6 +170,34 @@ class ClientController {
         }
     }
 
+    removeFromTable(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: auth, done: function() {
+                    var _id: string = req.params._id;
+                    sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+                        new sql.Request().query("DELETE FROM Clients WHERE userID = '" + _id + "'").then(function() {
+                          new sql.Request().query("UPDATE Users SET userType= 'Student' WHERE userID = '" + _id + "'").then(function() {
+                              res.send({ "success": "success" });
+                          }).catch(function(err) {
+                              res.send({ "error": "error" }); console.log("Update user userType " + err);
+                          });
+                        }).catch(function(err) {
+                            res.send({ "error": "error" }); console.log("Delete form client table with id " + _id + ". " + err);
+                        });
+                    }).catch(function(err) {
+                        console.log(err);
+                        res.send({ "error": "error" });
+                    });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
     retrieve(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -190,11 +228,11 @@ class ClientController {
     findById(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
-                requiredAuth: auth, done: function() {
+                requiredAuth: ["Admin", "Staff", "Client"], done: function() {
                     var _id: string = req.params._id;
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-                        new sql.Request().query("SELECT * FROM Clients WHERE clientID = '" + _id + "'").then(function(recordset) {
-                            res.send(recordset[0]);
+                        new sql.Request().query("SELECT * FROM Clients WHERE userID = '" + _id + "'").then(function(client) {
+                            res.send({ client: client });
                         }).catch(function(err) {
                             console.log("Get client by id " + err);
                             res.send({ "error": "error" });
@@ -220,17 +258,17 @@ class ClientController {
                 sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
                     new sql.Request().query("SELECT * FROM Clients C INNER JOIN SuitabilityForm S ON C.userID = S.userID WHERE C.userID = '" + _id + "' AND S.userID = '" + _id + "'").then(function(recordset) {
                         new PRFService().populatePRF(recordset[0]);
-                  res.send({ "success": "success" });
-              }).catch(function(err) {
-                  console.log("Get client by id for prf " + err);
-                  res.send({ "error": "error" });
-              });
-          }).catch(function(err) {
-              console.log(err);
-              res.send({ "error": "error" });
-          });
-        }
-      });
+                        res.send({ "success": "success" });
+                    }).catch(function(err) {
+                        console.log("Get client by id for prf " + err);
+                        res.send({ "error": "error" });
+                    });
+                }).catch(function(err) {
+                    console.log(err);
+                    res.send({ "error": "error" });
+                });
+            }
+        });
     }
 }
 export = ClientController;

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from "../../models/client";
+import { Student } from "../../models/student";
 import { SuitabilityForm } from "../../models/suitabilityForm";
 import { ClientService } from "../../services/client.service";
+import { StudentService } from "../../services/student.service";
 import { AuthService } from "../../services/authentication.service";
-//import { pdfiller } from 'pdffiller';
+
 declare var swal: any;
 
 @Component({
@@ -14,7 +16,6 @@ declare var swal: any;
 })
 
 export class ClientStatusComponent implements OnInit {
-    //pdffiller = new pdfiller();
     clients: Client[];
     allClients: Client[];
     suitabilityForms: SuitabilityForm[];
@@ -31,9 +32,11 @@ export class ClientStatusComponent implements OnInit {
     doughnutChartData: number[];
     doughnutChartType: string;
     doughnutChartColors: any[];
+    stage1: any;
+    stage2: any;
+    stage3: any;
 
-    constructor(private router: Router, private clientService: ClientService, private authService: AuthService) {
-
+    constructor(private router: Router, private clientService: ClientService, private studentService: StudentService, private authService: AuthService) {
     }
 
     ngOnInit() {
@@ -72,11 +75,11 @@ export class ClientStatusComponent implements OnInit {
         this.allClients = objects.clients;
         this.clientTotal = objects.clients.length;
         this.suitabilityForms = objects.suitabilityForms;
-        var stage1 = this.clients.filter(x => x.status === '1');
-        var stage2 = this.clients.filter(x => x.status === '2');
-        var stage3 = this.clients.filter(x => x.status === '3');
-        this.doughnutChartLabels = ['Suitability', 'Consent', 'PRF'];
-        this.doughnutChartData = [stage1.length, stage2.length, stage3.length];
+        this.stage1 = this.clients.filter(x => x.suitability);
+        this.stage2 = this.clients.filter(x => !x.suitability && x.consent && x.learningStyle);
+        this.stage3 = this.clients.filter(x => !x.suitability && !x.consent && !x.learningStyle);
+        this.doughnutChartLabels = ['Suitability', 'Consent/Learning Style', 'Forms Complete'];
+        this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length];
         this.doughnutChartType = 'doughnut';
         this.doughnutChartColors = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];
     }
@@ -89,7 +92,7 @@ export class ClientStatusComponent implements OnInit {
         this.router.navigate(['/clientEdit', client.clientID]);
     }
 
-    showAlert(client, event) {
+    deleteAlert(client, event) {
         swal({
             title: 'Delete client (' + client.firstName + ' ' + client.lastName + ')?',
             text: "You won't be able to revert this!",
@@ -116,11 +119,14 @@ export class ClientStatusComponent implements OnInit {
                     'Client record has been deleted.',
                     'success'
                 );
+                this.clientTotal = this.clients.length;
             })
             .catch(error => this.error = error);
     }
 
     showClientView(client: Client) {
+        this.showGeneral = true;
+        this.showSuitability = false;
         this.clientView = client;
         var suitabilityForm = this.getSuitabilityFormByFilter(client.userID);
         this.suitabilityView = suitabilityForm[0];
@@ -148,11 +154,11 @@ export class ClientStatusComponent implements OnInit {
         try {
             var index = e.active[0]._index;
             if (index === 0) {
-                this.clients = this.allClients.filter(x => x.status === '1');
+                this.clients = this.allClients.filter(x => x.suitability);
             } else if (index === 1) {
-                this.clients = this.allClients.filter(x => x.status === '2');
+                this.clients = this.allClients.filter(x => !x.suitability && x.consent && x.learningStyle);
             } else if (index === 2) {
-                this.clients = this.allClients.filter(x => x.status === '3');
+                this.clients = this.allClients.filter(x => !x.suitability && !x.consent && !x.learningStyle);
             }
         } catch (err) {
             this.clients = this.allClients;
@@ -161,6 +167,50 @@ export class ClientStatusComponent implements OnInit {
 
     chartHovered(e: any): void {
 
+    }
+
+    createAsStudent(client: Student) {
+      this.studentService
+          .save(client)
+          .then(result => {
+            console.log(result);
+            this.removeAlert(client);
+          })
+          .catch(error => this.error = error); // TODO: Display error message
+    }
+
+    removeAlert(client) {
+      swal({
+          title: 'Transfer client (' + client.firstName + ' ' + client.lastName + ')?',
+          text: "You won't be able to revert this!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, transfer it!'
+      }).then(isConfirm => {
+        if (isConfirm) {
+          this.removeFromClientTable(client.userID);
+        }
+      });
+    }
+
+    removeFromClientTable(userID): void {
+      event.stopPropagation();
+      this.clientService
+          .removeFromClientTable(userID)
+          .then(res => {
+              this.clients = this.clients.filter(h => h.userID !== userID);
+              this.stage3 = this.clients.filter(x => x.userID !== userID && !x.suitability && !x.consent && !x.learningStyle);
+              this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length];
+              swal(
+                  'Transfered',
+                  'Client record has been transfered to the student table.',
+                  'success'
+              );
+              this.clientTotal = this.clients.length;
+          })
+          .catch(error => this.error = error);
     }
 
     goBack() {

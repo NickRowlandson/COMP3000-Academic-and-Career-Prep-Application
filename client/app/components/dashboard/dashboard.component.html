@@ -1,5 +1,10 @@
 <div class="dashboard">
-    <h2>Dashboard</h2>
+    <div *ngIf="userType === 'Client'">
+      <h2>Welcome, {{client}}</h2>
+    </div>
+    <div *ngIf="userType === 'Admin' || userType === 'Staff'">
+      <h2>Dashboard</h2>
+    </div>
     <hr>
     <div class="row">
         <div class="col-md-4 dashboardItem" *ngIf="clientStatus">
@@ -74,7 +79,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-4 dashboardItem" *ngIf="consent">
+        <div class="col-md-4 dashboardItem" *ngIf="consent && consentForm">
             <div class="itemBorder">
                 <a routerLink="/consent" routerLinkActive="active">
                     <div>
@@ -86,7 +91,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-4 dashboardItem" *ngIf="learningStyle">
+        <div class="col-md-4 dashboardItem" *ngIf="learningStyle && learningStyleForm">
             <div class="itemBorder">
                 <a routerLink="/learning-style" routerLinkActive="active">
                     <div>

@@ -1,7 +1,7 @@
 const schedule = require('node-schedule');
 const MailService = require("./MailService");
 
-var attendance = schedule.scheduleJob([{minute: 1}], function(){
+var attendance = schedule.scheduleJob([{hour: 1}], function(){
   console.log("Checking student attendance...");
   let mailOptions = {
     from: '"Test Ghost 👻" <ghost@test.com>', // sender address

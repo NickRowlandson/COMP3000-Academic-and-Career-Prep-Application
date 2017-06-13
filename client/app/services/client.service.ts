@@ -6,7 +6,6 @@ import { Client } from "../models/client";
 import { ConsentForm } from "../models/consentForm";
 import { LearningStyleForm } from "../models/learningStyleForm";
 import { SuitabilityForm } from "../models/suitabilityForm";
-//import * as pdfFiller from 'pdffiller';
 
 @Injectable()
 export class ClientService {
@@ -110,12 +109,25 @@ export class ClientService {
             .catch(this.handleError);
     }
 
-    delete(client: Client) {
+    delete(client) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
         let url = `${this.clientUrl}/${client.userID}`;
+
+        return this.http
+            .delete(url, options)
+            .toPromise()
+            .catch(this.handleError);
+    }
+
+    removeFromClientTable(userID) {
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        let url = `${this.clientUrl}/${userID}/remove`;
 
         return this.http
             .delete(url, options)
