@@ -33,6 +33,7 @@
     "@angular/platform-browser-dynamic": "^2.4.10",
     "@angular/router": "~3.2.3",
     "@angular/upgrade": "^2.4.10",
+    "angular2-datatable": "^0.6.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "bootstrap": "^3.3.7",
@@ -46,8 +47,9 @@
     "pdffiller": "0.0.10",
     "reflect-metadata": "^0.1.10",
     "rxjs": "5.0.2",
-    "systemjs": "0.19.41",
-    "zone.js": "^0.7.8"
+    "systemjs": "0.20.12",
+    "typescript": "^2.3.4",
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
     "concurrently": "^3.0.0",

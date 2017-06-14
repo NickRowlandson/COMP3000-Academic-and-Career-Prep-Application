@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from "../../models/client";
 import { Student } from "../../models/student";
@@ -16,7 +16,8 @@ declare var swal: any;
 })
 
 export class ClientStatusComponent implements OnInit {
-    clients: Client[];
+    data: any[];
+    filterQuery = "";
     allClients: Client[];
     suitabilityForms: SuitabilityForm[];
     clientTotal: any;
@@ -48,7 +49,7 @@ export class ClientStatusComponent implements OnInit {
             .getClients()
             .then(objects => {
                 if (objects.status === "403") {
-                    this.clients = null;
+                    this.data = null;
                 } else {
                     this.setData(objects);
                 }
@@ -62,22 +63,22 @@ export class ClientStatusComponent implements OnInit {
             .populatePRF(client.userID)
             .then(response => {
               swal(
-                  'PRF Generated!',
-                  client.username,
-                  'success'
+                  'Sorry...',
+                  'This feature is not yet available',
+                  'info'
               );
             })
             .catch(error => console.log(error));
     }
 
     setData(objects) {
-        this.clients = objects.clients;
+        this.data = objects.clients;
         this.allClients = objects.clients;
         this.clientTotal = objects.clients.length;
         this.suitabilityForms = objects.suitabilityForms;
-        this.stage1 = this.clients.filter(x => x.suitability);
-        this.stage2 = this.clients.filter(x => !x.suitability && x.consent && x.learningStyle);
-        this.stage3 = this.clients.filter(x => !x.suitability && !x.consent && !x.learningStyle);
+        this.stage1 = this.data.filter(x => x.suitability);
+        this.stage2 = this.data.filter(x => !x.suitability && x.consent && x.learningStyle);
+        this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle);
         this.doughnutChartLabels = ['Suitability', 'Consent/Learning Style', 'Forms Complete'];
         this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length];
         this.doughnutChartType = 'doughnut';
@@ -88,9 +89,9 @@ export class ClientStatusComponent implements OnInit {
         this.router.navigate(['/suitability']);
     }
 
-    gotoEdit(client: Client, event: any) {
-        this.router.navigate(['/clientEdit', client.clientID]);
-    }
+    // gotoEdit(client: Client, event: any) {
+    //     this.router.navigate(['/clientEdit', client.clientID]);
+    // }
 
     deleteAlert(client, event) {
         swal({
@@ -113,13 +114,13 @@ export class ClientStatusComponent implements OnInit {
         this.clientService
             .delete(client)
             .then(res => {
-                this.clients = this.clients.filter(h => h !== client);
+                this.data = this.data.filter(h => h !== client);
                 swal(
                     'Deleted!',
                     'Client record has been deleted.',
                     'success'
                 );
-                this.clientTotal = this.clients.length;
+                this.clientTotal = this.data.length;
             })
             .catch(error => this.error = error);
     }
@@ -154,14 +155,14 @@ export class ClientStatusComponent implements OnInit {
         try {
             var index = e.active[0]._index;
             if (index === 0) {
-                this.clients = this.allClients.filter(x => x.suitability);
+                this.data = this.allClients.filter(x => x.suitability);
             } else if (index === 1) {
-                this.clients = this.allClients.filter(x => !x.suitability && x.consent && x.learningStyle);
+                this.data = this.allClients.filter(x => !x.suitability && x.consent && x.learningStyle);
             } else if (index === 2) {
-                this.clients = this.allClients.filter(x => !x.suitability && !x.consent && !x.learningStyle);
+                this.data = this.allClients.filter(x => !x.suitability && !x.consent && !x.learningStyle);
             }
         } catch (err) {
-            this.clients = this.allClients;
+            this.data = this.allClients;
         }
     }
 
@@ -200,15 +201,15 @@ export class ClientStatusComponent implements OnInit {
       this.clientService
           .removeFromClientTable(userID)
           .then(res => {
-              this.clients = this.clients.filter(h => h.userID !== userID);
-              this.stage3 = this.clients.filter(x => x.userID !== userID && !x.suitability && !x.consent && !x.learningStyle);
+              this.data = this.data.filter(h => h.userID !== userID);
+              this.stage3 = this.data.filter(x => x.userID !== userID && !x.suitability && !x.consent && !x.learningStyle);
               this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length];
               swal(
                   'Transfered',
                   'Client record has been transfered to the student table.',
                   'success'
               );
-              this.clientTotal = this.clients.length;
+              this.clientTotal = this.data.length;
           })
           .catch(error => this.error = error);
     }

@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
+import { DataTableModule } from 'angular2-datatable';
 
 //Import components
 import { LoginComponent } from './components/login/login.component';
@@ -21,6 +22,9 @@ import { CourseManageComponent } from './components/course-manage/course-manage.
 import { PrfFormComponent } from './components/prf-form/prf-form.component';
 import { LearningStyleComponent } from './components/learning-style-form/learning-style-form.component';
 
+//Import pipes
+import { DataFilterPipe } from "./pipes/data-filter.pipe";
+
 //Import services
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
@@ -31,7 +35,7 @@ import { AuthService } from './services/authentication.service';
 import { StudentService } from './services/student.service';
 import { ClientService } from './services/client.service';
 import { StaffService } from './services/staff.service';
-import {CourseService } from './services/course.service';
+import { CourseService } from './services/course.service';
 
 
 @NgModule({
@@ -40,7 +44,8 @@ import {CourseService } from './services/course.service';
     HttpModule,
     FormsModule,
     routing,
-    ChartsModule
+    ChartsModule,
+    DataTableModule
     ],
   declarations: [
     AppComponent,
@@ -56,7 +61,8 @@ import {CourseService } from './services/course.service';
     CaseNotesComponent,
     CourseManageComponent,
     PrfFormComponent,
-    LearningStyleComponent
+    LearningStyleComponent,
+    DataFilterPipe
   ],
   providers: [
     AuthGuard,

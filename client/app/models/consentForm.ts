@@ -1,9 +1,6 @@
 export class ConsentForm {
-  firstName: string;
   userID: string;
-  lastName: string;
   date: string;
-  phone: string;
   detailedMessageYes: string;
   detailedMessageNo: string;
   ontarioWorks: string;

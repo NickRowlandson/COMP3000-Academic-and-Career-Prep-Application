@@ -17,10 +17,7 @@ class ClientFormsController {
                     var _id: string = req.params._id;
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
                         var consentQuery = "'" + _id + "', '" +
-                            consentForm.firstName + "', '" +
-                            consentForm.lastName + "', '" +
                             consentForm.date + "', '" +
-                            consentForm.phone + "', '" +
                             consentForm.detailedMessageYes + "', '" +
                             consentForm.detailedMessageNo + "', '" +
                             consentForm.ontarioWorks + "', '" +

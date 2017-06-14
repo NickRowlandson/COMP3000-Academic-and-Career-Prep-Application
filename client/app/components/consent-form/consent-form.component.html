@@ -1,15 +1,9 @@
 <h2>Consent Form </h2>
 <hr>
-  <input  [(ngModel)]="consentForm.firstName" placeholder="First Name" required />
-
-  <input   [(ngModel)]="consentForm.lastName" placeholder="Last name" required />
-
 <h3>Date</h3>
  {{date | date: format}}
   <input  type="hidden" value="{{date | date: format}}" [(ngModel)]="consentForm.date" placeholder="DD/MM/YYYY" required />
-<h3>Phone</h3>
-  <input  [(ngModel)]="consentForm.phone" placeholder="phone" required />
-
+  
 <h3>Can a detailed message be left at this number</h3>
 <label><input type="checkbox" [(ngModel)]="consentForm.detailedMessageYes"> Yes</label>
 <label><input type="checkbox" [(ngModel)]="consentForm.detailedMessageNo">  No</label>

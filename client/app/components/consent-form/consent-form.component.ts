@@ -14,8 +14,11 @@ import { AuthService } from '../../services/authentication.service';
 export class ConsentFormComponent {
   @Input() consentForm: ConsentForm;
   error: any;
+  date: any;
+
   constructor(private clientService: ClientService, private router: Router, private authService: AuthService) {
       this.consentForm = new ConsentForm();
+      this.date = new Date();
   }
 
   saveConsent() {
