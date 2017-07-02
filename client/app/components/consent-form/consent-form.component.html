@@ -18,9 +18,22 @@
 
 
 <h3>Other contact for follow up</h3>
-<input  [(ngModel)]="consentForm.contactName" placeholder="Contact Name" required />
+<input  [(ngModel)]="consentForm.contactName" placeholder="Contact Name" required #contactName="ngModel" />
+ <div *ngIf="contactName.errors && (contactName.dirty || contactName.touched)"class="alert alert-danger">
+                                <div [hidden]="!contactName.errors.required">
+                                First name is required
+                                </div>
+                        
+                         </div>
 
-<input   [(ngModel)]="consentForm.contactNum" placeholder="Phone Number" required />
+<input   [(ngModel)]="consentForm.contactNum" placeholder="Phone Number" required #contactNum="ngModel" />
+ <div *ngIf="contactNum.errors && (contactNum.dirty || contactNum.touched)"class="alert alert-danger">
+                             <div [hidden]="!contactNum.errors.required">
+                                Example Phone number format 1-777-777-7777
+                                </div>
+                            
+                        
+                         </div>
 
 
 <h3>Other literacy agencies</h3>
