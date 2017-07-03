@@ -21,33 +21,34 @@ export class AuthService {
         }
     }
 
-    login(username: string, password: string): Observable<boolean> {
-        let headers = new Headers({
-          'Content-Type': 'application/json'});
+    login(username: string, password: string): Promise<boolean> {
+        let headers = new Headers({'Content-Type': 'application/json'});
         var credentials = JSON.stringify({ username: username, password: password });
         return this.http.post('/api/auth', credentials, {headers:headers})
-            .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                var body = response.json().body;
-                let token = response.json().body && response.json().body.token;
-                if (token) {
-                    // set token property
-                    this.token = token;
+        .toPromise()
+        .then((response: Response) => {
+          // login successful if there's a jwt token in the response
+          var body = response.json().body;
+          let token = response.json().body && response.json().body.token;
+          if (token) {
+              // set token property
+              this.token = token;
 
-                    // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(body));
+              // store username and jwt token in local storage to keep user logged in between page refreshes
+              localStorage.setItem('currentUser', JSON.stringify(body));
 
-                    var username = JSON.parse(localStorage.getItem('currentUser')).username;
-                    this.loggedUser.next(JSON.stringify(username));
+              var username = JSON.parse(localStorage.getItem('currentUser')).username;
+              this.loggedUser.next(JSON.stringify(username));
 
-                    // return true to indicate successful login
-                    return true;
-                } else {
-                     console.log("Failed to login");
-                    // return false to indicate failed login
-                    return false;
-                }
-            });
+              // return true to indicate successful login
+              return true;
+            } else {
+                // return false to indicate failed login
+                return false;
+            }
+        }).catch((err) => {
+          console.log("Invalid login " + err);
+        });
     }
 
     logout(): void {
@@ -55,10 +56,5 @@ export class AuthService {
         this.token = null;
         localStorage.removeItem('currentUser');
         this.loggedUser.next(null);
-    }
-
-    private handleError(error: any) {
-        console.log('An error occurred', error);
-        return Promise.reject(error.message || error);
     }
 }
