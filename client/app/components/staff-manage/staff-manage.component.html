@@ -27,28 +27,45 @@
             </div>
         </div>
         <div class="col-md-12">
-            <table class="table table-striped">
+            <table class="table table-striped" [mfData]="users | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>
+                          <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
+                        </th>
+                        <th>
+                          <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                        </th>
                         <th>Action</th>
+                    </tr>
+                    <tr>
+                        <th colspan="5">
+                            Filter by name:
+                            <input class="form-control" [(ngModel)]="filterQuery" />
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of users" [class.active]="user === selectedUser">
-                        <td>{{user.firstName + " " + user.lastName}}</td>
-                        <td>{{user.email}}</td>
+                    <tr *ngFor="let item of mf.data" [class.active]="user === selectedUser">
+                        <td>{{item.firstName + " " + item.lastName}}</td>
+                        <td>{{item.email}}</td>
                         <td class="actionColumn middle">
                             <div class="inline">
-                                <button class="btn btn-primary" (click)="gotoEdit(user, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                                <button class="btn btn-primary" (click)="gotoEdit(item, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             </div>
                             <div class="inline">
-                                <button class="btn btn-danger" (click)="deleteUser(user, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                <button class="btn btn-danger" (click)="deleteUser(item, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
