@@ -23,55 +23,55 @@
             <button class="addClient btn btn-primary" (click)="addClient()" title="Add new client"><i class="fa fa-plus" aria-hidden="true"></i></button>
             <hr>
             <div class="error" *ngIf="error">{{error}}</div>
-                <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
-                    <thead>
-                        <tr>
-                            <th>
-                              <mfDefaultSorter by="status">Status</mfDefaultSorter>
-                            </th>
-                            <th>
-                              <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
-                            </th>
-                            <th>
-                              <mfDefaultSorter by="email">Email</mfDefaultSorter>
-                            </th>
-                            <th>Action</th>
-                        </tr>
-                        <tr>
-                          <th colspan="5">
-                              Filter by name:
-                              <input class="form-control" [(ngModel)]="filterQuery"/>
-                          </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of mf.data">
-                            <td>
-                                <div [class.statusStage1]="item.suitability" [class.statusStage2]="!item.suitability && item.consent && item.learningStyle" [class.statusStage3]="!item.suitability && !item.consent && !item.learningStyle"></div>
-                            </td>
-                            <td>{{item.firstName + " " + item.lastName}}</td>
-                            <td>{{item.email}}</td>
-                            <td class="actionColumn middle">
-                                <div class="dropdown-toggle" id="actionMenu" title="Click to view options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i>
-                                </div>
-                                <ul class="dropdown-menu actionMenu" aria-labelledby="actionMenu">
-                                    <li *ngIf="!item.suitability && !item.consent && !item.learningStyle"><a (click)="createAsStudent(item)"><i class="fa fa-check" aria-hidden="true"></i> Create as Student</a></li>
-                                    <li><a (click)="showClientView(item)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
-                                    <li><a (click)="populatePRF(item)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</a></li>
-                                    <li class="deleteClient"><a (click)="deleteAlert(item, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                          <td colspan="5">
-                              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
-                          </td>
-                      </tr>
-                    </tfoot>
-                </table>
+            <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+                <thead>
+                    <tr>
+                        <th>
+                            <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                        </th>
+                        <th>
+                            <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
+                        </th>
+                        <th>
+                            <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <th colspan="5">
+                            Filter by name:
+                            <input class="form-control" [(ngModel)]="filterQuery" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of mf.data">
+                        <td>
+                            <div [class.statusStage1]="item.suitability" [class.statusStage2]="!item.suitability && item.consent && item.learningStyle" [class.statusStage3]="!item.suitability && !item.consent && !item.learningStyle"></div>
+                        </td>
+                        <td>{{item.firstName + " " + item.lastName}}</td>
+                        <td>{{item.email}}</td>
+                        <td class="actionColumn middle">
+                            <div class="dropdown-toggle" id="actionMenu" title="Click to view options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i>
+                            </div>
+                            <ul class="dropdown-menu actionMenu" aria-labelledby="actionMenu">
+                                <li *ngIf="!item.suitability && !item.consent && !item.learningStyle"><a (click)="createAsStudent(item)"><i class="fa fa-check" aria-hidden="true"></i> Create as Student</a></li>
+                                <li><a (click)="showClientView(item)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
+                                <li><a (click)="populatePRF(item)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</a></li>
+                                <li class="deleteClient"><a (click)="deleteAlert(item, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
         <div *ngIf="!clientView" class="col-md-6">
             <h2>Status Report</h2>
@@ -91,6 +91,10 @@
                     <h4>General Info</h4></li>
                 <li class="sectionButtons" *ngIf="!clientView.suitability" [ngClass]="{active: showSuitability}" title="Suitability" (click)="sectionBtnClicked($event, 'suitability')">
                     <h4>Suitability</h4></li>
+                <li class="sectionButtons" *ngIf="!clientView.consent" [ngClass]="{active: showConsent}" title="Consent" (click)="sectionBtnClicked($event, 'consent')">
+                    <h4>Consent</h4></li>
+                <li class="sectionButtons" *ngIf="!clientView.learningStyle" [ngClass]="{active: showLearningStyle}" title="Consent" (click)="sectionBtnClicked($event, 'learningStyle')">
+                    <h4>Learning Style</h4></li>
             </ul>
             <div *ngIf="showGeneral" class="infoPanel">
                 <br />
@@ -127,6 +131,29 @@
                     <label class="control-label">Age: </label> {{suitabilityView.age}} <br />
                     <label class="control-label"># of Hours/Week: </label> {{suitabilityView.hoursPerWeek}} <br />
                     <label class="control-label">Work History: </label> {{suitabilityView.workHistory}} <br />
+                </div>
+            </div>
+            <div *ngIf="showConsent" class="infoPanel">
+                <br />
+                <div class="form-group">
+                    <label class="control-label">id: </label> {{consentView.userID}} <br />
+                    <label class="control-label">Date: </label> {{consentView.date}} <br />
+                    <label class="control-label">Detailed Message: </label> {{consentView.detailedMessage}} <br />
+                    <label class="control-label">Ontario Works: </label> {{consentView.ontarioWorks}} <br />
+                    <label class="control-label">Ontario Disability: </label> {{consentView.ontarioDisabilityProgram}} <br />
+                    <label class="control-label">Employment Insurance: </label> {{consentView.employmentInsurance}} <br />
+                    <label class="control-label">Employment Services: </label> {{consentView.employmentServices}} <br />
+                    <label class="control-label">Other: </label> {{consentView.other}} <br />
+                    <label class="control-label">Contact Name: </label> {{consentView.contactName}} <br />
+                    <label class="control-label">Contact Number: </label> {{consentView.contactNum}} <br />
+                    <label class="control-label">Literacy Agencies: </label> {{consentView.literacyAgencies}} <br />
+                    <label class="control-label">Literacy Witness: </label> {{consentView.literacyWitness}} <br />
+                </div>
+            </div>
+            <div *ngIf="showLearningStyle" class="infoPanel">
+                <br />
+                <div class="form-group">
+                    <label class="control-label">id: </label> {{learningStyleView.userID}} <br />
                 </div>
             </div>
         </div>

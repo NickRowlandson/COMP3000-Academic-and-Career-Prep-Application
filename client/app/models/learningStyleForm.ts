@@ -1,4 +1,5 @@
 export class LearningStyleForm {
+  userID: number;
   seeing: number;
   hearing: number;
   doing: number;

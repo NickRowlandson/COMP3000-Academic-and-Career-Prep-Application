@@ -205,7 +205,18 @@ class ClientController {
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
                         new sql.Request().query('SELECT * FROM Clients').then(function(clients) {
                             new sql.Request().query('SELECT * FROM SuitabilityForm').then(function(suitabilityForms) {
-                                res.send({ clients: clients, suitabilityForms: suitabilityForms });
+                                new sql.Request().query('SELECT * FROM Consent').then(function(consentForms) {
+                                  new sql.Request().query('SELECT * FROM LearningStyle').then(function(learningStyleForms) {
+                                      res.send({ clients: clients,
+                                        suitabilityForms: suitabilityForms,
+                                        consentForms: consentForms, 
+                                        learningStyleForms: learningStyleForms });
+                                  }).catch(function(err) {
+                                      res.send({ "error": "error" }); console.log("Get learningStyleForms " + err);
+                                  });
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" }); console.log("Get consentForms " + err);
+                                });
                             }).catch(function(err) {
                                 res.send({ "error": "error" }); console.log("Get suitabilityForms " + err);
                             });

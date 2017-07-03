@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { Client } from "../../models/client";
 import { Student } from "../../models/student";
 import { SuitabilityForm } from "../../models/suitabilityForm";
+import { ConsentForm } from "../../models/consentForm";
+import { LearningStyleForm } from "../../models/learningStyleForm";
 import { ClientService } from "../../services/client.service";
 import { StudentService } from "../../services/student.service";
 import { AuthService } from "../../services/authentication.service";
-
 declare var swal: any;
 
 @Component({
@@ -20,13 +21,20 @@ export class ClientStatusComponent implements OnInit {
     filterQuery = "";
     allClients: Client[];
     suitabilityForms: SuitabilityForm[];
+    consentForms: ConsentForm[];
+    learningStyleForms: LearningStyleForm[];
     clientTotal: any;
     error: any;
 
     clientView: Client;
+    consentView: ConsentForm;
     suitabilityView: SuitabilityForm;
+    learningStyleView: LearningStyleForm;
+
     showGeneral: boolean = true;
     showSuitability: boolean;
+    showConsent: boolean;
+    showLearningStyle: boolean;
 
     //Chart
     doughnutChartLabels: string[];
@@ -57,6 +65,10 @@ export class ClientStatusComponent implements OnInit {
             .catch(error => this.error = error);
     }
 
+    update(event) {
+      console.log();
+    }
+
     populatePRF(client) {
       console.log("generating pdf...");
         this.clientService
@@ -76,6 +88,8 @@ export class ClientStatusComponent implements OnInit {
         this.allClients = objects.clients;
         this.clientTotal = objects.clients.length;
         this.suitabilityForms = objects.suitabilityForms;
+        this.consentForms = objects.consentForms;
+        this.learningStyleForms = objects.learningStyleForms;
         this.stage1 = this.data.filter(x => x.suitability);
         this.stage2 = this.data.filter(x => !x.suitability && x.consent && x.learningStyle);
         this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle);
@@ -126,24 +140,56 @@ export class ClientStatusComponent implements OnInit {
     }
 
     showClientView(client: Client) {
+        this.clientView = client;
+
         this.showGeneral = true;
         this.showSuitability = false;
-        this.clientView = client;
+        this.showConsent = false;
+        this.showLearningStyle = false;
+
         var suitabilityForm = this.getSuitabilityFormByFilter(client.userID);
         this.suitabilityView = suitabilityForm[0];
+
+        var consentForm = this.getConsentFormByFilter(client.userID);
+        this.consentView = consentForm[0];
+
+        var learningStyleForm = this.getLearningStyleFormByFilter(client.userID);
+        this.learningStyleView = learningStyleForm[0];
     }
 
     getSuitabilityFormByFilter(id) {
         return this.suitabilityForms.filter(x => x.userID === id);
     }
 
+    getConsentFormByFilter(id) {
+        return this.consentForms.filter(x => x.userID === id);
+    }
+
+    getLearningStyleFormByFilter(id) {
+        return this.learningStyleForms.filter(x => x.userID === id);
+    }
+
     sectionBtnClicked(event, section) {
         if (section === "general") {
             this.showGeneral = true;
             this.showSuitability = false;
+            this.showConsent = false;
+            this.showLearningStyle = false;
         } else if (section === "suitability") {
             this.showGeneral = false;
             this.showSuitability = true;
+            this.showConsent = false;
+            this.showLearningStyle = false;
+        } else if (section === "consent") {
+            this.showGeneral = false;
+            this.showSuitability = false;
+            this.showConsent = true;
+            this.showLearningStyle = false;
+        } else if (section === "learningStyle") {
+            this.showGeneral = false;
+            this.showSuitability = false;
+            this.showConsent = false;
+            this.showLearningStyle = true;
         }
     }
 
