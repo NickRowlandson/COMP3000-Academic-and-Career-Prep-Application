@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Student } from "../../models/student";
 import { Router } from '@angular/router';
 import { StudentService } from "../../services/student.service";
@@ -16,7 +16,7 @@ export class StudentManageComponent implements OnInit {
     students: Student [];
     error: any;
 
-    constructor(private router: Router, private studentService: StudentService, private authService: AuthService) {
+    constructor(private router: Router, private ngZone: NgZone, private studentService: StudentService, private authService: AuthService) {
 
     }
 
@@ -43,6 +43,10 @@ export class StudentManageComponent implements OnInit {
 
     gotoEdit(student: Student, event: any) {
         this.router.navigate(['/student-edit', student.studentID]);
+    }
+
+    gotoCourseSelection(student: Student, event: any) {
+      this.router.navigate(['/course-selection', student.studentID]);
     }
 
     addStudent() {

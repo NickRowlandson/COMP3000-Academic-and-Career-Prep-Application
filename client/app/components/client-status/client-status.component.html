@@ -45,21 +45,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of mf.data">
+                    <tr *ngFor="let client of mf.data">
                         <td>
-                            <div [class.statusStage1]="item.suitability" [class.statusStage2]="!item.suitability && item.consent && item.learningStyle" [class.statusStage3]="!item.suitability && !item.consent && !item.learningStyle"></div>
+                            <div [class.statusStage1]="client.suitability" [class.statusStage2]="!client.suitability && client.consent && client.learningStyle" [class.statusStage3]="!client.suitability && !client.consent && !client.learningStyle"></div>
                         </td>
-                        <td>{{item.firstName + " " + item.lastName}}</td>
-                        <td>{{item.email}}</td>
+                        <td>{{client.firstName + " " + client.lastName}}</td>
+                        <td>{{client.email}}</td>
                         <td class="actionColumn middle">
                             <div class="dropdown-toggle" id="actionMenu" title="Click to view options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i>
                             </div>
                             <ul class="dropdown-menu actionMenu" aria-labelledby="actionMenu">
-                                <li *ngIf="!item.suitability && !item.consent && !item.learningStyle"><a (click)="createAsStudent(item)"><i class="fa fa-check" aria-hidden="true"></i> Create as Student</a></li>
-                                <li><a (click)="showClientView(item)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
-                                <li><a (click)="populatePRF(item)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</a></li>
-                                <li class="deleteClient"><a (click)="deleteAlert(item, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
+                                <li *ngIf="!client.suitability && !client.consent && !client.learningStyle"><a (click)="createAsStudent(item)"><i class="fa fa-check" aria-hidden="true"></i> Create as Student</a></li>
+                                <li><a (click)="showClientView(client)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
+                                <li><a (click)="populatePRF(client)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</a></li>
+                                <li class="deleteClient"><a (click)="deleteAlert(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
                             </ul>
                         </td>
                     </tr>

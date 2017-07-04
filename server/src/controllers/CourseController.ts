@@ -1,4 +1,3 @@
-
 import express = require("express");
 import jwt = require('jsonwebtoken');
 import bcrypt = require('bcrypt');
@@ -13,10 +12,7 @@ class CourseController {
                 requiredAuth: auth, done: function () {
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function () {
                         new sql.Request().query('SELECT * FROM Course').then(function (recordset) {
-                            console.log("courses list ====");
-                            console.log(recordset);
                             res.send(recordset);
-                           
                         }).catch(function (err) {
                             res.send({ "error": "error" }); console.log("Select all course " + err);
                         });

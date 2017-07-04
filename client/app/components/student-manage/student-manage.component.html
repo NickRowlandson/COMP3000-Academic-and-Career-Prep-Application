@@ -45,12 +45,17 @@
                         <td>{{item.firstName + " " + item.lastName}}</td>
                         <td>{{item.email}}</td>
                         <td class="actionColumn middle">
+                          <div >
                             <div class="inline">
                                 <button class="btn btn-primary" (click)="gotoEdit(item, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             </div>
                             <div class="inline">
+                                <button class="btn btn-warning" (click)="gotoCourseSelection(item, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Manage Courses</button>
+                            </div>
+                            <div class="inline">
                                 <button class="btn btn-success" (click)="archiveAlert(item, $event)"><i class="fa fa-archive" aria-hidden="true"></i> Archive</button>
                             </div>
+                          </div>
                         </td>
                     </tr>
                 </tbody>

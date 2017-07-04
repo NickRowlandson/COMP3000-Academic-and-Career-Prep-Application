@@ -20,6 +20,7 @@ import { CaseNotesComponent } from './components/case-notes/case-notes.component
 import { CourseManageComponent } from './components/course-manage/course-manage.component';
 import { PrfFormComponent } from './components/prf-form/prf-form.component';
 import { LearningStyleComponent } from './components/learning-style-form/learning-style-form.component';
+import { CourseSelectionComponent } from './components/course-selection/course-selection.component';
 
 const appRoutes: Routes = [
     {
@@ -90,6 +91,11 @@ const appRoutes: Routes = [
         path: 'learning-style',
         component: LearningStyleComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'course-selection/:id',
+        component: CourseSelectionComponent,
+        canActivate: [AuthGuard, StaffGuard]
     }
 ];
 

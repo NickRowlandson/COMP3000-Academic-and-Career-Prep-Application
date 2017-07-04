@@ -3,6 +3,7 @@ import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { AuthService } from './authentication.service';
 import { Student } from "../models/student";
+import { Course } from "../models/course";
 
 @Injectable()
 export class StudentService {
@@ -79,5 +80,23 @@ export class StudentService {
     private handleError(error: any) {
         console.log('An error occurred', error);
         return Promise.reject(error.message || error);
+    }
+
+    private courseEnroll(studentID, courseID): Promise<Student> {
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        let url = `${this.studentsUrl}/${studentID}/${courseID}`;
+
+        return this.http
+            .post(url, options)
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
+
+    removeCourse(student, course) {
+
     }
 }

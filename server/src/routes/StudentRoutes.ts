@@ -16,6 +16,7 @@ class StudentRoutes {
         router.put("/students/:_id", controller.update);
         router.get("/students/:_id", controller.findById);
         router.delete("/students/:_id", controller.delete);
+        router.post("/students/:_studentID/:_courseID", controller.addToTimetable);
 
         return router;
     }

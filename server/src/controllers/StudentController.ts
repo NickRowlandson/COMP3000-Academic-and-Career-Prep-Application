@@ -29,6 +29,7 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
+
     update(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -53,6 +54,7 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
+
     delete(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -80,6 +82,7 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
+
     retrieve(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -102,6 +105,7 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
+    
     findById(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -124,6 +128,31 @@ class StudentController {
             console.log(e);
             res.send({ "error": "error in your request" });
         }
+    }
+
+    addToTimetable(req: express.Request, res: express.Response): void {
+      try {
+          new AuthController().authUser(req, res, {
+              requiredAuth: auth, done: function() {
+                  var _studentID  = req.params._studentID;
+                  var _courseID = req.params._courseID;
+                  sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+                          new sql.Request().query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "')").then(function() {
+                              res.send({ "success": "success" });
+                          }).catch(function(err) {
+                              res.send({ "error": "error" }); console.log("insert timetable " + err);
+                          });
+                  }).catch(function(err) {
+                      console.log(err);
+                      res.send({ "error": "error" });
+                  });
+              }
+          });
+      }
+      catch (e) {
+          console.log(e);
+          res.send({ "error": "error in your request" });
+      }
     }
 }
 export = StudentController;
