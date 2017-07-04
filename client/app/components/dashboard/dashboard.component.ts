@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
     caseNotes = false;
     learningStyle = false;
     maesdprf = false;
+    timetable = false;
 
     //
     userType: any;
@@ -48,52 +49,21 @@ export class DashboardComponent implements OnInit {
             this.manageStudents = true;
             this.manageStaff = true;
             this.suitability = true;
-            this.consent = false;
-            this.learningStyle = false;
-            this.maesdprf = false;
             this.caseNotes = true;
             this.manageCourses = true;
         } else if (userType === 'Staff') {
             this.clientStatus = true;
             this.manageStudents = true;
-            this.manageStaff = false;
             this.suitability = true;
-            this.consent = false;
-            this.learningStyle = false;
-            this.maesdprf = false;
             this.caseNotes = true;
             this.manageCourses = true;
         } else if (userType === 'Student') {
-            this.clientStatus = false;
-            this.manageStudents = false;
-            this.manageStaff = false;
-            this.suitability = false;
-            this.consent = false;
-            this.learningStyle = false;
-            this.maesdprf = false;
-            this.caseNotes = false;
-            this.manageCourses = false;
+            this.timetable = true;
         } else if (userType === 'Client') {
-            this.clientStatus = false;
-            this.manageStudents = false;
-            this.manageStaff = false;
-            this.suitability = false;
             this.consent = true;
             this.learningStyle = true;
             this.maesdprf = true;
-            this.caseNotes = false;
-            this.manageCourses = false;
             this.checkFormStatus(userID);
-        } else {
-            this.clientStatus = false;
-            this.manageStudents = false;
-            this.manageStaff = false;
-            this.suitability = false;
-            this.consent = false;
-            this.learningStyle = false;
-            this.maesdprf = false;
-            this.caseNotes = false;
-            this.manageCourses = false;
         }
     }
 

@@ -22,6 +22,7 @@ import { CourseManageComponent } from './components/course-manage/course-manage.
 import { PrfFormComponent } from './components/prf-form/prf-form.component';
 import { LearningStyleComponent } from './components/learning-style-form/learning-style-form.component';
 import { CourseSelectionComponent } from './components/course-selection/course-selection.component';
+import { TimetableComponent } from './components/timetable/timetable.component';
 
 //Import pipes
 import { DataFilterPipe } from "./pipes/data-filter.pipe";
@@ -64,6 +65,7 @@ import { CourseService } from './services/course.service';
     PrfFormComponent,
     LearningStyleComponent,
     CourseSelectionComponent,
+    TimetableComponent,
     DataFilterPipe
   ],
   providers: [
