@@ -5,7 +5,6 @@ import AuthController = require("../controllers/AuthController");
 const sql = require('mssql');
 var auth = ["Admin"];
 
-
 const config = {
     user: 'NickRowlandson',
     password: 'georgianTest1',
@@ -87,7 +86,28 @@ class CourseController {
         }
     }
 
-
+    update(req: express.Request, res: express.Response): void {
+        try {
+          new AuthController().authUser(req, res, {requiredAuth: auth, done: function(){
+            var course = req.body;
+            var _id: string = req.params._id;
+            sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+              new sql.Request().query("UPDATE Course SET courseName='"+course.courseName+"', lastName='"+course.classroom+"' WHERE courseID = '"+_id+"'").then(function() {
+                  res.send({"success": "success"});
+              }).catch(function(err) {
+                  res.send({"error": "error"}); console.log("Update course " + err);
+              });
+            }).catch(function(err) {
+                console.log(err);
+                res.send({"error": "error in your request"});
+            });
+          }});
+        }
+        catch (e)  {
+            console.log(e);
+            res.send({"error": "error in your request"});
+        }
+    }
 
   findById(req: express.Request, res: express.Response): void {
   try {

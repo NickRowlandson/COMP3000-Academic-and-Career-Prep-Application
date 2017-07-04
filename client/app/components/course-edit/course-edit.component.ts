@@ -23,17 +23,15 @@ export class CourseEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
       let id = params['id'];
-      console.log(id);
       if (id === 'new') {
         this.newCourse = true;
         this.course = new Course();
-        console.log(this.newCourse);
       } else {
-        console.log("course id " + id);
         this.newCourse = false;
-        this.courseService.getCourse(id).then(course => {
-          this.course = course;
-          console.log(course.courseName);
+        this.courseService
+        .getCourse(id)
+        .then(course => {
+          this.course = course[0];
         });
       }
     });

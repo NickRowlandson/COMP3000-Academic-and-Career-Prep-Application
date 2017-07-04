@@ -5,6 +5,7 @@ import { Course } from "../../models/course";
 import { Student } from "../../models/Student";
 import { CourseService } from "../../services/course.service";
 import { StudentService } from "../../services/student.service";
+declare var vis;
 
 @Component({
     selector: 'course-selection',
@@ -30,6 +31,8 @@ export class CourseSelectionComponent implements OnInit {
         });
         this.getCourse();
         this.checkTimetable();
+
+
     }
 
     getCourse() {
@@ -42,8 +45,7 @@ export class CourseSelectionComponent implements OnInit {
                 this.courses = result;
                 console.log(this.courses);
               }
-            })
-            .catch(error => error);
+            }).catch(error => error);
     }
 
     courseEnroll(course:Course, $event) {

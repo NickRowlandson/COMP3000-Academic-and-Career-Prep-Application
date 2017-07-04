@@ -51,11 +51,9 @@ export class CourseService {
          .catch(this.handleError);
     }
 
-
-
- save(course: Course): Promise<Course>  {
+    save(course: Course): Promise<Course>  {
         if (course.courseID) {
-            //return this.put(course);
+            return this.put(course);
         }
         return this.post(course);
     }
@@ -72,18 +70,18 @@ export class CourseService {
           .catch(this.handleError);
     }
 
-    // private put(course: Course) {
-    //   // add authorization header with jwt token
-    //   let headers = new Headers({ authorization: this.authService.token });
-    //   let options = new RequestOptions({ headers: headers });
+    private put(course: Course) {
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
 
-    //   let url = `${this.courseUrl}/${course.courseID}`;
-    //   return this.http
-    //       .put(url, course, options)
-    //       .toPromise()
-    //       .then(() => course)
-    //       .catch(this.handleError);
-    // }
+      let url = `${this.courseUrl}/${course.courseID}`;
+      return this.http
+          .put(url, course, options)
+          .toPromise()
+          .then(() => course)
+          .catch(this.handleError);
+    }
 
     private handleError(error: any) {
        console.log('An error occurred', error);

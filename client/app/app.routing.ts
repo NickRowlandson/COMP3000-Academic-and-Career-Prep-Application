@@ -23,6 +23,7 @@ import { PrfFormComponent } from './components/prf-form/prf-form.component';
 import { LearningStyleComponent } from './components/learning-style-form/learning-style-form.component';
 import { CourseSelectionComponent } from './components/course-selection/course-selection.component';
 import { TimetableComponent } from './components/timetable/timetable.component';
+import { VisviewComponent } from './components/visview/visview.component';
 
 const appRoutes: Routes = [
     {
@@ -108,6 +109,11 @@ const appRoutes: Routes = [
         path: 'course-selection/:id',
         component: CourseSelectionComponent,
         canActivate: [AuthGuard, StaffGuard]
+    },
+    {
+        path: 'visview',
+        component: VisviewComponent,
+        canActivate: [AuthGuard]
     }
 ];
 
