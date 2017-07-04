@@ -13,8 +13,8 @@ class CourseRoutes {
 
         router.get("/course", controller.retrieve);
         router.post("/course", controller.create);
-        //router.put("/Course/:_id", controller.update);
-        router.get("/Course/:_id", controller.findById);
+        router.put("/course/:_id", controller.update);
+        router.get("/course/:_id", controller.findById);
         router.delete("/course/:_id", controller.delete);
 
         return router;
