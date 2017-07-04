@@ -19,6 +19,7 @@ import { SuitabilityFormComponent } from './components/suitability-form/suitabil
 import { ConsentFormComponent } from './components/consent-form/consent-form.component';
 import { CaseNotesComponent } from './components/case-notes/case-notes.component';
 import { CourseManageComponent } from './components/course-manage/course-manage.component';
+import { CourseEditComponent } from './components/course-edit/course-edit.component';
 import { PrfFormComponent } from './components/prf-form/prf-form.component';
 import { LearningStyleComponent } from './components/learning-style-form/learning-style-form.component';
 import { CourseSelectionComponent } from './components/course-selection/course-selection.component';
@@ -62,6 +63,7 @@ import { CourseService } from './services/course.service';
     ConsentFormComponent,
     CaseNotesComponent,
     CourseManageComponent,
+    CourseEditComponent,
     PrfFormComponent,
     LearningStyleComponent,
     CourseSelectionComponent,

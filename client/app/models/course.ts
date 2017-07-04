@@ -1,8 +1,9 @@
-
 export class Course {
-    courseID: number;
+    courseID: string;
     authLevel: string;
     courseName: string;
-    scheduleStart: string;
-    scheduleEnd: string;
+    courseStart: string;
+    courseEnd: string;
+    classroom:string;
+    campusId:string;
 }

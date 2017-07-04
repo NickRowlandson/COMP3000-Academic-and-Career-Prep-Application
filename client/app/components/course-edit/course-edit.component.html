@@ -1,0 +1,59 @@
+<div class="courseEdit form-horizontal">
+    <div *ngIf="!newCourse">
+        <h2>Edit {{course.courseName}}'s Details</h2>
+    </div>
+    <div *ngIf="newCourse">
+        <h2>Add New Course</h2>
+    </div>
+    <hr>
+    <!--<div class="form-group">
+        <div *ngIf="!newCourse">
+            <label class="col-sm-2 control-label">id: </label>
+            <div class="col-sm-10">
+                {{course.courseId}}
+            </div>
+        </div>
+    </div>-->
+    <div class="form-group" >
+        <label class="col-sm-2 control-label">Course Name: </label>
+        <div class="col-sm-10">
+            <input class="form-control" [(ngModel)]="course.courseName" placeholder="Course Name" required />
+        </div>
+    </div>
+
+    <div class="form-group" >
+        <label class="col-sm-2 control-label">Start: </label>
+        <!--<div class="col-sm-10">
+            <input class="form-control" type="date" [(ngModel)]="course.courseStart" placeholder="Start" required />
+        </div>-->
+        <div>datetime picker</div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">End: </label>
+        <div class="col-sm-10">
+            <!--<input class="form-control" type="date" [(ngModel)]="course.courseEnd" placeholder="End" required />-->
+              <div>datetime picker</div>
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label class="col-sm-2 control-label">professor: </label>
+        dropdown
+    </div>
+
+     <div class="form-group">
+        <label class="col-sm-2 control-label">classroom: </label>
+        <div class="col-sm-10">
+            <input class="form-control" [(ngModel)]="course.classroom" placeholder="classroom" required />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button (click)="goBack()" class="btn btn-default">Back</button>
+            <button (click)="save()" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</div>

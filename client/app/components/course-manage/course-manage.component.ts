@@ -17,11 +17,11 @@ export class CourseManageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getCourse();
+        this.getCourses();
     }
-    getCourse() {
+    getCourses() {
         this.CourseService
-            .getCourse()
+            .getCourses()
             .then(result => {
                 if (result.status === "403") {
                     this.courses = null;
@@ -32,6 +32,29 @@ export class CourseManageComponent implements OnInit {
             })
             .catch(error => this.error = error);
     }
+
+  deleteCourse(course: Course, event: any) {
+
+        event.stopPropagation();
+        this.CourseService
+          .delete(course)
+          .then(res => {
+              console.log(res);
+              console.log(course);
+              this.courses = this.courses.filter(h => h !== course);
+          })
+          .catch(error => this.error = error);
+    }
+
+    gotoEdit(course: Course, event: any) {
+        this.router.navigate(['/course-edit', course.courseID]);
+    }
+
+    addCourse() {
+        this.router.navigate(['/course-edit', 'new']);
+    }
+
+
     goBack() {
         window.history.back();
     }
