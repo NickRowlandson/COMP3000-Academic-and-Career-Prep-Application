@@ -30,6 +30,7 @@ export class CourseSelectionComponent implements OnInit {
         });
         this.getCourse();
         this.checkTimetable();
+        this.checkStatus();
     }
 
     getCourse() {
@@ -73,6 +74,9 @@ export class CourseSelectionComponent implements OnInit {
       //
       // })
       // .catch(error => error);
+    }
+
+    checkStatus(){
     }
 
     goBack() {

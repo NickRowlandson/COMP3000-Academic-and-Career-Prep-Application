@@ -134,8 +134,8 @@ class StudentController {
       try {
         var _studentID  = req.params._studentID;
         var _courseID = req.params._courseID;
-        sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-                new sql.Request().query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "')").then(function() {
+        sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function(connection) {
+                new sql.Request(connection).query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "')").then(function() {
                     res.send({ "success": "success" });
                 }).catch(function(err) {
                     res.send({ "error": "error" }); console.log("insert timetable " + err);
