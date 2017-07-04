@@ -16,6 +16,7 @@ export class CourseSelectionComponent implements OnInit {
     @Input() student: Student;
     courses: Course[];
     studentID: any;
+    studentTimetable: [];
 
     constructor(private studentService: StudentService, private courseService: CourseService, private route: ActivatedRoute) {
 
@@ -28,18 +29,19 @@ export class CourseSelectionComponent implements OnInit {
                 .then(student => this.student = student);
         });
         this.getCourse();
+        this.checkTimetable();
     }
 
     getCourse() {
         this.courseService
             .getCourse()
             .then(result => {
-                if (result.status === "403") {
-                    this.courses = null;
-                } else {
-                    this.courses = result;
-                    console.log(this.courses);
-                }
+              if (result.error === 'error') {
+                this.courses = null;
+              } else {
+                this.courses = result;
+                console.log(this.courses);
+              }
             })
             .catch(error => error);
     }
@@ -48,7 +50,18 @@ export class CourseSelectionComponent implements OnInit {
       this.studentService
       .courseEnroll(this.studentID, course.courseID)
       .then(result => {
+        this.checkTimetable();
         console.log("Enrolled");
+      })
+      .catch(error => error);
+    }
+
+    checkTimetable() {
+      this.studentService
+      .checkStudentTimetable(this.studentID)
+      .then(result => {
+        this.studentTimetable = result;
+        console.log(this.studentTimetable);
       })
       .catch(error => error);
     }

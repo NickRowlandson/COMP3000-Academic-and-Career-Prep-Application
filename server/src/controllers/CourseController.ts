@@ -10,8 +10,8 @@ class CourseController {
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function () {
-                    sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function () {
-                        new sql.Request().query('SELECT * FROM Course').then(function (recordset) {
+                    sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function (connection) {
+                        new sql.Request(connection).query('SELECT * FROM Course').then(function (recordset) {
                             res.send(recordset);
                         }).catch(function (err) {
                             res.send({ "error": "error" }); console.log("Select all course " + err);

@@ -83,8 +83,8 @@ export class CourseService {
     //      .catch(this.handleError);
     //}
 
-    //private handleError(error: any) {
-    //    console.log('An error occurred', error);
-    //    return Promise.reject(error.message || error);
-    //}
+    private handleError(error: any) {
+       console.log('An error occurred', error);
+       return Promise.reject(error.message || error);
+    }
 }

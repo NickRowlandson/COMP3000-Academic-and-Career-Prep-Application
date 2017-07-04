@@ -82,7 +82,7 @@ export class StudentService {
         return Promise.reject(error.message || error);
     }
 
-    private courseEnroll(studentID, courseID): Promise<Student> {
+    courseEnroll(studentID, courseID) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
@@ -94,6 +94,19 @@ export class StudentService {
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
+    }
+
+    checkStudentTimetable(studentID) {
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
+
+      let url = `${this.studentsUrl}/${studentID}/timetable`;
+
+      return this.http.get(url, options)
+          .toPromise()
+          .then(response => response.json())
+          .catch(this.handleError);
     }
 
     removeCourse(student, course) {

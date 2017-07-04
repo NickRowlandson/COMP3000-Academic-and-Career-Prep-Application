@@ -105,14 +105,14 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
-    
+
     findById(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {
                     var _id: string = req.params._id;
-                    sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-                        new sql.Request().query("SELECT *  FROM Students WHERE studentID = '" + _id + "'").then(function(recordset) {
+                    sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function(connection) {
+                        new sql.Request(connection).query("SELECT *  FROM Students WHERE studentID = '" + _id + "'").then(function(recordset) {
                             res.send(recordset[0]);
                         }).catch(function(err) {
                             res.send({ "error": "error" }); console.log("Get student by id " + err);
@@ -132,22 +132,48 @@ class StudentController {
 
     addToTimetable(req: express.Request, res: express.Response): void {
       try {
-          new AuthController().authUser(req, res, {
-              requiredAuth: auth, done: function() {
-                  var _studentID  = req.params._studentID;
-                  var _courseID = req.params._courseID;
-                  sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-                          new sql.Request().query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "')").then(function() {
-                              res.send({ "success": "success" });
-                          }).catch(function(err) {
-                              res.send({ "error": "error" }); console.log("insert timetable " + err);
-                          });
-                  }).catch(function(err) {
-                      console.log(err);
-                      res.send({ "error": "error" });
-                  });
-              }
-          });
+        var _studentID  = req.params._studentID;
+        var _courseID = req.params._courseID;
+        sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+                new sql.Request().query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "')").then(function() {
+                    res.send({ "success": "success" });
+                }).catch(function(err) {
+                    res.send({ "error": "error" }); console.log("insert timetable " + err);
+                });
+        }).catch(function(err) {
+            console.log(err);
+            res.send({ "error": "error" });
+        });
+          // new AuthController().authUser(req, res, {
+          //     requiredAuth: auth, done: function() {
+          //
+          //     }
+          // });
+      }
+      catch (e) {
+          console.log(e);
+          res.send({ "error": "error in your request" });
+      }
+    }
+
+    checkStudentTimetable(req: express.Request, res: express.Response): void {
+      try {
+        var _studentID = req.params._studentID;
+        sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
+            new sql.Request().query("SELECT * FROM Timetables WHERE studentID = '" + _studentID + "'").then(function(recordset) {
+                res.send(recordset);
+            }).catch(function(err) {
+                res.send({ "error": "error" }); console.log("Get student timetable " + err);
+            });
+        }).catch(function(err) {
+            console.log(err);
+            res.send({ "error": "error" });
+        });
+          // new AuthController().authUser(req, res, {
+          //     requiredAuth: auth, done: function() {
+          //
+          //     }
+          // });
       }
       catch (e) {
           console.log(e);
