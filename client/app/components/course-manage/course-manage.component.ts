@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CourseService } from "../../services/course.service";
 import { Course } from "../../models/course";
+declare var swal: any;
+
 @Component({
     selector: 'courseManage',
     templateUrl: './app/components/course-manage/course-manage.component.html',
@@ -33,15 +35,33 @@ export class CourseManageComponent implements OnInit {
             .catch(error => this.error = error);
     }
 
-  deleteCourse(course: Course, event: any) {
+    deleteAlert(course: Course, event: any) {
+        swal({
+            title: 'Delete course (' + course.courseName + ')?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(isConfirm => {
+          if (isConfirm) {
+            this.deleteCourse(course, event);
+          }
+        });
+    }
 
+    deleteCourse(course: Course, event: any) {
         event.stopPropagation();
         this.CourseService
           .delete(course)
           .then(res => {
-              console.log(res);
-              console.log(course);
               this.courses = this.courses.filter(h => h !== course);
+              swal(
+                  'Deleted!',
+                  'Course record has been deleted.',
+                  'success'
+              );
           })
           .catch(error => this.error = error);
     }

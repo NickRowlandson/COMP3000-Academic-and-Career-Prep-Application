@@ -25,13 +25,15 @@
             <table class="table table-striped" [mfData]="students | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
                 <thead>
                     <tr>
-                      <th>
-                        <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
-                      </th>
-                      <th>
-                        <mfDefaultSorter by="email">Email</mfDefaultSorter>
-                      </th>
-                        <th>Action</th>
+                        <th>
+                            <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
+                        </th>
+                        <th>
+                            <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                        </th>
+                        <th class="actionButton">Edit</th>
+                        <th class="actionButton">Courses</th>
+                        <th class="actionButton">Archive</th>
                     </tr>
                     <tr>
                         <th colspan="5">
@@ -45,17 +47,19 @@
                         <td>{{item.firstName + " " + item.lastName}}</td>
                         <td>{{item.email}}</td>
                         <td class="actionColumn middle">
-                          <div >
                             <div class="inline">
                                 <button class="btn btn-primary" (click)="gotoEdit(item, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             </div>
+                        </td>
+                        <td class="actionColumn middle">
                             <div class="inline">
-                                <button class="btn btn-warning" (click)="gotoCourseSelection(item, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Manage Courses</button>
+                                <button class="btn btn-warning" (click)="gotoCourseSelection(item, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Courses</button>
                             </div>
+                        </td>
+                        <td class="actionColumn middle">
                             <div class="inline">
                                 <button class="btn btn-success" (click)="archiveAlert(item, $event)"><i class="fa fa-archive" aria-hidden="true"></i> Archive</button>
                             </div>
-                          </div>
                         </td>
                     </tr>
                 </tbody>

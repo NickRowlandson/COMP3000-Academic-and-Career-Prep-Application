@@ -29,53 +29,53 @@ export class CourseSelectionComponent implements OnInit {
             this.studentService.getStudent(this.studentID)
                 .then(student => this.student = student);
         });
-        this.getCourse();
+        this.getCourses();
         this.checkTimetable();
     }
 
-    getCourse() {
+    getCourses() {
         this.courseService
-            .getCourse()
+            .getCourses()
             .then(result => {
-              if (result.error === 'error') {
-                this.courses = null;
-              } else {
-                this.courses = result;
-                console.log(this.courses);
-              }
+                if (result.error === 'error') {
+                    this.courses = null;
+                } else {
+                    this.courses = result;
+                    console.log(this.courses);
+                }
             }).catch(error => error);
     }
 
-    courseEnroll(course:Course, $event) {
-      this.studentService
-      .courseEnroll(this.studentID, course.courseID)
-      .then(result => {
-        this.checkTimetable();
-        console.log("Enrolled");
-      })
-      .catch(error => error);
+    courseEnroll(course: Course, $event) {
+        this.studentService
+            .courseEnroll(this.studentID, course.courseID)
+            .then(result => {
+                this.checkTimetable();
+                console.log("Enrolled");
+            })
+            .catch(error => error);
     }
 
     checkTimetable() {
-      this.studentService
-      .checkStudentTimetable(this.studentID)
-      .then(result => {
-        this.studentTimetable = result;
-        console.log(this.studentTimetable);
-      })
-      .catch(error => error);
+        this.studentService
+            .checkStudentTimetable(this.studentID)
+            .then(result => {
+                this.studentTimetable = result;
+                console.log(this.studentTimetable);
+            })
+            .catch(error => error);
     }
 
-    removeCourse(course:Course, $event) {
-      // this.studentService
-      // .removeCourse()
-      // .then(result => {
-      //
-      // })
-      // .catch(error => error);
+    removeCourse(course: Course, $event) {
+        // this.studentService
+        // .removeCourse()
+        // .then(result => {
+        //
+        // })
+        // .catch(error => error);
     }
 
-    checkStatus(){
+    checkStatus() {
     }
 
     goBack() {

@@ -8,13 +8,20 @@ h1, h2, h3, h4, h5, h6 {
   color: #333f48;
 }
 
+button {
+    min-width: 80px;
+}
+
+table {
+  table-layout: fixed;
+  width:100%;
+}
+
 .inline {
   display:inline;
 }
 
-button {
-    min-width: 80px;
-}
+
 
 .actionColumn {
   width:20%;
@@ -27,4 +34,8 @@ button {
 .backButton {
   position: fixed;
   bottom: 25px;
+}
+
+.actionButton {
+  width: 10%;
 }
