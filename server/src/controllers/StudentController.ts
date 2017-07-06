@@ -159,25 +159,25 @@ class StudentController {
 
     addToTimetable(req: express.Request, res: express.Response): void {
         try {
-            new AuthController().authUser(req, res, {
-                requiredAuth: auth, done: function() {
-                    var _studentID = req.params._studentID;
-                    var _courseID = req.params._courseID;
-                    sql.connect(config)
-                        .then(function(connection) {
-                            new sql.Request(connection)
-                                .query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "')")
-                                .then(function() {
-                                    res.send({ "success": "success" });
-                                }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("insert timetable " + err);
-                                });
+            var _studentID = req.params._studentID;
+            var _courseID = req.params._courseID;
+            sql.connect(config)
+                .then(function(connection) {
+                    new sql.Request(connection)
+                        .query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "')")
+                        .then(function() {
+                            res.send({ "success": "success" });
                         }).catch(function(err) {
-                            console.log(err);
-                            res.send({ "error": "error" });
+                            res.send({ "error": "error" }); console.log("insert timetable " + err);
                         });
-                }
-            });
+                }).catch(function(err) {
+                    console.log(err);
+                    res.send({ "error": "error" });
+                });
+            // new AuthController().authUser(req, res, {
+            //     requiredAuth: auth, done: function() {
+            //     }
+            // });
         }
         catch (e) {
             console.log(e);
