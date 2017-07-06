@@ -16,7 +16,7 @@
             <label>	.</label>
         </div>
     </div>
-    <table class="table table-striped" [mfData]="courses | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
         <thead>
             <tr>
                 <th><mfDefaultSorter by="courseName">Course Name</mfDefaultSorter></th>
@@ -26,8 +26,7 @@
             </tr>
             <tr>
                 <th colspan="5">
-                    Filter by name:
-                    <input class="form-control" [(ngModel)]="filterQuery" />
+                    <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
                 </th>
             </tr>
         </thead>

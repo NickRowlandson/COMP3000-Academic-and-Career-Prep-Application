@@ -23,7 +23,7 @@
             <button class="addClient btn btn-primary" (click)="addClient()" title="Add new client"><i class="fa fa-plus" aria-hidden="true"></i></button>
             <hr>
             <div class="error" *ngIf="error">{{error}}</div>
-            <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
                 <thead>
                     <tr>
                         <th>
@@ -39,15 +39,14 @@
                     </tr>
                     <tr>
                         <th colspan="5">
-                            Filter by name:
-                            <input class="form-control" [(ngModel)]="filterQuery" />
+                            <input placeholder="Filter by client name" class="form-control" [(ngModel)]="filterQuery" />
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let client of mf.data">
                         <td>
-                            <div [class.statusStage1]="client.suitability" [class.statusStage2]="!client.suitability && client.consent && client.learningStyle" [class.statusStage3]="!client.suitability && !client.consent && !client.learningStyle"></div>
+                            <div [class.statusStage1]="client.suitability" [class.statusStage2]="!client.suitability" [class.statusStage3]="!client.suitability && !client.consent && !client.learningStyle"></div>
                         </td>
                         <td>{{client.firstName + " " + client.lastName}}</td>
                         <td>{{client.email}}</td>
@@ -79,7 +78,14 @@
             <div>
                 <h3>Total clients: {{ clientTotal }}</h3></div>
             <div style="display: block">
-                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutChartColors" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                <canvas baseChart
+                  [data]="doughnutChartData"
+                  [labels]="doughnutChartLabels"
+                  [colors]="doughnutChartColors"
+                  [chartType]="doughnutChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)">
+                </canvas>
             </div>
         </div>
         <div *ngIf="clientView" class="col-md-6">
@@ -136,7 +142,6 @@
             <div *ngIf="showConsent" class="infoPanel">
                 <br />
                 <div class="form-group">
-                    <label class="control-label">id: </label> {{consentView.userID}} <br />
                     <label class="control-label">Date: </label> {{consentView.date}} <br />
                     <label class="control-label">Detailed Message: </label> {{consentView.detailedMessage}} <br />
                     <label class="control-label">Ontario Works: </label> {{consentView.ontarioWorks}} <br />
@@ -153,7 +158,19 @@
             <div *ngIf="showLearningStyle" class="infoPanel">
                 <br />
                 <div class="form-group">
-                    <label class="control-label">id: </label> {{learningStyleView.userID}} <br />
+                  <div>
+                    <div style="display: block">
+                      <canvas baseChart
+                              [datasets]="barChartData"
+                              [labels]="barChartLabels"
+                              [options]="barChartOptions"
+                              [colors]="barChartColors"
+                              [legend]="barChartLegend"
+                              [chartType]="barChartType"
+                              (chartHover)="chartHovered($event)"
+                              (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>

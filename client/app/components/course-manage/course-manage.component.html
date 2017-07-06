@@ -43,21 +43,26 @@
             </div>
         </div>
         <div class="col-md-12">
-            <table class="table table-striped">
+            <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
                 <thead>
                     <tr>
-                        <th>Course Name</th>
-                        <th>Professor</th>
-                        <th>Course Start</th>
-                        <th>Course End</th>
+                        <th><mfDefaultSorter by="courseName">Course Name</mfDefaultSorter></th>
+                        <th><mfDefaultSorter by="professor">Professor</mfDefaultSorter></th>
+                        <th><mfDefaultSorter by="courseStart">Course Start</mfDefaultSorter></th>
+                        <th><mfDefaultSorter by="courseEnd">Course End</mfDefaultSorter></th>
+                    </tr>
+                    <tr>
+                        <th colspan="5">
+                            <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let course of courses">
-                        <td>{{course.courseName}}</td>
-                        <td>{{course.professorId}}</td>
-                        <td>{{course.courseStart  }}</td>
-                        <td>{{course.courseEnd }}</td>
+                    <tr *ngFor="let course of mf.data">
+                        <td>{{ course.courseName }}</td>
+                        <td>{{ course.professorId }}</td>
+                        <td>{{ course.courseStart  }}</td>
+                        <td>{{ course.courseEnd }}</td>
                         <td class="actionColumn middle">
                             <div class="inline">
                                 <button class="btn btn-primary" (click)="gotoEdit(course, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
@@ -68,6 +73,13 @@
                         </td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

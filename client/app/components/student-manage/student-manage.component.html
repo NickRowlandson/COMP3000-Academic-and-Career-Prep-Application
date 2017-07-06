@@ -22,7 +22,7 @@
             <div class="error" *ngIf="error">{{error}}</div>
         </div>
         <div class="col-md-12">
-            <table class="table table-striped" [mfData]="students | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
                 <thead>
                     <tr>
                         <th>
@@ -37,28 +37,27 @@
                     </tr>
                     <tr>
                         <th colspan="5">
-                            Filter by name:
-                            <input class="form-control" [(ngModel)]="filterQuery" />
+                            <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of mf.data" [class.active]="student === selectedStudent">
-                        <td>{{item.firstName + " " + item.lastName}}</td>
-                        <td>{{item.email}}</td>
+                    <tr *ngFor="let student of mf.data" [class.active]="student === selectedStudent">
+                        <td>{{student.firstName + " " + student.lastName}}</td>
+                        <td>{{student.email}}</td>
                         <td class="actionColumn middle">
                             <div class="inline">
-                                <button class="btn btn-primary" (click)="gotoEdit(item, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                                <button class="btn btn-primary" (click)="gotoEdit(student, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             </div>
                         </td>
                         <td class="actionColumn middle">
                             <div class="inline">
-                                <button class="btn btn-warning" (click)="gotoCourseSelection(item, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Courses</button>
+                                <button class="btn btn-warning" (click)="gotoCourseSelection(student, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Courses</button>
                             </div>
                         </td>
                         <td class="actionColumn middle">
                             <div class="inline">
-                                <button class="btn btn-success" (click)="archiveAlert(item, $event)"><i class="fa fa-archive" aria-hidden="true"></i> Archive</button>
+                                <button class="btn btn-success" (click)="archiveAlert(student, $event)"><i class="fa fa-archive" aria-hidden="true"></i> Archive</button>
                             </div>
                         </td>
                     </tr>

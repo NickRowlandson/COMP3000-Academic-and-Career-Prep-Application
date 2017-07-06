@@ -41,7 +41,6 @@ export class CourseSelectionComponent implements OnInit {
                     this.courses = null;
                 } else {
                     this.courses = result;
-                    console.log(this.courses);
                 }
             }).catch(error => error);
     }
@@ -61,7 +60,6 @@ export class CourseSelectionComponent implements OnInit {
             .checkStudentTimetable(this.studentID)
             .then(result => {
                 this.studentTimetable = result;
-                console.log(this.studentTimetable);
             })
             .catch(error => error);
     }

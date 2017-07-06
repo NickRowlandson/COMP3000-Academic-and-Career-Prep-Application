@@ -27,7 +27,8 @@ import { TimetableComponent } from './components/timetable/timetable.component';
 import { VisviewComponent } from './components/visview/visview.component';
 
 //Import pipes
-import { DataFilterPipe } from "./pipes/data-filter.pipe";
+import { UserFilterPipe } from "./pipes/user-filter.pipe";
+import { CourseFilterPipe } from "./pipes/course-filter.pipe";
 
 //Import services
 import { AuthGuard } from './guards/auth.guard';
@@ -69,7 +70,8 @@ import { CourseService } from './services/course.service';
     LearningStyleComponent,
     CourseSelectionComponent,
     TimetableComponent,
-    DataFilterPipe,
+    UserFilterPipe,
+    CourseFilterPipe,
     VisviewComponent
   ],
   providers: [

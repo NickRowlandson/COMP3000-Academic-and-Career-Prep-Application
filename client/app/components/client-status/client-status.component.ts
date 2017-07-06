@@ -18,7 +18,6 @@ declare var swal: any;
 
 export class ClientStatusComponent implements OnInit {
     data: any[];
-    filterQuery = "";
     allClients: Client[];
     suitabilityForms: SuitabilityForm[];
     consentForms: ConsentForm[];
@@ -36,14 +35,25 @@ export class ClientStatusComponent implements OnInit {
     showConsent: boolean;
     showLearningStyle: boolean;
 
-    //Chart
+    //doughnut chart (client status)
     doughnutChartLabels: string[];
     doughnutChartData: number[];
     doughnutChartType: string;
-    doughnutChartColors: any[];
+    doughnutChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];
     stage1: any;
     stage2: any;
     stage3: any;
+
+    //bar chart (learning style)
+    barChartOptions:any = {
+      scaleShowVerticalLines: false,
+      responsive: true
+    };
+    barChartLabels:string[] = ['Hearing', 'Seeing', 'Doing'];
+    barChartType:string = 'bar';
+    barChartLegend:boolean = false;
+    barChartData:any;
+    barChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];
 
     constructor(private router: Router, private clientService: ClientService, private studentService: StudentService, private authService: AuthService) {
     }
@@ -91,12 +101,11 @@ export class ClientStatusComponent implements OnInit {
         this.consentForms = objects.consentForms;
         this.learningStyleForms = objects.learningStyleForms;
         this.stage1 = this.data.filter(x => x.suitability);
-        this.stage2 = this.data.filter(x => !x.suitability && x.consent && x.learningStyle);
+        this.stage2 = this.data.filter(x => !x.suitability);
         this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle);
         this.doughnutChartLabels = ['Suitability', 'Consent/Learning Style', 'Forms Complete'];
         this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length];
         this.doughnutChartType = 'doughnut';
-        this.doughnutChartColors = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];
     }
 
     addClient() {
@@ -155,6 +164,9 @@ export class ClientStatusComponent implements OnInit {
 
         var learningStyleForm = this.getLearningStyleFormByFilter(client.userID);
         this.learningStyleView = learningStyleForm[0];
+        if (this.learningStyleView) {
+          this.barChartData = [{ data: [this.learningStyleView.hearing, this.learningStyleView.seeing, this.learningStyleView.doing]}];
+        }
     }
 
     getSuitabilityFormByFilter(id) {
