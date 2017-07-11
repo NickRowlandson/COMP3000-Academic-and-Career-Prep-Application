@@ -4,17 +4,17 @@
     <div *ngIf="client" class="form-horizontal">
         <div class="row">
             <ul class="sectionBtnGroup col-sm-12">
-                <li *ngIf="showSectionBtn1" class="sectionButtons" [ngClass]="{active: showSection1}" title="General Info" (click)="clicked($event, 'section1')">
+                <li *ngIf="showSectionBtn1" class="sectionButtons" [ngClass]="{active: showSection1}" title="General Info" (click)="clicked('section1')">
                     <h4>Client Info</h4></li>
-                <li *ngIf="showSectionBtn2" class="sectionButtons" [ngClass]="{active: showSection2}" title="Question Group 2" (click)="clicked($event, 'section2')">
+                <li *ngIf="showSectionBtn2" class="sectionButtons" [ngClass]="{active: showSection2}" title="Question Group 2" (click)="clicked('section2')">
                     <h4>General Info 1</h4></li>
-                <li *ngIf="showSectionBtn3" class="sectionButtons" [ngClass]="{active: showSection3}" title="Question Group 3" (click)="clicked($event, 'section3')">
+                <li *ngIf="showSectionBtn3" class="sectionButtons" [ngClass]="{active: showSection3}" title="Question Group 3" (click)="clicked('section3')">
                     <h4>General Info 2</h4></li>
-                <li *ngIf="showSectionBtn4" class="sectionButtons" [ngClass]="{active: showSection4}" title="Success Factors" (click)="clicked($event, 'section4')">
+                <li *ngIf="showSectionBtn4" class="sectionButtons" [ngClass]="{active: showSection4}" title="Success Factors" (click)="clicked('section4')">
                     <h4>Success Factors</h4></li>
-                <li *ngIf="showSectionBtn5" class="sectionButtons" [ngClass]="{active: showSection5}" title="Summary Notes" (click)="clicked($event, 'section5')">
+                <li *ngIf="showSectionBtn5" class="sectionButtons" [ngClass]="{active: showSection5}" title="Summary Notes" (click)="clicked('section5')">
                     <h4>Summary Notes</h4></li>
-                <li *ngIf="showSectionBtn6" class="sectionButtons" [ngClass]="{active: showSection6}" title="Review" (click)="clicked($event, 'section6')">
+                <li *ngIf="showSectionBtn6" class="sectionButtons" [ngClass]="{active: showSection6}" title="Review" (click)="clicked('section6')">
                     <h4>Review</h4></li>
             </ul>
             <div id="section1" *ngIf="showSection1" class="col-sm-12">
@@ -90,7 +90,7 @@
                                 <div [hidden]="!phone.errors.number">
                                 Proper Phone Number Format is Required
                                 </div>
-                        
+
                          </div>
                     </div>
                 </div>

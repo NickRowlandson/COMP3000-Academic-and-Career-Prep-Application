@@ -251,6 +251,8 @@ export class ClientStatusComponent implements OnInit {
         if (isConfirm) {
           this.removeFromClientTable(client.userID);
         }
+      }).catch(error => {
+        //console.log("Canceled");
       });
     }
 

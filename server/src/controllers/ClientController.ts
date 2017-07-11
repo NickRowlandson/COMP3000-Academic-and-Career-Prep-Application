@@ -49,9 +49,12 @@ class ClientController {
                                                 true + "', '" +
                                                 true + "', '" +
                                                 true + "'";
-
-                                            new MailService().welcomeMessage(client);
-
+                                            try {
+                                              new MailService().welcomeMessage(client);
+                                            } catch (e) {
+                                              console.log("Invalid email...");
+                                            }
+                                            console.log("User created");
                                             new sql.Request().query("INSERT INTO Clients VALUES (" + clientQuery + ")").then(function() {
                                                 if (Object.keys(suitabilityForm).length != 0) {
                                                     var suitabilityFormQuery = "'" + id[0].userID
@@ -95,18 +98,22 @@ class ClientController {
                                                     new sql.Request(connection)
                                                         .query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")")
                                                         .then(function() {
+                                                            console.log("Suitability inserted");
                                                             new sql.Request(connection)
                                                                 .query("UPDATE Clients SET suitability= 'false' WHERE userID = '" + id[0].userID + "'")
                                                                 .then(function() {
                                                                     res.send({ "success": "success" });
                                                                 }).catch(function(err) {
-                                                                    res.send({ "error": "error" }); console.log("Update client " + err);
+                                                                    res.send({ "error": "error" });
+                                                                    console.log("Update client " + err);
                                                                 });
                                                         }).catch(function(err) {
-                                                            res.send({ "error": "error" }); console.log("insert suitabilityForm " + err);
+                                                            res.send({ "error": "error" });
+                                                            console.log("insert suitabilityForm " + err);
                                                         });
                                                 } else {
                                                     res.send({ "success": "success" });
+                                                    console.log("Suitability not provided.");
                                                 }
                                             }).catch(function(err) {
                                                 res.send({ "error": "error" }); console.log("insert client " + err);

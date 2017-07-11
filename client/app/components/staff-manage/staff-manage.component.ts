@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StaffService } from "../../services/staff.service";
 import { User } from "../../models/user";
 import { Router } from '@angular/router';
+declare var swal: any;
+
 
 @Component({
     selector: 'staff-manage',
@@ -43,12 +45,35 @@ export class StaffManageComponent implements OnInit {
         this.router.navigate(['/staff-edit', 'new']);
     }
 
+    deleteAlert(user: User, event: any) {
+        swal({
+            title: 'Delete user (' + user.firstName + ' ' + user.lastName + ')?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete!'
+        }).then(isConfirm => {
+          if (isConfirm) {
+            this.deleteUser(user, event);
+          }
+        }).catch(error => {
+          //console.log("Canceled");
+        });
+    }
+
     deleteUser(user: User, event: any) {
         event.stopPropagation();
         this.userService
           .delete(user)
           .then(res => {
               this.users = this.users.filter(h => h !== user);
+              swal(
+                  'Deleted!',
+                  'User has been deleted.',
+                  'success'
+              );
           })
           .catch(error => this.error = error);
     }

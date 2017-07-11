@@ -48,6 +48,8 @@ export class CourseManageComponent implements OnInit {
           if (isConfirm) {
             this.deleteCourse(course, event);
           }
+        }).catch(error => {
+          //console.log("Canceled");
         });
     }
 

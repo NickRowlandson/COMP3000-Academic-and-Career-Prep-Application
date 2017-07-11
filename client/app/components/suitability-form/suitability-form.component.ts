@@ -5,6 +5,7 @@ import { SuitabilityForm } from "../../models/suitabilityForm";
 import { ActivatedRoute, Params } from '@angular/router';
 import { ClientService } from "../../services/client.service";
 import { AuthService } from '../../services/authentication.service';
+declare var swal: any;
 
 @Component({
     selector: 'suitabilityForm',
@@ -49,7 +50,7 @@ export class SuitabilityFormComponent {
 
     }
 
-    clicked(event, item) {
+    clicked(item) {
         switch (item) {
             case 'section1':
                 this.showSection1 = true;
@@ -180,23 +181,23 @@ export class SuitabilityFormComponent {
         switch (nextSection) {
             case 'section2':
                 this.showSectionBtn2 = true;
-                this.clicked(event, nextSection);
+                this.clicked(nextSection);
                 break;
             case 'section3':
                 this.showSectionBtn3 = true;
-                this.clicked(event, nextSection);
+                this.clicked(nextSection);
                 break;
             case 'section4':
                 this.showSectionBtn4 = true;
-                this.clicked(event, nextSection);
+                this.clicked(nextSection);
                 break;
             case 'section5':
                 this.showSectionBtn5 = true;
-                this.clicked(event, nextSection);
+                this.clicked(nextSection);
                 break;
             case 'section6':
                 this.showSectionBtn6 = true;
-                this.clicked(event, nextSection);
+                this.clicked(nextSection);
                 break;
             default:
         }
@@ -205,16 +206,51 @@ export class SuitabilityFormComponent {
     save() {
         this.client["inquiryDate"] = this.date;
         this.client["username"] = this.client.firstName + this.client.lastName;
-        this.client["password"] = this.client.birthday.replace(/-/g, "");
-        console.log('save clicked');
-        this.clientService
-            .save(this.client, this.suitabilityForm)
-            .then(client => {
-              console.log('then');
-                this.client = client; // saved client, w/ id if new
-                this.router.navigate(['/clients']);
-            })
-            .catch(error => this.error = error); // TODO: Display error message
+        if (this.client.birthday) {
+          this.client["password"] = this.client.birthday.replace(/-/g, "");
+        }
+        if (this.client.password && this.client.firstName && this.client.lastName && this.client.email && this.client.phone ) {
+          if (Object.keys(this.suitabilityForm).length === 0) {
+            swal({
+                title: 'Suitability Incomplete',
+                text: "The suitability section of the form has not been filled out. Are you sure you want to continue?",
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, continue'
+            }).then(isConfirm => {
+              if (isConfirm) {
+                this.clientService
+                    .save(this.client, this.suitabilityForm)
+                    .then(client => {
+                      this.router.navigate(['/clients']);
+                    })
+                    .catch(error => {
+                      console.log("Error " + error );
+                    });
+              }
+            }).catch(error => {
+              this.clicked('section2');
+            });
+          } else {
+            this.clientService
+                .save(this.client, this.suitabilityForm)
+                .then(client => {
+                  this.router.navigate(['/clients']);
+                })
+                .catch(error => {
+                  console.log("Error " + error );
+                });
+          }
+        } else {
+          swal(
+              'Whoops...',
+              "Please complete all fields in the 'Client Info' section",
+              'warning'
+          );
+          this.clicked('section1');
+        }
     }
 
     goBack() {
