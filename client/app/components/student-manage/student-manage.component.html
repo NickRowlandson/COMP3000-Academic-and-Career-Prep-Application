@@ -31,9 +31,6 @@
                         <th>
                             <mfDefaultSorter by="email">Email</mfDefaultSorter>
                         </th>
-                        <th class="actionButton">Edit</th>
-                        <th class="actionButton">Courses</th>
-                        <th class="actionButton">Archive</th>
                     </tr>
                     <tr>
                         <th colspan="5">
@@ -49,13 +46,6 @@
                             <div class="inline">
                                 <button class="btn btn-primary" (click)="gotoEdit(student, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             </div>
-                        </td>
-                        <td class="actionColumn middle">
-                            <div class="inline">
-                                <button class="btn btn-warning" (click)="gotoCourseSelection(student, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Courses</button>
-                            </div>
-                        </td>
-                        <td class="actionColumn middle">
                             <div class="inline">
                                 <button class="btn btn-success" (click)="archiveAlert(student, $event)"><i class="fa fa-archive" aria-hidden="true"></i> Archive</button>
                             </div>

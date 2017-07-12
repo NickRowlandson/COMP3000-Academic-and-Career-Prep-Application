@@ -45,10 +45,6 @@ export class StudentManageComponent implements OnInit {
         this.router.navigate(['/student-edit', student.studentID]);
     }
 
-    gotoCourseSelection(student: Student, event: any) {
-      this.router.navigate(['/course-selection', student.studentID]);
-    }
-
     addStudent() {
         this.router.navigate(['/student-edit', 'new']);
     }

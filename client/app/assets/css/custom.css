@@ -128,3 +128,8 @@
   border: 0px solid;
   transition: .2s;
 }
+
+.backButton {
+  position: fixed;
+  bottom: 25px;
+}

@@ -254,6 +254,20 @@ export class SuitabilityFormComponent {
     }
 
     goBack() {
-        window.history.back();
+      swal({
+          title: 'Are you sure?',
+          text: "Any information on this form will be lost if you proceed without saving.",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, continue'
+      }).then(isConfirm => {
+        if (isConfirm) {
+          window.history.back();
+        }
+      }).catch(error => {
+        //console.log("Canceled");
+      });
     }
 };

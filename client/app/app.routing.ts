@@ -21,7 +21,7 @@ import { CourseManageComponent } from './components/course-manage/course-manage.
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
 import { PrfFormComponent } from './components/prf-form/prf-form.component';
 import { LearningStyleComponent } from './components/learning-style-form/learning-style-form.component';
-import { CourseSelectionComponent } from './components/course-selection/course-selection.component';
+import { StudentEnrollmentComponent } from './components/student-enrollment/student-enrollment.component';
 import { TimetableComponent } from './components/timetable/timetable.component';
 import { VisviewComponent } from './components/visview/visview.component';
 
@@ -106,8 +106,8 @@ const appRoutes: Routes = [
         canActivate: [StudentGuard]
     },
     {
-        path: 'course-selection/:id',
-        component: CourseSelectionComponent,
+        path: 'student-enrollment/:id/:name',
+        component: StudentEnrollmentComponent,
         canActivate: [AuthGuard, StaffGuard]
     },
     {

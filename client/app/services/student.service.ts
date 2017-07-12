@@ -87,7 +87,7 @@ export class StudentService {
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
-        let url = `${this.studentsUrl}/${studentID}/${courseID}`;
+        let url = `api/enroll/${studentID}/${courseID}`;
 
         return this.http
             .post(url, options)
@@ -96,12 +96,26 @@ export class StudentService {
             .catch(this.handleError);
     }
 
-    checkStudentTimetable(studentID) {
+    courseDrop(studentID, courseID) {
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        let url = `api/drop/${studentID}/${courseID}`;
+
+        return this.http
+            .delete(url, options)
+            .toPromise()
+            .catch(this.handleError);
+    }
+
+
+    getTimetables() {
       // add authorization header with jwt token
       let headers = new Headers({ authorization: this.authService.token });
       let options = new RequestOptions({ headers: headers });
 
-      let url = `${this.studentsUrl}/${studentID}/timetable`;
+      let url = `api/timetable`;
 
       return this.http.get(url, options)
           .toPromise()

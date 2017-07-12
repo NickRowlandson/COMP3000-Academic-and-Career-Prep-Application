@@ -10,4 +10,5 @@ export class Student {
     birthdate: string;
     email: string;
     phone: string;
+    enrolled: boolean;
 }

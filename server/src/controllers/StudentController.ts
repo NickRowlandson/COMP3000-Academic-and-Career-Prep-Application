@@ -28,7 +28,8 @@ class StudentController {
                                 .then(function() {
                                     res.send({ "success": "success" });
                                 }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("insert student " + err);
+                                    res.send({ "error": "error" });
+                                    console.log("insert student " + err);
                                 });
                         }).catch(function(err) {
                             console.log(err);
@@ -56,7 +57,8 @@ class StudentController {
                                 .then(function(recordset) {
                                     res.send({ "success": "success" });
                                 }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("Update student " + err);
+                                    res.send({ "error": "error" });
+                                    console.log("Update student " + err);
                                 });
                         }).catch(function(err) {
                             console.log(err);
@@ -86,10 +88,12 @@ class StudentController {
                                         .then(function() {
                                             res.send({ "success": "success" });
                                         }).catch(function(err) {
-                                            res.send({ "error": "error" }); console.log("Delete user with id " + _id + ". " + err);
+                                            res.send({ "error": "error" });
+                                            console.log("Delete user with id " + _id + ". " + err);
                                         });
                                 }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("Delete student with id " + _id + ". " + err);
+                                    res.send({ "error": "error" });
+                                    console.log("Delete student with id " + _id + ". " + err);
                                 });
                         }).catch(function(err) {
                             console.log(err);
@@ -115,7 +119,8 @@ class StudentController {
                                 .then(function(recordset) {
                                     res.send(recordset);
                                 }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("Get students " + err);
+                                    res.send({ "error": "error" });
+                                    console.log("Get students " + err);
                                 });
                         }).catch(function(err) {
                             console.log(err);
@@ -142,7 +147,8 @@ class StudentController {
                                 .then(function(recordset) {
                                     res.send(recordset[0]);
                                 }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("Get student by id " + err);
+                                    res.send({ "error": "error" });
+                                    console.log("Get student by id " + err);
                                 });
                         }).catch(function(err) {
                             console.log(err);
@@ -168,7 +174,8 @@ class StudentController {
                         .then(function() {
                             res.send({ "success": "success" });
                         }).catch(function(err) {
-                            res.send({ "error": "error" }); console.log("insert timetable " + err);
+                            res.send({ "error": "error" });
+                            console.log("insert into timetable " + err);
                         });
                 }).catch(function(err) {
                     console.log(err);
@@ -185,19 +192,48 @@ class StudentController {
         }
     }
 
-    checkStudentTimetable(req: express.Request, res: express.Response): void {
+    removeFromTimetable(req: express.Request, res: express.Response): void {
+        try {
+            var _studentID = req.params._studentID;
+            var _courseID = req.params._courseID;
+            sql.connect(config)
+                .then(function(connection) {
+                    new sql.Request(connection)
+                        .query("DELETE FROM Timetables WHERE studentID = ('" + _studentID + "') AND courseID = ('" + _courseID + "')")
+                        .then(function() {
+                            res.send({ "success": "success" });
+                        }).catch(function(err) {
+                            res.send({ "error": "error" });
+                            console.log("remove from timetable " + err);
+                        });
+                }).catch(function(err) {
+                    console.log(err);
+                    res.send({ "error": "error" });
+                });
+            // new AuthController().authUser(req, res, {
+            //     requiredAuth: auth, done: function() {
+            //     }
+            // });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
+    getTimetables(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {
-                    var _studentID = req.params._studentID;
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)
-                                .query("SELECT * FROM Timetables WHERE studentID = '" + _studentID + "'")
+                                .query("SELECT * FROM Timetables")
                                 .then(function(recordset) {
                                     res.send(recordset);
                                 }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("Get student timetable " + err);
+                                    res.send({ "error": "error" });
+                                    console.log("Get student timetable " + err);
                                 });
                         }).catch(function(err) {
                             console.log(err);

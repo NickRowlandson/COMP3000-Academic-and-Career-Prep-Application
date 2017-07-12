@@ -73,11 +73,6 @@ button {
     text-align: center;
 }
 
-.backButton {
-  position: fixed;
-  bottom: 25px;
-}
-
 .statusStage1 {
   vertical-align: middle;
 	border-radius: 50%;

@@ -76,6 +76,9 @@ export class CourseManageComponent implements OnInit {
         this.router.navigate(['/course-edit', 'new']);
     }
 
+    gotoStudentEnrollment(course: Course, event: any) {
+      this.router.navigate(['/student-enrollment', course.courseID, course.courseName]);
+    }
 
     goBack() {
         window.history.back();
