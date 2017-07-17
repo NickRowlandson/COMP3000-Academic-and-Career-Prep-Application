@@ -5,6 +5,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { StaffGuard } from './guards/staff.guard';
 import { StudentGuard } from './guards/student.guard';
 import { ClientGuard } from './guards/client.guard';
+import { InstructorGuard } from './guards/instructor.guard';
 
 
 import { LoginComponent }   from './components/login/login.component';
@@ -24,6 +25,7 @@ import { LearningStyleComponent } from './components/learning-style-form/learnin
 import { StudentEnrollmentComponent } from './components/student-enrollment/student-enrollment.component';
 import { TimetableComponent } from './components/timetable/timetable.component';
 import { VisviewComponent } from './components/visview/visview.component';
+import { AttendanceListComponent } from './components/attendance-list/attendance-list.component';
 
 const appRoutes: Routes = [
     {
@@ -114,7 +116,13 @@ const appRoutes: Routes = [
         path: 'visview',
         component: VisviewComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'attendance-list',
+        component: AttendanceListComponent,
+        canActivate: [InstructorGuard]
     }
+
 ];
 
 export const routing = RouterModule.forRoot(appRoutes, { useHash: true });

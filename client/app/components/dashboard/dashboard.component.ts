@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
 
     consentForm: boolean;
     learningStyleForm: boolean;
+    
 
     //variables used to toggle dahsboard items
     clientStatus = false;
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
     learningStyle = false;
     maesdprf = false;
     timetable = false;
+    attendanceList = false;
 
     //
     userType: any;
@@ -64,6 +66,9 @@ export class DashboardComponent implements OnInit {
             this.learningStyle = true;
             this.maesdprf = true;
             this.checkFormStatus(userID);
+        } else if(userType ==='Instructor')
+        {
+            this.attendanceList = true;
         }
     }
 
