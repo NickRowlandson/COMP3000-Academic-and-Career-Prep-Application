@@ -38,6 +38,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { StaffGuard } from './guards/staff.guard';
 import { StudentGuard } from './guards/student.guard';
 import { ClientGuard } from './guards/client.guard';
+import { InstructorGuard } from './guards/instructor.guard';
 import { AuthService } from './services/authentication.service';
 import { StudentService } from './services/student.service';
 import { ClientService } from './services/client.service';
@@ -84,6 +85,7 @@ import { CourseService } from './services/course.service';
     StaffGuard,
     StudentGuard,
     ClientGuard,
+    InstructorGuard,
     AuthService,
     StudentService,
     StaffService,

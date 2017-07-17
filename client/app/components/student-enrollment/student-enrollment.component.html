@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="col-lg-6">
-        <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+        <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
             <thead>
                 <tr>
                     <th>
@@ -47,7 +47,7 @@
             <tfoot>
                 <tr>
                     <td colspan="5">
-                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                        <mfBootstrapPaginator></mfBootstrapPaginator>
                     </td>
                 </tr>
             </tfoot>

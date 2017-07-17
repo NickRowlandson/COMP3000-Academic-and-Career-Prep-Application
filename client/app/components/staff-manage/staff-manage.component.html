@@ -27,9 +27,12 @@
             </div>
         </div>
         <div class="col-md-12">
-            <table class="table table-striped" [mfData]="users | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <table class="table table-striped" [mfData]="users | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
+                        <th>
+                          <mfDefaultSorter by="userType">Role</mfDefaultSorter>
+                        </th>
                         <th>
                           <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
                         </th>
@@ -46,6 +49,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of mf.data" [class.active]="user === selectedUser">
+                        <td>{{item.userType}}</td>
                         <td>{{item.firstName + " " + item.lastName}}</td>
                         <td>{{item.email}}</td>
                         <td class="actionColumn middle">
@@ -61,7 +65,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="5">
-                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                            <mfBootstrapPaginator ></mfBootstrapPaginator>
                         </td>
                     </tr>
                 </tfoot>

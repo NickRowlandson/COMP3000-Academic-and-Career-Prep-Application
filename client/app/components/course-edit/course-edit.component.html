@@ -1,19 +1,11 @@
 <div class="courseEdit form-horizontal">
   <div *ngIf="!newCourse && course">
-    <h2>Edit {{course.courseName}}'s Details</h2>
+    <h2>Edit Details for {{course.courseName}}</h2>
   </div>
   <div *ngIf="newCourse">
     <h2>Add New Course</h2>
   </div>
   <hr>
-  <!--<div class="form-group">
-        <div *ngIf="!newCourse">
-            <label class="col-sm-2 control-label">id: </label>
-            <div class="col-sm-10">
-                {{course.courseId}}
-            </div>
-        </div>
-    </div>-->
   <div *ngIf="course">
     <div class="form-group">
       <label class="col-sm-2 control-label">Course Name: </label>

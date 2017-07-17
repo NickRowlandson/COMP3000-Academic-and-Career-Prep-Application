@@ -23,7 +23,7 @@
             <button class="addClient btn btn-primary" (click)="addClient()" title="Add new client"><i class="fa fa-plus" aria-hidden="true"></i></button>
             <hr>
             <div class="error" *ngIf="error">{{error}}</div>
-            <table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
                         <th>
@@ -66,7 +66,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="5">
-                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                            <mfBootstrapPaginator></mfBootstrapPaginator>
                         </td>
                     </tr>
                 </tfoot>
