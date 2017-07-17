@@ -6,6 +6,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { DataTableModule } from 'angular2-datatable';
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
+import { ScheduleModule } from 'primeng/primeng';
 
 //Import components
 import { LoginComponent } from './components/login/login.component';
@@ -50,7 +52,9 @@ import { CourseService } from './services/course.service';
     FormsModule,
     routing,
     ChartsModule,
-    DataTableModule
+    DataTableModule,
+    NKDatetimeModule,
+    ScheduleModule
     ],
   declarations: [
     AppComponent,

@@ -24,18 +24,12 @@
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Start: </label>
-      <!--<div class="col-sm-10">
-            <input class="form-control" type="date" [(ngModel)]="course.courseStart" placeholder="Start" required />
-        </div>-->
-      <div>datetime picker</div>
+      <datetime [(ngModel)]="course.courseStart"></datetime>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label">End: </label>
-      <div class="col-sm-10">
-        <!--<input class="form-control" type="date" [(ngModel)]="course.courseEnd" placeholder="End" required />-->
-        <div>datetime picker</div>
-      </div>
+      <datetime [(ngModel)]="course.courseEnd"></datetime>
     </div>
 
     <div class="form-group">
