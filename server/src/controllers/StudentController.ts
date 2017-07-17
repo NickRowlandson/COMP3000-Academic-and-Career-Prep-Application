@@ -247,5 +247,39 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
+
+    getTimetablesById(req: express.Request, res: express.Response): void {
+   try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: auth, done: function() {
+                    var _id: string = req.params._studentID;
+                        console.log('param student ID: '+_id)
+                    sql.connect(config).then(() => {
+                        return sql.query`select * FROM Timetables WHERE studentId = ${_id}`
+                    }).then(result => {
+
+                        console.dir('here is timetable result'+result);
+                        res.send(result);
+                    }).catch(err => {
+                        // ... error checks
+                        res.send({ "error": "error" });
+                        console.log("select timetable" + err)
+                    })
+
+                    sql.on('error', err => {
+                        // ... error handler
+                        console.log(err);
+                        res.send({ "error": "error in your request" });
+                    })
+
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+    
 }
 export = StudentController;

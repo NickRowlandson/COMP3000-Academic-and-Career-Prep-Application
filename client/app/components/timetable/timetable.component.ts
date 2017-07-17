@@ -14,13 +14,23 @@ import { StudentService } from "../../services/student.service";
 export class TimetableComponent implements OnInit {
     @Input() student: Student;
     studentID: any;
-
+    events: any[];
     constructor(private studentService: StudentService, private route: ActivatedRoute) {
 
     }
 
     ngOnInit() {
-
+ var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      
+        console.log(currentUser);
+         this.studentID = currentUser.studentID;
+        console.log('studentId is '+ this.studentID);
+    this.studentService.getEventsById(this.studentID).then(events =>
+     {
+        //  this.events = events;
+        console.log(event);
+        });
+        ];
     }
 
     goBack() {
