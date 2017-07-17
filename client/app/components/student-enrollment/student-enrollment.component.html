@@ -1,4 +1,4 @@
-<div>
+<div class="row">
     <h2>Student Enrollment ({{courseName}})</h2>
     <hr>
 
@@ -16,39 +16,46 @@
             <label>	.</label>
         </div>
     </div>
-    <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
-        <thead>
-            <tr>
-                <th><mfDefaultSorter by="studentID">Student ID</mfDefaultSorter></th>
-                <th><mfDefaultSorter by="lastName">Student Name</mfDefaultSorter></th>
-                <th>Add/Drop</th>
-            </tr>
-            <tr>
-                <th colspan="5">
-                    <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let student of mf.data">
-                <td>{{student.studentID}}</td>
-                <td>{{student.firstName}} {{student.lastName}}</td>
-                <div class="">
-                    <input class="checkbox-large" type="checkbox" checked="{{student.enrolled}}" (change)="checkEnrolled(student, student.enrolled)">
-                </div>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="5">
-                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-  </div>
-  <div class="backButton">
-      <div>
-          <button (click)="goBack()" class="btn btn-default">Back</button>
-      </div>
-  </div>
+    <div class="col-lg-6">
+        <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <thead>
+                <tr>
+                    <th>
+                        <mfDefaultSorter by="studentID">Student ID</mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="lastName">Student Name</mfDefaultSorter>
+                    </th>
+                    <th>Add/Drop</th>
+                </tr>
+                <tr>
+                    <th colspan="5">
+                        <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of mf.data">
+                    <td>{{student.studentID}}</td>
+                    <td>{{student.firstName}} {{student.lastName}}</td>
+                    <div *ngIf="!loading" class="input-group">
+                      <button *ngIf="student.enrolled" type="button" (click)="checkEnrolled(student)" class="btn btn-danger">Remove</button>
+                      <button *ngIf="!student.enrolled" type="button" (click)="checkEnrolled(student)" class="btn btn-success">Enroll</button>
+                    </div>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div class="backButton">
+    <div>
+        <button (click)="goBack()" class="btn btn-default">Back</button>
+    </div>
+</div>

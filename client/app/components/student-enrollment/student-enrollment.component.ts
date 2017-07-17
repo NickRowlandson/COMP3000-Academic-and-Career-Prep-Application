@@ -5,6 +5,7 @@ import { Course } from "../../models/course";
 import { Student } from "../../models/Student";
 import { CourseService } from "../../services/course.service";
 import { StudentService } from "../../services/student.service";
+declare var swal: any;
 
 @Component({
     selector: 'course-selection',
@@ -17,6 +18,7 @@ export class StudentEnrollmentComponent implements OnInit {
     courseID: any;
     courseName: any;
     studentTimetables: any[];
+    loading: boolean = true;
 
     constructor(private studentService: StudentService, private courseService: CourseService, private route: ActivatedRoute) {
 
@@ -47,50 +49,65 @@ export class StudentEnrollmentComponent implements OnInit {
         this.studentService
             .getTimetables()
             .then(result => {
-              this.studentTimetables = result;
-              this.compareTimetables();
+                this.studentTimetables = result;
+                this.compareTimetables();
             })
             .catch(error => error);
     }
 
     compareTimetables() {
-      for (let student of this.students) {
-        var timetable = this.studentTimetables.filter(x => x.studentID === student.studentID);
-        for (let item of timetable) {
-          var itemCourseID = item.courseID.toString();
-          if (itemCourseID === this.courseID) {
-            student.enrolled = true;
-          } else {
-            student.enrolled = false;
-          }
+        for (let student of this.students) {
+            var timetable = this.studentTimetables.filter(x => x.studentID === student.studentID);
+            for (let item of timetable) {
+                var itemCourseID = item.courseID.toString();
+                if (itemCourseID === this.courseID) {
+                    student.enrolled = true;
+                } else {
+                    student.enrolled = false;
+                }
+            }
         }
-      }
+        this.loading = false;
     }
 
-    checkEnrolled(student: Student, enrolled) {
-      if (enrolled) {
-        this.drop(student);
-      } else {
-        this.enroll(student);
-      }
+    checkEnrolled(student: Student) {
+        if (student.enrolled) {
+            swal({
+                title: 'Remove ' + student.firstName + ' ' + student.lastName + ' from ' + this.courseName + '?',
+                text: "",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, remove!'
+            }).then(isConfirm => {
+                if (isConfirm) {
+                    this.drop(student);
+                }
+            }).catch(error => {
+                //console.log("Canceled");
+            });
+        } else {
+            this.enroll(student);
+        }
     }
 
     enroll(student: Student) {
-      this.studentService
-          .courseEnroll(student.studentID, this.courseID)
-          .then(result => {
-              this.getTimetables();
-          })
-          .catch(error => error);
+        this.studentService
+            .courseEnroll(student.studentID, this.courseID)
+            .then(result => {
+                student.enrolled = true;
+            })
+            .catch(error => error);
     }
 
     drop(student: Student) {
-      this.studentService
-          .courseDrop(student.studentID, this.courseID)
-          .then(result => {
-              this.getTimetables();
-          })
-          .catch(error => error);
+        this.studentService
+            .courseDrop(student.studentID, this.courseID)
+            .then(result => {
+                student.enrolled = false;
+            })
+            .catch(error => error);
     }
 
     checkStatus() {

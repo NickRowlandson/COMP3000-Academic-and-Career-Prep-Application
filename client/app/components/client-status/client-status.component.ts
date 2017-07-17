@@ -129,6 +129,8 @@ export class ClientStatusComponent implements OnInit {
           if (isConfirm) {
             this.deleteClient(client, event);
           }
+        }).catch(error => {
+          //console.log("Canceled");
         });
     }
 
