@@ -141,4 +141,18 @@ export class StudentService {
     removeCourse(student, course) {
 
     }
+
+    saveNewNote(caseNote, studentID) {
+      var caseNoteObject = { caseNote: caseNote };
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+        let url = `api/caseNotes/${studentID}`;
+
+        return this.http
+            .post(url, caseNoteObject, options)
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
 }

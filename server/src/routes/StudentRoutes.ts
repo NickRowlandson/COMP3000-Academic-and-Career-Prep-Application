@@ -20,6 +20,7 @@ class StudentRoutes {
         router.delete("/drop/:_studentID/:_courseID", controller.removeFromTimetable);
         router.get("/timetables", controller.getTimetables);
         router.get("/timetable/:_studentID", controller.getTimetablesById);
+        router.post("/caseNotes/:_studentID", controller.createNote);
         return router;
     }
 

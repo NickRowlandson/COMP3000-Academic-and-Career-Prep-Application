@@ -284,5 +284,34 @@ class StudentController {
         }
     }
 
+    createNote(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: auth, done: function() {
+                    var caseNote = req.body.caseNote;
+                    var _id: string = req.params._studentID;
+
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query("INSERT INTO CaseNotes VALUES ('" + _id + "', '" + caseNote + "')")
+                                .then(function() {
+                                    res.send({ "success": "success" });
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" });
+                                    console.log("insert note " + err);
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
 }
 export = StudentController;
