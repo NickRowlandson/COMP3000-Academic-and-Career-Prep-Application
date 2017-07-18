@@ -69,7 +69,7 @@ class AuthController {
                                         res.send({ status: '403' });
                                     }
                                 }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("Authenticate user 'Select staff' statement " + err);
+                                    res.send({ "error": "error" }); console.log("Authenticate user 'Select users' statement " + err);
                                 });
                         });
                 });

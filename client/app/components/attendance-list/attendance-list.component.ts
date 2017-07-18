@@ -14,13 +14,17 @@ declare var swal: any;
 
 export class AttendanceListComponent implements OnInit {
     data: any;
+    date: any;
+    courseID: any;
     attendanceView: boolean = false;
     attendanceCourse: any;
     attendanceStudents: any;
     timetables: any;
+    attendance: any;
+    absentStudents = [];
 
     constructor(private router: Router, private CourseService: CourseService, private StudentService: StudentService) {
-
+      this.date = new Date();
     }
 
     ngOnInit() {
@@ -45,12 +49,12 @@ export class AttendanceListComponent implements OnInit {
     }
 
     doAttendance(course: Course) {
+      this.courseID = course.courseID;
       this.StudentService
           .getTimetablesByCourseId(course.courseID)
           .then(result => {
               var isEmpty = (result || []).length === 0;
               if (isEmpty) {
-                  console.log("result is empty!!!!");
                   this.timetables = null;
               } else {
                   this.timetables = result
@@ -78,7 +82,15 @@ export class AttendanceListComponent implements OnInit {
     }
 
     markAbsent(student: Student) {
-
+      if (student.absent) {
+        student.absent = false;
+        var index = this.absentStudents.indexOf(student.studentID);
+        this.absentStudents.splice(index, 1);
+      } else {
+        student.absent = true;
+        this.absentStudents.push(student.studentID);
+      }
+      console.log(this.absentStudents);
     }
 
     submitAttendance() {
@@ -92,6 +104,22 @@ export class AttendanceListComponent implements OnInit {
           confirmButtonText: 'Yes, submit!'
       }).then(isConfirm => {
         if (isConfirm) {
+          this.attendance = {
+            studentsAbsent: this.absentStudents,
+            courseID: this.courseID,
+            date: this.date
+          };
+          console.log(this.attendance);
+          this.StudentService
+              .insertAttendance(this.attendance)
+              .then(result => {
+                swal(
+                    'Attendance submitted!',
+                    '',
+                    'success'
+                );
+              })
+              .catch(error => console.log(error));
         }
       }).catch(error => {
         //console.log("Canceled");

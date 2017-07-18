@@ -191,4 +191,18 @@ export class StudentService {
           .then(response => response.json())
           .catch(this.handleError);
     }
+
+    insertAttendance(attendance) {
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        let url = `api/attendance`;
+
+        return this.http
+            .post(url, attendance, options)
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
 }
