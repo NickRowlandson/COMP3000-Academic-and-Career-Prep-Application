@@ -407,5 +407,45 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
+
+    insertAttendance(req: express.Request, res: express.Response): void {
+      console.log("INSERTING attendance");
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
+                    var attendance = req.body;
+                    var query = "INSERT INTO Attendance (studentID, courseID, Date) VALUES ";
+                    var count = 0;
+                    for (let studentID of attendance.studentID) {
+                      if(count === 0) {
+                        query += "('" + studentID + "', '" + attendance.courseID + "', '" + attendance.courseID + "' )";
+                      } else {
+                        query += ", ('" + studentID + "', '" + attendance.courseID + "', '" + attendance.courseID + "' )";
+                      }
+                      count ++;
+                    }
+                    console.log(query);
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query(query)
+                                .then(function(recordset) {
+                                    res.send(recordset);
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" });
+                                    console.log("Attendance " + err);
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
 }
 export = StudentController;
