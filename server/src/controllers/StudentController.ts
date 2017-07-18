@@ -47,7 +47,7 @@ class StudentController {
     getStudentsById(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
-                requiredAuth: ["Instructor"], done: function() {
+                requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     var timetables = req.body;
                     var query = "SELECT * FROM Students WHERE studentID =";
                     var count = 0;
@@ -149,7 +149,7 @@ class StudentController {
     retrieve(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
-                requiredAuth: auth, done: function() {
+                requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)
@@ -353,7 +353,7 @@ class StudentController {
     createNote(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
-                requiredAuth: auth, done: function() {
+                requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     var caseNote = req.body.caseNote;
                     var _id: string = req.params._studentID;
 
@@ -383,7 +383,7 @@ class StudentController {
     getNote(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
-                requiredAuth: auth, done: function() {
+                requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     var _id: string = req.params._studentID;
                     sql.connect(config)
                         .then(function(connection) {

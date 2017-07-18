@@ -6,7 +6,7 @@ import { StaffGuard } from './guards/staff.guard';
 import { StudentGuard } from './guards/student.guard';
 import { ClientGuard } from './guards/client.guard';
 import { InstructorGuard } from './guards/instructor.guard';
-
+import { SharedGuard } from './guards/shared.guard';
 
 import { LoginComponent }   from './components/login/login.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
@@ -80,7 +80,7 @@ const appRoutes: Routes = [
     {
         path: 'case-notes',
         component: CaseNotesComponent,
-        canActivate: [AuthGuard, StaffGuard, InstructorGuard]
+        canActivate: [AuthGuard, SharedGuard]
     },
     {
         path: 'courses',
@@ -105,7 +105,7 @@ const appRoutes: Routes = [
     {
         path: 'timetable',
         component: TimetableComponent,
-        canActivate: [StudentGuard]
+        canActivate: [AuthGuard, StudentGuard]
     },
     {
         path: 'student-enrollment/:courseID/:instructorID/:courseName',
@@ -120,7 +120,7 @@ const appRoutes: Routes = [
     {
         path: 'attendance-list',
         component: AttendanceListComponent,
-        canActivate: [InstructorGuard]
+        canActivate: [AuthGuard, InstructorGuard]
     }
 
 ];
