@@ -4,6 +4,7 @@ import { CourseService } from "../../services/course.service";
 import { Course } from "../../models/course";
 import { Student } from "../../models/Student";
 import { StudentService } from "../../services/student.service";
+declare var swal: any;
 
 @Component({
     selector: 'attendanceList',
@@ -34,6 +35,7 @@ export class AttendanceListComponent implements OnInit {
             .then(result => {
                 var isEmpty = (result || []).length === 0;
                 if (isEmpty) {
+                    console.log(result);
                     this.data = null;
                 } else {
                     this.data = result;
@@ -48,6 +50,7 @@ export class AttendanceListComponent implements OnInit {
           .then(result => {
               var isEmpty = (result || []).length === 0;
               if (isEmpty) {
+                  console.log("result is empty!!!!");
                   this.timetables = null;
               } else {
                   this.timetables = result
@@ -68,10 +71,31 @@ export class AttendanceListComponent implements OnInit {
               if (isEmpty) {
                   this.attendanceStudents = null;
               } else {
-                  this.attendanceStudents = result
+                  this.attendanceStudents = result;
               }
           })
           .catch(error => console.log(error));
+    }
+
+    markAbsent(student: Student) {
+
+    }
+
+    submitAttendance() {
+      swal({
+          title: 'Submit Attendance?',
+          text: "You won't be able to revert this!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, submit!'
+      }).then(isConfirm => {
+        if (isConfirm) {
+        }
+      }).catch(error => {
+        //console.log("Canceled");
+      });
     }
 
     goBack() {

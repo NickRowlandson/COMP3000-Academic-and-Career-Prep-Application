@@ -22,7 +22,7 @@
             <h2>My Courses</h2>
             <hr>
             <div class="error" *ngIf="error">{{error}}</div>
-            <table class="table table-striped" [mfData]="data | courseFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <table class="table table-striped" [mfData]="data | courseFilter : courseQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
                         <th>
@@ -32,7 +32,7 @@
                     </tr>
                     <tr>
                         <th colspan="5">
-                            <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
+                            <input placeholder="Filter by course name" class="form-control" [(ngModel)]="courseQuery" />
                         </th>
                     </tr>
                 </thead>
@@ -60,6 +60,37 @@
         <div *ngIf="attendanceView" class="col-md-6">
             <h2>Attendance for {{ attendanceCourse }}</h2>
             <hr>
+            <table class="table table-striped" [mfData]="attendanceStudents | userFilter : studentQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+                <thead>
+                    <tr>
+                        <th>
+                            <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <th colspan="5">
+                            <input placeholder="Filter by student name" class="form-control" [(ngModel)]="studentQuery" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of mf.data">
+                        <td>{{student.firstName}} {{student.lastName}}</td>
+                        <td class="action">
+                          <button type="button" (click)="markAbsent(student)" class="btn btn-warning">Absent</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <mfBootstrapPaginator></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button type="button" (click)="submitAttendance()" style="float:right;" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Submit</button>
         </div>
     </div>
     <div class="backButton">

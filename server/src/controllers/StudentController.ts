@@ -47,18 +47,24 @@ class StudentController {
     getStudentsById(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
-                requiredAuth: auth, done: function() {
+                requiredAuth: ["Instructor"], done: function() {
                     var timetables = req.body;
                     var query = "SELECT * FROM Students WHERE studentID =";
+                    var count = 0;
                     for (let timetable of timetables) {
-                      query += timetable.studentID;
+                      if(count === 0) {
+                        query += " " + timetable.studentID;
+                      } else {
+                        query += " OR studentID = " + timetable.studentID;
+                      }
+                      count ++;
                     }
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)
                                 .query(query)
                                 .then(function(recordset) {
-                                    res.send({ "success": "success" });
+                                    res.send(recordset);
                                 }).catch(function(err) {
                                     res.send({ "error": "error" });
                                     console.log("Update student " + err);
@@ -284,7 +290,6 @@ class StudentController {
     }
 
     getTimetablesByCourseId(req: express.Request, res: express.Response): void {
-      console.log("Getting Timetables by course id");
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Instructor"], done: function() {
