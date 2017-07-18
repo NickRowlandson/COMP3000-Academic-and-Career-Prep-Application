@@ -32,6 +32,7 @@ import { AttendanceListComponent } from './components/attendance-list/attendance
 //Import pipes
 import { UserFilterPipe } from "./pipes/user-filter.pipe";
 import { CourseFilterPipe } from "./pipes/course-filter.pipe";
+import { campusFilterPipe } from "./pipes/campus-filter.pipe";
 
 //Import services
 import { AuthGuard } from './guards/auth.guard';
@@ -80,6 +81,7 @@ import { CourseService } from './services/course.service';
     UserFilterPipe,
     CourseFilterPipe,
     VisviewComponent,
+    campusFilterPipe,
     AttendanceListComponent
   ],
   providers: [

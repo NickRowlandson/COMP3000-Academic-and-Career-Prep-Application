@@ -21,8 +21,8 @@
 <div class="row">
 <div class="col-md-6">
 <label for="">Campus</label>
- <select>
-  <!-- <option *ngFor="let cam of Campus"  [(ngModel)]={{Campus.indexOf(cam)+1}}>{{cam}}</option> -->
+ <select [(ngModel)]="campusId">
+   <option *ngFor="let cam of Campus"  [ngValue]="this.Campus.indexOf(cam)+1"   >{{cam}}</option> 
 </select>
 
         </div>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="col-md-12">
-            <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery | campusFilter : campusId" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
                         <th><mfDefaultSorter by="courseName">Course Name</mfDefaultSorter></th>

@@ -8,7 +8,7 @@ export class campusFilterPipe implements PipeTransform {
 
     transform(array: any[], query: string): any {
         if (query) {
-            return _.filter(array, row => (row.campusId).toLowerCase().indexOf(query.toLowerCase()) > -1);
+            return _.filter(array, row => row.campusId.indexOf(query) > -1);
         }
         return array;
     }

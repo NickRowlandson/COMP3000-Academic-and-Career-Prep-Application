@@ -24,8 +24,24 @@
       <datetime [(ngModel)]="course.courseEnd"></datetime>
     </div>
 
+
+
+
     <div class="form-group">
-      <label class="col-sm-2 control-label">professor: </label> dropdown
+      <label class="col-sm-2 control-label">Valid from: </label>
+      <datetime [(ngModel)]="course.validFrom"></datetime>
+    </div>
+        <div class="form-group">
+      <label class="col-sm-2 control-label">Valid to: </label>
+      <datetime [(ngModel)]="course.validTo"></datetime>
+    </div>
+
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">professor: </label>
+      <select>
+   <option *ngFor="let pro of professors" >{{pro}}</option> 
+</select>
     </div>
 
     <div class="form-group">

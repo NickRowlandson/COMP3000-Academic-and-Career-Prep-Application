@@ -16,7 +16,7 @@ export class VisviewComponent implements OnInit {
        @Input() student: Student;
  
 
-    events: any[];
+    events: any[]=[];
 
     header: any;
 
@@ -35,14 +35,17 @@ export class VisviewComponent implements OnInit {
     
              console.log(result)
              
-            
+                 result.forEach((i) => {
+                this.events.push(
+                    {
+                        "title": i.courseName,
+                        "start": i.courseStart,
+                        "end": i.courseEnd
+                    })
+                
+            })
          
-            // for(let i of result){
-            //     console.log(i);
-            //     // this.courseService.getCourse(i.courseID).then(result=>{
-            //     //     console.log(result);
-            //     }) 
-            // }
+      
 
 
      })
@@ -61,23 +64,7 @@ export class VisviewComponent implements OnInit {
 
         }
 
-       this.events = [
-            {
-                "title": "All Day Event",
-                "start": "2017-07-02"
-            },
-            {
-                "title": "Math (A001)",
-                "start": "2017-07-18T10:00:00",
-                "end": "2017-07-18T13:00:00"
-            },
-            {
-                "title": "Englsh (A002)",
-                "start": "2017-07-20T10:00:00",
-                "end": "2017-07-20T13:00:00"
-            }
-            
-        ];
+       
 
    
   }

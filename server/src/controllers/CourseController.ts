@@ -199,6 +199,33 @@ class CourseController {
     }
 
 
+getProfessor(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
+                
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query(`SELECT * FROM users where userType='instructor'`)
+                                .then(function(recordset) {
+                                    console.dir(recordset)
+                                    res.send(recordset);
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" });                               
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
 
 }
 

@@ -316,8 +316,7 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
-
-    getTimetablesByStudentId(req: express.Request, res: express.Response): void {
+   getTimetablesByStudentId(req: express.Request, res: express.Response): void {
    try {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {

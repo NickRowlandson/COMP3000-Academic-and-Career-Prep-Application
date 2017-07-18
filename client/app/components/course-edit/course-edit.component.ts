@@ -14,6 +14,7 @@ export class CourseEditComponent implements OnInit {
   newCourse = false;
   error: any;
   navigated = false; // true if navigated here
+ date8:Date;
 
 
   constructor(private courseService: CourseService, private route: ActivatedRoute) {
@@ -21,6 +22,15 @@ export class CourseEditComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+
+
+// get professors 
+this.courseService.getProfessors().then((result)=>{console.log(result)})
+
+
+
     this.route.params.forEach((params: Params) => {
       let id = params['id'];
       if (id === 'new') {
@@ -32,6 +42,7 @@ export class CourseEditComponent implements OnInit {
         .getCourse(id)
         .then(course => {
           this.course = course[0];
+          console.log(this.course)
         });
       }
     });
@@ -50,4 +61,8 @@ export class CourseEditComponent implements OnInit {
   goBack() {
     window.history.back();
   }
+  
+
+
+  
 }

@@ -15,6 +15,7 @@ export class CourseManageComponent implements OnInit {
     courses: Course[];
     error: any;
     Campus:string[]
+    campusId:any;
     constructor(private router: Router, private CourseService: CourseService) {
 
     }
@@ -85,4 +86,9 @@ export class CourseManageComponent implements OnInit {
     goBack() {
         window.history.back();
     }
+    filterCampus(cam){
+this.campusId= this.Campus.indexOf(cam)+1
+console.log(this.campusId);
+    }
+        
 }
