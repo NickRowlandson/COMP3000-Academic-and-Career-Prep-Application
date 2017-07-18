@@ -18,6 +18,9 @@ export class VisviewComponent implements OnInit {
 
     events: any[];
 
+    header: any;
+
+
 
     constructor(private studentService: StudentService, private courseService:CourseService, private route: ActivatedRoute) {
 
@@ -43,10 +46,21 @@ export class VisviewComponent implements OnInit {
 
      })
 
-      this.events = [
+     this.header = {
+			left: 'prev,next,today',
+			center: 'title',
+			right: 'month,agendaWeek'
+		}
+
+       this.events = [
             {
                 "title": "All Day Event",
-                "start": "2017-07-06"
+                "start": "2017-07-02"
+            },
+            {
+                "title": "Long Event",
+                "start": "2017-07-07",
+                "end": "2017-07-08"
             }
         ];
 
