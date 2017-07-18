@@ -38,10 +38,12 @@
                 <tr *ngFor="let student of mf.data">
                     <td>{{student.studentID}}</td>
                     <td>{{student.firstName}} {{student.lastName}}</td>
-                    <div *ngIf="!loading" class="input-group">
-                      <button *ngIf="student.enrolled" type="button" (click)="checkEnrolled(student)" class="btn btn-danger">Remove</button>
-                      <button *ngIf="!student.enrolled" type="button" (click)="checkEnrolled(student)" class="btn btn-success">Enroll</button>
-                    </div>
+                    <td>
+                      <div *ngIf="!loading" class="input-group">
+                        <button *ngIf="student.enrolled" type="button" (click)="checkEnrolled(student)" class="btn btn-danger remove">Remove</button>
+                        <button *ngIf="!student.enrolled" type="button" (click)="checkEnrolled(student)" class="btn btn-success enroll">Enroll</button>
+                      </div>
+                  </td>
                 </tr>
             </tbody>
             <tfoot>

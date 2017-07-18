@@ -80,7 +80,7 @@ const appRoutes: Routes = [
     {
         path: 'case-notes',
         component: CaseNotesComponent,
-        canActivate: [AuthGuard, StaffGuard]
+        canActivate: [AuthGuard, StaffGuard, InstructorGuard]
     },
     {
         path: 'courses',
@@ -108,7 +108,7 @@ const appRoutes: Routes = [
         canActivate: [StudentGuard]
     },
     {
-        path: 'student-enrollment/:id/:name',
+        path: 'student-enrollment/:courseID/:instructorID/:courseName',
         component: StudentEnrollmentComponent,
         canActivate: [AuthGuard, StaffGuard]
     },

@@ -21,7 +21,7 @@ export class AuthService {
         }
     }
 
-    login(username: string, password: string): Promise<boolean> {
+    login(username: string, password: string) {
         let headers = new Headers({'Content-Type': 'application/json'});
         var credentials = JSON.stringify({ username: username, password: password });
         return this.http.post('/api/auth', credentials, {headers:headers})

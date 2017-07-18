@@ -109,7 +109,6 @@ export class StudentService {
             .catch(this.handleError);
     }
 
-
     getTimetables() {
       // add authorization header with jwt token
       let headers = new Headers({ authorization: this.authService.token });
@@ -123,23 +122,47 @@ export class StudentService {
           .catch(this.handleError);
     }
 
+    getTimetablesByCourseId(courseID) {
+          // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        let url = `api/timetables-course-id/${courseID}`;
+
+        return this.http.get(url, options)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
+    }
+
     getEventsById(studentID){
+        console.log(studentID);
           // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
         let url = `api/timetable/${studentID}`;
         return this.http.get(url,options).toPromise()
-        .then(response => {response.json()
-        console.log('hey im printing res')
-    console.log(response.json())})
+          .then(response => response.json())
           .catch(this.handleError);
+    //     console.log('hey im printing res');
+    // console.log(response.json())})
+    //
         // .then(res => <any[]> res.json().data)
         //             .then(data => { return data; });
     }
 
-    removeCourse(student, course) {
+    getStudentsById(timetables) {
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
 
+      let url = `api/get-students-id`;
+
+      return this.http.post(url, timetables, options)
+          .toPromise()
+          .then(response => response.json())
+          .catch(this.handleError);
     }
 
     saveNewNote(caseNote, studentID) {

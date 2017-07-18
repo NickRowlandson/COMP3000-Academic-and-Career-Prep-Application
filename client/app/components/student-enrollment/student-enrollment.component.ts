@@ -29,7 +29,7 @@ export class StudentEnrollmentComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             this.courseID = params['courseID'];
             this.instructorID = params['instructorID'];
-            this.courseName = params['name'];
+            this.courseName = params['courseName'];
         });
         this.getStudents();
     }
