@@ -20,6 +20,7 @@ export class VisviewComponent implements OnInit {
 
     header: any;
 
+    options: any;
 
 
     constructor(private studentService: StudentService, private courseService:CourseService, private route: ActivatedRoute) {
@@ -47,10 +48,18 @@ export class VisviewComponent implements OnInit {
      })
 
      this.header = {
-			left: 'prev,next,today',
+			left: 'prev',
 			center: 'title',
-			right: 'month,agendaWeek'
+			right: 'next'
 		}
+
+        this.options = {
+            defaultView: "agendaWeek",
+            minTime: "06:00:00",
+            maxTime: "22:00:00",
+            height: 740
+
+        }
 
        this.events = [
             {
@@ -58,10 +67,16 @@ export class VisviewComponent implements OnInit {
                 "start": "2017-07-02"
             },
             {
-                "title": "Long Event",
-                "start": "2017-07-07",
-                "end": "2017-07-08"
+                "title": "Math (A001)",
+                "start": "2017-07-18T10:00:00",
+                "end": "2017-07-18T13:00:00"
+            },
+            {
+                "title": "Englsh (A002)",
+                "start": "2017-07-20T10:00:00",
+                "end": "2017-07-20T13:00:00"
             }
+            
         ];
 
    
