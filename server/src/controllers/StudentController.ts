@@ -256,13 +256,29 @@ class StudentController {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {
                     var _id: string = req.params._studentID;
-                        console.log('param student ID: '+_id)
+                 
                     sql.connect(config).then(() => {
-                        return sql.query`select * FROM Timetables WHERE studentId = ${_id}`
-                    }).then(result => {
+                        return sql.query`select * FROM Timetables WHERE studentID = ${_id}`
+                    }).then(result => {                  
+                        res.send(result);               
+//   let tempArry=[];
+                    //    for (let i=0;i< result.length;i++){
+                    //     console.dir((result[i]).courseID);
 
-                        console.dir('here is timetable result'+result);
-                        res.send(result);
+                    //          sql.connect(config).then(()=>{
+                    //               return sql.query`select * FROM course WHERE courseId = ${result[i].courseID}`
+                    //          }).then(result=>{
+                    //              console.dir(result)                          
+                    //             // tempArry.push(result);
+                    //            // res.send(result)
+                    //          }).catch(err => {
+                    //     // ... error checks
+                    //     res.send({ "error": "error" });
+                    //     console.log("get course" + err)
+                    // })          
+                    //    }
+                      // console.dir(tempArry);
+
                     }).catch(err => {
                         // ... error checks
                         res.send({ "error": "error" });

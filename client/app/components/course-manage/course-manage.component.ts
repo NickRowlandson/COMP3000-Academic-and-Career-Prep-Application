@@ -10,16 +10,18 @@ declare var swal: any;
     styleUrls: ['./app/components/course-manage/course-manage.component.css']
 })
 
+
 export class CourseManageComponent implements OnInit {
     courses: Course[];
     error: any;
-
+    Campus:string[]
     constructor(private router: Router, private CourseService: CourseService) {
 
     }
 
     ngOnInit() {
         this.getCourses();
+       this.Campus=['Barrie','Orilia','Owen Sound','Orangevile','Midland','Muskoka','South Georgain Bay']
     }
     getCourses() {
         this.CourseService
