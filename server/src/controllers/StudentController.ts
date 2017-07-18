@@ -167,10 +167,11 @@ class StudentController {
         try {
             var _studentID = req.params._studentID;
             var _courseID = req.params._courseID;
+            var _instructorID = req.params._instructorID;
             sql.connect(config)
                 .then(function(connection) {
                     new sql.Request(connection)
-                        .query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "')")
+                        .query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "','" + _instructorID + "')")
                         .then(function() {
                             res.send({ "success": "success" });
                         }).catch(function(err) {
@@ -222,6 +223,7 @@ class StudentController {
     }
 
     getTimetables(req: express.Request, res: express.Response): void {
+      console.log("Getting Timetables");
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {
@@ -230,6 +232,7 @@ class StudentController {
                             new sql.Request(connection)
                                 .query("SELECT * FROM Timetables")
                                 .then(function(recordset) {
+                                    console.log("Success! timetable retrieved");
                                     res.send(recordset);
                                 }).catch(function(err) {
                                     res.send({ "error": "error" });
@@ -280,6 +283,6 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
-    
+
 }
 export = StudentController;

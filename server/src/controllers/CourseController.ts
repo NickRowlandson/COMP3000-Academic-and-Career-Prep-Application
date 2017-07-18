@@ -44,6 +44,34 @@ class CourseController {
         }
     }
 
+    getInstructorCourses(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: ["Instructor"], done: function() {
+                  var _id: string = req.params._id;
+
+                  sql.connect(config)
+                  .then(function(connection) {
+                      new sql.Request(connection)
+                          .query("SELECT * FROM Course WHERE professorId = '" + _id + "'")
+                          .then(function(recordset) {
+                              res.send(recordset);
+                          }).catch(function(err) {
+                              res.send({ "error": "error" }); console.log("Select instructor course " + err);
+                          });
+                  }).catch(function(err) {
+                      console.log(err);
+                      res.send({ "error": "error in your request" });
+                  });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
     delete(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -144,7 +172,7 @@ class CourseController {
                     var course = req.body;
 
                     sql.connect(config).then(() => {
-                        return sql.query`INSERT INTO Course (courseName,professorId,campusId,classroom, courseStart,courseEnd) VALUES(${course.courseName},'Di','1',${course.classroom},'2017-05-17 13:00:00','2017-05-17 17:00:00')`
+                        return sql.query`INSERT INTO Course (courseName,professorId,campusId,classroom, courseEnd,courseStart) VALUES(${course.courseName},'225', 'Barrie', ${course.classroom},'2017-05-17 13:00:00','2017-05-17 17:00:00')`
                     }).then(result => {
                         console.dir(`insert ${course.courseName} complete`);
                         res.send({ "success": "success" });

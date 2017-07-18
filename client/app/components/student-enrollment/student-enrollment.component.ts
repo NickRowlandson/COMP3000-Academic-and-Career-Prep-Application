@@ -16,6 +16,7 @@ declare var swal: any;
 export class StudentEnrollmentComponent implements OnInit {
     students: Student[];
     courseID: any;
+    instructorID: any;
     courseName: any;
     studentTimetables: any[];
     loading: boolean = true;
@@ -26,7 +27,8 @@ export class StudentEnrollmentComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
-            this.courseID = params['id'];
+            this.courseID = params['courseID'];
+            this.instructorID = params['instructorID'];
             this.courseName = params['name'];
         });
         this.getStudents();
@@ -94,7 +96,7 @@ export class StudentEnrollmentComponent implements OnInit {
 
     enroll(student: Student) {
         this.studentService
-            .courseEnroll(student.studentID, this.courseID)
+            .courseEnroll(student.studentID, this.courseID,  this.instructorID)
             .then(result => {
                 student.enrolled = true;
             })

@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
 
     consentForm: boolean;
     learningStyleForm: boolean;
-    
+
 
     //variables used to toggle dahsboard items
     clientStatus = false;
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-     
+
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         var userType = currentUser.userType;
         var userID = currentUser.userID;
@@ -67,8 +67,7 @@ export class DashboardComponent implements OnInit {
             this.learningStyle = true;
             this.maesdprf = true;
             this.checkFormStatus(userID);
-        } else if(userType ==='Instructor')
-        {
+        } else if (userType === 'Instructor') {
             this.attendanceList = true;
         }
     }

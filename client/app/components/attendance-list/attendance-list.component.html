@@ -1,9 +1,71 @@
-<div class="caseNotes">
-  <h2>Case Notes</h2>
-  <hr>
-  <div class="backButton">
-      <div>
-          <button (click)="goBack()" class="btn btn-default">Back</button>
-      </div>
-  </div>
+<div class="">
+    <div *ngIf="!data">
+        <h2>My Courses</h2>
+        <hr>
+        <div class="cs-loader">
+            <div class="cs-loader-inner">
+                <label>	L</label>
+                <label>	O</label>
+                <label>	A</label>
+                <label>	D</label>
+                <label>	I</label>
+                <label>	N</label>
+                <label>	G</label>
+                <label>	.</label>
+                <label>	.</label>
+                <label>	.</label>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="data">
+        <div class="col-md-6">
+            <h2>My Courses</h2>
+            <hr>
+            <div class="error" *ngIf="error">{{error}}</div>
+            <table class="table table-striped" [mfData]="data | courseFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+                <thead>
+                    <tr>
+                        <th>
+                            <mfDefaultSorter by="courseName">Name</mfDefaultSorter>
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <th colspan="5">
+                            <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let course of mf.data">
+                        <td>{{course.courseName}}</td>
+                        <td class="actionColumn middle">
+
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <mfBootstrapPaginator></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div *ngIf="!attendanceView" class="col-md-6">
+            <h2>Status Report</h2>
+            <hr>
+            <div>
+        </div>
+        <div *ngIf="attendanceView" class="col-md-6">
+            <h2>Attendance for </h2>
+            <hr>
+        </div>
+    </div>
+    <div class="backButton">
+        <div>
+            <button (click)="goBack()" class="btn btn-default">Back</button>
+        </div>
+    </div>
 </div>

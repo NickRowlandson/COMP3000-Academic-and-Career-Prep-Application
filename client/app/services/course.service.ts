@@ -24,6 +24,19 @@ export class CourseService {
           .catch(this.handleError);
     }
 
+    getInstructorCourses(id: string): Promise<Course[]> {
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
+
+      let url  = "api/instructor-courses/" + id;
+
+      return this.http.get(url, options)
+          .toPromise()
+          .then(response => response.json())
+          .catch(this.handleError);
+    }
+
     getCourse(id: string) {
      // add authorization header with jwt token
      let headers = new Headers({ authorization: this.authService.token });

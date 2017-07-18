@@ -21,7 +21,7 @@ export class TimetableComponent implements OnInit {
 
     ngOnInit() {
  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      
+
         console.log(currentUser);
          this.studentID = currentUser.studentID;
         console.log('studentId is '+ this.studentID);

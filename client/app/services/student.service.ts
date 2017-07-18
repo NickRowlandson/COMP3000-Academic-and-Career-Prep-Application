@@ -82,12 +82,12 @@ export class StudentService {
         return Promise.reject(error.message || error);
     }
 
-    courseEnroll(studentID, courseID) {
+    courseEnroll(studentID, courseID, instructorID) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
-        let url = `api/enroll/${studentID}/${courseID}`;
+        let url = `api/enroll/${studentID}/${courseID}/${instructorID}`;
 
         return this.http
             .post(url, options)
@@ -115,7 +115,7 @@ export class StudentService {
       let headers = new Headers({ authorization: this.authService.token });
       let options = new RequestOptions({ headers: headers });
 
-      let url = `api/timetable`;
+      let url = `api/timetables`;
 
       return this.http.get(url, options)
           .toPromise()

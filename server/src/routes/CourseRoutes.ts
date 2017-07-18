@@ -12,6 +12,7 @@ class CourseRoutes {
         var controller = this._CourseController;
 
         router.get("/course", controller.retrieve);
+        router.get("/instructor-courses/:_id", controller.getInstructorCourses);
         router.post("/course", controller.create);
         router.put("/course/:_id", controller.update);
         router.get("/course/:_id", controller.findById);
