@@ -317,30 +317,46 @@ class StudentController {
         }
     }
 
-    getTimetablesById(req: express.Request, res: express.Response): void {
+    getTimetablesByStudentId(req: express.Request, res: express.Response): void {
    try {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {
                     var _id: string = req.params._studentID;
                         console.log('param student ID: '+_id)
-                    sql.connect(config).then(() => {
-                        return sql.query`select * FROM Timetables WHERE studentId = ${_id}`
-                    }).then(result => {
+                    // sql.connect(config).then(() => {
+                    //     return sql.query`select * FROM Timetables WHERE studentId = ${_id}`
+                    // }).then(result => {
+                    //     console.dir('here is timetable result'+result);
+                    //     res.send(result);
+                    // }).catch(err => {
+                    //     // ... error checks
+                    //     res.send({ "error": "error" });
+                    //     console.log("select timetable" + err)
+                    // })
 
-                        console.dir('here is timetable result'+result);
+                    // sql.on('error', err => {
+                    //     // ... error handler
+                    //     console.log(err);
+                    //     res.send({ "error": "error in your request" });
+                    // })
+ sql.connect(config).then(function(connection) {
+                new sql.Request(connection)
+                    .query(`select * FROM Timetables WHERE studentId = ${_id}`)
+                    .then((result)=>{               
+                  let query='select * from course where';
+for (let i=0;i<result.length;i++) {
+                      if(i === 0) {
+                        query += ' courseId = ' + result[i].courseID;
+                      } else {
+                        query += " OR courseId = " + result[i].courseID;
+                      }                  
+                    }               
+                      new sql.Request(connection).query(query).then((result)=>{
+                        console.log(result);
                         res.send(result);
-                    }).catch(err => {
-                        // ... error checks
-                        res.send({ "error": "error" });
-                        console.log("select timetable" + err)
+                      });
                     })
-
-                    sql.on('error', err => {
-                        // ... error handler
-                        console.log(err);
-                        res.send({ "error": "error in your request" });
-                    })
-
+            })
                 }
             });
         }
@@ -348,6 +364,8 @@ class StudentController {
             console.log(e);
             res.send({ "error": "error in your request" });
         }
+
+
     }
 
     createNote(req: express.Request, res: express.Response): void {
