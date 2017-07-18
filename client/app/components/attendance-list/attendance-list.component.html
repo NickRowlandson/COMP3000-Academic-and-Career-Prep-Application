@@ -39,8 +39,8 @@
                 <tbody>
                     <tr *ngFor="let course of mf.data">
                         <td>{{course.courseName}}</td>
-                        <td class="actionColumn middle">
-
+                        <td class="action">
+                          <button type="button" (click)="doAttendance(course)" class="btn btn-info">Attendance</button>
                         </td>
                     </tr>
                 </tbody>
@@ -56,10 +56,9 @@
         <div *ngIf="!attendanceView" class="col-md-6">
             <h2>Status Report</h2>
             <hr>
-            <div>
         </div>
         <div *ngIf="attendanceView" class="col-md-6">
-            <h2>Attendance for </h2>
+            <h2>Attendance for {{ attendanceCourse }}</h2>
             <hr>
         </div>
     </div>

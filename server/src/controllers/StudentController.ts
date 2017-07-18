@@ -44,6 +44,34 @@ class StudentController {
         }
     }
 
+    getStudentsById(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: auth, done: function() {
+                    var timetables = req.body;
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query("UPDATE Students SET firstName='" + student.firstName + "', lastName='" + student.lastName + "', birthdate='" + student.birthday + "', email='" + student.email + "', phone='" + student.phone + "' WHERE studentID = '" + _id + "'")
+                                .then(function(recordset) {
+                                    res.send({ "success": "success" });
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" });
+                                    console.log("Update student " + err);
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
     update(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
@@ -237,6 +265,35 @@ class StudentController {
                                 }).catch(function(err) {
                                     res.send({ "error": "error" });
                                     console.log("Get student timetable " + err);
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
+    getTimetablesByCourseId(req: express.Request, res: express.Response): void {
+      console.log("Getting Timetables by course id");
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: ["Instructor"], done: function() {
+                    var _id: string = req.params._courseID;
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query("SELECT * FROM Timetables WHERE courseID = '" + _id + "'")
+                                .then(function(recordset) {
+                                    res.send(recordset);
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" });
+                                    console.log("Get timetables by courseID " + err);
                                 });
                         }).catch(function(err) {
                             console.log(err);

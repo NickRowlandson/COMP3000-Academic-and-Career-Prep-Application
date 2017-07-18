@@ -65,10 +65,10 @@
                         <td>{{ course.courseEnd }}</td>
                         <td class="actionColumn middle">
                             <div class="inline">
-                                <button class="btn btn-primary" (click)="gotoEdit(course, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                                <button class="btn btn-warning" (click)="gotoStudentEnrollment(course, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>
                             </div>
                             <div class="inline">
-                                <button class="btn btn-warning" (click)="gotoStudentEnrollment(course, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>
+                                <button class="btn btn-primary" (click)="gotoEdit(course, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             </div>
                             <div class="inline">
                                 <button class="btn btn-danger" (click)="deleteAlert(course, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
