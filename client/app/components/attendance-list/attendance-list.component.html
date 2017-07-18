@@ -78,7 +78,8 @@
                     <tr *ngFor="let student of mf.data">
                         <td>{{student.firstName}} {{student.lastName}}</td>
                         <td class="action">
-                          <button type="button" (click)="markAbsent(student)" class="btn btn-warning">Absent</button>
+                          <button *ngIf="!student.absent"  type="button" (click)="markAbsent(student)" class="btn btn-Success">Present</button>
+                          <button *ngIf="student.absent" type="button" (click)="markAbsent(student)" class="btn btn-warning">Absent</button>
                         </td>
                     </tr>
                 </tbody>
