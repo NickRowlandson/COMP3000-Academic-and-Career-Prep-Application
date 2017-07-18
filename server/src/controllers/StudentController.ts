@@ -49,10 +49,14 @@ class StudentController {
             new AuthController().authUser(req, res, {
                 requiredAuth: auth, done: function() {
                     var timetables = req.body;
+                    var query = "SELECT * FROM Students WHERE studentID =";
+                    for (let timetable of timetables) {
+                      query += timetable.studentID;
+                    }
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)
-                                .query("UPDATE Students SET firstName='" + student.firstName + "', lastName='" + student.lastName + "', birthdate='" + student.birthday + "', email='" + student.email + "', phone='" + student.phone + "' WHERE studentID = '" + _id + "'")
+                                .query(query)
                                 .then(function(recordset) {
                                     res.send({ "success": "success" });
                                 }).catch(function(err) {

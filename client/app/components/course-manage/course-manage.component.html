@@ -22,10 +22,7 @@
 <div class="col-md-6">
 <label for="">Campus</label>
  <select>
-  <option value="1">Barrie</option>
-  <option value="2">Midland</option>
-  <option value="3">Orillia</option>
-  <option value="4">Owen Sound</option>
+  <option *ngFor="let cam of Campus"  [(ngModel)]={{Campus.indexOf(cam)+1}}>{{cam}}</option>
 </select>
 
         </div>

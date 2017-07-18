@@ -123,6 +123,7 @@ export class StudentService {
           .catch(this.handleError);
     }
 
+<<<<<<< HEAD
     getTimetablesByCourseId(courseID) {
           // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
@@ -140,26 +141,37 @@ export class StudentService {
     }
 
     getEventsById(studentID){
+=======
+     getEventsById(studentID){
+        console.log(studentID);
+>>>>>>> 919e58c230278af3ba4e99a782a32ecca0a9620b
           // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
         let url = `api/timetable/${studentID}`;
         return this.http.get(url,options).toPromise()
-        .then(response => {response.json()
-        console.log('hey im printing res')
-    console.log(response.json())})
+          .then(response => response.json())
           .catch(this.handleError);
+    //     console.log('hey im printing res');
+    // console.log(response.json())})
+    //   
         // .then(res => <any[]> res.json().data)
         //             .then(data => { return data; });
     }
 
+<<<<<<< HEAD
     getStudentsById(timetables) {
       // add authorization header with jwt token
       let headers = new Headers({ authorization: this.authService.token });
       let options = new RequestOptions({ headers: headers });
 
       let url = `api/get-students-id`;
+=======
+
+
+    removeCourse(student, course) {
+>>>>>>> 919e58c230278af3ba4e99a782a32ecca0a9620b
 
       return this.http.post(url, timetables, options)
           .toPromise()
