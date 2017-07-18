@@ -28,11 +28,10 @@ export class VisviewComponent implements OnInit {
 
        this.studentService.getEventsById(80).then(result =>
      {
-      
-         result.forEach((i)=>{
-             console.log(i.courseID)
-             this.courseService.getCourse(i.courseID).then( result=> {console.log(result);}
-            )
+    
+             console.log(result)
+             
+            
          
             // for(let i of result){
             //     console.log(i);
@@ -42,7 +41,6 @@ export class VisviewComponent implements OnInit {
             // }
 
 
-        });
      })
 
       this.events = [
