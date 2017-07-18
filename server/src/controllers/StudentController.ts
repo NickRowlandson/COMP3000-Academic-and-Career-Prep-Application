@@ -313,5 +313,33 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
+
+    getNote(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: auth, done: function() {
+                    var _id: string = req.params._studentID;
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query("SELECT *  FROM CaseNotes WHERE studentID = '" + _id + "'")
+                                .then(function(recordset) {
+                                    res.send(recordset);
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" });
+                                    console.log("Get case note by id " + err);
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
 }
 export = StudentController;

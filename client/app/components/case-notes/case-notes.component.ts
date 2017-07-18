@@ -11,8 +11,12 @@ import { Student } from "../../models/student";
 
 export class CaseNotesComponent implements OnInit {
   data: any[];
+  notes: any[];
   notesView: Student;
   note: any;
+  newNote: boolean;
+  status: any;
+  error: any;
 
   constructor(private router: Router, private studentService: StudentService) {
 
@@ -45,7 +49,7 @@ export class CaseNotesComponent implements OnInit {
     this.studentService
         .saveNewNote(this.note, studentID)
         .then(note => {
-            this.note = note;
+            this.note = '';
             this.goBack();
         })
         .catch(error => this.error = error); // TODO: Display error message
@@ -55,6 +59,14 @@ export class CaseNotesComponent implements OnInit {
 
   showCaseNotes(student: Student) {
     this.notesView = student;
+    console.log('shownotes');
+    this.studentService
+        .getNotes(student.studentID)
+        .then(notes => {
+          this.notes = notes;
+          console.log(this.notes);
+        })
+        .catch(error => console.log(error));
   }
 
   goBack() {

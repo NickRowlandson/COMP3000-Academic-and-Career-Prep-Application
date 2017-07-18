@@ -155,4 +155,17 @@ export class StudentService {
             .then(response => response.json().data)
             .catch(this.handleError);
     }
+
+    getNotes(studentID) {
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
+
+      let url = `api/caseNotes/${studentID}`;
+
+      return this.http.get(url, options)
+          .toPromise()
+          .then(response => response.json())
+          .catch(this.handleError);
+    }
 }

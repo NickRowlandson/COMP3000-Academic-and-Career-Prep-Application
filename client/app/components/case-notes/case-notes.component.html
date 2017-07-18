@@ -69,7 +69,9 @@
       </div>
       <hr>
       <div>
-        Case Notes go here.
+          <ul *ngFor="let noteItem of notes">
+            <li>{{noteItem.caseNote}}</li>
+          </ul>
       </div>
     </div>
   </div>

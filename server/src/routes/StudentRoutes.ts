@@ -21,6 +21,7 @@ class StudentRoutes {
         router.get("/timetables", controller.getTimetables);
         router.get("/timetable/:_studentID", controller.getTimetablesById);
         router.post("/caseNotes/:_studentID", controller.createNote);
+        router.get("/caseNotes/:_studentID", controller.getNote);
         return router;
     }
 
