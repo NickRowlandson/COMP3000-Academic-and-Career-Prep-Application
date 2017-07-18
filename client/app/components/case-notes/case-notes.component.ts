@@ -40,7 +40,6 @@ export class CaseNotesComponent implements OnInit {
   }
 
   addCaseNotes() {
-    console.log('Adding Case Note');
     this.newNote = true;
   }
 
@@ -50,7 +49,7 @@ export class CaseNotesComponent implements OnInit {
         .saveNewNote(this.note, studentID)
         .then(note => {
             this.note = '';
-            this.goBack();
+            this.showNotes(studentID);
         })
         .catch(error => this.error = error); // TODO: Display error message
 
@@ -59,12 +58,14 @@ export class CaseNotesComponent implements OnInit {
 
   showCaseNotes(student: Student) {
     this.notesView = student;
-    console.log('shownotes');
+    this.showNotes(student.studentID);
+  }
+
+  showNotes(studentID){
     this.studentService
-        .getNotes(student.studentID)
+        .getNotes(studentID)
         .then(notes => {
           this.notes = notes;
-          console.log(this.notes);
         })
         .catch(error => console.log(error));
   }
