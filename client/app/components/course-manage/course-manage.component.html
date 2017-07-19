@@ -1,93 +1,110 @@
 <div class="course">
-    <h2>Manage Courses</h2>
-    <hr>
+  <h2>Manage Courses</h2>
+  <hr>
 
-    <div *ngIf ="!courses" class="cs-loader">
-        <div class="cs-loader-inner">
-            <label>	L</label>
-            <label>	O</label>
-            <label>	A</label>
-            <label>	D</label>
-            <label>	I</label>
-            <label>	N</label>
-            <label>	G</label>
-            <label>	.</label>
-            <label>	.</label>
-            <label>	.</label>
-        </div>
+  <div *ngIf="!courses" class="cs-loader">
+    <div class="cs-loader-inner">
+      <label>	L</label>
+      <label>	O</label>
+      <label>	A</label>
+      <label>	D</label>
+      <label>	I</label>
+      <label>	N</label>
+      <label>	G</label>
+      <label>	.</label>
+      <label>	.</label>
+      <label>	.</label>
+    </div>
+  </div>
+
+  <!-- front end  for courses-->
+  <div class="row">
+    <div class="col-md-6">
+      <label for="">Campus</label>
+      <!-- <select [(ngModel)]="campusId">
+   <option *ngFor="let cam of Campus"  [ngValue]="this.Campus.indexOf(cam)+1"   >{{cam}}</option>
+</select> -->
+  <p-dropdown [style]="{'width':'175px'}"  [options]="campuses" [(ngModel)]="selectedCampusId"></p-dropdown>
+
     </div>
 
-    <!-- front end  for courses-->
-<div class="row">
-<div class="col-md-6">
-<label for="">Campus</label>
- <select [(ngModel)]="campusId">
-   <option *ngFor="let cam of Campus"  [ngValue]="this.Campus.indexOf(cam)+1"   >{{cam}}</option> 
-</select>
-
-        </div>
-
-        <!--<div class="col-md-3">
+    <!--<div class="col-md-3">
             <label for="">Search</label>
             <input type="text">
         </div>-->
-        <div class="col-md-6">
-            <div class="error" *ngIf="error">{{error}}</div>
-            <div class="pull-right">
-                <div class="padding">
-                    <button class="btn btn-success" (click)="addCourse()"><i class="fa fa-plus"></i> Add a Course</button>
-                </div>
-            </div>
+    <div class="col-md-6">
+      <div class="error" *ngIf="error">{{error}}</div>
+      <div class="pull-right">
+        <div class="padding">
+          <button class="btn btn-success" (click)="addCourse()"><i class="fa fa-plus"></i> Add a Course</button>
         </div>
-        <div class="col-md-12">
-            <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery | campusFilter : campusId" #mf="mfDataTable" [mfRowsOnPage]="10">
-                <thead>
-                    <tr>
-                        <th><mfDefaultSorter by="courseName">Course Name</mfDefaultSorter></th>
-                        <th><mfDefaultSorter by="professor">Professor</mfDefaultSorter></th>
-                        <th><mfDefaultSorter by="courseStart">Course Start</mfDefaultSorter></th>
-                        <th><mfDefaultSorter by="courseEnd">Course End</mfDefaultSorter></th>
-                    </tr>
-                    <tr>
-                        <th colspan="5">
-                            <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let course of mf.data">
-                        <td>{{ course.courseName }}</td>
-                        <td>{{ course.professorId }}</td>
-                        <td>{{ course.courseStart  }}</td>
-                        <td>{{ course.courseEnd }}</td>
-                        <td class="actionColumn middle">
-                            <div class="inline">
-                                <button class="btn btn-warning" (click)="gotoStudentEnrollment(course, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>
-                            </div>
-                            <div class="inline">
-                                <button class="btn btn-primary" (click)="gotoEdit(course, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-                            </div>
-                            <div class="inline">
-                                <button class="btn btn-danger" (click)="deleteAlert(course, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5">
-                            <mfBootstrapPaginator></mfBootstrapPaginator>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+      </div>
     </div>
+    <div class="col-md-12">
+      <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery | campusFilter : selectedCampusId" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <thead>
+          <tr>
+            <th>
+              <mfDefaultSorter by="courseName">Course Name</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="professor">Professor</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="classroom">Classroom</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="Campus">Campus</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="courseStart">Course Start</mfDefaultSorter>
+            </th>
+            <th>
+              <mfDefaultSorter by="courseEnd">Course End</mfDefaultSorter>
+            </th>
+          </tr>
+          <tr>
+            <th colspan="5">
+              <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of mf.data">
+            <td>{{ course.courseName?course.courseName:'none'}}</td>
+            <td>{{ course.professorName?course.professorName:'none' }}</td>
+            <td>{{ course.classroom?course.classroom:'none' }}</td>
+            <td>{{ course.campusName?course.campusName:'none' }}</td>
+            <td>{{ course.courseStart?course.courseStart:'none' }}</td>
+            <td>{{ course.courseEnd?course.courseEnd:'none' }}</td>
+            <td class="actionColumn middle">
+              <div class="inline">
+                <button class="btn btn-warning" (click)="gotoStudentEnrollment(course, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>
+              </div>
+              <div class="inline">
+                <button class="btn btn-primary" (click)="gotoEdit(course, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+              </div>
+              <div class="inline">
+                <button class="btn btn-danger" (click)="deleteAlert(course, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">
+              <mfBootstrapPaginator></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
 
 
-    <div class="backButton">
-        <div>
-            <button (click)="goBack()" class="btn btn-default">Back</button>
-        </div>
+  <div class="backButton">
+    <div>
+      <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>
+  </div>
 </div>

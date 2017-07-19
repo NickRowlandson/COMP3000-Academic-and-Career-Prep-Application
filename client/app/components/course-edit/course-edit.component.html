@@ -1,4 +1,4 @@
-<div class="courseEdit form-horizontal">
+<div  *ngIf="course" class="courseEdit form-horizontal">
   <div *ngIf="!newCourse && course">
     <h2>Edit Details for {{course.courseName}}</h2>
   </div>
@@ -16,7 +16,9 @@
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Start: </label>
-      <datetime [(ngModel)]="course.courseStart"></datetime>
+     <!--<p-calendar [(ngModel)]="course.courseStart" [showTime]="true"></p-calendar> {{course.courseStart}}-->
+     <!-- <p-calendar [(ngModel)]="course.courseStart" [showTime]="true"></p-calendar> -->
+     {{course.courseStart}}
     </div>
 
     <div class="form-group">
@@ -39,11 +41,15 @@
 
     <div class="form-group">
       <label class="col-sm-2 control-label">professor: </label>
-      <select>
-   <option *ngFor="let pro of professors" >{{pro}}</option> 
-</select>
+<p-dropdown [style]="{'width':'175px'}" [options]="professors" [(ngModel)]="course.professorId"></p-dropdown>
+
     </div>
 
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Campus: </label>
+  <p-dropdown [style]="{'width':'175px'}" [options]="campuses" [(ngModel)]="course.campusId"></p-dropdown>
+
+    </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">classroom: </label>
       <div class="col-sm-10">

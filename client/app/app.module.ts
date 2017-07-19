@@ -8,6 +8,8 @@ import { routing } from './app.routing';
 import { DataTableModule } from 'angular2-datatable';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { ScheduleModule } from 'primeng/primeng';
+import { CalendarModule } from 'primeng/primeng';
+import {DropdownModule} from 'primeng/primeng';
 
 //Import components
 import { LoginComponent } from './components/login/login.component';
@@ -58,7 +60,9 @@ import { CourseService } from './services/course.service';
     ChartsModule,
     DataTableModule,
     NKDatetimeModule,
-    ScheduleModule
+    ScheduleModule,
+    CalendarModule,
+    DropdownModule
     ],
   declarations: [
     AppComponent,
