@@ -319,7 +319,7 @@ class StudentController {
    getTimetablesByStudentId(req: express.Request, res: express.Response): void {
    try {
             new AuthController().authUser(req, res, {
-                requiredAuth: auth, done: function() {
+                requiredAuth: ["Student", "Admin", "Staff"], done: function() {
                     var _id: string = req.params._studentID;
                         console.log('param student ID: '+_id)
                     // sql.connect(config).then(() => {
@@ -341,15 +341,15 @@ class StudentController {
  sql.connect(config).then(function(connection) {
                 new sql.Request(connection)
                     .query(`select * FROM Timetables WHERE studentId = ${_id}`)
-                    .then((result)=>{               
+                    .then((result)=>{
                   let query='select * from course where';
 for (let i=0;i<result.length;i++) {
                       if(i === 0) {
                         query += ' courseId = ' + result[i].courseID;
                       } else {
                         query += " OR courseId = " + result[i].courseID;
-                      }                  
-                    }               
+                      }
+                    }
                       new sql.Request(connection).query(query).then((result)=>{
                         console.log(result);
                         res.send(result);

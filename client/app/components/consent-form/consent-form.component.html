@@ -1,51 +1,63 @@
 <h2>Consent Form </h2>
 <hr>
-<h3>Date</h3>
  {{date | date: format}}
+<form class="jumbotron">
+  <div class="form-group">
+<label for="date">Date</label>
+ <input type="date" id="date"   readonly="true" placeholder="{{date | date: format}}"/>
+
+
   <input  type="hidden" value="{{date | date: format}}" [(ngModel)]="consentForm.date" placeholder="DD/MM/YYYY" required />
-  
+</div>
+
+<div class="form-group">
 <h3>Can a detailed message be left at this number</h3>
-<label><input type="checkbox" [(ngModel)]="consentForm.detailedMessageYes"> Yes</label>
-<label><input type="checkbox" [(ngModel)]="consentForm.detailedMessageNo">  No</label>
+<label><input class="form-check" type="checkbox" [(ngModel)]="consentForm.detailedMessageYes"> Yes</label>
+<label><input class="form-check" type="checkbox" [(ngModel)]="consentForm.detailedMessageNo">  No</label>
+</div>
 
-<h3>Release information to outside agencies </h3>
-<p>I also authorize Academic and Career Preparation, Georgian College, to provide information concerning my academic status and progress to:</p>
-<label><input type="checkbox" [(ngModel)]="consentForm.ontarioWorks">Ontario Works</label>
-<label><input type="checkbox" [(ngModel)]="consentForm.ontarioDisabilityProgram">  Ontario Disability Program</label>
-<label><input type="checkbox" [(ngModel)]="consentForm.employmentInsurance"> Employment Insurance</label>
-<label><input type="checkbox" [(ngModel)]="consentForm.employmentServices">  Employment Services</label>
-<label><input type="checkbox" [(ngModel)]="consentForm.other">  Other</label>
-
-
+<div class="form-check">
+<h3>Release Of information to outside agencies </h3>
+<b><em><p>I also authorize Academic and Career Preparation, Georgian College, to provide information concerning my academic status and progress to:</p></em></b>
+<label><input type="checkbox" class="form-check" [(ngModel)]="consentForm.ontarioWorks">Ontario Works</label>
+<label><input type="checkbox" class="form-check" [(ngModel)]="consentForm.ontarioDisabilityProgram">  Ontario Disability Program</label>
+<label><input type="checkbox" class="form-check" [(ngModel)]="consentForm.employmentInsurance"> Employment Insurance</label>
+<label><input type="checkbox" class="form-check" [(ngModel)]="consentForm.employmentServices">  Employment Services</label>
+<label><input type="checkbox" class="form-check"  [(ngModel)]="consentForm.other">  Other</label>
+</div>
+<div class="form-group row">
 <h3>Other contact for follow up</h3>
-<input  [(ngModel)]="consentForm.contactName" placeholder="Contact Name" required #contactName="ngModel" />
+<input  class="col-sm-3 " [(ngModel)]="consentForm.contactName" placeholder="Contact Name" required #contactName="ngModel" />
  <div *ngIf="contactName.errors && (contactName.dirty || contactName.touched)"class="alert alert-danger">
                                 <div [hidden]="!contactName.errors.required">
                                 First name is required
                                 </div>
-                        
+
                          </div>
 
-<input   [(ngModel)]="consentForm.contactNum" placeholder="Phone Number" required #contactNum="ngModel" />
+<input class="col-sm-3 col-sm-offset-1"  [(ngModel)]="consentForm.contactNum" placeholder="Phone Number" required #contactNum="ngModel" />
  <div *ngIf="contactNum.errors && (contactNum.dirty || contactNum.touched)"class="alert alert-danger">
                              <div [hidden]="!contactNum.errors.required">
                                 Example Phone number format 1-777-777-7777
                                 </div>
-                            
-                        
+
+
                          </div>
 
+</div>
 
+<div class="form-group row">
 <h3>Other literacy agencies</h3>
-<input   [(ngModel)]="consentForm.literacyAgencies" placeholder="Signature" required />
+<input class="col-sm-3"  [(ngModel)]="consentForm.literacyAgencies" placeholder="Signature" required />
 
-<input  [(ngModel)]="consentForm.literacyWitness" placeholder="Witness" required />
-
+<input class="col-sm-3 col-sm-offset-1" [(ngModel)]="consentForm.literacyWitness" placeholder="Witness" required />
+</div>
+</form>
  <div class="col-sm-offset-10 col-sm-1">
  <button (click)="saveConsent()" class="saveButton" title="Save client"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>
   </div>
 
-<div class="backButton">
+<div class="backButton" style="margin-left:-15px;">
     <div>
         <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>

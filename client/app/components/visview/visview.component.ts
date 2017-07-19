@@ -14,7 +14,7 @@ import { CourseService} from '../../services/course.service';
 
 export class VisviewComponent implements OnInit {
        @Input() student: Student;
- 
+
 
     events: any[]=[];
 
@@ -30,11 +30,11 @@ export class VisviewComponent implements OnInit {
     ngOnInit() {
 
 
-       this.studentService.getEventsById(80).then(result =>
+       this.studentService.getEventsById(33).then(result =>
      {
-    
+
              console.log(result)
-             
+
                  result.forEach((i) => {
                 this.events.push(
                     {
@@ -42,10 +42,10 @@ export class VisviewComponent implements OnInit {
                         "start": i.courseStart,
                         "end": i.courseEnd
                     })
-                
+
             })
-         
-      
+
+
 
 
      })
@@ -64,9 +64,9 @@ export class VisviewComponent implements OnInit {
 
         }
 
-       
 
-   
+
+
   }
 
 }

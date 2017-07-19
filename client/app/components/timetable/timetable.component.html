@@ -2,7 +2,7 @@
     <h2>Timetable</h2>
     <hr>
 
-    <div *ngIf="!timetable" class="cs-loader">
+    <div *ngIf="!events" class="cs-loader">
         <div class="cs-loader-inner">
             <label>	L</label>
             <label>	O</label>
@@ -16,5 +16,8 @@
             <label>	.</label>
         </div>
     </div>
+    <div *ngIf="events">
+    <p-schedule [events]="events" [header]="header" [editable]="false" [weekends]="false" [allDaySlot]="false" [options]="options"></p-schedule>
+</div>
 
   </div>
