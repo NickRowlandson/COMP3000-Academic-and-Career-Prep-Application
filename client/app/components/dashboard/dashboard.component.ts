@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
     consentForm: boolean;
     learningStyleForm: boolean;
 
-
     //variables used to toggle dahsboard items
     clientStatus = false;
     manageStudents = false;
@@ -38,7 +37,6 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         var userType = currentUser.userType;
         var userID = currentUser.userID;

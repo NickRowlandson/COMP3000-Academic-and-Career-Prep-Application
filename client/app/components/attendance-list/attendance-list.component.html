@@ -74,7 +74,11 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <div *ngIf="loading" class="spinner">
+                  <div class="double-bounce1"></div>
+                  <div class="double-bounce2"></div>
+                </div>
+                <tbody *ngIf="!loading">
                     <tr *ngFor="let student of mf.data">
                         <td>{{student.firstName}} {{student.lastName}}</td>
                         <td class="action">

@@ -11,27 +11,22 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     padding: 10px;
     white-space: nowrap;
-    background-color: #333f48;
-    box-shadow: 8px 8px 8px #FFFFFF;
-}
-
-.dashboardItem:hover {
-  background-color: #004b87;
-  transition: 0.1s;
 }
 
 .dashboardItemText {
-    color: #c4bfb6;
+    color: #333f48;
 }
 
 .fa-lg-icon {
     font-size: 6em;
-    color: #c4bfb6;
+    color: #333f48;
 }
 
 .itemBorder {
     padding: 10px;
     padding-top: 40px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    box-shadow: 5px 5px 5px #888888;
 }
 
 .itemBorder a {

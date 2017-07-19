@@ -17,6 +17,7 @@ export class AttendanceListComponent implements OnInit {
     date: any;
     courseID: any;
     attendanceView: boolean = false;
+    loading: boolean = false;
     attendanceCourse: any;
     attendanceStudents: any;
     timetables: any;
@@ -49,6 +50,7 @@ export class AttendanceListComponent implements OnInit {
     }
 
     doAttendance(course: Course) {
+      this.loading = true;
       this.courseID = course.courseID;
       this.StudentService
           .getTimetablesByCourseId(course.courseID)
@@ -75,6 +77,7 @@ export class AttendanceListComponent implements OnInit {
               if (isEmpty) {
                   this.attendanceStudents = null;
               } else {
+                  this.loading = false;
                   this.attendanceStudents = result;
               }
           })
