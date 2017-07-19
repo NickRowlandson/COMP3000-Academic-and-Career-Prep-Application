@@ -58,17 +58,25 @@ export class StudentEnrollmentComponent implements OnInit {
     }
 
     compareTimetables() {
+    // console.log(this.courseID)
         for (let student of this.students) {
-            var timetable = this.studentTimetables.filter(x => x.studentID === student.studentID);
+            var timetable = this.studentTimetables.filter(x => x.userID === student.userID);
+            console.log(timetable);
             for (let item of timetable) {
                 var itemCourseID = item.courseID.toString();
+                // console.log('current courseID: '+ itemCourseID);
                 if (itemCourseID === this.courseID) {
+                  console.log('course:'+this.courseID+' has been matched for student '+student.userID)
                     student.enrolled = true;
+                    console.log('student: '+student.userID+' status to true'+student.enrolled )
                 } else {
                     student.enrolled = false;
+                      console.log('student: '+student.userID+' status to false'+student.enrolled)
                 }
+
             }
         }
+        console.log(this.students);
         this.loading = false;
     }
 
@@ -96,7 +104,7 @@ export class StudentEnrollmentComponent implements OnInit {
 
     enroll(student: Student) {
         this.studentService
-            .courseEnroll(student.studentID, this.courseID,  this.instructorID)
+            .courseEnroll(student.userID, this.courseID,  this.instructorID)
             .then(result => {
                 student.enrolled = true;
             })
@@ -105,7 +113,7 @@ export class StudentEnrollmentComponent implements OnInit {
 
     drop(student: Student) {
         this.studentService
-            .courseDrop(student.studentID, this.courseID)
+            .courseDrop(student.userID, this.courseID)
             .then(result => {
                 student.enrolled = false;
             })

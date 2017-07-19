@@ -82,12 +82,12 @@ export class StudentService {
         return Promise.reject(error.message || error);
     }
 
-    courseEnroll(studentID, courseID, instructorID) {
+    courseEnroll(userID, courseID, instructorID) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
-        let url = `api/enroll/${studentID}/${courseID}/${instructorID}`;
+        let url = `api/enroll/${userID}/${courseID}/${instructorID}`;
 
         return this.http
             .post(url, options)
@@ -96,12 +96,12 @@ export class StudentService {
             .catch(this.handleError);
     }
 
-    courseDrop(studentID, courseID) {
+    courseDrop(userID, courseID) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
-        let url = `api/drop/${studentID}/${courseID}`;
+        let url = `api/drop/${userID}/${courseID}`;
 
         return this.http
             .delete(url, options)

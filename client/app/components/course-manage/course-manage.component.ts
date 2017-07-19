@@ -26,7 +26,7 @@ selectedCampusId:string;
 
   ngOnInit() {
 
-  console.log(moment().format('YYYY-MM-DD hh:mm A'));
+  // console.log(moment().format('YYYY-MM-DD hh:mm A'));
     this.getProfessors();
 this.getCampuses();
     this.getCourses();

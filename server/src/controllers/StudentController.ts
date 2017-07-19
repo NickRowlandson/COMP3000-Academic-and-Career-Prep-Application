@@ -203,13 +203,13 @@ class StudentController {
 
     addToTimetable(req: express.Request, res: express.Response): void {
         try {
-            var _studentID = req.params._studentID;
+            var _userID = req.params._userID;
             var _courseID = req.params._courseID;
             var _instructorID = req.params._instructorID;
             sql.connect(config)
                 .then(function(connection) {
                     new sql.Request(connection)
-                        .query("INSERT INTO Timetables VALUES ('" + _studentID + "','" + _courseID + "','" + _instructorID + "')")
+                        .query("INSERT INTO Timetables (userID,courseID,instructorID) VALUES ('" + _userID + "','" + _courseID + "','" + _instructorID + "')")
                         .then(function() {
                             res.send({ "success": "success" });
                         }).catch(function(err) {
@@ -233,12 +233,12 @@ class StudentController {
 
     removeFromTimetable(req: express.Request, res: express.Response): void {
         try {
-            var _studentID = req.params._studentID;
+            var _userID = req.params._userID;
             var _courseID = req.params._courseID;
             sql.connect(config)
                 .then(function(connection) {
                     new sql.Request(connection)
-                        .query("DELETE FROM Timetables WHERE studentID = ('" + _studentID + "') AND courseID = ('" + _courseID + "')")
+                        .query("DELETE FROM Timetables WHERE userID = ('" + _userID + "') AND courseID = ('" + _courseID + "')")
                         .then(function() {
                             res.send({ "success": "success" });
                         }).catch(function(err) {
@@ -304,6 +304,7 @@ class StudentController {
                                     res.send({ "error": "error" });
                                     console.log("Get timetables by courseID " + err);
                                 });
+
                         }).catch(function(err) {
                             console.log(err);
                             res.send({ "error": "error" });
