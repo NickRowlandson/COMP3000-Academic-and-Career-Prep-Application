@@ -21,9 +21,8 @@ export class CourseEditComponent implements OnInit {
 
   // drop down
   professors: SelectItem[] = [];
-  selectedProfessor: string;
   campuses: SelectItem[] = [];
-  selectedCampus: string;
+
 
   constructor(private courseService: CourseService, private route: ActivatedRoute) {
 
@@ -32,28 +31,24 @@ export class CourseEditComponent implements OnInit {
   ngOnInit() {
 
 
-
-
     // get professors
     this.courseService.getProfessors().then((result) => {
-result.forEach((i)=>
-{
-  this.professors.push({
-        label: i.username,
-        value: i.userID
-      });
-})
+      result.forEach((i) => {
+        this.professors.push({
+          label: i.professorName,
+          value: i.userID
+        });
+      })
     });
-// get campuses
-this.courseService.getCampuses().then((result) => {
-result.forEach((i)=>
-{
-this.campuses.push({
-    label: i.campusName,
-    value: i.campusId
-  });
-})
-});
+    // get campuses
+    this.courseService.getCampuses().then((result) => {
+      result.forEach((i) => {
+        this.campuses.push({
+          label: i.campusName,
+          value: i.campusId
+        });
+      })
+    });
 
 
 
@@ -77,7 +72,7 @@ this.campuses.push({
   }
 
   save() {
-    console.log(this.course)
+console.log(this.course)
     this.courseService
       .save(this.course)
       .then(course => {
