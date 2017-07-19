@@ -3,6 +3,7 @@ import { Course } from "../../models/Course";
 import { ActivatedRoute, Params } from '@angular/router';
 import { CourseService } from "../../services/course.service";
 import { SelectItem } from 'primeng/primeng';
+declare var moment;
 @Component({
   selector: 'course-edit',
   templateUrl: './app/components/course-edit/course-edit.component.html',
@@ -14,10 +15,16 @@ export class CourseEditComponent implements OnInit {
   newCourse = false;
   error: any;
   navigated = false; // true if navigated here
-
-
-
-
+  private sub: any;
+ id: any;
+ datepickerOpts:any = {
+     startDate: moment(),
+     autoclose: true,
+     todayBtn: 'linked',
+     todayHighlight: true,
+     assumeNearbyYear: true,
+     format: 'YYYY-MM-DD'
+ }
 
   // drop down
   professors: SelectItem[] = [];
@@ -29,7 +36,7 @@ export class CourseEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
+this.subscribeCourse();
 
     // get professors
     this.courseService.getProfessors().then((result) => {
@@ -50,30 +57,43 @@ export class CourseEditComponent implements OnInit {
       })
     });
 
-
-
-
-
-    this.route.params.forEach((params: Params) => {
-      let id = params['id'];
-      if (id === 'new') {
-        this.newCourse = true;
-        this.course = new Course();
-      } else {
-        this.newCourse = false;
-        this.courseService
-          .getCourse(id)
-          .then(course => {
-            this.course = course[0];
-            console.log(this.course)
-          });
-      }
-    });
+    //
+    // this.route.params.forEach((params: Params) => {
+    //   let id = params['id'];
+    //   if (id === 'new') {
+    //     this.newCourse = true;
+    //     this.course = new Course();
+    //   } else {
+    //     this.newCourse = false;
+    //     this.courseService
+    //       .getCourse(id)
+    //       .then(result => {
+    //         // this.course = course[0];
+    //       console.log(result);
+    //         this.course= result;
+    //         // console.log(this.course)
+    //       });
+    //   }
+    // });
   }
+subscribeCourse(){
+  this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+      if (this.id==='new') {
+        this.newCourse = true;
+        this.course=new Course();
+      }else{
+        this.newCourse = false;
+        this.courseService.getCourse(this.id).then((result)=>{
+          this.course = result[0];
+          console.log(this.course)
+        })
+      }
+   });
+}
 
   save() {
 // **** need validation
-
     this.courseService
       .save(this.course)
       .then(course => {
@@ -82,7 +102,9 @@ export class CourseEditComponent implements OnInit {
       })
       .catch(error => this.error = error); // TODO: Display error message
   }
+handleDateFromChange(e){
 
+}
   goBack() {
     window.history.back();
   }

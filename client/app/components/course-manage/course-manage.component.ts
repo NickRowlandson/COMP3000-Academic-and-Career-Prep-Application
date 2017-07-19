@@ -60,8 +60,8 @@ getCampuses(){
             result.forEach((item)=>{
               item.courseStart = moment(item.courseStart).format('YYYY-MM-DD hh:mm A')
               item.courseEnd = moment(item.courseStart).format('YYYY-MM-DD hh:mm A')
-              item.validFrom = moment(item.courseStart).format('YYYY-MM-DD hh:mm A')
-              item.validTo = moment(item.courseStart).format('YYYY-MM-DD hh:mm A')
+              item.validFrom = moment(item.courseStart).format('YYYY-MM-DD')
+              item.validTo = moment(item.courseStart).format('YYYY-MM-DD')
           });
           this.courses = result;
 
@@ -105,11 +105,13 @@ getCampuses(){
   }
 
   gotoEdit(course: Course, event: any) {
-    this.router.navigate(['/course-edit', course.courseID]);
+
+    this.router.navigate(['/course-edit', course.courseID])
   }
 
   addCourse() {
-    this.router.navigate(['/course-edit', 'new']);
+
+    this.router.navigate(['/course-edit','new']);
   }
 
   gotoStudentEnrollment(course: Course, event: any) {

@@ -1,4 +1,4 @@
-<div  *ngIf="course" class="courseEdit form-horizontal">
+<div  class="courseEdit form-horizontal">
   <div *ngIf="!newCourse && course">
     <h2>Edit Details for {{course.courseName}}</h2>
   </div>
@@ -16,14 +16,13 @@
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Start: </label>
-     <!--<p-calendar [(ngModel)]="course.courseStart" [showTime]="true"></p-calendar> {{course.courseStart}}-->
-     <!-- <p-calendar [(ngModel)]="course.courseStart" [showTime]="true"></p-calendar> -->
-     {{course.courseStart}}
+    <!-- <datetime   [(ngModel)]="course.courseStart" [datepicker]="datepickerToOpts"></datetime> -->
+    <datetime [(ngModel)]="course.courseStart"></datetime>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label">End: </label>
-      <datetime [(ngModel)]="course.courseEnd"></datetime>
+        <!-- <datetime   [datepicker]="datepickerToOpts"></datetime> -->
     </div>
 
 
@@ -31,11 +30,13 @@
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Valid from: </label>
-      <datetime [(ngModel)]="course.validFrom"></datetime>
+         <!-- <p-calendar [(ngModel)]="course.validFrom" dateFormat="yy-mm-dd" ></p-calendar> -->
+         <!-- <datetime [ngModel]="course.dateFrom" (ngModelChange)="handleDateFromChange($event)" [timepicker]="false" [datepicker]="datepickerToOpts"></datetime> -->
     </div>
         <div class="form-group">
       <label class="col-sm-2 control-label">Valid to: </label>
-      <datetime [(ngModel)]="course.validTo"></datetime>
+       <!-- <p-calendar [(ngModel)]="course.validTo" dateFormat="yy-mm-dd" ></p-calendar> -->
+       <!-- <datetime [(ngModel)]="course.dateTo" [timepicker]="false" [datepicker]="datepickerToOpts"></datetime> -->
     </div>
 
 

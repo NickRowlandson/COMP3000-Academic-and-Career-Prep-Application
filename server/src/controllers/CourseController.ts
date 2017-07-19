@@ -147,6 +147,7 @@ left join users on users.userID=course.professorId
 left join campus on campus.campusId = course.campusId
  where courseId=${_id}`)
                 .then(function(recordset) {
+                  console.dir(recordset);
                   res.send(recordset);
                 }).catch(function(err) {
                   res.send({ "error": "error" });

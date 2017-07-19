@@ -5,8 +5,8 @@ export class Course {
     courseName: string;
     courseStart: string;
     courseEnd: string;
-    validFrom:string;
-    validTo:string;
+    validFrom: Date;
+    validTo:Date;
     classroom:string;
     campusId:string;
 }
