@@ -102,6 +102,18 @@ export class CourseService {
     }
 
 
+    getCampuses() {
+         // add authorization header with jwt token
+         let headers = new Headers({ authorization: this.authService.token });
+         let options = new RequestOptions({ headers: headers });
+
+         return this.http.get('api/getCampuses', options)
+             .toPromise()
+             .then(response => response.json())
+             .catch(this.handleError);
+        }
+
+
 getProfessors() {
      // add authorization header with jwt token
      let headers = new Headers({ authorization: this.authService.token });

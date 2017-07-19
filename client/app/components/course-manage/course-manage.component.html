@@ -22,7 +22,7 @@
 <div class="col-md-6">
 <label for="">Campus</label>
  <select [(ngModel)]="campusId">
-   <option *ngFor="let cam of Campus"  [ngValue]="this.Campus.indexOf(cam)+1"   >{{cam}}</option> 
+   <option *ngFor="let cam of Campus"  [ngValue]="this.Campus.indexOf(cam)+1"   >{{cam}}</option>
 </select>
 
         </div>
@@ -45,6 +45,7 @@
                     <tr>
                         <th><mfDefaultSorter by="courseName">Course Name</mfDefaultSorter></th>
                         <th><mfDefaultSorter by="professor">Professor</mfDefaultSorter></th>
+                          <th><mfDefaultSorter by="classroom">Classroom</mfDefaultSorter></th>
                         <th><mfDefaultSorter by="courseStart">Course Start</mfDefaultSorter></th>
                         <th><mfDefaultSorter by="courseEnd">Course End</mfDefaultSorter></th>
                     </tr>
@@ -57,7 +58,8 @@
                 <tbody>
                     <tr *ngFor="let course of mf.data">
                         <td>{{ course.courseName }}</td>
-                        <td>{{ course.professorId }}</td>
+                        <td>{{ getProfessorName(course.professorId) }}</td>
+                          <td>{{ course.classroom }}</td>
                         <td>{{ course.courseStart  }}</td>
                         <td>{{ course.courseEnd }}</td>
                         <td class="actionColumn middle">

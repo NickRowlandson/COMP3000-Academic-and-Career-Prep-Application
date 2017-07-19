@@ -16,14 +16,36 @@ export class CourseManageComponent implements OnInit {
     error: any;
     Campus:string[]
     campusId:any;
+    professors:any[]=[];
     constructor(private router: Router, private CourseService: CourseService) {
 
     }
 
     ngOnInit() {
+        this.getProfessors();
+
+
         this.getCourses();
        this.Campus=['Barrie','Orilia','Owen Sound','Orangevile','Midland','Muskoka','South Georgain Bay']
     }
+
+
+
+    getProfessors(){
+      // get professors
+      this.CourseService.getProfessors().then((result) => {
+          this.professors = result;
+      });
+    }
+    getProfessorName(professorId){
+this.professors.forEach((item)=>{
+  if (item.userID==professorId) {
+      return item.username;
+  }
+})
+    }
+
+
     getCourses() {
         this.CourseService
             .getCourses()
@@ -90,5 +112,5 @@ export class CourseManageComponent implements OnInit {
 this.campusId= this.Campus.indexOf(cam)+1
 
     }
-        
+
 }
