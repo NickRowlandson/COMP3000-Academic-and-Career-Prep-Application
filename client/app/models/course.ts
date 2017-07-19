@@ -5,6 +5,8 @@ export class Course {
     courseName: string;
     courseStart: string;
     courseEnd: string;
+    validFrom:string;
+    validTo:string;
     classroom:string;
     campusId:string;
 }

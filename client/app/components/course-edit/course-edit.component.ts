@@ -72,7 +72,8 @@ export class CourseEditComponent implements OnInit {
   }
 
   save() {
-console.log(this.course)
+// **** need validation
+
     this.courseService
       .save(this.course)
       .then(course => {

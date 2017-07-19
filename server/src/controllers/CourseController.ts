@@ -27,9 +27,9 @@ class CourseController {
               new sql.Request(connection)
                 .query(`
 SELECT course.*,concat(concat(staff.firstName,' '),staff.lastName)[professorName],campusName FROM Course
-inner join users on users.userID=course.professorId
-inner join campus on campus.campusId = course.campusId
-inner join staff on staff.userID = course.professorId`)
+left join users on users.userID=course.professorId
+left join campus on campus.campusId = course.campusId
+left join staff on staff.userID = course.professorId`)
                 .then(function(recordset) {
                   res.send(recordset);
                 }).catch(function(err) {
@@ -143,8 +143,8 @@ inner join staff on staff.userID = course.professorId`)
             .then(function(connection) {
               new sql.Request(connection)
                 .query(`SELECT course.*,username[professorName],campusName FROM Course
-inner join users on users.userID=course.professorId
-inner join campus on campus.campusId = course.campusId
+left join users on users.userID=course.professorId
+left join campus on campus.campusId = course.campusId
  where courseId=${_id}`)
                 .then(function(recordset) {
                   res.send(recordset);
@@ -174,7 +174,9 @@ inner join campus on campus.campusId = course.campusId
           var course = req.body;
 
           sql.connect(config).then(() => {
-            return sql.query`INSERT INTO Course (courseName,professorId,campusId,classroom, courseEnd,courseStart) VALUES(${course.courseName},'225', 'Barrie', ${course.classroom},'2017-05-17 13:00:00','2017-05-17 17:00:00')`
+            return sql.query`INSERT INTO Course (courseName,professorId,campusId,classroom, courseEnd,courseStart)
+             VALUES(${course.courseName},${course.professorId},${course.campusId},
+              ${course.classroom},'2017-05-17 13:00:00','2017-05-17 17:00:00')`
           }).then(result => {
             console.dir(`insert ${course.courseName} complete`);
             res.send({ "success": "success" });
@@ -189,9 +191,6 @@ inner join campus on campus.campusId = course.campusId
             console.log(err);
             res.send({ "error": "error in your request" });
           })
-
-
-
         }
       });
     } catch (e) {
@@ -201,6 +200,7 @@ inner join campus on campus.campusId = course.campusId
   }
   getCampuses(req: express.Request, res: express.Response): void {
     try {
+
       new AuthController().authUser(req, res, {
         requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
 
@@ -236,7 +236,7 @@ inner join campus on campus.campusId = course.campusId
               new sql.Request(connection)
                 .query(`
  SELECT users.*,concat(concat(staff.firstName,' '),staff.lastName)[professorName] FROM users
- inner join  staff on staff.userID = users.userID
+ left join  staff on staff.userID = users.userID
  where userType='instructor'`)
                 .then(function(recordset) {
                   // console.dir(recordset)

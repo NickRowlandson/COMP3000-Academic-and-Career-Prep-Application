@@ -71,12 +71,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let course of mf.data">
-            <td>{{ course.courseName }}</td>
-            <td>{{ course.professorName }}</td>
-            <td>{{ course.classroom }}</td>
-            <td>{{ course.campusName }}</td>
-            <td>{{ course.courseStart }}</td>
-            <td>{{ course.courseEnd }}</td>
+            <td>{{ course.courseName?course.courseName:'none'}}</td>
+            <td>{{ course.professorName?course.professorName:'none' }}</td>
+            <td>{{ course.classroom?course.classroom:'none' }}</td>
+            <td>{{ course.campusName?course.campusName:'none' }}</td>
+            <td>{{ course.courseStart?course.courseStart:'none' }}</td>
+            <td>{{ course.courseEnd?course.courseEnd:'none' }}</td>
             <td class="actionColumn middle">
               <div class="inline">
                 <button class="btn btn-warning" (click)="gotoStudentEnrollment(course, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>

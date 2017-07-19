@@ -4,7 +4,7 @@ import { CourseService } from "../../services/course.service";
 import { Course } from "../../models/course";
 import { SelectItem } from 'primeng/primeng';
 declare var swal: any;
-
+declare var moment:any;
 @Component({
   selector: 'courseManage',
   templateUrl: './app/components/course-manage/course-manage.component.html',
@@ -25,6 +25,8 @@ selectedCampusId:string;
   }
 
   ngOnInit() {
+
+  console.log(moment().format('YYYY-MM-DD hh:mm A'));
     this.getProfessors();
 this.getCampuses();
     this.getCourses();
@@ -54,7 +56,16 @@ getCampuses(){
         if (result.status === "403") {
           this.courses = null;
         } else {
+            //format datetime
+            result.forEach((item)=>{
+              item.courseStart = moment(item.courseStart).format('YYYY-MM-DD hh:mm A')
+              item.courseEnd = moment(item.courseStart).format('YYYY-MM-DD hh:mm A')
+              item.validFrom = moment(item.courseStart).format('YYYY-MM-DD hh:mm A')
+              item.validTo = moment(item.courseStart).format('YYYY-MM-DD hh:mm A')
+          });
           this.courses = result;
+
+
         }
       })
       .catch(error => this.error = error);
