@@ -88,7 +88,7 @@ export class CourseManageComponent implements OnInit {
     }
     filterCampus(cam){
 this.campusId= this.Campus.indexOf(cam)+1
-console.log(this.campusId);
+
     }
         
 }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Course } from "../../models/Course";
 import { ActivatedRoute, Params } from '@angular/router';
 import { CourseService } from "../../services/course.service";
-
+import { SelectItem } from 'primeng/primeng';
 @Component({
   selector: 'course-edit',
   templateUrl: './app/components/course-edit/course-edit.component.html',
@@ -14,7 +14,14 @@ export class CourseEditComponent implements OnInit {
   newCourse = false;
   error: any;
   navigated = false; // true if navigated here
- date8:Date;
+
+
+
+
+
+  // drop down
+  professors: SelectItem[] = [];
+  selectedProfessor: string;
 
 
   constructor(private courseService: CourseService, private route: ActivatedRoute) {
@@ -22,12 +29,23 @@ export class CourseEditComponent implements OnInit {
   }
 
   ngOnInit() {
+   
 
 
 
-
-// get professors 
-this.courseService.getProfessors().then((result)=>{console.log(result)})
+    // get professors 
+    this.courseService.getProfessors().then((result) => {
+    
+result.forEach((i)=>
+{
+  this.professors.push({
+        label: i.username,
+        value: i.userID
+      });
+})
+      
+     
+    });
 
 
 
@@ -39,11 +57,11 @@ this.courseService.getProfessors().then((result)=>{console.log(result)})
       } else {
         this.newCourse = false;
         this.courseService
-        .getCourse(id)
-        .then(course => {
-          this.course = course[0];
-          console.log(this.course)
-        });
+          .getCourse(id)
+          .then(course => {
+            this.course = course[0];
+            console.log(this.course)
+          });
       }
     });
   }
@@ -64,5 +82,6 @@ this.courseService.getProfessors().then((result)=>{console.log(result)})
   
 
 
-  
+
+
 }

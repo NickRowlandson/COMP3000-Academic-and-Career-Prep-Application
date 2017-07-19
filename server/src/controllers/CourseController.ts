@@ -138,7 +138,7 @@ class CourseController {
                     sql.connect(config).then(() => {
                         return sql.query`SELECT * FROM Course where courseId=${_id}`
                     }).then(result => {
-                      //  console.dir(result);
+                     console.dir(result);
                         res.send(result);
                     }).catch(err => {
                         // ... error checks
