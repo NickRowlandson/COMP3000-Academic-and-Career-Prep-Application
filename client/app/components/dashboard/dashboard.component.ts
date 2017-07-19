@@ -16,19 +16,18 @@ export class DashboardComponent implements OnInit {
   consentForm: boolean;
   learningStyleForm: boolean;
 
-
-  //variables used to toggle dahsboard items
-  clientStatus = false;
-  manageStudents = false;
-  manageStaff = false;
-  suitability = false;
-  consent = false;
-  manageCourses = false;
-  caseNotes = false;
-  learningStyle = false;
-  maesdprf = false;
-  timetable = false;
-  attendanceList = false;
+    //variables used to toggle dahsboard items
+    clientStatus = false;
+    manageStudents = false;
+    manageStaff = false;
+    suitability = false;
+    consent = false;
+    manageCourses = false;
+    caseNotes = false;
+    learningStyle = false;
+    maesdprf = false;
+    timetable = false;
+    attendanceList = false;
 
   //
   userType: any;
@@ -37,13 +36,12 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    var userType = currentUser.userType;
-    var userID = currentUser.userID;
-    this.checkAuth(userType, userID);
-  }
+    ngOnInit() {
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        var userType = currentUser.userType;
+        var userID = currentUser.userID;
+        this.checkAuth(userType, userID);
+    }
 
   checkAuth(userType, userID) {
     this.userType = userType;
