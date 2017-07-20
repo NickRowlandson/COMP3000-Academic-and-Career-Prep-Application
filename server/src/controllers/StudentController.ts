@@ -317,12 +317,12 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
-   getTimetablesByStudentId(req: express.Request, res: express.Response): void {
+   getTimetablesByUserId(req: express.Request, res: express.Response): void {
    try {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Student", "Admin", "Staff"], done: function() {
-                    var _id: string = req.params._studentID;
-                        console.log('param student ID: '+_id)
+                    var _id: string = req.params.userID;
+                        console.log('param userID: '+_id)
                     // sql.connect(config).then(() => {
                     //     return sql.query`select * FROM Timetables WHERE studentId = ${_id}`
                     // }).then(result => {
@@ -341,7 +341,7 @@ class StudentController {
                     // })
  sql.connect(config).then(function(connection) {
                 new sql.Request(connection)
-                    .query(`select * FROM Timetables WHERE studentId = ${_id}`)
+                    .query(`select * FROM Timetables WHERE userID = ${_id}`)
                     .then((result)=>{
                   let query='select * from course where';
 for (let i=0;i<result.length;i++) {

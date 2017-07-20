@@ -78,6 +78,8 @@ export class StudentEnrollmentComponent implements OnInit {
         }
         console.log(this.students);
         this.loading = false;
+
+
     }
 
     checkEnrolled(student: Student) {
