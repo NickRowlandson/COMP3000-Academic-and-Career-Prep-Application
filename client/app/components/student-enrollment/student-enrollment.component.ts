@@ -20,7 +20,7 @@ export class StudentEnrollmentComponent implements OnInit {
     courseName: any;
     studentTimetables: any[];
     loading: boolean = true;
-
+    tempTimetableArry: any[] =[];
     constructor(private studentService: StudentService, private courseService: CourseService, private route: ActivatedRoute) {
 
     }
@@ -58,7 +58,7 @@ export class StudentEnrollmentComponent implements OnInit {
     }
 
     compareTimetables() {
-    // console.log(this.courseID)
+    console.log(this.courseID)
         for (let student of this.students) {
             var timetable = this.studentTimetables.filter(x => x.userID === student.userID);
             console.log(timetable);
@@ -69,15 +69,17 @@ export class StudentEnrollmentComponent implements OnInit {
                   console.log('course:'+this.courseID+' has been matched for student '+student.userID)
                     student.enrolled = true;
                     console.log('student: '+student.userID+' status to true'+student.enrolled )
-                } else {
-                    student.enrolled = false;
-                      console.log('student: '+student.userID+' status to false'+student.enrolled)
                 }
-
+                // else {
+                //     student.enrolled = false;
+                //       console.log('student: '+student.userID+' status to false'+student.enrolled)
+                // }
             }
         }
         console.log(this.students);
         this.loading = false;
+
+
 
 
     }
