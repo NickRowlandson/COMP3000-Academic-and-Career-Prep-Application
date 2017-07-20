@@ -232,7 +232,7 @@ export class ClientStatusComponent implements OnInit {
 
     createAsStudent(client: Student) {
       this.studentService
-          .save(client)
+          .postNew(client)
           .then(result => {
             this.removeAlert(client);
           })

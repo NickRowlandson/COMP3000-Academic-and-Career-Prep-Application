@@ -29,12 +29,12 @@ export class StudentEditComponent implements OnInit {
 
     save() {
         this.studentService
-            .save(this.student)
+            .update(this.student)
             .then(student => {
-                this.student = student; // saved student, w/ id if new
+                this.student = student;
                 this.goBack();
             })
-            .catch(error => this.error = error); // TODO: Display error message
+            .catch(error => this.error = error);
     }
 
     goBack() {

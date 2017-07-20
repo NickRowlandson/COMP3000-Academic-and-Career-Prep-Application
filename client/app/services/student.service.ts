@@ -34,11 +34,7 @@ export class StudentService {
             .catch(this.handleError);
     }
 
-    save(student: Student): Promise<Student>  {
-        return this.post(student);
-    }
-
-    private post(student: Student): Promise<Student> {
+    postNew(student: Student): Promise<Student> {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
@@ -50,12 +46,12 @@ export class StudentService {
             .catch(this.handleError);
     }
 
-    private put(student: Student) {
+    update(student: Student) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
-        let url = `${this.studentsUrl}/${student.studentID}`;
+        let url = `${this.studentsUrl}/${student.userID}`;
 
         return this.http
             .put(url, student, options)
@@ -110,62 +106,62 @@ export class StudentService {
     }
 
     getTimetables() {
-      // add authorization header with jwt token
-      let headers = new Headers({ authorization: this.authService.token });
-      let options = new RequestOptions({ headers: headers });
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
 
-      let url = `api/timetables`;
+        let url = `api/timetables`;
 
-      return this.http.get(url, options)
-          .toPromise()
-          .then(response => response.json())
-          .catch(this.handleError);
+        return this.http.get(url, options)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
     }
 
     getTimetablesByCourseId(courseID) {
-          // add authorization header with jwt token
+        // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
         let url = `api/timetables-course-id/${courseID}`;
 
         return this.http.get(url, options)
-        .toPromise()
-        .then(response => response.json())
-        .catch(this.handleError);
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
     }
 
     getEventsById(userID) {
-          // add authorization header with jwt token
+        // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
         let url = `api/timetable/${userID}`;
         return this.http.get(url, options).toPromise()
-          .then(response => response.json())
-          .catch(this.handleError);
-    //     console.log('hey im printing res');
-    // console.log(response.json())})
-    //
+            .then(response => response.json())
+            .catch(this.handleError);
+        //     console.log('hey im printing res');
+        // console.log(response.json())})
+        //
         // .then(res => <any[]> res.json().data)
         //             .then(data => { return data; });
     }
 
     getStudentsById(timetables) {
-      // add authorization header with jwt token
-      let headers = new Headers({ authorization: this.authService.token });
-      let options = new RequestOptions({ headers: headers });
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
 
-      let url = `api/get-students-id`;
+        let url = `api/get-students-id`;
 
-      return this.http.post(url, timetables, options)
-          .toPromise()
-          .then(response => response.json())
-          .catch(this.handleError);
+        return this.http.post(url, timetables, options)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
     }
 
     saveNewNote(caseNote, studentID) {
-      var caseNoteObject = { caseNote: caseNote };
+        var caseNoteObject = { caseNote: caseNote };
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
@@ -179,16 +175,16 @@ export class StudentService {
     }
 
     getNotes(studentID) {
-      // add authorization header with jwt token
-      let headers = new Headers({ authorization: this.authService.token });
-      let options = new RequestOptions({ headers: headers });
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
 
-      let url = `api/caseNotes/${studentID}`;
+        let url = `api/caseNotes/${studentID}`;
 
-      return this.http.get(url, options)
-          .toPromise()
-          .then(response => response.json())
-          .catch(this.handleError);
+        return this.http.get(url, options)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
     }
 
     insertAttendance(attendance) {
