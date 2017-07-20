@@ -23,6 +23,7 @@
             <button class="addClient btn btn-primary" (click)="addClient()" title="Add new client"><i class="fa fa-plus" aria-hidden="true"></i></button>
             <hr>
             <div class="error" *ngIf="error">{{error}}</div>
+            <input placeholder="Filter by client name" class="form-control" [(ngModel)]="filterQuery" />
             <table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
@@ -37,11 +38,6 @@
                         </th>
                         <th>Action</th>
                     </tr>
-                    <tr>
-                        <th colspan="5">
-                            <input placeholder="Filter by client name" class="form-control" [(ngModel)]="filterQuery" />
-                        </th>
-                    </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let client of mf.data">
@@ -55,7 +51,7 @@
                                 <i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i>
                             </div>
                             <ul class="dropdown-menu actionMenu" aria-labelledby="actionMenu">
-                                <li *ngIf="!client.suitability && !client.consent && !client.learningStyle"><a (click)="createAsStudent(item)"><i class="fa fa-check" aria-hidden="true"></i> Create as Student</a></li>
+                                <li *ngIf="!client.suitability && !client.consent && !client.learningStyle"><a (click)="createAsStudent(client)"><i class="fa fa-check" aria-hidden="true"></i> Create as Student</a></li>
                                 <li><a (click)="showClientView(client)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
                                 <li><a (click)="populatePRF(client)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</a></li>
                                 <li class="deleteClient"><a (click)="deleteAlert(client, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>

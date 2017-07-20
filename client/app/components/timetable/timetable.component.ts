@@ -29,23 +29,23 @@ export class TimetableComponent implements OnInit {
     console.log(userID);
 
     this.studentService.getEventsById(userID).then(result => {
-      console.log(result)
+      console.log(result);
       result.forEach((i) => {
         this.events.push(
           {
             "title": i.courseName,
             "start": i.courseStart,
             "end": i.courseEnd
-          })
+          });
 
-      })
-    })
+      });
+    });
 
     this.header = {
       left: 'prev',
       center: 'title',
       right: 'next'
-    }
+    };
 
     this.options = {
       prev: 'circle-triangle-w',
@@ -53,7 +53,7 @@ export class TimetableComponent implements OnInit {
       minTime: "06:00:00",
       maxTime: "22:00:00",
       height: "auto"
-    }
+    };
   }
 
   goBack() {

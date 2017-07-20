@@ -234,7 +234,6 @@ export class ClientStatusComponent implements OnInit {
       this.studentService
           .save(client)
           .then(result => {
-            console.log(result);
             this.removeAlert(client);
           })
           .catch(error => this.error = error); // TODO: Display error message

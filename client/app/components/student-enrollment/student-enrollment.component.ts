@@ -20,6 +20,7 @@ export class StudentEnrollmentComponent implements OnInit {
     courseName: any;
     studentTimetables: any[];
     loading: boolean = true;
+    tempTimetableArry: any[] = [];
 
     constructor(private studentService: StudentService, private courseService: CourseService, private route: ActivatedRoute) {
 
@@ -59,13 +60,11 @@ export class StudentEnrollmentComponent implements OnInit {
 
     compareTimetables() {
         for (let student of this.students) {
-            var timetable = this.studentTimetables.filter(x => x.studentID === student.studentID);
+            var timetable = this.studentTimetables.filter(x => x.userID === student.userID);
             for (let item of timetable) {
                 var itemCourseID = item.courseID.toString();
                 if (itemCourseID === this.courseID) {
                     student.enrolled = true;
-                } else {
-                    student.enrolled = false;
                 }
             }
         }
@@ -96,7 +95,7 @@ export class StudentEnrollmentComponent implements OnInit {
 
     enroll(student: Student) {
         this.studentService
-            .courseEnroll(student.studentID, this.courseID,  this.instructorID)
+            .courseEnroll(student.userID, this.courseID, this.instructorID)
             .then(result => {
                 student.enrolled = true;
             })
@@ -105,7 +104,7 @@ export class StudentEnrollmentComponent implements OnInit {
 
     drop(student: Student) {
         this.studentService
-            .courseDrop(student.studentID, this.courseID)
+            .courseDrop(student.userID, this.courseID)
             .then(result => {
                 student.enrolled = false;
             })

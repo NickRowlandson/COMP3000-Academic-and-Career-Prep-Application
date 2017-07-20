@@ -29,7 +29,6 @@ export class DashboardComponent implements OnInit {
     timetable = false;
     attendanceList = false;
 
-  //
   userType: any;
 
   constructor(private router: Router, private authService: AuthService, private clientService: ClientService) {

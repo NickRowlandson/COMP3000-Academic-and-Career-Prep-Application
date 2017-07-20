@@ -61,7 +61,7 @@ export class CaseNotesComponent implements OnInit {
     this.showNotes(student.studentID);
   }
 
-  showNotes(studentID){
+  showNotes(studentID) {
     this.studentService
         .getNotes(studentID)
         .then(notes => {
