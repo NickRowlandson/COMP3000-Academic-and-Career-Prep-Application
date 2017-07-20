@@ -135,14 +135,14 @@ export class StudentService {
         .catch(this.handleError);
     }
 
-    getEventsById(studentID){
+    getEventsById(studentID) {
         console.log(studentID);
           // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
         let url = `api/timetable/${studentID}`;
-        return this.http.get(url,options).toPromise()
+        return this.http.get(url, options).toPromise()
           .then(response => response.json())
           .catch(this.handleError);
     //     console.log('hey im printing res');

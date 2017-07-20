@@ -4,7 +4,7 @@ import {Pipe, PipeTransform} from "@angular/core";
 @Pipe({
     name: "campusFilter"
 })
-export class campusFilterPipe implements PipeTransform {
+export class CampusFilterPipe implements PipeTransform {
 
     transform(array: any[], query: string): any {
         if (query) {

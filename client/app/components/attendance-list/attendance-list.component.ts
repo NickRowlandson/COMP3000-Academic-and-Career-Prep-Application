@@ -59,7 +59,7 @@ export class AttendanceListComponent implements OnInit {
               if (isEmpty) {
                   this.timetables = null;
               } else {
-                  this.timetables = result
+                  this.timetables = result;
                   this.getStudentsById(this.timetables);
               }
           })

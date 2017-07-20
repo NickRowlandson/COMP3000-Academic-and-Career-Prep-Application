@@ -9,7 +9,7 @@ import { DataTableModule } from 'angular2-datatable';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
-import {DropdownModule} from 'primeng/primeng';
+import { DropdownModule } from 'primeng/primeng';
 
 //Import components
 import { LoginComponent } from './components/login/login.component';
@@ -34,7 +34,7 @@ import { AttendanceListComponent } from './components/attendance-list/attendance
 //Import pipes
 import { UserFilterPipe } from "./pipes/user-filter.pipe";
 import { CourseFilterPipe } from "./pipes/course-filter.pipe";
-import { campusFilterPipe } from "./pipes/campus-filter.pipe";
+import { CampusFilterPipe } from "./pipes/campus-filter.pipe";
 
 //Import services
 import { AuthGuard } from './guards/auth.guard';
@@ -85,7 +85,7 @@ import { CourseService } from './services/course.service';
     UserFilterPipe,
     CourseFilterPipe,
     VisviewComponent,
-    campusFilterPipe,
+    CampusFilterPipe,
     AttendanceListComponent
   ],
   providers: [

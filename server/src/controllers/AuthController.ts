@@ -51,11 +51,10 @@ class AuthController {
     }
 
     //Decode token and check if user is authorized
-    authUser(req: express.Request, res: express.Response, data: Object): void {
+    authUser(req: express.Request, res: express.Response, data): void {
         try {
             if (req.headers) {
                 jwt.verify(req.headers.authorization, 'f9b574a2fc0d77986cb7ebe21a0dea480f5f21931abfa5cf329a45ecc0c8e1ff', function(err, decoded) {
-                    console.log(decoded);
                     var _id = decoded.userid;
                     sql.connect(config)
                         .then(function(connection) {
