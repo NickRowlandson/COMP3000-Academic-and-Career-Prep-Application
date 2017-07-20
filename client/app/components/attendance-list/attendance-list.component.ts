@@ -58,6 +58,8 @@ export class AttendanceListComponent implements OnInit {
               var isEmpty = (result || []).length === 0;
               if (isEmpty) {
                   this.timetables = null;
+                  this.attendanceStudents = null;
+                  this.loading = false;
               } else {
                   this.timetables = result;
                   this.getStudentsById(this.timetables);
@@ -77,8 +79,8 @@ export class AttendanceListComponent implements OnInit {
               if (isEmpty) {
                   this.attendanceStudents = null;
               } else {
-                  this.loading = false;
                   this.attendanceStudents = result;
+                  this.loading = false;
               }
           })
           .catch(error => console.log(error));

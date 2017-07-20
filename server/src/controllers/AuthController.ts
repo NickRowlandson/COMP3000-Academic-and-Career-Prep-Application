@@ -53,25 +53,41 @@ class AuthController {
     //Decode token and check if user is authorized
     authUser(req: express.Request, res: express.Response, data): void {
         try {
-            if (req.headers) {
+            if (req.headers && req.headers.authorization) {
                 jwt.verify(req.headers.authorization, 'f9b574a2fc0d77986cb7ebe21a0dea480f5f21931abfa5cf329a45ecc0c8e1ff', function(err, decoded) {
+                    if(err) {
+                      return res.send({error: "There was an error"});
+                    } else {
+                      if(decoded === null || Object.keys(decoded).length === 0) {
+                        return res.send({error: "No values in token"});
+                      }
+                    }
                     var _id = decoded.userid;
+                    var query = "SELECT * FROM Users WHERE userID = '" + _id + "'";
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)
-                                .query("SELECT * FROM Users WHERE userID = '" + _id + "'")
+                                .query(query)
                                 .then(function(user) {
                                     if (data.requiredAuth.indexOf(user[0].userType) > -1) {
+                                      try {
                                         data.done();
+                                      } catch(err) {
+                                        console.log(err.stack);
+                                        throw "There was an issue in the logic done after the authentication"; // This will throw to catch on line 83
+                                      }
                                     }
                                     else {
                                         res.send({ status: '403' });
                                     }
-                                }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("Authenticate user 'Select users' statement " + err);
+                                }).catch(err => {
+                                    res.send({ "error": "error" });
+                                    console.log(" " + err);
                                 });
                         });
                 });
+            } else {
+              res.send({error: "No auth header"});
             }
         }
         catch (e) {

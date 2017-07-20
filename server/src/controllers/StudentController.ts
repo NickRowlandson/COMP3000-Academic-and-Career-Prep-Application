@@ -427,36 +427,43 @@ for (let i=0;i<result.length;i++) {
     }
 
     insertAttendance(req: express.Request, res: express.Response): void {
-      console.log("INSERTING attendance");
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     var attendance = req.body;
-                    var query = "INSERT INTO Attendance (studentID, courseID, Date) VALUES ";
+                    var query = "INSERT INTO Attendance (courseID, Date, userID) VALUES ";
                     var count = 0;
-                    for (let studentID of attendance.studentID) {
-                      if(count === 0) {
-                        query += "('" + studentID + "', '" + attendance.courseID + "', '" + attendance.courseID + "' )";
-                      } else {
-                        query += ", ('" + studentID + "', '" + attendance.courseID + "', '" + attendance.courseID + "' )";
+                    if(attendance.studentsAbsent.length > 0) {
+                      var date = attendance.date;
+                      for (let studentID of attendance.studentsAbsent) {
+                        if(count === 0) {
+                          query += "('" + attendance.courseID + "', '" + date + "', '" + studentID + "' )";
+                        } else {
+                          query += ", ('" + attendance.courseID + "', '" + date + "', '" + studentID + "' )";
+                        }
+                        count ++;
                       }
-                      count ++;
+                      console.log(query);
+                      sql.connect(config)
+                          .then(function(connection) {
+                              new sql.Request(connection)
+                                  .query(query)
+                                  .then(function(recordset) {
+                                      // set schedule check on DB
+                                      console.log("attendance record inserted");
+                                      res.send(recordset);
+                                  }).catch(function(err) {
+                                      res.send({ "error": "error" });
+                                      console.log("Attendance " + err);
+                                  });
+                          }).catch(function(err) {
+                              console.log(err);
+                              res.send({ "error": "error" });
+                          });
+                    } else {
+                      console.log("No absent students");
+                      res.send({status: "No absent students"});
                     }
-                    console.log(query);
-                    sql.connect(config)
-                        .then(function(connection) {
-                            new sql.Request(connection)
-                                .query(query)
-                                .then(function(recordset) {
-                                    res.send(recordset);
-                                }).catch(function(err) {
-                                    res.send({ "error": "error" });
-                                    console.log("Attendance " + err);
-                                });
-                        }).catch(function(err) {
-                            console.log(err);
-                            res.send({ "error": "error" });
-                        });
                 }
             });
         }
