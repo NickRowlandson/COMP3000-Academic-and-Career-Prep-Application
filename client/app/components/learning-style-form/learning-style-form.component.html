@@ -1,44 +1,54 @@
 <div class="suitability">
-  <h2>Learning Style</h2>
-  <hr>
-  <div class="form-horizontal">
-    <h2> Check the boxes beside those statements that describe you </h2>
-    <h3> Learning through seeing: </h3>
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing1" name="" value="1" />I remember something better if I write it down. <br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing2" name="" value="1" />I enjoy doodling. I draw pictures or doodles in my notebooks. <br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing3" name="" value="1" />I find it hard to understand what a person is saying when background music is playing.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing4" name="" value="1" />I get more work done in a quiet place.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing5" name="" value="1" />I get lost if someone tells me directions and I didn’t write them down.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing6" name="" value="1" />I am good at remembering faces.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing7" name="" value="1" />It’s much easier for me to add three simple numbers if I write them down rather than add them up in my head.<br />
-    Total: <input class="form-control" value="{{totalSeeingPoints}}" type="number" name="seeing" disabled>
-    <input class="form-control" value="{{totalSeeingPoints}}" type="hidden" name="seeing" [(ngModel)]="learningStyleForm.seeing">
+    <h2>Learning Style</h2>
+    <hr>
+    <div class="padding jumbotron form-horizontal">
+        <h2> Check the boxes beside the statements that describe you </h2>
+        <h3> Learning through seeing: </h3>
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing1" name="" value="1" /> I remember something better if I write it down. <br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing2" name="" value="1" /> I enjoy doodling. I draw pictures or doodles in my notebooks. <br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing3" name="" value="1" /> I find it hard to understand what a person is saying when background music is playing.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing4" name="" value="1" /> I get more work done in a quiet place.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing5" name="" value="1" /> I get lost if someone tells me directions and I didn’t write them down.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing6" name="" value="1" /> I am good at remembering faces.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing7" name="" value="1" /> It’s much easier for me to add three simple numbers if I write them down rather than add them up in my head.<br /> Total: <input class="form-control"
+            value="{{totalSeeingPoints}}" type="number" name="seeing" disabled>
+        <input class="form-control" value="{{totalSeeingPoints}}" type="hidden" name="seeing" [(ngModel)]="learningStyleForm.seeing">
 
-    <h3> Learning through hearing </h3>
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing1" name="" value="1" />I understand instructions better that someone tells me, rather than reading them.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing2" name="" value="1" />I’m good at remembering names.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing3" name="" value="1" />I’m good at remembering what other people say.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing4" name="" value="1" />I say the numbers to myself when I do math.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing5" name="" value="1" />When I’m listening to someone give a talk, it’s better for me to just listen, and not take notes.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing6" name="" value="1" />When I’m trying to remember what I’ve learned, I usually ask myself questions out loud.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing7" name="" value="1" />I’d rather listen to the news than read a newspaper.<br />
-    Total: <input class="form-control" value="{{totalHearingPoints}}" type="number" name="hearing" disabled>
-    <input class="form-control" value="{{totalHearingPoints}}" type="hidden" name="hearing" [(ngModel)]="learningStyleForm.hearing">
+        <h3> Learning through hearing </h3>
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing1" name="" value="1" /> I understand instructions better that someone tells me, rather than reading them.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing2" name="" value="1" /> I’m good at remembering names.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing3" name="" value="1" /> I’m good at remembering what other people say.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing4" name="" value="1" /> I say the numbers to myself when I do math.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing5" name="" value="1" /> When I’m listening to someone give a talk, it’s better for me to just listen, and not take notes.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing6" name="" value="1" /> When I’m trying to remember what I’ve learned, I usually ask myself questions out loud.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.hearing7" name="" value="1" /> I’d rather listen to the news than read a newspaper.<br /> Total: <input class="form-control" value="{{totalHearingPoints}}" type="number"
+            name="hearing" disabled>
+        <input class="form-control" value="{{totalHearingPoints}}" type="hidden" name="hearing" [(ngModel)]="learningStyleForm.hearing">
 
-    <h3> Learning through doing </h3>
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing1" name="" value="1" />I think best when I can move around. I don’t like sitting at a desk very long.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing2" name="" value="1" />I like to do crafts or repairs where I get to use my hands.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing3" name="" value="1" />I need lots of breaks when I’m learning.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing4" name="" value="1" />I don’t get lost very often, even in a new place.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing5" name="" value="1" />I remember recipes after I make the dish once or twice.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing6" name="" value="1" />I don’t like to stop to read the directions. I’d rather just figure something out by doing it.<br />
-    <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing7" name="" value="1" />I learn best when the teacher explains things using models or experiments.<br />
-    Total: <input class="form-control" value="{{totalDoingPoints}}" type="number" name="doing" disabled>
-    <input class="form-control" value="{{totalDoingPoints}}" type="hidden" name="doing" [(ngModel)]="learningStyleForm.doing">
-    <br/>
-    Learning Style: <input type="text" name="" value="" />
-    <div class="col-sm-offset-10 col-sm-1">
-    <button (click)="saveLearningStyle()" class="saveButton" title="Save client"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>
+        <h3> Learning through doing </h3>
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing1" name="" value="1" /> I think best when I can move around. I don’t like sitting at a desk very long.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing2" name="" value="1" /> I like to do crafts or repairs where I get to use my hands.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing3" name="" value="1" /> I need lots of breaks when I’m learning.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing4" name="" value="1" /> I don’t get lost very often, even in a new place.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing5" name="" value="1" /> I remember recipes after I make the dish once or twice.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing6" name="" value="1" /> I don’t like to stop to read the directions. I’d rather just figure something out by doing it.<br />
+        <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.doing7" name="" value="1" /> I learn best when the teacher explains things using models or experiments.<br /> Total: <input class="form-control" value="{{totalDoingPoints}}"
+            type="number" name="doing" disabled>
+        <input class="form-control" value="{{totalDoingPoints}}" type="hidden" name="doing" [(ngModel)]="learningStyleForm.doing">
+        <br>
+        Learning Style:
+        <input type="text" name="" value="" />
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-12" style="margin-left:-15px;">
+            <div style="float: left;">
+                <button (click)="goBack()" class="btn btn-default">Back</button>
+            </div>
+            <div style="float: right;">
+                <button (click)="saveLearningStyle()" class="submitForm" title="Save client"><h4><i class="fa fa-floppy-o" aria-hidden="true"></i> Submit</h4></button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

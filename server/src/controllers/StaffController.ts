@@ -136,7 +136,7 @@ class StaffController {
                     sql.connect(config)
                     .then(function(connection) {
                         new sql.Request(connection)
-                            .query('SELECT * FROM Staff')
+                            .query('SELECT Staff.*, Users.userType FROM Staff LEFT JOIN Users ON Users.userID = Staff.userID')
                             .then(function(recordset) {
                                 res.send(recordset);
                             }).catch(function(err) {

@@ -35,16 +35,6 @@ export class ClientService {
             .catch(this.handleError);
     }
 
-    populatePRF(id: string) {
-        // add authorization header with jwt token
-        let headers = new Headers({ authorization: this.authService.token });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.clientUrl + '/' + id + '/prf', options)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
-    }
-
     save(client: Client, suitabilityForm: SuitabilityForm): Promise<Client> {
         if (client.clientID) {
             return this.put(client, suitabilityForm);

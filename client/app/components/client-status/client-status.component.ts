@@ -79,20 +79,6 @@ export class ClientStatusComponent implements OnInit {
       console.log();
     }
 
-    populatePRF(client) {
-      console.log("generating pdf...");
-        this.clientService
-            .populatePRF(client.userID)
-            .then(response => {
-              swal(
-                  'Sorry...',
-                  'This feature is not yet available',
-                  'info'
-              );
-            })
-            .catch(error => console.log(error));
-    }
-
     setData(objects) {
         this.data = objects.clients;
         this.allClients = objects.clients;

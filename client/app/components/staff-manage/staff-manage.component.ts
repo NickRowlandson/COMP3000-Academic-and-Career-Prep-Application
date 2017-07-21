@@ -16,7 +16,7 @@ export class StaffManageComponent implements OnInit {
     users: User[];
     error: any;
 
-    constructor(private router: Router, private userService: StaffService) {
+    constructor(private router: Router, private staffService: StaffService) {
 
     }
 
@@ -25,7 +25,7 @@ export class StaffManageComponent implements OnInit {
     }
 
     getUsers() {
-        this.userService
+        this.staffService
           .getUsers()
           .then(users => {
             if (users.status === "403") {
@@ -65,7 +65,7 @@ export class StaffManageComponent implements OnInit {
 
     deleteUser(user: User, event: any) {
         event.stopPropagation();
-        this.userService
+        this.staffService
           .delete(user)
           .then(res => {
               this.users = this.users.filter(h => h !== user);

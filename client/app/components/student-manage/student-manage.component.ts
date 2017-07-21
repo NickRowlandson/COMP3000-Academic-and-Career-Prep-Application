@@ -73,6 +73,19 @@ export class StudentManageComponent implements OnInit {
       );
     }
 
+    populatePRF(student) {
+        this.studentService
+            .populatePRF(student.userID)
+            .then(response => {
+              swal(
+                  'Sorry...',
+                  'This feature is not yet available',
+                  'info'
+              );
+            })
+            .catch(error => console.log(error));
+    }
+
     goBack() {
         window.history.back();
     }

@@ -25,6 +25,7 @@ class StudentRoutes {
         router.post("/caseNotes/:_studentID", controller.createNote);
         router.post("/attendance", controller.insertAttendance);
         router.get("/caseNotes/:_studentID", controller.getNote);
+        router.get("/prf/:_id", controller.populatePRF);
         return router;
     }
 

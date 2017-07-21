@@ -3,7 +3,6 @@ import jwt = require('jsonwebtoken');
 import bcrypt = require('bcrypt');
 import AuthController = require("../controllers/AuthController");
 const MailService = require("../services/MailService");
-const PRFService = require("../services/PRFService");
 var sql = require('mssql');
 var auth = ["Admin", "Staff"];
 
@@ -316,28 +315,5 @@ class ClientController {
         }
     }
 
-    populatePRF(req: express.Request, res: express.Response): void {
-        console.log("Populating PRF...");
-        new AuthController().authUser(req, res, {
-            requiredAuth: auth, done: function() {
-                var _id: string = req.params._id;
-                sql.connect(config)
-                    .then(function(connection) {
-                        new sql.Request(connection)
-                            .query("SELECT * FROM Clients C INNER JOIN SuitabilityForm S ON C.userID = S.userID WHERE C.userID = '" + _id + "' AND S.userID = '" + _id + "'")
-                            .then(function(recordset) {
-                                new PRFService().populatePRF(recordset[0]);
-                                res.send({ "success": "success" });
-                            }).catch(function(err) {
-                                console.log("Get client by id for prf " + err);
-                                res.send({ "error": "error" });
-                            });
-                    }).catch(function(err) {
-                        console.log(err);
-                        res.send({ "error": "error" });
-                    });
-            }
-        });
-    }
 }
 export = ClientController;
