@@ -24,7 +24,6 @@ var isPublic = typeof window != "undefined";
     'moment':                     { main: 'moment.js', defaultExtension: 'js' },
     'ng2-charts':                 { main: 'index.js', defaultExtension: 'js' },
     'angular2-datatable':         { main: 'index.js', defaultExtension: 'js' },
-    'ng2-datetime':               { main: 'index.js', defaultExtension: 'js' },
     'primeng':                    { defaultExtension: 'js' }
   };
   var ngPackageNames = [
