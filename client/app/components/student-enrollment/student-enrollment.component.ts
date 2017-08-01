@@ -111,7 +111,7 @@ export class StudentEnrollmentComponent implements OnInit {
               .catch(error => error);
         } else {
           swal(
-              'Woops',
+              'Whoops',
               'Please input a valid start and end date for the student.',
               'warning'
           );

@@ -9,7 +9,7 @@
   <div *ngIf="course">
     <div class="form-group">
       <label class="col-sm-2 control-label">Course Name: </label>
-      <div class="col-sm-10">
+      <div style="max-width:200px; display: inline-block;">
         <input class="form-control" [(ngModel)]="course.courseName" placeholder="Course Name" required />
       </div>
     </div>
@@ -22,10 +22,19 @@
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Course End Date: </label>
-        <p-calendar [(ngModel)]="courseEndDate" dateFormat="dd/mm/yy"></p-calendar>
+      <p-calendar [(ngModel)]="courseEndDate" dateFormat="dd/mm/yy"></p-calendar>
     </div>
 
     <div class="form-group">
+
+      <label class="col-sm-2 control-label">Class Day: </label>
+      <p-dropdown [style]="{'width':'175px'}" [options]="daysOfWeek" [(ngModel)]="classDay"></p-dropdown>
+    </div>
+
+
+
+
+
       <label class="col-sm-2 control-label">Class Date: </label>
          <p-calendar [(ngModel)]="classDate" dateFormat="dd/mm/yy"></p-calendar>
     </div> -->
@@ -40,12 +49,11 @@
      <p-schedule *ngIf="events"  [events]="events" [header]="header" [editable]="true" [weekends]="false" [allDaySlot]="false" [options]="options"></p-schedule>
 
 
-
     <!-- Class start and end time selection -->
     <div class="form-group">
       <label class="col-sm-2 control-label">Class Start/End Time:</label>
-       <p-calendar [(ngModel)]="classStartTime" [timeOnly]="true" showTime="showTime" hourFormat="12"></p-calendar> -
-       <p-calendar [(ngModel)]="classEndTime" [timeOnly]="true" showTime="showTime" hourFormat="12"></p-calendar>
+      <p-calendar [(ngModel)]="classStartTime" [timeOnly]="true" showTime="showTime" hourFormat="12"></p-calendar> -
+      <p-calendar [(ngModel)]="classEndTime" [timeOnly]="true" showTime="showTime" hourFormat="12"></p-calendar>
     </div>
     <!-- Instructor dropdown selection -->
     <div class="form-group">
@@ -59,9 +67,9 @@
     </div>
     <!-- Classroom input -->
     <div class="form-group">
-      <label class="col-sm-2 control-label">classroom: </label>
-      <div class="col-sm-10">
-        <input class="form-control" [(ngModel)]="course.classroom" placeholder="classroom" required />
+      <label class="col-sm-2 control-label">Classroom: </label>
+      <div style="max-width:200px; display: inline-block;">
+        <input class="form-control" [(ngModel)]="course.classroom" placeholder="Classroom" required />
       </div>
     </div>
   </div>
