@@ -12,4 +12,6 @@ export class Student {
     phone: string;
     enrolled: boolean;
     absent: boolean;
+    studentStartDate: Date;
+    studentEndDate: Date;
 }

@@ -41,7 +41,11 @@
                     <td>
                       <div *ngIf="!loading" class="input-group">
                         <button *ngIf="student.enrolled" type="button" (click)="checkEnrolled(student)" class="btn btn-danger remove">Remove</button>
-                        <button *ngIf="!student.enrolled" type="button" (click)="checkEnrolled(student)" class="btn btn-success enroll">Enroll</button>
+                        <div *ngIf="!student.enrolled">
+                            <p-calendar [(ngModel)]="student.studentStartDate" dateFormat="dd/mm/yy" placeholder="Student Start Date"></p-calendar> -
+                            <p-calendar [(ngModel)]="student.studentEndDate" dateFormat="dd/mm/yy"  placeholder="Student End Date"></p-calendar>
+                            <button type="button" (click)="checkEnrolled(student)" class="btn btn-success enroll">Enroll</button>
+                        </div>
                       </div>
                   </td>
                 </tr>

@@ -6,6 +6,7 @@ import { Student } from "../../models/Student";
 import { CourseService } from "../../services/course.service";
 import { StudentService } from "../../services/student.service";
 declare var swal: any;
+declare var moment: any;
 
 @Component({
     selector: 'course-selection',
@@ -94,12 +95,27 @@ export class StudentEnrollmentComponent implements OnInit {
     }
 
     enroll(student: Student) {
-        this.studentService
-            .courseEnroll(student.userID, this.courseID, this.instructorID)
-            .then(result => {
-                student.enrolled = true;
-            })
-            .catch(error => error);
+      var startDate = moment(student.studentStartDate, "DDD MMM YYYY h:mm:ss LT").isValid();
+      var endDate = moment(student.studentEndDate, "DDD MMM YYYY h:mm:ss LT").isValid();
+        if (startDate && endDate) {
+          this.studentService
+              .courseEnroll(student.userID, this.courseID, this.instructorID)
+              .then(result => {
+                  student.enrolled = true;
+                  swal(
+                      this.courseName,
+                      '' + student.firstName + ' ' + student.lastName + ' has been succesfully enrolled.',
+                      'success'
+                  );
+              })
+              .catch(error => error);
+        } else {
+          swal(
+              'Woops',
+              'Please input a valid start and end date for the student.',
+              'warning'
+          );
+        }
     }
 
     drop(student: Student) {
