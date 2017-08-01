@@ -29,6 +29,11 @@ export class CourseEditComponent implements OnInit {
     // drop down
     professors: SelectItem[] = [];
     campuses: SelectItem[] = [];
+    daysOfWeek: SelectItem[] = [{ label: 'Monday', value: 'Monday' },
+                                { label: 'Tuesday', value: 'Tuesday' },
+                                { label: 'Wednesday', value: 'Wednesday' },
+                                { label: 'Thursday', value: 'Thursday' },
+                                { label: 'Friday', value: 'Friday' }];
 
 
     constructor(private courseService: CourseService, private route: ActivatedRoute) {
