@@ -29,6 +29,7 @@ import { StudentEnrollmentComponent } from './components/student-enrollment/stud
 import { TimetableComponent } from './components/timetable/timetable.component';
 import { VisviewComponent } from './components/visview/visview.component';
 import { AttendanceListComponent } from './components/attendance-list/attendance-list.component';
+import { AttendanceReportComponent } from './components/attendance-report/attendance-report.component';
 
 //Import pipes
 import { UserFilterPipe } from "./pipes/user-filter.pipe";
@@ -84,7 +85,8 @@ import { CourseService } from './services/course.service';
     CourseFilterPipe,
     VisviewComponent,
     CampusFilterPipe,
-    AttendanceListComponent
+    AttendanceListComponent,
+    AttendanceReportComponent
   ],
   providers: [
     AuthGuard,

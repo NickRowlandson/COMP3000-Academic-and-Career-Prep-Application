@@ -175,9 +175,8 @@ left join campus on campus.campusId = course.campusId
                     var course = req.body;
 
                     sql.connect(config).then(() => {
-                        return sql.query`INSERT INTO Course (courseName,professorId,campusId,classroom, courseEnd,courseStart)
-             VALUES(${course.courseName},${course.professorId},${course.campusId},
-              ${course.classroom},'2017-05-17 13:00:00','2017-05-17 17:00:00')`
+                        return sql.query`INSERT INTO Course (courseName, professorId, campusId, classroom, courseStart, courseEnd, classDay, classStartTime, classEndTime)
+                          VALUES(${course.courseName}, ${course.professorId}, ${course.campusId}, ${course.classroom}, ${course.courseStart}, ${course.courseEnd}, ${course.classDay}, ${course.classStartTime}, ${course.classEndTime})`
                     }).then(result => {
                         console.dir(`insert ${course.courseName} complete`);
                         res.send({ "success": "success" });

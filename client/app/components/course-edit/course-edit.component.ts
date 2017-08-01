@@ -90,6 +90,12 @@ export class CourseEditComponent implements OnInit {
             } else {
                 this.newCourse = false;
                 this.courseService.getCourse(this.id).then((result) => {
+                    result.forEach((item) => {
+                        item.courseStart = moment(item.courseStart).format('DD/MM/YYYY');
+                        item.courseEnd = moment(item.courseEnd).format('DD/MM/YYYY');
+                        item.classStartTime = moment(item.classStartTime).format('hh:mm A');
+                        item.classEndTime = moment(item.classEndTime).format('hh:mm A');
+                    });
                     this.course = result[0];
                     console.log(this.course);
                 });

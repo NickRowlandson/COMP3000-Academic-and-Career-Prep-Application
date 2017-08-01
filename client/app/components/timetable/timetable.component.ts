@@ -4,7 +4,7 @@ import { Course } from "../../models/course";
 import { Student } from "../../models/Student";
 import { StudentService } from "../../services/student.service";
 import { CourseService} from '../../services/course.service';
-
+declare var moment: any;
 
 @Component({
   selector: 'timetable',
@@ -29,15 +29,34 @@ export class TimetableComponent implements OnInit {
     console.log(userID);
 
     this.studentService.getEventsById(userID).then(result => {
-      console.log(result);
       result.forEach((i) => {
+        var classDay = 0;
+
+        if (i.classDay === "Monday") {
+          classDay = 1;
+        } else if (i.classDay === "Tuesday") {
+          classDay = 2;
+        } else if (i.classDay === "Wednesday") {
+          classDay = 3;
+        } else if (i.classDay === "Thursday") {
+          classDay = 4;
+        } else if (i.classDay === "Friday") {
+          classDay = 5;
+        }
+        i.courseStart = moment(i.courseStart).format('YYYY-MM-DD');
+        i.courseEnd = moment(i.courseEnd).format('YYYY-MM-DD');
+        i.classStartTime = moment(i.classStartTime).format('hh:mm A');
+        i.classEndTime = moment(i.classEndTime).format('hh:mm A');
+
         this.events.push(
           {
             "title": i.courseName,
             "start": i.courseStart,
-            "end": i.courseEnd
+            "end": i.courseEnd,
+            "dow": [ classDay ]
           });
 
+          console.log(this.events);
       });
     });
 

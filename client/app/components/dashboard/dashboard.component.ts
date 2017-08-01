@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
     maesdprf = false;
     timetable = false;
     attendanceList = false;
+    attendanceReport = false;
 
   userType: any;
 
@@ -51,12 +52,14 @@ export class DashboardComponent implements OnInit {
       this.suitability = true;
       this.caseNotes = true;
       this.manageCourses = true;
+      this.attendanceReport =true;
     } else if (userType === 'Staff') {
       this.clientStatus = true;
       this.manageStudents = true;
       this.suitability = true;
       this.caseNotes = true;
       this.manageCourses = true;
+      this.attendanceReport =true;
     } else if (userType === 'Student') {
       this.timetable = true;
     } else if (userType === 'Client') {

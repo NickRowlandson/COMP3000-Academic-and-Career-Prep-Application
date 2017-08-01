@@ -17,23 +17,23 @@
     <!-- Course start date selection -->
     <div class="form-group">
       <label class="col-sm-2 control-label">Course Start Date: </label>
-      <p-calendar [(ngModel)]="courseStartDate" dateFormat="dd/mm/yy"></p-calendar>
+      <p-calendar [(ngModel)]="course.courseStart" dateFormat="dd/mm/yy"></p-calendar>
     </div>
     <!-- Course end date selection -->
     <div class="form-group">
       <label class="col-sm-2 control-label">Course End Date: </label>
-      <p-calendar [(ngModel)]="courseEndDate" dateFormat="dd/mm/yy"></p-calendar>
+      <p-calendar [(ngModel)]="course.courseEnd" dateFormat="dd/mm/yy"></p-calendar>
     </div>
     <!-- Class date selection -->
     <div class="form-group">
       <label class="col-sm-2 control-label">Class Day: </label>
-      <p-dropdown [style]="{'width':'175px'}" [options]="daysOfWeek" [(ngModel)]="classDay"></p-dropdown>
+      <p-dropdown [style]="{'width':'175px'}" [options]="daysOfWeek" [(ngModel)]="course.classDay"></p-dropdown>
     </div>
     <!-- Class start and end time selection -->
     <div class="form-group">
       <label class="col-sm-2 control-label">Class Start/End Time:</label>
-      <p-calendar [(ngModel)]="classStartTime" [timeOnly]="true" showTime="showTime" hourFormat="12"></p-calendar> -
-      <p-calendar [(ngModel)]="classEndTime" [timeOnly]="true" showTime="showTime" hourFormat="12"></p-calendar>
+      <p-calendar [(ngModel)]="course.classStartTime" [timeOnly]="true" showTime="showTime" hourFormat="12" dateFormat="hh:mm"></p-calendar> -
+      <p-calendar [(ngModel)]="course.classEndTime" [timeOnly]="true" showTime="showTime" hourFormat="12" dateFormat="hh:mm"></p-calendar>
     </div>
     <!-- Instructor dropdown selection -->
     <div class="form-group">
