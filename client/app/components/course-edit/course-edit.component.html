@@ -14,21 +14,41 @@
       </div>
     </div>
 
-    <!-- Course start date selection -->
-    <div class="form-group">
+
+    <!-- <div class="form-group">
       <label class="col-sm-2 control-label">Course Start Date: </label>
       <p-calendar [(ngModel)]="course.courseStart" dateFormat="dd/mm/yy"></p-calendar>
     </div>
-    <!-- Course end date selection -->
+
     <div class="form-group">
       <label class="col-sm-2 control-label">Course End Date: </label>
       <p-calendar [(ngModel)]="course.courseEnd" dateFormat="dd/mm/yy"></p-calendar>
     </div>
-    <!-- Class date selection -->
+
     <div class="form-group">
+
       <label class="col-sm-2 control-label">Class Day: </label>
       <p-dropdown [style]="{'width':'175px'}" [options]="daysOfWeek" [(ngModel)]="course.classDay"></p-dropdown>
     </div>
+
+
+
+
+
+      <label class="col-sm-2 control-label">Class Date: </label>
+         <p-calendar [(ngModel)]="classDate" dateFormat="dd/mm/yy"></p-calendar>
+    </div> -->
+<h3 class="first">Week Days</h3>
+<div class="ui-g" style="margin-bottom:10px">
+    <div class="ui-g-2"><p-checkbox name="group1" value="1" label="Monday" [(ngModel)]="selectedDays"></p-checkbox></div>
+     <div class="ui-g-2"><p-checkbox name="group1" value="2" label="Tuesday" [(ngModel)]="selectedDays"></p-checkbox></div>
+      <div class="ui-g-2"><p-checkbox name="group1" value="3" label="Wedsday" [(ngModel)]="selectedDays"></p-checkbox></div>
+    <div class="ui-g-2"><p-checkbox name="group1" value="4" label="Thursday" [(ngModel)]="selectedDays"></p-checkbox></div>
+    <div class="ui-g-2"><p-checkbox name="group1" value="5" label="Friday" [(ngModel)]="selectedDays"></p-checkbox></div>
+</div>
+     <p-schedule *ngIf="events"  [events]="events" [header]="header" [editable]="true" [weekends]="false" [allDaySlot]="false" [options]="options"></p-schedule>
+
+
     <!-- Class start and end time selection -->
     <div class="form-group">
       <label class="col-sm-2 control-label">Class Start/End Time:</label>
