@@ -17,6 +17,12 @@ export class CourseEditComponent implements OnInit {
     navigated = false; // true if navigated here
     private sub: any;
     id: any;
+  events: any[] = [];
+  header: any;
+  options: any;
+  
+  selectedDays: string[]=[];
+
     datepickerOpts: any = {
         startDate: moment(),
         autoclose: true,
@@ -25,7 +31,6 @@ export class CourseEditComponent implements OnInit {
         assumeNearbyYear: true,
         format: 'YYYY-MM-DD'
     };
-
     // drop down
     professors: SelectItem[] = [];
     campuses: SelectItem[] = [];
@@ -75,6 +80,23 @@ export class CourseEditComponent implements OnInit {
         //       });
         //   }
         // });
+
+   this.header = {
+      left: 'prev',
+      center: 'title',
+      right: 'next'
+    };
+
+    this.options = {
+      prev: 'circle-triangle-w',
+      defaultView: "month",
+      //minTime: "06:00:00",
+      //maxTime: "22:00:00",
+      height: "auto"
+    };
+
+
+
     }
     subscribeCourse() {
         this.sub = this.route.params.subscribe(params => {

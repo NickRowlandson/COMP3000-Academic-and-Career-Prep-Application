@@ -9,6 +9,7 @@ import { DataTableModule } from 'angular2-datatable';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DropdownModule } from 'primeng/primeng';
+import { CheckboxModule } from 'primeng/primeng';
 
 //Import components
 import { LoginComponent } from './components/login/login.component';
@@ -60,7 +61,8 @@ import { CourseService } from './services/course.service';
     DataTableModule,
     ScheduleModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    CheckboxModule
     ],
   declarations: [
     AppComponent,

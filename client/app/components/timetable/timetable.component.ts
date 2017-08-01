@@ -48,6 +48,7 @@ export class TimetableComponent implements OnInit {
     };
 
     this.options = {
+      selectable:true,
       prev: 'circle-triangle-w',
       defaultView: "agendaWeek",
       minTime: "06:00:00",
