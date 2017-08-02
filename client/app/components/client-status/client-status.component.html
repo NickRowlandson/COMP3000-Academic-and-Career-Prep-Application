@@ -1,6 +1,6 @@
 <div class="clients">
     <div *ngIf="!data">
-        <h2>Clients</h2>
+        <h1>Manage Clients</h1>
         <hr>
         <div class="cs-loader">
             <div class="cs-loader-inner">
@@ -18,6 +18,8 @@
         </div>
     </div>
     <div class="row" *ngIf="data">
+        <h1>Manage Clients</h1>
+        <hr>
         <div class="col-md-6">
             <h2>Clients</h2>
             <button class="addClient btn btn-primary" (click)="addClient()" title="Add new client"><i class="fa fa-plus" aria-hidden="true"></i></button>

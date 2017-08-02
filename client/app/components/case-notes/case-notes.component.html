@@ -1,6 +1,6 @@
 <div class="caseNotes">
   <div *ngIf="!data">
-    <h2>Case Notes</h2>
+    <h1>Case Notes</h1>
     <hr>
     <div class="cs-loader">
       <div class="cs-loader-inner">
@@ -18,8 +18,10 @@
     </div>
   </div>
   <div class="row" *ngIf="data">
+    <h1>Case Notes</h1>
+    <hr>
     <div class="col-md-6">
-      <h2>Case Notes</h2>
+      <h2>Students</h2>
       <hr>
       <table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
         <thead>

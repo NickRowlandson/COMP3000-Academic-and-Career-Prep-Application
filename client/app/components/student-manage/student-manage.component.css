@@ -24,11 +24,6 @@ button {
   text-align:center;
 }
 
-.backButton {
-  position: fixed;
-  bottom: 25px;
-}
-
 .actionButton {
   width: 10%;
 }

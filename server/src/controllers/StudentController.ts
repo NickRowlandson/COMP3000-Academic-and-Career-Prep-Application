@@ -474,6 +474,33 @@ for (let i=0;i<result.length;i++) {
         }
     }
 
+    getAllAttendance(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query("SELECT * FROM Attendance")
+                                .then(function(recordset) {
+                                    res.send(recordset);
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" });
+                                    console.log("Get all attendance " + err);
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
     populatePRF(req: express.Request, res: express.Response): void {
         console.log("Populating PRF...");
         new AuthController().authUser(req, res, {

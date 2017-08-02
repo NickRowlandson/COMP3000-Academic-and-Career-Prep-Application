@@ -98,25 +98,6 @@ button {
   margin: 0 auto;
 }
 
-.statusButton {
-  position: absolute;
-  right: 20;
-  top: 20;
-  cursor:pointer;
-  background-color: #fff;
-  color: #333f48;
-  display: inline;
-  padding: 5 10 5 10;
-  margin: 0 2 0 2;
-  float: left;
-}
-
-.statusButton:hover {
-  background-color: #333f48;
-  color: #fff;
-  transition: .4s;
-}
-
 .infoPanel {
   margin-left: 50px;
 }

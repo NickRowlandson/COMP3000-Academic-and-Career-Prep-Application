@@ -17,11 +17,10 @@ export class CourseEditComponent implements OnInit {
     navigated = false; // true if navigated here
     private sub: any;
     id: any;
-  events: any[] = [];
-  header: any;
-  options: any;
-  
-  selectedDays: string[]=[];
+    events: any[] = [];
+    header: any;
+    options: any;
+    selectedDays: string[] = [];
 
     datepickerOpts: any = {
         startDate: moment(),
@@ -35,10 +34,10 @@ export class CourseEditComponent implements OnInit {
     professors: SelectItem[] = [];
     campuses: SelectItem[] = [];
     daysOfWeek: SelectItem[] = [{ label: 'Monday', value: 'Monday' },
-                                { label: 'Tuesday', value: 'Tuesday' },
-                                { label: 'Wednesday', value: 'Wednesday' },
-                                { label: 'Thursday', value: 'Thursday' },
-                                { label: 'Friday', value: 'Friday' }];
+        { label: 'Tuesday', value: 'Tuesday' },
+        { label: 'Wednesday', value: 'Wednesday' },
+        { label: 'Thursday', value: 'Thursday' },
+        { label: 'Friday', value: 'Friday' }];
 
 
     constructor(private courseService: CourseService, private route: ActivatedRoute) {
@@ -86,19 +85,19 @@ export class CourseEditComponent implements OnInit {
         //   }
         // });
 
-   this.header = {
-      left: 'prev',
-      center: 'title',
-      right: 'next'
-    };
+        this.header = {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+        };
 
-    this.options = {
-      prev: 'circle-triangle-w',
-      defaultView: "month",
-      //minTime: "06:00:00",
-      //maxTime: "22:00:00",
-      height: "auto"
-    };
+        this.options = {
+            prev: 'circle-triangle-w',
+            defaultView: "month",
+            //minTime: "06:00:00",
+            //maxTime: "22:00:00",
+            height: "auto"
+        };
 
 
 
