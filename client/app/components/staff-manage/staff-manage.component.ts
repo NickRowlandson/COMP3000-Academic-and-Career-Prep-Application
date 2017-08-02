@@ -14,7 +14,9 @@ declare var swal: any;
 
 export class StaffManageComponent implements OnInit {
     users: User[];
+    usersBackup: User[];
     error: any;
+    usersLength: any;
     adminNumber: any;
     staffNumber: any;
     instructorNumber: any;
@@ -35,13 +37,9 @@ export class StaffManageComponent implements OnInit {
               this.users = null;
             } else {
               this.users = users;
-              console.log(this.users);
-              this.adminNumber = this.users.filter(x => x.userType === "Admin");
-              this.adminNumber = this.adminNumber.length;
-              this.staffNumber = this.users.filter(x => x.userType === "Staff");
-              this.staffNumber = this.staffNumber.length;
-              this.instructorNumber = this.users.filter(x => x.userType === "Instructor");
-              this.instructorNumber = this.instructorNumber.length;
+              this.usersBackup = users;
+              this.usersLength = users.length;
+              this.updateStats();
             }
           })
           .catch(error => this.error = error);
@@ -79,6 +77,9 @@ export class StaffManageComponent implements OnInit {
           .delete(user)
           .then(res => {
               this.users = this.users.filter(h => h !== user);
+              this.usersBackup = this.users;
+              this.usersLength = this.users.length;
+              this.updateStats();
               swal(
                   'Deleted!',
                   'User has been deleted.',
@@ -86,6 +87,24 @@ export class StaffManageComponent implements OnInit {
               );
           })
           .catch(error => this.error = error);
+    }
+
+    updateStats() {
+      this.adminNumber = this.users.filter(x => x.userType === "Admin");
+      this.adminNumber = this.adminNumber.length;
+      this.staffNumber = this.users.filter(x => x.userType === "Staff");
+      this.staffNumber = this.staffNumber.length;
+      this.instructorNumber = this.users.filter(x => x.userType === "Instructor");
+      this.instructorNumber = this.instructorNumber.length;
+    }
+
+    filterStaff(userType) {
+      this.users = this.usersBackup;
+      if (userType === 'total') {
+        this.users = this.usersBackup;
+      } else {
+        this.users = this.users.filter(x => x.userType === userType);
+      }
     }
 
     goBack() {

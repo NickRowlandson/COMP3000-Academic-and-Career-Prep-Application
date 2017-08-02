@@ -20,7 +20,9 @@
     <div class="row" *ngIf="data">
         <h1>Attendance Report</h1>
         <hr>
+
         <div class="col-md-4">
+          <div class="wrapper2">
             <h2>Students</h2>
             <hr>
             <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
@@ -56,12 +58,14 @@
                 </tr>
               </tfoot>
             </table>
-            <div class="backButton">
-                <div>
-                    <button (click)="goBack()" class="btn btn-default">Back</button>
-                </div>
+            <div class="push"></div>
+        </div>
+        <div class="footer">
+            <div>
+                <button (click)="goBack()" class="btn btn-default">Back</button>
             </div>
         </div>
+      </div>
         <div *ngIf="!studentAttendanceView" class="col-md-8">
           <h2>Overall Status</h2>
           <hr>

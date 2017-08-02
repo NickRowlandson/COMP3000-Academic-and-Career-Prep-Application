@@ -1,85 +1,90 @@
 <div class="caseNotes">
-  <div *ngIf="!data">
-    <h1>Case Notes</h1>
-    <hr>
-    <div class="cs-loader">
-      <div class="cs-loader-inner">
-        <label>	L</label>
-        <label>	O</label>
-        <label>	A</label>
-        <label>	D</label>
-        <label>	I</label>
-        <label>	N</label>
-        <label>	G</label>
-        <label>	.</label>
-        <label>	.</label>
-        <label>	.</label>
-      </div>
-    </div>
-  </div>
-  <div class="row" *ngIf="data">
-    <h1>Case Notes</h1>
-    <hr>
-    <div class="col-md-6">
-      <h2>Students</h2>
-      <hr>
-      <table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
-        <thead>
-          <tr>
-            <th>
-              <mfDefaultSorter by="status">Status</mfDefaultSorter>
-            </th>
-            <th>
-              <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
-            </th>
-            <th>
-              <mfDefaultSorter by="email">Email</mfDefaultSorter>
-            </th>
-            <th>Action</th>
-          </tr>
-          <tr>
-            <th colspan="5">
-              <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let student of mf.data">
-            <td><div> Status </div></td>
-            <td>{{student.firstName + " " + student.lastName}}</td>
-            <td>{{student.email}}</td>
-            <td class="actionColumn middle"><a (click)="showCaseNotes(student)"><i class="fa fa-eye" aria-hidden="true"></i>View Notes</a></td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="5">
-              <mfBootstrapPaginator></mfBootstrapPaginator>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-      <div class="backButton">
-        <div>
-          <button (click)="goBack()" class="btn btn-default">Back</button>
+    <div *ngIf="!data">
+        <h1>Case Notes</h1>
+        <hr>
+        <div class="cs-loader">
+            <div class="cs-loader-inner">
+                <label>	L</label>
+                <label>	O</label>
+                <label>	A</label>
+                <label>	D</label>
+                <label>	I</label>
+                <label>	N</label>
+                <label>	G</label>
+                <label>	.</label>
+                <label>	.</label>
+                <label>	.</label>
+            </div>
         </div>
-      </div>
     </div>
-    <div *ngIf="notesView" class="col-md-6">
-      <h2>Case Notes for {{notesView.firstName + " " + notesView.lastName}}</h2>
-      <hr>
-      <button class="addClient btn btn-primary" (click)="addCaseNotes()" title="Add new case note"><i class="fa fa-plus" aria-hidden="true"></i></button>
-      <div *ngIf="newNote">
-        <label for="caseNote">New Case Note:</label>
-        <textarea class="form-control" rows="2" name="caseNote" [(ngModel)]="note"></textarea>
-        <button (click)="saveNote(notesView.studentID)" title="Save note"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>
-      </div>
-      <hr>
-      <div>
-          <ul class="notesList">
-            <li *ngFor="let noteItem of notes">{{noteItem.caseNote}}</li>
-          </ul>
-      </div>
+    <div class="row" *ngIf="data">
+        <h1>Case Notes</h1>
+        <hr>
+        <div class="col-md-6">
+            <div class="wrapper2">
+                <h2>Students</h2>
+                <hr>
+                <table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+                    <thead>
+                        <tr>
+                            <th>
+                                <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <th colspan="5">
+                                <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of mf.data">
+                            <td>
+                                <div> Status </div>
+                            </td>
+                            <td>{{student.firstName + " " + student.lastName}}</td>
+                            <td>{{student.email}}</td>
+                            <td class="actionColumn middle"><a (click)="showCaseNotes(student)"><i class="fa fa-eye" aria-hidden="true"></i>View Notes</a></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <mfBootstrapPaginator></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="push"></div>
+              </div>
+              <div class="footer">
+                  <div>
+                      <button (click)="goBack()" class="btn btn-default">Back</button>
+                  </div>
+              </div>
+            </div>
+            <div *ngIf="notesView" class="col-md-6">
+                <h2>Case Notes for {{notesView.firstName + " " + notesView.lastName}}</h2>
+                <hr>
+                <button class="addClient btn btn-primary" (click)="addCaseNotes()" title="Add new case note"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <div *ngIf="newNote">
+                    <label for="caseNote">New Case Note:</label>
+                    <textarea class="form-control" rows="2" name="caseNote" [(ngModel)]="note"></textarea>
+                    <button (click)="saveNote(notesView.studentID)" title="Save note"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>
+                </div>
+                <hr>
+                <div>
+                    <ul class="notesList">
+                        <li *ngFor="let noteItem of notes">{{noteItem.caseNote}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
