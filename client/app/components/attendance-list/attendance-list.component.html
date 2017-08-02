@@ -52,6 +52,11 @@
                     </tr>
                 </tfoot>
             </table>
+            <div class="backButton">
+                <div>
+                    <button (click)="goBack()" class="btn btn-default">Back</button>
+                </div>
+            </div>
         </div>
         <div *ngIf="!attendanceView" class="col-md-6">
             <h2>Status Report</h2>
@@ -99,11 +104,6 @@
             </table>
             <div *ngIf="!loading">
                 <button type="button" (click)="submitAttendance()" style="float:right;" class="btn btn-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> Submit</button>
-            </div>
-        </div>
-        <div class="backButton">
-            <div>
-                <button (click)="goBack()" class="btn btn-default">Back</button>
             </div>
         </div>
     </div>

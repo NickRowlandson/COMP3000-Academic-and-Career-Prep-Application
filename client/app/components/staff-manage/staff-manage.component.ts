@@ -15,6 +15,9 @@ declare var swal: any;
 export class StaffManageComponent implements OnInit {
     users: User[];
     error: any;
+    adminNumber: any;
+    staffNumber: any;
+    instructorNumber: any;
 
     constructor(private router: Router, private staffService: StaffService) {
 
@@ -32,6 +35,13 @@ export class StaffManageComponent implements OnInit {
               this.users = null;
             } else {
               this.users = users;
+              console.log(this.users);
+              this.adminNumber = this.users.filter(x => x.userType === "Admin");
+              this.adminNumber = this.adminNumber.length;
+              this.staffNumber = this.users.filter(x => x.userType === "Staff");
+              this.staffNumber = this.staffNumber.length;
+              this.instructorNumber = this.users.filter(x => x.userType === "Instructor");
+              this.instructorNumber = this.instructorNumber.length;
             }
           })
           .catch(error => this.error = error);

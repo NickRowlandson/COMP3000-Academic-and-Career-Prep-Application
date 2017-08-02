@@ -56,6 +56,11 @@
                 </tr>
               </tfoot>
             </table>
+            <div class="backButton">
+                <div>
+                    <button (click)="goBack()" class="btn btn-default">Back</button>
+                </div>
+            </div>
         </div>
         <div *ngIf="!studentAttendanceView" class="col-md-8">
           <h2>Overall Status</h2>
@@ -74,16 +79,11 @@
               <br />
               <label class="control-label">Course Name: </label> {{ absence.course[0].courseName }}
               <br />
-              <label class="control-label">Made Contact: </label> 
+              <label class="control-label">Made Contact: </label>
               <br />
             </div>
             <br />
           </div>
-        </div>
-    </div>
-    <div class="backButton">
-        <div>
-            <button (click)="goBack()" class="btn btn-default">Back</button>
         </div>
     </div>
 </div>

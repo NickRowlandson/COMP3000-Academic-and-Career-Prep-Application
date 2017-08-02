@@ -432,7 +432,7 @@ for (let i=0;i<result.length;i++) {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     var attendance = req.body;
-                    var query = "INSERT INTO Attendance (courseID, Date, userID) VALUES ";
+                    var query = "INSERT INTO Attendance (courseID, date, studentID) VALUES ";
                     var count = 0;
                     if(attendance.studentsAbsent.length > 0) {
                       var date = attendance.date;

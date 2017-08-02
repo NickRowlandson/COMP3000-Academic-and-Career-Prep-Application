@@ -82,7 +82,7 @@ export class AttendanceReportComponent implements OnInit {
   viewReport(student: Student) {
     this.missedClasses = [];
     this.studentAttendanceView = true;
-    this.absences = this.data.filter(x => x.userID === student.studentID);
+    this.absences = this.data.filter(x => x.studentID === student.studentID);
     this.student = this.students.filter(x => x.studentID === student.studentID);
     this.student = this.student[0];
     this.totalStudentAbsences = this.absences.length;
@@ -92,10 +92,10 @@ export class AttendanceReportComponent implements OnInit {
     } else {
       this.noAbsences = false;
       for (let item of this.absences) {
-        var course = this.courses.filter(x => x.courseID === item.CourseID);
+        var course = this.courses.filter(x => x.courseID === item.courseID);
         var missedClass = {
           course: course,
-          date: item.Date
+          date: item.date
         };
         this.missedClasses.push(missedClass);
       }
