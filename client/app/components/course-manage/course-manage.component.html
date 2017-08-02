@@ -1,5 +1,5 @@
-<div class="course">
-    <h2>Manage Courses</h2>
+<div class="course wrapper">
+    <h1>Manage Courses</h1>
     <hr>
 
     <div *ngIf="!courses" class="cs-loader">
@@ -56,6 +56,10 @@
                             <mfDefaultSorter by="courseEnd">Course End</mfDefaultSorter>
                         </th>
                         <th>
+                            <mfDefaultSorter by="classDay">Class Day</mfDefaultSorter>
+                        </th>
+                        <th>
+                            <mfDefaultSorter by="classStartTime">Class Start/End Time</mfDefaultSorter>
                         </th>
                     </tr>
                 </thead>
@@ -67,6 +71,8 @@
                         <td>{{ course.campusName?course.campusName:'none' }}</td>
                         <td>{{ course.courseStart?course.courseStart:'none' }}</td>
                         <td>{{ course.courseEnd?course.courseEnd:'none' }}</td>
+                        <td>{{ course.classDay?course.classDay:'none' }}</td>
+                        <td>{{ course.classStartTime }} - {{ course.classEndTime }}</td>
                         <td class="actionColumn middle">
                             <div class="inline">
                                 <button class="btn btn-warning" (click)="gotoStudentEnrollment(course, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>
@@ -90,11 +96,10 @@
             </table>
         </div>
     </div>
-
-
-    <div class="backButton">
-        <div>
-            <button (click)="goBack()" class="btn btn-default">Back</button>
-        </div>
+    <div class="push"></div>
+</div>
+<div class="footer">
+    <div>
+        <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>
 </div>

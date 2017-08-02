@@ -19,6 +19,7 @@
     </div>
     <div class="row" *ngIf="data">
         <div class="col-md-6">
+          <div class="wrapper3">
             <h2>My Courses</h2>
             <hr>
             <div class="error" *ngIf="error">{{error}}</div>
@@ -52,7 +53,14 @@
                     </tr>
                 </tfoot>
             </table>
+            <div class="push"></div>
         </div>
+        <div class="footer">
+            <div>
+                <button (click)="goBack()" class="btn btn-default">Back</button>
+            </div>
+        </div>
+      </div>
         <div *ngIf="!attendanceView" class="col-md-6">
             <h2>Status Report</h2>
             <hr>
@@ -98,12 +106,8 @@
                 </tfoot>
             </table>
             <div *ngIf="!loading">
-                <button type="button" (click)="submitAttendance()" style="float:right;" class="btn btn-warning"><i class="fa fa-floppy-o" aria-hidden="true"></i> Submit</button>
+                <button type="button" (click)="submitAttendance()" style="float:right;" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Submit</button>
             </div>
         </div>
-        <div class="backButton">
-            <div>
-                <button (click)="goBack()" class="btn btn-default">Back</button>
-            </div>
-        </div>
+        <div class="push"></div>
     </div>

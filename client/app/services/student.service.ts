@@ -21,7 +21,7 @@ export class StudentService {
         return this.http.get(this.studentsUrl, options)
             .toPromise()
             .then(response => response.json())
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Get all students"));
     }
 
     getStudent(id: string) {
@@ -32,7 +32,7 @@ export class StudentService {
         return this.http.get(this.studentsUrl + '/' + id, options)
             .toPromise()
             .then(response => response.json())
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "get student by id"));
     }
 
     postNew(student: Student): Promise<Student> {
@@ -44,7 +44,7 @@ export class StudentService {
             .post(this.studentsUrl, student, options)
             .toPromise()
             .then(response => response.json().data)
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "postNew"));
     }
 
     update(student: Student) {
@@ -58,7 +58,7 @@ export class StudentService {
             .put(url, student, options)
             .toPromise()
             .then(() => student)
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Update"));
     }
 
     delete(student: Student) {
@@ -71,12 +71,7 @@ export class StudentService {
         return this.http
             .delete(url, options)
             .toPromise()
-            .catch(this.handleError);
-    }
-
-    private handleError(error: any) {
-        console.log('An error occurred', error);
-        return Promise.reject(error.message || error);
+            .catch(err => this.handleError(err, "Delete"));
     }
 
     courseEnroll(userID, courseID, instructorID) {
@@ -90,7 +85,7 @@ export class StudentService {
             .post(url, options)
             .toPromise()
             .then(response => response.json().data)
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Course enroll"));
     }
 
     courseDrop(userID, courseID) {
@@ -103,7 +98,7 @@ export class StudentService {
         return this.http
             .delete(url, options)
             .toPromise()
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Course drop"));
     }
 
     getTimetables() {
@@ -116,7 +111,7 @@ export class StudentService {
         return this.http.get(url, options)
             .toPromise()
             .then(response => response.json())
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Get timetables"));
     }
 
     getTimetablesByCourseId(courseID) {
@@ -129,7 +124,7 @@ export class StudentService {
         return this.http.get(url, options)
             .toPromise()
             .then(response => response.json())
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Get timetables by course"));
     }
 
     getEventsById(userID) {
@@ -140,12 +135,7 @@ export class StudentService {
         let url = `api/timetable/${userID}`;
         return this.http.get(url, options).toPromise()
             .then(response => response.json())
-            .catch(this.handleError);
-        //     console.log('hey im printing res');
-        // console.log(response.json())})
-        //
-        // .then(res => <any[]> res.json().data)
-        //             .then(data => { return data; });
+            .catch(err => this.handleError(err, "Get events by id"));
     }
 
     getStudentsById(timetables) {
@@ -158,7 +148,7 @@ export class StudentService {
         return this.http.post(url, timetables, options)
             .toPromise()
             .then(response => response.json())
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Get students by id"));
     }
 
     saveNewNote(caseNote, studentID) {
@@ -173,7 +163,7 @@ export class StudentService {
             .post(url, caseNoteObject, options)
             .toPromise()
             .then(response => response.json().data)
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Save new note"));
     }
 
     getNotes(studentID) {
@@ -186,7 +176,7 @@ export class StudentService {
         return this.http.get(url, options)
             .toPromise()
             .then(response => response.json())
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Get notes"));
     }
 
     insertAttendance(attendance) {
@@ -199,8 +189,8 @@ export class StudentService {
         return this.http
             .post(url, attendance, options)
             .toPromise()
-            .then(response => response.json().data)
-            .catch(this.handleError);
+            .then(response => response.json())
+            .catch(err => this.handleError(err, "Insert attendance"));
     }
 
     populatePRF(id: string) {
@@ -210,6 +200,39 @@ export class StudentService {
         return this.http.get('api/prf/' + id, options)
             .toPromise()
             .then(response => response.json())
-            .catch(this.handleError);
+            .catch(err => this.handleError(err, "Populate PRF"));
     }
+
+    getAllAttendance() {
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        let url = `api/attendance-report`;
+
+        return this.http
+            .get(url, options)
+            .toPromise()
+            .then(response => response.json())
+            .catch(err => this.handleError(err, "Get all attendance"));
+    }
+
+    getAllFormsByID(student: Student) {
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
+
+      let url = `api/clientForms/${student.userID}`;
+
+      return this.http
+          .get(url, options)
+          .toPromise()
+          .then(response => response.json())
+          .catch(err => this.handleError(err, "Get all student forms"));
+    }
+
+    private handleError(error: any, name: any) {
+        console.log('An error occurred at ' + name, error);
+    }
+
 }

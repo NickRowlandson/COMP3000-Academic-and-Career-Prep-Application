@@ -1,5 +1,8 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Student } from "../../models/student";
+import { ConsentForm } from "../../models/consentForm";
+import { SuitabilityForm } from "../../models/suitabilityForm";
+import { LearningStyleForm } from "../../models/learningStyleForm";
 import { Router } from '@angular/router';
 import { StudentService } from "../../services/student.service";
 import { AuthService } from "../../services/authentication.service";
@@ -15,6 +18,26 @@ declare var swal: any;
 export class StudentManageComponent implements OnInit {
     students: Student [];
     error: any;
+    studentInfoView: boolean = false;
+    studentView: Student;
+    consentView: ConsentForm;
+    suitabilityView: SuitabilityForm;
+    learningStyleView: LearningStyleForm;
+    showGeneral: boolean = true;
+    showSuitability: boolean;
+    showConsent: boolean;
+    showLearningStyle: boolean;
+
+    //bar chart (learning style)
+    barChartOptions:any = {
+      scaleShowVerticalLines: false,
+      responsive: true
+    };
+    barChartLabels:string[] = ['Hearing', 'Seeing', 'Doing'];
+    barChartType:string = 'bar';
+    barChartLegend:boolean = false;
+    barChartData:any;
+    barChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];
 
     constructor(private router: Router, private ngZone: NgZone, private studentService: StudentService, private authService: AuthService) {
 
@@ -84,6 +107,57 @@ export class StudentManageComponent implements OnInit {
               );
             })
             .catch(error => console.log(error));
+    }
+
+    viewInfo(student: Student) {
+      this.showGeneral = true;
+      this.showSuitability = false;
+      this.showConsent = false;
+      this.showLearningStyle = false;
+      this.studentInfoView = true;
+      this.studentView = student;
+      this.studentService
+        .getAllFormsByID(student)
+        .then(forms => {
+          if (forms.status === "403") {
+            this.consentView = null;
+            this.learningStyleView = null;
+            this.suitabilityView = null;
+          } else {
+            this.consentView = forms.consentForm[0];
+            this.learningStyleView = forms.learningStyleForm[0];
+            this.suitabilityView = forms.suitabilityForm[0];
+          }
+        })
+        .catch(error => this.error = error);
+    }
+
+    overallStatus() {
+      this.studentInfoView = false;
+    }
+
+    sectionBtnClicked(event, section) {
+        if (section === "general") {
+            this.showGeneral = true;
+            this.showSuitability = false;
+            this.showConsent = false;
+            this.showLearningStyle = false;
+        } else if (section === "suitability") {
+            this.showGeneral = false;
+            this.showSuitability = true;
+            this.showConsent = false;
+            this.showLearningStyle = false;
+        } else if (section === "consent") {
+            this.showGeneral = false;
+            this.showSuitability = false;
+            this.showConsent = true;
+            this.showLearningStyle = false;
+        } else if (section === "learningStyle") {
+            this.showGeneral = false;
+            this.showSuitability = false;
+            this.showConsent = false;
+            this.showLearningStyle = true;
+        }
     }
 
     goBack() {

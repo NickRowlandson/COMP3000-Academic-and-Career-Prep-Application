@@ -3,10 +3,11 @@ export class Course {
     professorId: string;
     authLevel: string;
     courseName: string;
-    courseStart: string;
-    courseEnd: string;
-    validFrom: Date;
-    validTo:Date;
+    courseStart: Date;
+    courseEnd: Date;
     classroom:string;
     campusId:string;
+    classDay:string;
+    classStartTime:string;
+    classEndTime:string;
 }

@@ -123,6 +123,7 @@ export class AttendanceListComponent implements OnInit {
                     '',
                     'success'
                 );
+                this.attendanceView = false;
               })
               .catch(error => console.log(error));
         }

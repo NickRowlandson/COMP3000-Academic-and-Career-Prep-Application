@@ -1,0 +1,93 @@
+<div class="">
+    <div *ngIf="!data">
+        <h1>Attendance Report</h1>
+        <hr>
+        <div class="cs-loader">
+            <div class="cs-loader-inner">
+                <label>	L</label>
+                <label>	O</label>
+                <label>	A</label>
+                <label>	D</label>
+                <label>	I</label>
+                <label>	N</label>
+                <label>	G</label>
+                <label>	.</label>
+                <label>	.</label>
+                <label>	.</label>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="data">
+        <h1>Attendance Report</h1>
+        <hr>
+
+        <div class="col-md-4">
+          <div class="wrapper2">
+            <h2>Students</h2>
+            <hr>
+            <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+              <thead>
+                <tr>
+                  <!-- <th>
+                    <mfDefaultSorter by="studentNumber">Student Number</mfDefaultSorter>
+                  </th> -->
+                  <th>
+                    <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
+                  </th>
+                  <th>Action</th>
+                </tr>
+                <tr>
+                  <th colspan="5">
+                    <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let student of mf.data">
+                  <td>{{student.firstName + " " + student.lastName}}</td>
+                  <td>
+                      <button class="btn btn-primary" (click)="viewReport(student, $event)"><i class="fa fa-eye" aria-hidden="true"></i> View Report</button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5">
+                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="push"></div>
+        </div>
+        <div class="footer">
+            <div>
+                <button (click)="goBack()" class="btn btn-default">Back</button>
+            </div>
+        </div>
+      </div>
+        <div *ngIf="!studentAttendanceView" class="col-md-8">
+          <h2>Overall Status</h2>
+          <hr>
+          <h3>Total absences: {{ totalAbsences }}</h3>
+        </div>
+        <div *ngIf="studentAttendanceView" class="col-md-8">
+          <h2>Absence Report for {{ student.firstName }}</h2>
+          <div (click)="overallStatus($event)" class="statusButton" title="View overall status"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
+          <hr>
+          <h3>Total absences: {{ totalStudentAbsences }}</h3>
+          <div *ngIf="noAbsences" style="color:green;"><h2>Student has attended all classes so far!</h2></div>
+          <div class="col-md-6" *ngFor="let absence of missedClasses">
+            <div class="well">
+              <label class="control-label">Date: </label> {{ absence.date | date }}
+              <br />
+              <label class="control-label">Course Name: </label> {{ absence.course[0].courseName }}
+              <br />
+              <label class="control-label">Made Contact: </label>
+              <br />
+            </div>
+            <br />
+          </div>
+        </div>
+    </div>
+</div>

@@ -17,18 +17,44 @@ button {
 }
 
 .actionColumn {
-  width:40%;
+  width:60%;
 }
 
 .middle{
   text-align:center;
 }
 
-.backButton {
-  position: fixed;
-  bottom: 25px;
-}
-
 .actionButton {
   width: 10%;
+}
+
+.sectionButtons {
+    display: inline;
+    padding: 5 10 5 10;
+    margin: 0 2 0 2;
+    color: #333f48;
+    float: left;
+    font-weight: bold;
+    box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
+}
+
+.sectionBtnGroup {
+    margin-bottom: 40px;
+}
+
+.sectionBtnGroup>li:focus, .sectionBtnGroup>li:hover {
+    background-color: #333f48;
+    cursor: pointer;
+    transition: .6s;
+}
+.sectionBtnGroup>li:focus>h4, .sectionBtnGroup>li:hover>h4 {
+  color: #fff !important;
+}
+
+.active {
+    background-color: #333f48;
+}
+
+.active>h4 {
+    color: #fff !important;
 }

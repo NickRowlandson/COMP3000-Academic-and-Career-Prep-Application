@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from "../../models/User";
 import { ActivatedRoute, Params } from '@angular/router';
 import { StaffService } from "../../services/staff.service";
+declare var swal: any;
 
 @Component({
     selector: 'staff-edit',
@@ -34,13 +35,28 @@ export class StaffEditComponent implements OnInit {
     }
 
     save() {
-        this.staffService
-            .save(this.user)
-            .then(user => {
-                this.user = user; // saved user, w/ id if new
-                this.goBack();
-            })
-            .catch(error => this.error = error); // TODO: Display error message
+      console.log(this.user);
+      if (this.user.email
+        && this.user.firstName
+        && this.user.lastName
+        && this.user.password
+        && this.user.username
+        && this.user.authLevel) {
+          this.staffService
+              .save(this.user)
+              .then(user => {
+                  this.user = user; // saved user, w/ id if new
+                  this.goBack();
+              })
+              .catch(error => this.error = error); // TODO: Display error message
+      } else {
+        swal(
+            'Missing Input',
+            'Please enter all information before saving.',
+            'warning'
+        );
+      }
+
     }
 
     goBack() {

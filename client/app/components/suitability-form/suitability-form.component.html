@@ -1,5 +1,5 @@
-<div class="suitability">
-    <h2>Client Suitability</h2>
+<div class="suitability wrapper">
+    <h1>Client Suitability</h1>
     <hr>
     <div *ngIf="client" class="form-horizontal">
         <div class="row">
@@ -20,7 +20,7 @@
             <div id="section1" *ngIf="showSection1" class="col-sm-12">
                 <div class="form-group">
                     <div class="col-sm-offset-10 col-sm-1">
-                        <div (click)="next($event, 'section2')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></div>
+                        <div (click)="next($event, 'section2')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -94,7 +94,7 @@
             <div id="section2" *ngIf="showSection2" class="col-sm-12">
                 <div class="form-group">
                     <div class="col-sm-offset-10 col-sm-1">
-                        <button (click)="next($event, 'section3')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                        <button (click)="next($event, 'section3')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></button>
                     </div>
                 </div>
                 <div class="form-group">
@@ -146,7 +146,7 @@
             <div id="section3" *ngIf="showSection3" class="col-sm-12">
                 <div class="form-group">
                     <div class="col-sm-offset-10 col-sm-1">
-                        <button (click)="next($event, 'section4')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                        <button (click)="next($event, 'section4')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></button>
                     </div>
                 </div>
                 <div class="form-group">
@@ -301,7 +301,7 @@
             <div id="section4" *ngIf="showSection4" class="col-sm-12">
               <div class="form-group">
                   <div class="col-sm-offset-10 col-sm-1">
-                      <button (click)="next($event, 'section5')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                      <button (click)="next($event, 'section5')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></button>
                   </div>
               </div>
               <h3>Factors Affecting Client Success</h3>
@@ -348,7 +348,7 @@
             <div id="section5" *ngIf="showSection5" class="col-sm-12">
               <div class="form-group">
                   <div class="col-sm-offset-10 col-sm-1">
-                      <button (click)="next($event, 'section6')" class="nextButton" title="Next section"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+                      <button (click)="next($event, 'section6')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></button>
                   </div>
               </div>
               <h3>Summary Notes</h3>
@@ -406,6 +406,7 @@
         </div>
         <!-- close row -->
     </div>
+    <div class="push"></div>
 </div>
 <div class="backButton">
     <div>

@@ -434,7 +434,7 @@ for (let i=0;i<result.length;i++) {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     var attendance = req.body;
-                    var query = "INSERT INTO Attendance (courseID, Date, userID) VALUES ";
+                    var query = "INSERT INTO Attendance (courseID, date, studentID) VALUES ";
                     var count = 0;
                     if(attendance.studentsAbsent.length > 0) {
                       var date = attendance.date;
@@ -467,6 +467,33 @@ for (let i=0;i<result.length;i++) {
                       console.log("No absent students");
                       res.send({status: "No absent students"});
                     }
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
+    getAllAttendance(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query("SELECT * FROM Attendance")
+                                .then(function(recordset) {
+                                    res.send(recordset);
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" });
+                                    console.log("Get all attendance " + err);
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
                 }
             });
         }

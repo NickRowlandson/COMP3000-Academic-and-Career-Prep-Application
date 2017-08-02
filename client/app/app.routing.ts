@@ -26,6 +26,7 @@ import { StudentEnrollmentComponent } from './components/student-enrollment/stud
 import { TimetableComponent } from './components/timetable/timetable.component';
 import { VisviewComponent } from './components/visview/visview.component';
 import { AttendanceListComponent } from './components/attendance-list/attendance-list.component';
+import { AttendanceReportComponent } from './components/attendance-report/attendance-report.component';
 
 const appRoutes: Routes = [
     {
@@ -121,6 +122,11 @@ const appRoutes: Routes = [
         path: 'attendance-list',
         component: AttendanceListComponent,
         canActivate: [AuthGuard, InstructorGuard]
+    },
+    {
+        path: 'attendance-report',
+        component: AttendanceReportComponent,
+        canActivate: [AuthGuard, StaffGuard]
     }
 
 ];

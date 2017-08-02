@@ -1,5 +1,5 @@
-<div class="staff">
-    <h2>Manage Staff</h2>
+<div class="staff wrapper">
+    <h1>Manage Staff</h1>
     <hr>
     <div class="" *ngIf="!users">
         <div class="cs-loader">
@@ -18,26 +18,18 @@
         </div>
     </div>
     <div class="row" *ngIf="users">
-        <div class="col-md-12">
-            <div class="error" *ngIf="error">{{error}}</div>
-            <div class="pull-right">
-                <div class="padding">
-                    <button class="btn btn-success" (click)="addUser()"><i class="fa fa-plus" ></i> Add Staff</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <table class="table table-striped" [mfData]="users | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <div class="col-md-8">
+            <table class="table table-striped" [mfData]="users | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
                 <thead>
                     <tr>
                         <th>
-                          <mfDefaultSorter by="userType">Role</mfDefaultSorter>
+                            <mfDefaultSorter by="userType">Role</mfDefaultSorter>
                         </th>
                         <th>
-                          <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
+                            <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
                         </th>
                         <th>
-                          <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                            <mfDefaultSorter by="email">Email</mfDefaultSorter>
                         </th>
                         <th>Action</th>
                     </tr>
@@ -65,16 +57,33 @@
                 <tfoot>
                     <tr>
                         <td colspan="5">
-                            <mfBootstrapPaginator ></mfBootstrapPaginator>
+                            <mfBootstrapPaginator></mfBootstrapPaginator>
                         </td>
                     </tr>
                 </tfoot>
             </table>
+
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-success pull-right" style="margin-bottom: 3px;" (click)="addUser()"><i class="fa fa-plus" ></i> Add Staff</button>
+            <div class="well statBox" style="clear: both" (click)="filterStaff('total')">
+                <h2><strong>{{ usersLength }}</strong> Total Staff</h2>
+            </div>
+            <div class="well statBox" (click)="filterStaff('Admin')">
+                <h2><strong>{{ adminNumber }}</strong> Admin Users</h2>
+            </div>
+            <div class="well statBox" (click)="filterStaff('Staff')">
+                <h2><strong>{{ staffNumber }}</strong> Staff Users</h2>
+            </div>
+            <div class="well statBox" (click)="filterStaff('Instructor')">
+                <h2><strong>{{ instructorNumber }}</strong> Instructor Users</h2>
+            </div>
         </div>
     </div>
-    <div class="backButton">
-        <div>
-            <button (click)="goBack()" class="btn btn-default">Back</button>
-        </div>
+    <div class="push"></div>
+</div>
+<div class="footer">
+    <div>
+        <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>
 </div>

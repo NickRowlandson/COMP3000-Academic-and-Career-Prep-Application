@@ -5,6 +5,7 @@ import { Course } from "../../models/course";
 import { SelectItem } from 'primeng/primeng';
 declare var swal: any;
 declare var moment: any;
+
 @Component({
     selector: 'courseManage',
     templateUrl: './app/components/course-manage/course-manage.component.html',
@@ -43,6 +44,7 @@ export class CourseManageComponent implements OnInit {
             });
         });
     }
+
     getProfessors() {
         // get professors
         this.CourseService.getProfessors().then((result) => {
@@ -58,10 +60,10 @@ export class CourseManageComponent implements OnInit {
                 } else {
                     //format datetime
                     result.forEach((item) => {
-                        item.courseStart = moment(item.courseStart).format('YYYY-MM-DD hh:mm A');
-                        item.courseEnd = moment(item.courseStart).format('YYYY-MM-DD hh:mm A');
-                        item.validFrom = moment(item.courseStart).format('YYYY-MM-DD');
-                        item.validTo = moment(item.courseStart).format('YYYY-MM-DD');
+                        item.courseStart = moment(item.courseStart).format('YYYY-MM-DD');
+                        item.courseEnd = moment(item.courseEnd).format('YYYY-MM-DD');
+                        item.classStartTime = moment(item.classStartTime).format('hh:mm A');
+                        item.classEndTime = moment(item.classEndTime).format('hh:mm A');
                     });
                     this.courses = result;
 

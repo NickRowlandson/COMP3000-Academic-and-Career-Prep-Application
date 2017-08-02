@@ -1,5 +1,5 @@
 <div class="students">
-    <h2>Manage Students</h2>
+    <h1>Manage Students</h1>
     <hr>
     <div class="" *ngIf="!students">
         <div class="cs-loader">
@@ -21,7 +21,8 @@
         <div class="col-md-12">
             <div class="error" *ngIf="error">{{error}}</div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-7">
+          <div class="wrapper2">
             <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
@@ -52,6 +53,9 @@
                             <div class="inline">
                               <button class="btn btn-info" (click)="populatePRF(student)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</button>
                             </div>
+                            <div class="inline">
+                              <button class="btn btn-warning" (click)="viewInfo(student)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -63,11 +67,103 @@
                     </tr>
                 </tfoot>
             </table>
+            <div class="push"></div>
+          </div>
+          <div class="footer">
+              <div>
+                  <button (click)="goBack()" class="btn btn-default">Back</button>
+              </div>
+          </div>
         </div>
-    </div>
-    <div class="backButton">
-        <div>
-            <button (click)="goBack()" class="btn btn-default">Back</button>
+        <div *ngIf="!studentInfoView" class="col-md-5" style="padding-top:35px">
+          <div class="well">
+              <h2><strong>{{ students.length }}</strong> Total Students</h2>
+          </div>
         </div>
+        <div *ngIf="studentInfoView" class="col-md-5">
+            <h2>Information for {{studentView.firstName + " " + studentView.lastName}}</h2>
+            <div (click)="overallStatus($event)" class="statusButton" title="View status report"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
+            <hr>
+            <ul class="sectionBtnGroup col-sm-12">
+                <li class="sectionButtons" [ngClass]="{active: showGeneral}" title="General Info" (click)="sectionBtnClicked($event, 'general')">
+                    <h4>General Info</h4></li>
+                <li class="sectionButtons" *ngIf="!studentView.suitability" [ngClass]="{active: showSuitability}" title="Suitability" (click)="sectionBtnClicked($event, 'suitability')">
+                    <h4>Suitability</h4></li>
+                <li class="sectionButtons" *ngIf="!studentView.consent" [ngClass]="{active: showConsent}" title="Consent" (click)="sectionBtnClicked($event, 'consent')">
+                    <h4>Consent</h4></li>
+                <li class="sectionButtons" *ngIf="!studentView.learningStyle" [ngClass]="{active: showLearningStyle}" title="Consent" (click)="sectionBtnClicked($event, 'learningStyle')">
+                    <h4>Learning Style</h4></li>
+            </ul>
+            <div *ngIf="showGeneral" class="infoPanel">
+                <br />
+                <div class="form-group">
+                    <label class="control-label">id: </label> {{studentView.userID}} <br />
+                    <label class="control-label">Inquiry Date: </label> {{studentView.inquiryDate}} <br />
+                    <label class="control-label">First Name: </label> {{studentView.firstName}} <br />
+                    <label class="control-label">Last Name: </label> {{studentView.lastName}} <br />
+                    <label class="control-label">Birth Date: </label> {{studentView.birthdate}} <br />
+                    <label class="control-label">Email: </label> {{studentView.email}} <br />
+                    <label class="control-label">Phone: </label> {{studentView.phone}} <br />
+                </div>
+            </div>
+            <div *ngIf="showSuitability" class="infoPanel">
+                <br />
+                <div class="form-group">
+                    <label class="control-label">Transcript: </label> {{suitabilityView.transcript}} <br />
+                    <label class="control-label">Courses: </label> {{suitabilityView.courses}} <br />
+                    <label class="control-label">Goal: </label> {{suitabilityView.goal}} <br />
+                    <label class="control-label">Transition Date: </label> {{suitabilityView.transitionDate}} <br />
+                    <label class="control-label">Governament ID: </label> {{suitabilityView.governmentID}} <br />
+                    <label class="control-label">Appropriate Goal: </label> {{suitabilityView.appropriateGoal}} <br />
+                    <label class="control-label">19+ Years Old: </label> {{suitabilityView.isValidAge}} <br />
+                    <label class="control-label">Not Registered In High School or Post-Sec: </label> {{suitabilityView.schoolRegistration}} <br />
+                    <label class="control-label">Available During Class Time: </label> {{suitabilityView.availableDuringClass}} <br />
+                    <label class="control-label">Last Grade Completed: </label> {{suitabilityView.lastGrade}} <br />
+                    <label class="control-label">Level: </label> {{suitabilityView.level}} <br />
+                    <label class="control-label">Post-Secondary/Job Offer start date: </label> {{suitabilityView.offerStartDate}} <br />
+                    <label class="control-label">Meets Next Goals Requirements: </label> {{suitabilityView.meetsGoal}} <br />
+                    <label class="control-label">Time out of School/Training: </label> {{suitabilityView.timeOutOfSchool}} <br />
+                    <label class="control-label">Has Been In Program Before: </label> {{suitabilityView.inProgramBefore}} <br />
+                    <label class="control-label">Employment: </label> {{suitabilityView.employment}} <br />
+                    <label class="control-label">Income Source: </label> {{suitabilityView.incomeSource}} <br />
+                    <label class="control-label">Age: </label> {{suitabilityView.age}} <br />
+                    <label class="control-label"># of Hours/Week: </label> {{suitabilityView.hoursPerWeek}} <br />
+                    <label class="control-label">Work History: </label> {{suitabilityView.workHistory}} <br />
+                </div>
+            </div>
+            <div *ngIf="showConsent" class="infoPanel">
+                <br />
+                <div class="form-group">
+                    <label class="control-label">Date: </label> {{consentView.date}} <br />
+                    <label class="control-label">Detailed Message: </label> {{consentView.detailedMessage}} <br />
+                    <label class="control-label">Ontario Works: </label> {{consentView.ontarioWorks}} <br />
+                    <label class="control-label">Ontario Disability: </label> {{consentView.ontarioDisabilityProgram}} <br />
+                    <label class="control-label">Employment Insurance: </label> {{consentView.employmentInsurance}} <br />
+                    <label class="control-label">Employment Services: </label> {{consentView.employmentServices}} <br />
+                    <label class="control-label">Other: </label> {{consentView.other}} <br />
+                    <label class="control-label">Contact Name: </label> {{consentView.contactName}} <br />
+                    <label class="control-label">Contact Number: </label> {{consentView.contactNum}} <br />
+                    <label class="control-label">Literacy Agencies: </label> {{consentView.literacyAgencies}} <br />
+                    <label class="control-label">Literacy Witness: </label> {{consentView.literacyWitness}} <br />
+                </div>
+            </div>
+            <div *ngIf="showLearningStyle" class="infoPanel">
+                <br />
+                <div class="form-group">
+                  <div>
+                    <div style="display: block">
+                      <canvas baseChart
+                              [datasets]="barChartData"
+                              [labels]="barChartLabels"
+                              [options]="barChartOptions"
+                              [colors]="barChartColors"
+                              [legend]="barChartLegend"
+                              [chartType]="barChartType"
+                              (chartHover)="chartHovered($event)"
+                              (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+                  </div>
+                </div>
+            </div>
     </div>
 </div>

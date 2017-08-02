@@ -17,6 +17,11 @@ export class CourseEditComponent implements OnInit {
     navigated = false; // true if navigated here
     private sub: any;
     id: any;
+    events: any[] = [];
+    header: any;
+    options: any;
+    selectedDays: string[] = [];
+
     datepickerOpts: any = {
         startDate: moment(),
         autoclose: true,
@@ -25,15 +30,14 @@ export class CourseEditComponent implements OnInit {
         assumeNearbyYear: true,
         format: 'YYYY-MM-DD'
     };
-
     // drop down
     professors: SelectItem[] = [];
     campuses: SelectItem[] = [];
     daysOfWeek: SelectItem[] = [{ label: 'Monday', value: 'Monday' },
-                                { label: 'Tuesday', value: 'Tuesday' },
-                                { label: 'Wednesday', value: 'Wednesday' },
-                                { label: 'Thursday', value: 'Thursday' },
-                                { label: 'Friday', value: 'Friday' }];
+        { label: 'Tuesday', value: 'Tuesday' },
+        { label: 'Wednesday', value: 'Wednesday' },
+        { label: 'Thursday', value: 'Thursday' },
+        { label: 'Friday', value: 'Friday' }];
 
 
     constructor(private courseService: CourseService, private route: ActivatedRoute) {
@@ -80,6 +84,23 @@ export class CourseEditComponent implements OnInit {
         //       });
         //   }
         // });
+
+        this.header = {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+        };
+
+        this.options = {
+            prev: 'circle-triangle-w',
+            defaultView: "month",
+            //minTime: "06:00:00",
+            //maxTime: "22:00:00",
+            height: "auto"
+        };
+
+
+
     }
     subscribeCourse() {
         this.sub = this.route.params.subscribe(params => {
@@ -90,6 +111,12 @@ export class CourseEditComponent implements OnInit {
             } else {
                 this.newCourse = false;
                 this.courseService.getCourse(this.id).then((result) => {
+                    result.forEach((item) => {
+                        item.courseStart = moment(item.courseStart).format('DD/MM/YYYY');
+                        item.courseEnd = moment(item.courseEnd).format('DD/MM/YYYY');
+                        item.classStartTime = moment(item.classStartTime).format('hh:mm A');
+                        item.classEndTime = moment(item.classEndTime).format('hh:mm A');
+                    });
                     this.course = result[0];
                     console.log(this.course);
                 });

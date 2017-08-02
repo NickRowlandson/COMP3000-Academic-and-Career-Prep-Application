@@ -1,5 +1,9 @@
-/* CSS Loading Animation */
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
+/* CSS Loading Animation */
 .cs-loader {
     position: absolute;
     top: 100;
@@ -147,11 +151,28 @@
   transition: .2s;
 }
 
-.backButton {
-  position: fixed;
-  bottom: 25px;
+/* Sticky Footer */
+.wrapper {
+  min-height: 75%;
 }
 
+.wrapper2 {
+  min-height: 60%;
+}
+
+.wrapper3 {
+  min-height: 70%;
+}
+
+.footer, .push {
+  height: 0px;
+}
+
+.footer {
+  padding-bottom: 50px;
+}
+
+/* Small loader */
 .spinner {
   width: 40px;
   height: 40px;
@@ -191,4 +212,28 @@
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
+}
+
+/* Status button */
+.statusButton {
+  position: absolute;
+  right: 20;
+  top: 20;
+  cursor:pointer;
+  background-color: #fff;
+  color: #333f48;
+  display: inline;
+  padding: 5 10 5 10;
+  margin: 0 2 0 2;
+  float: left;
+}
+
+.statusButton:hover {
+  background-color: #333f48;
+  color: #fff;
+  transition: .4s;
+}
+
+.statBox {
+  cursor: pointer;
 }
