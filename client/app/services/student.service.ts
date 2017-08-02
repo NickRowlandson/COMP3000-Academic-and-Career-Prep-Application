@@ -215,6 +215,20 @@ export class StudentService {
             .catch(err => this.handleError(err, "Get all attendance"));
     }
 
+    getAllFormsByID(student: Student) {
+      // add authorization header with jwt token
+      let headers = new Headers({ authorization: this.authService.token });
+      let options = new RequestOptions({ headers: headers });
+
+      let url = `api/clientForms/${student.userID}`;
+
+      return this.http
+          .get(url, options)
+          .toPromise()
+          .then(response => response.json())
+          .catch(err => this.handleError(err, "Get all student forms"));
+    }
+
     private handleError(error: any, name: any) {
         console.log('An error occurred at ' + name, error);
     }

@@ -13,6 +13,7 @@ class ClientFormsRoutes {
 
         router.post("/clientForms/:_id/consent", controller.consentForm);
         router.post("/clientForms/:_id/learningStyle", controller.learningStyleForm);
+        router.get("/clientForms/:_id", controller.getAllFormsByID);
         return router;
     }
 

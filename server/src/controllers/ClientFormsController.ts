@@ -97,5 +97,45 @@ class ClientFormsController {
             res.send({ "error": "error in your request" });
         }
     }
+
+    getAllFormsByID(req: express.Request, res: express.Response) {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: auth, done: function() {
+                    var _id: string = req.params._id;
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query('SELECT * FROM SuitabilityForm WHERE userID = ' + _id + '')
+                                .then(function(suitabilityForm) {
+                                    new sql.Request(connection)
+                                        .query('SELECT * FROM Consent WHERE userID = ' + _id + '')
+                                        .then(function(consentForm) {
+                                            new sql.Request(connection)
+                                                .query('SELECT * FROM LearningStyle WHERE userID = ' + _id + '')
+                                                .then(function(learningStyleForm) {
+                                                    res.send({
+                                                        suitabilityForm: suitabilityForm,
+                                                        consentForm: consentForm,
+                                                        learningStyleForm: learningStyleForm
+                                                    });
+                                                }).catch(function(err) {
+                                                    res.send({ "error": "error" }); console.log("Get learningStyleForms " + err);
+                                                });
+                                        }).catch(function(err) {
+                                            res.send({ "error": "error" }); console.log("Get consentForms " + err);
+                                        });
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" }); console.log("Get suitabilityForms " + err);
+                                });
+                        });
+                }
+            });
+        } catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
 }
 export = ClientFormsController;
