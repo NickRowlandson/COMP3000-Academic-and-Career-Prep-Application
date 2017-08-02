@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import { AuthService } from './authentication.service';
 import { Student } from "../models/student";
 import { Course } from "../models/course";
+declare var moment: any;
 
 @Injectable()
 export class StudentService {
@@ -161,7 +162,8 @@ export class StudentService {
     }
 
     saveNewNote(caseNote, studentID) {
-        var caseNoteObject = { caseNote: caseNote };
+        var caseNoteObject = { caseNote: caseNote, dateTime: moment().format('YYYY-MM-DD HH:mm:ss a') };
+        console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });

@@ -374,12 +374,14 @@ for (let i=0;i<result.length;i++) {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     var caseNote = req.body.caseNote;
+                    var dateTime = req.body.dateTime;
                     var _id: string = req.params._studentID;
 
                     sql.connect(config)
                         .then(function(connection) {
+                          console.log(dateTime);
                             new sql.Request(connection)
-                                .query("INSERT INTO CaseNotes VALUES ('" + _id + "', '" + caseNote + "')")
+                                .query("INSERT INTO CaseNotes VALUES ('" + _id + "', '" + caseNote + "', '" + dateTime + "')")
                                 .then(function() {
                                     res.send({ "success": "success" });
                                 }).catch(function(err) {

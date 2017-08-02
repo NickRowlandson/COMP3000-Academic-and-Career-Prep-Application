@@ -25,9 +25,6 @@
         <thead>
           <tr>
             <th>
-              <mfDefaultSorter by="status">Status</mfDefaultSorter>
-            </th>
-            <th>
               <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
             </th>
             <th>
@@ -43,7 +40,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let student of mf.data">
-            <td><div> Status </div></td>
             <td>{{student.firstName + " " + student.lastName}}</td>
             <td>{{student.email}}</td>
             <td class="actionColumn middle"><a (click)="showCaseNotes(student)"><i class="fa fa-eye" aria-hidden="true"></i>View Notes</a></td>
@@ -70,7 +66,7 @@
       <hr>
       <div>
           <ul class="notesList">
-            <li *ngFor="let noteItem of notes">{{noteItem.caseNote}}</li>
+            <li *ngFor="let noteItem of notes"><b>{{noteItem.dateTime | date}}:</b> {{noteItem.caseNote}}</li>
           </ul>
       </div>
     </div>
