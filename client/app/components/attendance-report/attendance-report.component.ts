@@ -19,11 +19,13 @@ export class AttendanceReportComponent implements OnInit {
   totalAbsences: any;
 
   studentAttendanceView: boolean = false;
-  absences: any[];
   student: any[];
-  missedClasses = [];
-  totalStudentAbsences: any;
-  noAbsences: boolean = false;
+  attendance: any[];
+  records = [];
+  totalPresent: any;
+  totalAbsent: any;
+  totalMadeContact: any;
+  noAttendance: boolean = false;
 
   constructor(private router: Router, private studentService: StudentService, private courseService: CourseService) {
 
@@ -37,7 +39,6 @@ export class AttendanceReportComponent implements OnInit {
         this.data = null;
       } else {
         this.data = attendance;
-        this.totalAbsences = this.data.length;
         this.getStudents();
       }
     })
@@ -80,24 +81,27 @@ export class AttendanceReportComponent implements OnInit {
   }
 
   viewReport(student: Student) {
-    this.missedClasses = [];
+    this.records = [];
     this.studentAttendanceView = true;
-    this.absences = this.data.filter(x => x.studentID === student.studentID);
+    this.attendance = this.data.filter(x => x.studentID === student.studentID);
     this.student = this.students.filter(x => x.studentID === student.studentID);
     this.student = this.student[0];
-    this.totalStudentAbsences = this.absences.length;
+    this.totalPresent = this.attendance.filter(x => x.attendanceValue === 'P').length;
+    this.totalAbsent = this.attendance.filter(x => x.attendanceValue === 'A').length;
+    this.totalMadeContact = this.attendance.filter(x => x.attendanceValue === 'MC').length;
 
-    if (this.totalStudentAbsences === 0) {
-      this.noAbsences = true;
+    if (this.attendance.length === 0) {
+      this.noAttendance = true;
     } else {
-      this.noAbsences = false;
-      for (let item of this.absences) {
+      this.noAttendance = false;
+      for (let item of this.attendance) {
         var course = this.courses.filter(x => x.courseID === item.courseID);
-        var missedClass = {
+        var attendance = {
           course: course,
-          date: item.date
+          date: item.date,
+          attendanceValue: item.attendanceValue
         };
-        this.missedClasses.push(missedClass);
+        this.records.push(attendance);
       }
     }
 
@@ -105,7 +109,7 @@ export class AttendanceReportComponent implements OnInit {
 
   overallStatus() {
     this.studentAttendanceView = false;
-    this.noAbsences = false;
+    this.noAttendance = false;
   }
 
   goBack() {

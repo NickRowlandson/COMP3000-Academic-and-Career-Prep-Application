@@ -86,50 +86,65 @@ export class AttendanceListComponent implements OnInit {
           .catch(error => console.log(error));
     }
 
-    markAbsent(student: Student) {
-      if (student.absent) {
-        student.absent = false;
-        var index = this.absentStudents.indexOf(student.studentID);
-        this.absentStudents.splice(index, 1);
-      } else {
-        student.absent = true;
-        this.absentStudents.push(student.studentID);
-      }
-      console.log(this.absentStudents);
-    }
+    // markAbsent(student: Student) {
+    //   if (student.absent) {
+    //     student.absent = false;
+    //     var index = this.absentStudents.indexOf(student.studentID);
+    //     this.absentStudents.splice(index, 1);
+    //   } else {
+    //     student.absent = true;
+    //     this.absentStudents.push(student.studentID);
+    //   }
+    //   console.log(this.absentStudents);
+    // }
 
     submitAttendance() {
-      swal({
-          title: 'Submit Attendance?',
-          text: "You won't be able to revert this!",
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, submit!'
-      }).then(isConfirm => {
-        if (isConfirm) {
-          this.attendance = {
-            studentsAbsent: this.absentStudents,
-            courseID: this.courseID,
-            date: this.date
-          };
-          console.log(this.attendance);
-          this.StudentService
-              .insertAttendance(this.attendance)
-              .then(result => {
-                swal(
-                    'Attendance submitted!',
-                    '',
-                    'success'
-                );
-                this.attendanceView = false;
-              })
-              .catch(error => console.log(error));
+      var count = 0;
+      for (let student of this.attendanceStudents) {
+        if (student.attendanceValue) {
+          count++;
         }
-      }).catch(error => {
-        //console.log("Canceled");
-      });
+      }
+
+      if (count === this.attendanceStudents.length) {
+        swal({
+            title: 'Submit Attendance?',
+            text: "You won't be able to revert this!",
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, submit!'
+        }).then(isConfirm => {
+          if (isConfirm) {
+            this.attendance = {
+              students: this.attendanceStudents,
+              courseID: this.courseID,
+              date: this.date
+            };
+            this.StudentService
+                .insertAttendance(this.attendance)
+                .then(result => {
+                  swal(
+                      'Attendance submitted!',
+                      '',
+                      'success'
+                  );
+                  this.attendanceView = false;
+                })
+                .catch(error => console.log(error));
+          }
+        }).catch(error => {
+          //console.log("Canceled");
+        });
+      } else {
+        swal(
+            'Attendance Incomplete',
+            'Please enter attendance for all students',
+            'warning'
+        );
+      }
+
     }
 
     goBack() {

@@ -39,10 +39,11 @@ export class ClientStatusComponent implements OnInit {
     doughnutChartLabels: string[];
     doughnutChartData: number[];
     doughnutChartType: string;
-    doughnutChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];
+    doughnutChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#0066FF", "#2AD308"] }];
     stage1: any;
     stage2: any;
     stage3: any;
+    stage4: any;
 
     //bar chart (learning style)
     barChartOptions:any = {
@@ -54,6 +55,9 @@ export class ClientStatusComponent implements OnInit {
     barChartLegend:boolean = false;
     barChartData:any;
     barChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];
+
+    banner: boolean = false;
+    cam: boolean = false;
 
     constructor(private router: Router, private clientService: ClientService, private studentService: StudentService, private authService: AuthService) {
     }
@@ -89,8 +93,9 @@ export class ClientStatusComponent implements OnInit {
         this.stage1 = this.data.filter(x => x.suitability);
         this.stage2 = this.data.filter(x => !x.suitability);
         this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle);
-        this.doughnutChartLabels = ['Suitability', 'Consent/Learning Style', 'Forms Complete'];
-        this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length];
+        this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
+        this.doughnutChartLabels = ['Suitability', 'Consent/Learning Style', 'Banner/CAM', 'Transfer Ready'];
+        this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length, this.stage4.length];
         this.doughnutChartType = 'doughnut';
     }
 
@@ -206,6 +211,8 @@ export class ClientStatusComponent implements OnInit {
                 this.data = this.allClients.filter(x => !x.suitability && x.consent && x.learningStyle);
             } else if (index === 2) {
                 this.data = this.allClients.filter(x => !x.suitability && !x.consent && !x.learningStyle);
+            } else if (index === 3) {
+                this.data = this.allClients.filter(x => !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
             }
         } catch (err) {
             this.data = this.allClients;
@@ -217,12 +224,7 @@ export class ClientStatusComponent implements OnInit {
     }
 
     createAsStudent(client: Student) {
-      this.studentService
-          .postNew(client)
-          .then(result => {
-            this.removeAlert(client);
-          })
-          .catch(error => this.error = error); // TODO: Display error message
+      this.removeAlert(client);
     }
 
     removeAlert(client) {
@@ -236,10 +238,15 @@ export class ClientStatusComponent implements OnInit {
           confirmButtonText: 'Yes, transfer it!'
       }).then(isConfirm => {
         if (isConfirm) {
-          this.removeFromClientTable(client.userID);
+          this.studentService
+              .postNew(client)
+              .then(result => {
+                this.removeFromClientTable(client.userID);
+              })
+              .catch(error => this.error = error); // TODO: Display error message
         }
       }).catch(error => {
-        //console.log("Canceled");
+        console.log("Canceled"); // TODO: Display error message
       });
     }
 
@@ -250,7 +257,8 @@ export class ClientStatusComponent implements OnInit {
           .then(res => {
               this.data = this.data.filter(h => h.userID !== userID);
               this.stage3 = this.data.filter(x => x.userID !== userID && !x.suitability && !x.consent && !x.learningStyle);
-              this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length];
+              this.stage4 = this.data.filter(x => x.userID !== userID && !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
+              this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length, this.stage4.length];
               swal(
                   'Transfered',
                   'Client record has been transfered to the student table.',
@@ -259,6 +267,18 @@ export class ClientStatusComponent implements OnInit {
               this.clientTotal = this.data.length;
           })
           .catch(error => this.error = error);
+    }
+
+    checkboxChange(checkbox) {
+      if (this.banner && this.cam) {
+        this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && !this.banner && !this.cam);
+        this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
+      } else {
+        this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle);
+        this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
+      }
+
+      this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length, this.stage4.length];
     }
 
     goBack() {

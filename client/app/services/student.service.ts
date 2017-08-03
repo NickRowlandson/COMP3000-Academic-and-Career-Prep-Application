@@ -189,7 +189,7 @@ export class StudentService {
         return this.http
             .post(url, attendance, options)
             .toPromise()
-            .then(response => response.json())
+            .then(response => response)
             .catch(err => this.handleError(err, "Insert attendance"));
     }
 

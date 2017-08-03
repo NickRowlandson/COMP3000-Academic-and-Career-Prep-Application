@@ -14,4 +14,5 @@ export class Student {
     absent: boolean;
     studentStartDate: Date;
     studentEndDate: Date;
+    attendanceValue: any;
 }

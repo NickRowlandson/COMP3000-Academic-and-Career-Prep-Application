@@ -434,15 +434,15 @@ for (let i=0;i<result.length;i++) {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     var attendance = req.body;
-                    var query = "INSERT INTO Attendance (courseID, date, studentID) VALUES ";
+                    var query = "INSERT INTO Attendance (courseID, date, studentID, attendanceValue) VALUES ";
                     var count = 0;
-                    if(attendance.studentsAbsent.length > 0) {
+                    if(attendance.students.length > 0) {
                       var date = attendance.date;
-                      for (let studentID of attendance.studentsAbsent) {
+                      for (let student of attendance.students) {
                         if(count === 0) {
-                          query += "('" + attendance.courseID + "', '" + date + "', '" + studentID + "' )";
+                          query += "('" + attendance.courseID + "', '" + date + "', '" + student.studentID + "', '" + student.attendanceValue + "' )";
                         } else {
-                          query += ", ('" + attendance.courseID + "', '" + date + "', '" + studentID + "' )";
+                          query += ", ('" + attendance.courseID + "', '" + date + "', '" + student.studentID + "', '" + student.attendanceValue + "' )";
                         }
                         count ++;
                       }

@@ -1,3 +1,11 @@
+.actionAttendance {
+  width: 60%;
+}
+
 .action {
   width: 20%;
+}
+
+.attendanceRadioButtons {
+  padding-right: 10px;
 }

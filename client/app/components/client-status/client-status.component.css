@@ -94,6 +94,14 @@ button {
 	border-radius: 50%;
 	width: 20px;
 	height: 20px;
+  background-color: #0066ff;
+  margin: 0 auto;
+}
+
+.statusStage4 {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
   background-color: #21C700;
   margin: 0 auto;
 }

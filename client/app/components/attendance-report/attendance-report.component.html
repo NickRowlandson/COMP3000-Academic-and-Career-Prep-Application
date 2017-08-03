@@ -21,11 +21,11 @@
         <h1>Attendance Report</h1>
         <hr>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="wrapper2">
             <h2>Students</h2>
             <hr>
-            <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
               <thead>
                 <tr>
                   <!-- <th>
@@ -46,7 +46,7 @@
                 <tr *ngFor="let student of mf.data">
                   <td>{{student.firstName + " " + student.lastName}}</td>
                   <td>
-                      <button class="btn btn-primary" (click)="viewReport(student, $event)"><i class="fa fa-eye" aria-hidden="true"></i> View Report</button>
+                      <button class="btn btn-primary" (click)="viewReport(student, $event)">View Report</button>
                   </td>
                 </tr>
               </tbody>
@@ -66,24 +66,24 @@
             </div>
         </div>
       </div>
-        <div *ngIf="!studentAttendanceView" class="col-md-8">
+        <div *ngIf="!studentAttendanceView" class="col-md-9">
           <h2>Overall Status</h2>
           <hr>
-          <h3>Total absences: {{ totalAbsences }}</h3>
+          <h3>Total student records: {{ data.length }}</h3>
         </div>
-        <div *ngIf="studentAttendanceView" class="col-md-8">
-          <h2>Absence Report for {{ student.firstName }}</h2>
+        <div *ngIf="studentAttendanceView" class="col-md-9">
+          <h2>Report for {{ student.firstName }}</h2>
           <div (click)="overallStatus($event)" class="statusButton" title="View overall status"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
           <hr>
-          <h3>Total absences: {{ totalStudentAbsences }}</h3>
-          <div *ngIf="noAbsences" style="color:green;"><h2>Student has attended all classes so far!</h2></div>
-          <div class="col-md-6" *ngFor="let absence of missedClasses">
-            <div class="well">
-              <label class="control-label">Date: </label> {{ absence.date | date }}
+          <h3>Present: {{ totalPresent }} Absent: {{ totalAbsent }} Made Contact: {{ totalMadeContact }}</h3>
+          <div *ngIf="noAttendance" style="color:green;"><h2>Student has attended all classes so far!</h2></div>
+          <div *ngFor="let info of records">
+            <div class="well col-md-12">
+              <label class="control-label">Date: </label> {{ info.date | date }}
               <br />
-              <label class="control-label">Course Name: </label> {{ absence.course[0].courseName }}
+              <label class="control-label">Course Name: </label> {{ info.course[0].courseName }}
               <br />
-              <label class="control-label">Made Contact: </label>
+              <label class="control-label">Attendance:  </label> {{ info.attendanceValue }}
               <br />
             </div>
             <br />

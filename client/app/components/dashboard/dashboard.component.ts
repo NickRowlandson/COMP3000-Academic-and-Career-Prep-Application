@@ -69,6 +69,7 @@ export class DashboardComponent implements OnInit {
             this.checkFormStatus(userID);
         } else if (userType === 'Instructor') {
             this.attendanceList = true;
+            this.attendanceReport = true;
             this.caseNotes = true;
         }
     }

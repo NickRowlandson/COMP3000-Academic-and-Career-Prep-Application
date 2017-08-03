@@ -21,7 +21,7 @@ class CourseController {
     retrieve(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
-                requiredAuth: auth, done: function() {
+                requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)

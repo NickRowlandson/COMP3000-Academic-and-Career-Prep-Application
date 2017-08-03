@@ -73,7 +73,7 @@
                 <div class="double-bounce1"></div>
                 <div class="double-bounce2"></div>
             </div>
-            <table *ngIf="!loading" class="table table-striped" [mfData]="attendanceStudents | userFilter : studentQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <table *ngIf="!loading" class="table table-striped" [mfData]="attendanceStudents | userFilter : studentQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
                 <thead>
                     <tr>
                         <th>
@@ -91,9 +91,17 @@
                 <tbody>
                     <tr *ngFor="let student of mf.data">
                         <td>{{student.firstName}} {{student.lastName}}</td>
-                        <td class="action">
-                            <button *ngIf="!student.absent" type="button" (click)="markAbsent(student)" class="btn btn-success">Present</button>
-                            <button *ngIf="student.absent" type="button" (click)="markAbsent(student)" class="btn btn-warning">Absent</button>
+                        <td class="actionAttendance">
+                            <p-radioButton class="attendanceRadioButtons" name="{{student.usedID}}" value="P" label="Present" [(ngModel)]="student.attendanceValue"></p-radioButton>
+                            <p-radioButton class="attendanceRadioButtons" name="{{student.usedID}}" value="A" label="Absent" [(ngModel)]="student.attendanceValue"></p-radioButton>
+                            <p-radioButton class="attendanceRadioButtons" name="{{student.usedID}}" value="MC" label="Made Contact" [(ngModel)]="student.attendanceValue"></p-radioButton>
+                            <!-- <button *ngIf="!student.absent" type="button" (click)="markAbsent(student)" class="btn btn-success">Present</button>
+                            <button *ngIf="student.absent" type="button" (click)="markAbsent(student)" class="btn btn-warning">Absent</button> -->
+                        </td>
+                        <td style="width: 10%;">
+                          <div *ngIf="student.attendanceValue === 'A'" style="color: red; display: inline-block"><strong>{{student.attendanceValue}}</strong></div>
+                          <div *ngIf="student.attendanceValue === 'P'" style="color: green; display: inline-block"><strong>{{student.attendanceValue}}</strong></div>
+                          <div *ngIf="student.attendanceValue === 'MC'" style="color: #FFA500; display: inline-block"><strong>{{student.attendanceValue}}</strong></div>
                         </td>
                     </tr>
                 </tbody>

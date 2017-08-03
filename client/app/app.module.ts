@@ -11,6 +11,7 @@ import { CalendarModule } from 'primeng/primeng';
 import { DropdownModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
 import { SplitButtonModule } from 'primeng/primeng';
+import { RadioButtonModule } from 'primeng/primeng';
 
 //Import components
 import { LoginComponent } from './components/login/login.component';
@@ -65,7 +66,8 @@ import { CourseService } from './services/course.service';
     CalendarModule,
     DropdownModule,
     CheckboxModule,
-    SplitButtonModule
+    SplitButtonModule,
+    RadioButtonModule
     ],
   declarations: [
     AppComponent,

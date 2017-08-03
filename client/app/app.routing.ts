@@ -126,7 +126,7 @@ const appRoutes: Routes = [
     {
         path: 'attendance-report',
         component: AttendanceReportComponent,
-        canActivate: [AuthGuard, StaffGuard]
+        canActivate: [AuthGuard, SharedGuard]
     }
 
 ];
