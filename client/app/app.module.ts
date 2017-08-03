@@ -12,6 +12,7 @@ import { DropdownModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
 import { SplitButtonModule } from 'primeng/primeng';
 import { RadioButtonModule } from 'primeng/primeng';
+import { ToggleButtonModule } from 'primeng/primeng';
 
 //Import components
 import { LoginComponent } from './components/login/login.component';
@@ -67,7 +68,8 @@ import { CourseService } from './services/course.service';
     DropdownModule,
     CheckboxModule,
     SplitButtonModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ToggleButtonModule
     ],
   declarations: [
     AppComponent,

@@ -17,8 +17,9 @@
             </div>
         </div>
     </div>
-    <div class="row" *ngIf="data">
-        <h1>Attendance Report</h1>
+    <div class="row" *ngIf="data && studentReport">
+        <h1>Attendance Report (Student)</h1>
+        <p-toggleButton onLabel="Course Report" offLabel="Student Report" [(ngModel)]="studentReport"></p-toggleButton>
         <hr>
 
         <div class="col-md-3">
@@ -46,7 +47,7 @@
                 <tr *ngFor="let student of mf.data">
                   <td>{{student.firstName + " " + student.lastName}}</td>
                   <td>
-                      <button class="btn btn-primary" (click)="viewReport(student, $event)">View Report</button>
+                      <button class="btn btn-primary" (click)="viewStudentReport(student, $event)">View Report</button>
                   </td>
                 </tr>
               </tbody>
@@ -88,6 +89,67 @@
             </div>
             <br />
           </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="data && !studentReport">
+        <h1>Attendance Report (Course)</h1>
+        <p-toggleButton styleClass="viewToggle" onLabel="Course Report" offLabel="Student Report" [(ngModel)]="studentReport"></p-toggleButton>
+        <hr>
+
+        <div class="col-md-3">
+          <div class="wrapper2">
+            <h2>Courses</h2>
+            <hr>
+            <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
+              <thead>
+                <tr>
+                  <!-- <th>
+                    <mfDefaultSorter by="studentNumber">Student Number</mfDefaultSorter>
+                  </th> -->
+                  <th>
+                    <mfDefaultSorter by="courseName">Name</mfDefaultSorter>
+                  </th>
+                  <th>Action</th>
+                </tr>
+                <tr>
+                  <th colspan="5">
+                    <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let course of mf.data">
+                  <td>{{course.courseName}}</td>
+                  <td>
+                      <button class="btn btn-primary" (click)="viewCourseReport(course, $event)">View Report</button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5">
+                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="push"></div>
+        </div>
+        <div class="footer">
+            <div>
+                <button (click)="goBack()" class="btn btn-default">Back</button>
+            </div>
+        </div>
+      </div>
+        <div *ngIf="!courseAttendanceView" class="col-md-9">
+          <h2>Overall Status</h2>
+          <hr>
+          <h3>Total student records: {{ data.length }}</h3>
+        </div>
+        <div *ngIf="courseAttendanceView" class="col-md-9">
+          <h2>{{ course.courseName }} Report</h2>
+          <div (click)="overallStatus($event)" class="statusButton" title="View overall status"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
+          <hr>
         </div>
     </div>
 </div>

@@ -27,6 +27,11 @@ export class AttendanceReportComponent implements OnInit {
   totalMadeContact: any;
   noAttendance: boolean = false;
 
+  studentReport: boolean = false;
+
+  courseAttendanceView: boolean = false;
+  course: any;
+
   constructor(private router: Router, private studentService: StudentService, private courseService: CourseService) {
 
   }
@@ -80,7 +85,7 @@ export class AttendanceReportComponent implements OnInit {
           .catch(error => console.log(error));
   }
 
-  viewReport(student: Student) {
+  viewStudentReport(student: Student) {
     this.records = [];
     this.studentAttendanceView = true;
     this.attendance = this.data.filter(x => x.studentID === student.studentID);
@@ -107,7 +112,13 @@ export class AttendanceReportComponent implements OnInit {
 
   }
 
+  viewCourseReport(course: Course) {
+    this.courseAttendanceView = true;
+    this.course = course;
+  }
+
   overallStatus() {
+    this.courseAttendanceView = false;
     this.studentAttendanceView = false;
     this.noAttendance = false;
   }
