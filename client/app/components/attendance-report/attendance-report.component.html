@@ -150,6 +150,22 @@
           <h2>{{ course.courseName }} Report</h2>
           <div (click)="overallStatus($event)" class="statusButton" title="View overall status"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
           <hr>
+          <table class="table table-striped">
+            <thead>
+                <th></th>
+                <th *ngFor="let day of days">{{ day.date }}</th>
+            </thead>
+            <tbody>
+                <tr></tr>
+                <tr *ngFor="let student of courseStudents">{{ student[0].student.firstName }} {{ student[0].student.lastName }}
+                  <td *ngFor="let item of student[0].attendanceInfo">
+                    {{ item.attendanceValue }}
+                  </td>
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+          </table>
         </div>
     </div>
 </div>

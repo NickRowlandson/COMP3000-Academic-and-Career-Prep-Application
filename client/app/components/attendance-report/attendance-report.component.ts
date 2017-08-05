@@ -29,8 +29,16 @@ export class AttendanceReportComponent implements OnInit {
 
   studentReport: boolean = false;
 
+  timetables: any [];
+
   courseAttendanceView: boolean = false;
   course: any;
+  courseData: any[];
+  courseStudents: any[];
+  courseTimetables: any[];
+  studentRecord: any[];
+
+  days = [{date: "Week 1"}, {date: "Week 2"}, {date: "Week 3"}, {date: "Week 4"}, {date: "Week 5"}];
 
   constructor(private router: Router, private studentService: StudentService, private courseService: CourseService) {
 
@@ -79,16 +87,30 @@ export class AttendanceReportComponent implements OnInit {
                       item.classEndTime = moment(item.classEndTime).format('hh:mm A');
                   });
                   this.courses = result;
+                  this.getTimetables();
               }
 
           })
           .catch(error => console.log(error));
   }
 
+  getTimetables() {
+    this.studentService
+        .getTimetables()
+        .then(result => {
+            if (result.status === "403") {
+                this.timetables = null;
+            } else {
+                this.timetables = result;
+            }
+        })
+        .catch(error => console.log(error));
+  }
+
   viewStudentReport(student: Student) {
     this.records = [];
     this.studentAttendanceView = true;
-    this.attendance = this.data.filter(x => x.studentID === student.studentID);
+    this.attendance = this.data.filter(x => x.userID === student.userID);
     this.student = this.students.filter(x => x.studentID === student.studentID);
     this.student = this.student[0];
     this.totalPresent = this.attendance.filter(x => x.attendanceValue === 'P').length;
@@ -113,8 +135,36 @@ export class AttendanceReportComponent implements OnInit {
   }
 
   viewCourseReport(course: Course) {
+    this.courseTimetables = [];
+    this.courseStudents = [];
     this.courseAttendanceView = true;
     this.course = course;
+    var studentInfo;
+
+      if (this.data.length === 0) {
+        this.noAttendance = true;
+      } else {
+        this.noAttendance = false;
+        this.courseTimetables = this.timetables.filter(x => x.courseID === course.courseID);
+        for (let item of this.courseTimetables) {
+          studentInfo = [{
+            student: this.students.filter(x => x.userID === item.userID)[0],
+            attendanceInfo: this.data.filter(x => x.userID === item.userID && x.courseID === course.courseID)
+          }];
+          this.courseStudents.push(studentInfo);
+        }
+        console.log(this.courseStudents);
+        //
+        // for (let item of this.data) {
+        //   this.courseData = this.data.filter(x => x.courseID === course.courseID);
+        // }
+        //
+        // for (let item of this.courseTimetables) {
+        //   this.courseStudents.push(this.students.filter(x => x.userID === item.userID));
+        // }
+        //
+        // console.log(this.courseStudents);
+      }
   }
 
   overallStatus() {

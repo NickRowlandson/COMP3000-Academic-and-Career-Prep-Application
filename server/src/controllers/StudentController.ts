@@ -265,7 +265,7 @@ class StudentController {
       console.log("Getting Timetables");
         try {
             new AuthController().authUser(req, res, {
-                requiredAuth: auth, done: function() {
+                requiredAuth: ["Instructor", "Admin", "Staff"], done: function() {
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)
@@ -434,15 +434,15 @@ for (let i=0;i<result.length;i++) {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Admin", "Staff", "Instructor"], done: function() {
                     var attendance = req.body;
-                    var query = "INSERT INTO Attendance (courseID, date, studentID, attendanceValue) VALUES ";
+                    var query = "INSERT INTO Attendance (courseID, date, userID, attendanceValue) VALUES ";
                     var count = 0;
                     if(attendance.students.length > 0) {
                       var date = attendance.date;
                       for (let student of attendance.students) {
                         if(count === 0) {
-                          query += "('" + attendance.courseID + "', '" + date + "', '" + student.studentID + "', '" + student.attendanceValue + "' )";
+                          query += "('" + attendance.courseID + "', '" + date + "', '" + student.userID + "', '" + student.attendanceValue + "' )";
                         } else {
-                          query += ", ('" + attendance.courseID + "', '" + date + "', '" + student.studentID + "', '" + student.attendanceValue + "' )";
+                          query += ", ('" + attendance.courseID + "', '" + date + "', '" + student.userID + "', '" + student.attendanceValue + "' )";
                         }
                         count ++;
                       }
