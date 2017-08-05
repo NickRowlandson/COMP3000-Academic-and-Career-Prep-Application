@@ -49,7 +49,7 @@
                         <th>
                             <mfDefaultSorter by="Campus">Campus</mfDefaultSorter>
                         </th>
-                        <th>
+                        <!-- <th>
                             <mfDefaultSorter by="courseStart">Course Start</mfDefaultSorter>
                         </th>
                         <th>
@@ -60,7 +60,7 @@
                         </th>
                         <th>
                             <mfDefaultSorter by="classStartTime">Class Start/End Time</mfDefaultSorter>
-                        </th>
+                        </th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -69,10 +69,10 @@
                         <td>{{ course.professorName?course.professorName:'none' }}</td>
                         <td>{{ course.classroom?course.classroom:'none' }}</td>
                         <td>{{ course.campusName?course.campusName:'none' }}</td>
-                        <td>{{ course.courseStart?course.courseStart:'none' }}</td>
+                        <!-- <td>{{ course.courseStart?course.courseStart:'none' }}</td>
                         <td>{{ course.courseEnd?course.courseEnd:'none' }}</td>
                         <td>{{ course.classDay?course.classDay:'none' }}</td>
-                        <td>{{ course.classStartTime }} - {{ course.classEndTime }}</td>
+                        <td>{{ course.classStartTime }} - {{ course.classEndTime }}</td> -->
                         <td class="actionColumn middle">
                             <div class="inline">
                                 <button class="btn btn-warning" (click)="gotoStudentEnrollment(course, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>

@@ -10,6 +10,7 @@ declare var moment;
     styleUrls: ['./app/components/course-edit/course-edit.component.css']
 })
 
+
 export class CourseEditComponent implements OnInit {
     @Input() course: Course;
     newCourse = false;
@@ -21,29 +22,15 @@ export class CourseEditComponent implements OnInit {
     header: any;
     options: any;
     selectedDays: string[] = [];
+    // popup 
 
-    datepickerOpts: any = {
-        startDate: moment(),
-        autoclose: true,
-        todayBtn: 'linked',
-        todayHighlight: true,
-        assumeNearbyYear: true,
-        format: 'YYYY-MM-DD'
-    };
+    display: boolean = false;
+    tempPop = {start:'', end:''};
     // drop down
     professors: SelectItem[] = [];
     campuses: SelectItem[] = [];
-    daysOfWeek: SelectItem[] = [{ label: 'Monday', value: 'Monday' },
-        { label: 'Tuesday', value: 'Tuesday' },
-        { label: 'Wednesday', value: 'Wednesday' },
-        { label: 'Thursday', value: 'Thursday' },
-        { label: 'Friday', value: 'Friday' }];
-
-
     constructor(private courseService: CourseService, private route: ActivatedRoute) {
-
     }
-
     ngOnInit() {
         this.subscribeCourse();
 
@@ -66,25 +53,6 @@ export class CourseEditComponent implements OnInit {
             });
         });
 
-        //
-        // this.route.params.forEach((params: Params) => {
-        //   let id = params['id'];
-        //   if (id === 'new') {
-        //     this.newCourse = true;
-        //     this.course = new Course();
-        //   } else {
-        //     this.newCourse = false;
-        //     this.courseService
-        //       .getCourse(id)
-        //       .then(result => {
-        //         // this.course = course[0];
-        //       console.log(result);
-        //         this.course= result;
-        //         // console.log(this.course)
-        //       });
-        //   }
-        // });
-
         this.header = {
             left: 'prev',
             center: 'title',
@@ -94,13 +62,68 @@ export class CourseEditComponent implements OnInit {
         this.options = {
             prev: 'circle-triangle-w',
             defaultView: "month",
-            //minTime: "06:00:00",
-            //maxTime: "22:00:00",
-            height: "auto"
+            height: "auto",
+            selectable: true
         };
+    } // end of init 
 
+    // check boxes onchange event 
+    cb_onchange(e, day) {
+        console.log(e);
+        if (e) {
+            // import days
+                // check if user declare time range
+                if (this.course.courseStart === undefined && this.course.courseEnd === undefined) {
+                alert('you must pick a date!');
+                this.unCheck(day); // unselect element 
+                }else {
+                this.generateDays(day, this.course.courseStart, this.course.courseEnd);
+                console.log(moment());
+                 this.events.push({ title: "1", "start":'2017-08-07', "day":"Mon" });
+                    console.log(this.events);
+                }
+        } else {
+            //delete all mon
+            alert('deleting');
+           this.events =  this.events.filter(result => result.day !== day);
+           console.log(this.events);
+        }
+    }
+ // this function will uncheck checkbox based on week day that given 
+  unCheck(day) {
+    this.selectedDays = this.selectedDays.filter(result => result !== day);
+ }
+ // this function will generate days that maches specification
+ generateDays(day, start_date, end_date) {
+  alert('generateing days');
+ }
+    handleEventClick(e) {
+        //    alert('Event: ' + calEvent.title);
+        // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+        // alert('View: ' + view.name);
 
+        // // change the border color just for fun
+        // $(this).css('border-color', 'red');
+        console.log(e);
+    }
 
+    handleDayClick(e) {
+        let date = e.date.format();
+        if (this.checkExist(date)) {
+            this.events.push({ title: "1", "start": date });
+        } else {
+            alert('event exist');
+        }
+
+    }
+    checkExist(date) {
+        let ndate = this.events.filter(result => result.start === date);
+        console.log(ndate.length);
+        if (ndate.length === 1) {
+            return false;
+        } else {
+            return true;
+        }
     }
     subscribeCourse() {
         this.sub = this.route.params.subscribe(params => {
@@ -112,10 +135,10 @@ export class CourseEditComponent implements OnInit {
                 this.newCourse = false;
                 this.courseService.getCourse(this.id).then((result) => {
                     result.forEach((item) => {
-                        item.courseStart = moment(item.courseStart).format('DD/MM/YYYY');
-                        item.courseEnd = moment(item.courseEnd).format('DD/MM/YYYY');
-                        item.classStartTime = moment(item.classStartTime).format('hh:mm A');
-                        item.classEndTime = moment(item.classEndTime).format('hh:mm A');
+                        // item.courseStart = moment(item.courseStart).format('YYYY-MM-DD');
+                        // item.courseEnd = moment(item.courseEnd).format('YYYY-MM-DD');
+                        // item.classStartTime = moment(item.classStartTime).format('hh:mm A');
+                        // item.classEndTime = moment(item.classEndTime).format('hh:mm A');
                     });
                     this.course = result[0];
                     console.log(this.course);
@@ -142,7 +165,9 @@ export class CourseEditComponent implements OnInit {
     }
 
 
+    gCalendar() {
 
+    }
 
 
 }
