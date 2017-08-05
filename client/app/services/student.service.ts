@@ -179,6 +179,19 @@ export class StudentService {
             .catch(err => this.handleError(err, "Get notes"));
     }
 
+    deleteNote(noteID) {
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        let url = `api/caseNotes/${noteID}`;
+
+        return this.http
+            .delete(url, options)
+            .toPromise()
+            .catch(err => this.handleError(err, "Delete notes"));
+    }
+
     insertAttendance(attendance) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });

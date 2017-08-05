@@ -25,9 +25,6 @@
         <thead>
           <tr>
             <th>
-              <mfDefaultSorter by="status">Status</mfDefaultSorter>
-            </th>
-            <th>
               <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
             </th>
             <th>
@@ -43,7 +40,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let student of mf.data">
-            <td><div> Status </div></td>
             <td>{{student.firstName + " " + student.lastName}}</td>
             <td>{{student.email}}</td>
             <td class="actionColumn middle"><a (click)="showCaseNotes(student)"><i class="fa fa-eye" aria-hidden="true"></i>View Notes</a></td>
@@ -61,8 +57,7 @@
     <div *ngIf="notesView" class="col-md-6">
       <h2>Case Notes for {{notesView.firstName + " " + notesView.lastName}}</h2>
       <hr>
-      <button class="addClient btn btn-primary" (click)="addCaseNotes()" title="Add new case note"><i class="fa fa-plus" aria-hidden="true"></i></button>
-      <div *ngIf="newNote">
+      <div>
         <label for="caseNote">New Case Note:</label>
         <textarea class="form-control" rows="2" name="caseNote" [(ngModel)]="note"></textarea>
         <button (click)="saveNote(notesView.studentID)" title="Save note"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>
@@ -70,7 +65,7 @@
       <hr>
       <div>
           <ul class="notesList">
-            <li *ngFor="let noteItem of notes"><b>{{noteItem.dateTime | date}}:</b> {{noteItem.caseNote}}</li>
+            <li *ngFor="let noteItem of notes"><b>{{noteItem.dateTime | date}}:</b> {{noteItem.caseNote}} <button class="deleteNote" (click)="deleteAlert(noteItem.caseNoteID)" title="Delete note"><i class="fa fa-trash-o"></i></button></li>
           </ul>
       </div>
     </div>
