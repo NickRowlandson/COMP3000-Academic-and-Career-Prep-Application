@@ -35,7 +35,6 @@ export class StaffEditComponent implements OnInit {
     }
 
     save() {
-      console.log(this.user);
       if (this.user.email
         && this.user.firstName
         && this.user.lastName
@@ -45,8 +44,24 @@ export class StaffEditComponent implements OnInit {
           this.staffService
               .save(this.user)
               .then(user => {
+                if (user.error === "username in use") {
+                  swal(
+                      'Username taken',
+                      'Please enter a differnet username.',
+                      'warning'
+                  );
+                } else if (user.error === "incorrect email format") {
+                  swal(
+                      'Incorrect email format',
+                      'Please enter a proper email.',
+                      'warning'
+                  );
+                }  else if (user.success === "success") {
+                  this.goBack();
+                } else {
                   this.user = user; // saved user, w/ id if new
                   this.goBack();
+                }
               })
               .catch(error => this.error = error); // TODO: Display error message
       } else {

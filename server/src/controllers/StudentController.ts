@@ -409,12 +409,40 @@ for (let i=0;i<result.length;i++) {
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)
-                                .query("SELECT *  FROM CaseNotes WHERE studentID = '" + _id + "'")
+                                .query("SELECT *  FROM CaseNotes WHERE studentID = '" + _id + "' ORDER BY dateTime DESC")
                                 .then(function(recordset) {
                                     res.send(recordset);
                                 }).catch(function(err) {
                                     res.send({ "error": "error" });
                                     console.log("Get case note by id " + err);
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
+    deleteNote(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: auth, done: function() {
+                    var _id: string = req.params._id;
+                    sql.connect(config)
+                        .then(function(connection) {
+                            new sql.Request(connection)
+                                .query("DELETE FROM caseNotes WHERE caseNoteID = '" + _id + "'")
+                                .then(function() {
+                                    res.send({ "success": "success" });
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" });
+                                    console.log("note removed " + err);
                                 });
                         }).catch(function(err) {
                             console.log(err);

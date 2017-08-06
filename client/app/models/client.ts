@@ -13,4 +13,6 @@ export class Client {
     suitability: boolean;
     consent: boolean;
     learningStyle: boolean;
+    error: string;
+    success: string;
 }

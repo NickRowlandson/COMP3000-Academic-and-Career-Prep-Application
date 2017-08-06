@@ -33,25 +33,54 @@ class StaffController {
                     var staff = req.body;
                     sql.connect(config)
                     .then(function(connection) {
-                        new sql.Request(connection)
-                            .query("INSERT INTO Users VALUES ('" + staff.username + "','" + staff.password + "','" + staff.authLevel + "')")
-                            .then(function() {
-                                new sql.Request(connection)
-                                    .query("SELECT userID FROM Users WHERE username = '" + staff.username + "' AND password = '" + staff.password + "'")
-                                    .then(function(id) {
-                                        new sql.Request(connection)
-                                            .query("INSERT INTO Staff VALUES ('" + id[0].userID + "','" + staff.firstName + "', '" + staff.lastName + "','" + staff.email + "')")
-                                            .then(function() {
-                                                res.send({ "success": "success" });
-                                            }).catch(function(err) {
-                                                res.send({ "error": "error" }); console.log("insert staff " + err);
-                                            });
-                                    }).catch(function(err) {
-                                        res.send({ "error": "error" }); console.log("get user " + err);
-                                    });
-                            }).catch(function(err) {
-                                res.send({ "error": "error" }); console.log("insert user " + err);
-                            });
+                      new sql.Request(connection)
+                          .query("SELECT * FROM Users")
+                          .then(function(users) {
+                            var validated = true;
+                            var error;
+                            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            var emailValidation = re.test(staff.email);
+                            for (let user of users) {
+                              if (user.username === staff.username) {
+                                validated = false;
+                                error = "username in use";
+                                res.send({"error": error});
+                              }
+                            }
+                            if (!emailValidation) {
+                              validated = false;
+                              error = "incorrect email format";
+                            }
+                            if (validated) {
+                              new sql.Request(connection)
+                                  .query("INSERT INTO Users VALUES ('" + staff.username + "','" + staff.password + "','" + staff.authLevel + "')")
+                                  .then(function() {
+                                      new sql.Request(connection)
+                                          .query("SELECT userID FROM Users WHERE username = '" + staff.username + "' AND password = '" + staff.password + "'")
+                                          .then(function(id) {
+                                              new sql.Request(connection)
+                                                  .query("INSERT INTO Staff VALUES ('" + id[0].userID + "','" + staff.firstName + "', '" + staff.lastName + "','" + staff.email + "')")
+                                                  .then(function() {
+                                                      res.send({ "success": "success" });
+                                                  }).catch(function(err) {
+                                                      res.send({ "error": "error" });
+                                                      console.log("insert staff " + err);
+                                                  });
+                                          }).catch(function(err) {
+                                              res.send({ "error": "error" });
+                                              console.log("get user " + err);
+                                          });
+                                  }).catch(function(err) {
+                                      res.send({ "error": "error" });
+                                      console.log("insert user " + err);
+                                  });
+                            } else {
+                              res.send({"error": error})
+                            }
+                          }).catch(function(err) {
+                              res.send({ "error": "error" });
+                              console.log("select all users " + err);
+                        });
                     }).catch(function(err) {
                         console.log(err);
                         res.send({ "error": "error in your request" });
@@ -79,7 +108,8 @@ class StaffController {
                             .then(function() {
                                 res.send({ "success": "success" });
                             }).catch(function(err) {
-                                res.send({ "error": "error" }); console.log("Update staff " + err);
+                                res.send({ "error": "error" });
+                                console.log("Update staff " + err);
                             });
                     }).catch(function(err) {
                         console.log(err);
@@ -110,10 +140,12 @@ class StaffController {
                                     .then(function() {
                                         res.send({ "success": "success" });
                                     }).catch(function(err) {
-                                        res.send({ "error": "error" }); console.log("Delete user with id " + _id + ". " + err);
+                                        res.send({ "error": "error" });
+                                        console.log("Delete user with id " + _id + ". " + err);
                                     });
                             }).catch(function(err) {
-                                res.send({ "error": "error" }); console.log("Delete staff with id " + _id + ". " + err);
+                                res.send({ "error": "error" });
+                                console.log("Delete staff with id " + _id + ". " + err);
                             });
                     }).catch(function(err) {
                         console.log(err);
@@ -140,7 +172,8 @@ class StaffController {
                             .then(function(recordset) {
                                 res.send(recordset);
                             }).catch(function(err) {
-                                res.send({ "error": "error" }); console.log("Select all staff " + err);
+                                res.send({ "error": "error" });
+                                console.log("Select all staff " + err);
                             });
                     }).catch(function(err) {
                         console.log(err);
@@ -168,7 +201,8 @@ class StaffController {
                             .then(function(recordset) {
                                 res.send(recordset[0]);
                             }).catch(function(err) {
-                                res.send({ "error": "error" }); console.log("NOPE " + err);
+                                res.send({ "error": "error" });
+                                console.log("NOPE " + err);
                             });
                     }).catch(function(err) {
                         console.log(err);

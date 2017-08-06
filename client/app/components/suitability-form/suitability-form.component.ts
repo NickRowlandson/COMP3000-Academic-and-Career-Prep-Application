@@ -221,27 +221,13 @@ export class SuitabilityFormComponent {
                 confirmButtonText: 'Yes, continue'
             }).then(isConfirm => {
               if (isConfirm) {
-                this.clientService
-                    .save(this.client, this.suitabilityForm)
-                    .then(client => {
-                      this.router.navigate(['/clients']);
-                    })
-                    .catch(error => {
-                      console.log("Error " + error );
-                    });
+                this.saveClient();
               }
             }).catch(error => {
               this.clicked('section2');
             });
           } else {
-            this.clientService
-                .save(this.client, this.suitabilityForm)
-                .then(client => {
-                  this.router.navigate(['/clients']);
-                })
-                .catch(error => {
-                  console.log("Error " + error );
-                });
+            this.saveClient();
           }
         } else {
           swal(
@@ -251,6 +237,38 @@ export class SuitabilityFormComponent {
           );
           this.clicked('section1');
         }
+    }
+
+    saveClient() {
+      this.clientService
+          .save(this.client, this.suitabilityForm)
+          .then(client => {
+            console.log(client);
+            if (client.error === "username in use") {
+              swal(
+                  'Username taken',
+                  'Please enter a differnet first and last name.',
+                  'warning'
+              );
+              this.clicked('section1');
+            } else if (client.error === "incorrect email format") {
+              swal(
+                  'Incorrect email format',
+                  'Please enter a proper email.',
+                  'warning'
+              );
+              this.clicked('section1');
+            }  else if (client.success === "success") {
+              console.log("success");
+              this.router.navigate(['/clients']);
+            } else {
+              console.log("????");
+              this.router.navigate(['/clients']);
+            }
+          })
+          .catch(error => {
+            console.log("Error " + error );
+          });
     }
 
     goBack() {
