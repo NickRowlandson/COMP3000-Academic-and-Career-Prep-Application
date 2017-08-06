@@ -10,7 +10,7 @@ import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DropdownModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
-import { SplitButtonModule } from 'primeng/primeng';
+import { InputSwitchModule } from 'primeng/primeng';
 import { RadioButtonModule } from 'primeng/primeng';
 import { ToggleButtonModule } from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
@@ -68,7 +68,7 @@ import { CourseService } from './services/course.service';
     CalendarModule,
     DropdownModule,
     CheckboxModule,
-    SplitButtonModule,
+    InputSwitchModule,
     RadioButtonModule,
     ToggleButtonModule,
     DialogModule

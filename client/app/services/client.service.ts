@@ -83,7 +83,22 @@ export class ClientService {
             .post(this.clientUrl, objects, options)
             .toPromise()
             .then(response => {
-              console.log(response.json());
+              return response.json();
+            })
+            .catch(this.handleError);
+    }
+
+    addSuitability(client, suitabilityForm: SuitabilityForm): Promise<Client> {
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        var url = this.clientUrl + "/" + client.userID;
+
+        return this.http
+            .post(url, suitabilityForm, options)
+            .toPromise()
+            .then(response => {
               return response.json();
             })
             .catch(this.handleError);

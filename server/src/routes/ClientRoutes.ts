@@ -13,6 +13,7 @@ class ClientRoutes {
 
         router.get("/clients", controller.retrieve);
         router.post("/clients", controller.create);
+        router.post("/clients/:_id", controller.addSuitability);
         router.put("/clients/:_id", controller.update);
         router.get("/clients/:_id", controller.findById);
         router.delete("/clients/:_id", controller.delete);

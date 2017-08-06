@@ -1,6 +1,6 @@
 export class SuitabilityForm {
   userID: any;
-  transcript: string;
+  transcript: boolean;
   courses: string;
   goal: string;
   transitionDate: string;
@@ -20,16 +20,16 @@ export class SuitabilityForm {
   ageRange: string;
   hoursPerWeek: string;
   workHistory: string;
-  factorHealth: string;
-  factorInstructions: string;
-  factorCommunication: string;
-  factorLanguage: string;
-  factorComputer: string;
-  factorHousing: string;
-  factorTransportation: string;
-  factorDaycare: string;
-  factorInternet: string;
-  factorPersonal: string;
+  factorHealth: boolean;
+  factorInstructions: boolean;
+  factorCommunication: boolean;
+  factorLanguage: boolean;
+  factorComputer: boolean;
+  factorHousing: boolean;
+  factorTransportation: boolean;
+  factorDaycare: boolean;
+  factorInternet: boolean;
+  factorPersonal: boolean;
   factorOther: string;
   summaryTransportation: string;
   summaryHousing: string;

@@ -247,7 +247,7 @@ export class SuitabilityFormComponent {
             if (client.error === "username in use") {
               swal(
                   'Username taken',
-                  'Please enter a differnet first and last name.',
+                  'Please enter a different first and last name.',
                   'warning'
               );
               this.clicked('section1');

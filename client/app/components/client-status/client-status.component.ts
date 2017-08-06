@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from "../../models/client";
 import { Student } from "../../models/student";
@@ -30,6 +30,17 @@ export class ClientStatusComponent implements OnInit {
     suitabilityView: SuitabilityForm;
     learningStyleView: LearningStyleForm;
 
+    addSuitability: boolean = false;
+    @Input() suitabilityForm: SuitabilityForm;
+    clientSuitability: Client[];
+    partAWarning = false;
+    partBWarning = false;
+    partAPoints = 0;
+    partBPoints = 0;
+    totalPoints = 0;
+    calculated: boolean = false;
+
+    statusReport: boolean = true;
     showGeneral: boolean = true;
     showSuitability: boolean;
     showConsent: boolean;
@@ -39,7 +50,7 @@ export class ClientStatusComponent implements OnInit {
     doughnutChartLabels: string[];
     doughnutChartData: number[];
     doughnutChartType: string;
-    doughnutChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#0066FF", "#2AD308"] }];
+    doughnutChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#309EFF", "#2AD308"] }];
     stage1: any;
     stage2: any;
     stage3: any;
@@ -97,6 +108,8 @@ export class ClientStatusComponent implements OnInit {
         this.doughnutChartLabels = ['Suitability', 'Consent/Learning Style', 'Banner/CAM', 'Transfer Ready'];
         this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length, this.stage4.length];
         this.doughnutChartType = 'doughnut';
+        this.addSuitability = false;
+        this.statusReport = true;
     }
 
     addClient() {
@@ -143,7 +156,8 @@ export class ClientStatusComponent implements OnInit {
 
     showClientView(client: Client) {
         this.clientView = client;
-
+        this.addSuitability = false;
+        this.statusReport = false;
         this.showGeneral = true;
         this.showSuitability = false;
         this.showConsent = false;
@@ -198,8 +212,10 @@ export class ClientStatusComponent implements OnInit {
         }
     }
 
-    statusReport(event) {
+    showStatusReport(event) {
+        this.statusReport = true;
         this.clientView = null;
+        this.addSuitability = false;
     }
 
     chartClicked(e: any): void {
@@ -268,6 +284,113 @@ export class ClientStatusComponent implements OnInit {
           })
           .catch(error => this.error = error);
     }
+
+    addSuitabilityInfo(client) {
+      this.clientView = null;
+      this.addSuitability = true;
+      this.statusReport = false;
+      this.suitabilityForm = new SuitabilityForm();
+      this.suitabilityForm.transcript = false;
+      this.suitabilityForm.appropriateGoal = false;
+      this.suitabilityForm.isValidAge = false;
+      this.suitabilityForm.governmentID = false;
+      this.suitabilityForm.schoolRegistration = false;
+      this.suitabilityForm.availableDuringClass = false;
+      this.suitabilityForm.factorHealth = false;
+      this.suitabilityForm.factorInstructions = false;
+      this.suitabilityForm.factorCommunication = false;
+      this.suitabilityForm.factorLanguage = false;
+      this.suitabilityForm.factorComputer = false;
+      this.suitabilityForm.factorHousing = false;
+      this.suitabilityForm.factorTransportation = false;
+      this.suitabilityForm.factorDaycare = false;
+      this.suitabilityForm.factorInternet = false;
+      this.suitabilityForm.factorPersonal = false;
+      this.clientSuitability = client;
+    }
+
+    saveSuitability() {
+      this.tallyPoints();
+      this.suitabilityForm.dbTotalPoints = this.totalPoints;
+      this.clientService
+        .addSuitability(this.clientSuitability, this.suitabilityForm)
+        .then( res => {
+          this.ngOnInit();
+        })
+        .catch();
+    }
+
+    calculate() {
+      this.tallyPoints();
+      this.calculated = true;
+    }
+
+    tallyPoints() {
+        var factorPoints = 0;
+        this.partAPoints = 0;
+        this.partBPoints = 0;
+        this.totalPoints = 0;
+        this.partAWarning = false;
+        this.partBWarning = false;
+        // PART A
+        if (this.suitabilityForm.offerStartDate === 'Less than one year') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.offerStartDate === 'In one year') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.offerStartDate === 'More than a Year') { this.partAPoints += 1; }
+
+        if (this.suitabilityForm.meetsGoal === 'No') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.meetsGoal === 'Yes but lacks skills/high enough marks') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.meetsGoal === 'Yes') { this.partAPoints += 1; }
+
+        if (this.suitabilityForm.timeOutOfSchool === '6 or more years') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.timeOutOfSchool === '1-6 years') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.timeOutOfSchool === 'Less than 1 year') { this.partAPoints += 1; }
+
+        if (this.suitabilityForm.inProgramBefore === 'No/Left with appropriate reasons') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.inProgramBefore === 'Yes - Appropriate progress') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.inProgramBefore === 'Yes – No progress') { this.partAPoints += 1; }
+
+        if (this.suitabilityForm.employment === 'Not working') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.employment === 'Working part time') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.employment === 'Working full time') { this.partAPoints += 1; }
+
+        if (this.suitabilityForm.incomeSource === 'OW  ODSP  EI  SC') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.incomeSource === 'No income') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.incomeSource === 'Employed') { this.partAPoints += 1; }
+
+        if (this.suitabilityForm.ageRange === '19-29 years old') { this.partAPoints += 1; } else if
+        (this.suitabilityForm.ageRange === '30-44 years old') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.ageRange === '45-65 years old') { this.partAPoints += 3; }
+
+        //PART B
+        if (this.suitabilityForm.hoursPerWeek === '1Less than 5') { this.partBPoints += 1; } else if
+        (this.suitabilityForm.hoursPerWeek === '5-10') { this.partBPoints += 2; } else if
+        (this.suitabilityForm.hoursPerWeek === '10-20') { this.partBPoints += 3; }
+
+        if (this.suitabilityForm.workHistory === 'Less than 1 year experience in the field') { this.partBPoints += 3; } else if
+        (this.suitabilityForm.workHistory === '1-4 years experience in the field') { this.partBPoints += 2; } else if
+        (this.suitabilityForm.workHistory === '4+ years experience in the field') { this.partBPoints += 1; }
+
+        if (this.suitabilityForm.factorHealth) { factorPoints++; }
+        if (this.suitabilityForm.factorInstructions) { factorPoints++; }
+        if (this.suitabilityForm.factorCommunication) { factorPoints++; }
+        if (this.suitabilityForm.factorLanguage) { factorPoints++; }
+        if (this.suitabilityForm.factorComputer) { factorPoints++; }
+        if (this.suitabilityForm.factorHousing) { factorPoints++; }
+        if (this.suitabilityForm.factorTransportation) { factorPoints++; }
+        if (this.suitabilityForm.factorDaycare) { factorPoints++; }
+        if (this.suitabilityForm.factorInternet) { factorPoints++; }
+        if (this.suitabilityForm.factorPersonal) { factorPoints++; }
+
+        if (factorPoints >= 0 && factorPoints <= 4) { this.partBPoints += 3; } else if
+        (factorPoints > 4 && factorPoints <= 8) { this.partBPoints += 2; } else if
+        (factorPoints > 8) { this.partBPoints += 1; }
+
+        this.totalPoints = this.partAPoints - this.partBPoints;
+
+        if (this.partAPoints < 14) { this.partAWarning = true; }
+        if (this.partBPoints < 4) { this.partBWarning = true; }
+    }
+
 
     checkboxChange(checkbox) {
       if (this.banner && this.cam) {

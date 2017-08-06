@@ -168,6 +168,76 @@ class ClientController {
         }
     }
 
+    addSuitability(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: auth, done: function() {
+                    var _id: string = req.params._id;
+                    var suitabilityForm = req.body;
+
+                    sql.connect(config)
+                        .then(function(connection) {
+
+                    var suitabilityFormQuery = "'" + _id
+                        + "', '" + suitabilityForm.transcript
+                        + "', '" + suitabilityForm.courses
+                        + "', '" + suitabilityForm.goal
+                        + "', '" + suitabilityForm.transitionDate
+                        + "', '" + suitabilityForm.governmentID
+                        + "', '" + suitabilityForm.appropriateGoal
+                        + "', '" + suitabilityForm.isValidAge
+                        + "', '" + suitabilityForm.schoolRegistration
+                        + "', '" + suitabilityForm.availableDuringClass
+                        + "', '" + suitabilityForm.lastGrade
+                        + "', '" + suitabilityForm.level
+                        + "', '" + suitabilityForm.offerStartDate
+                        + "', '" + suitabilityForm.meetsGoal
+                        + "', '" + suitabilityForm.timeOutOfSchool
+                        + "', '" + suitabilityForm.inProgramBefore
+                        + "', '" + suitabilityForm.employment
+                        + "', '" + suitabilityForm.incomeSource
+                        + "', '" + suitabilityForm.ageRange
+                        + "', '" + suitabilityForm.hoursPerWeek
+                        + "', '" + suitabilityForm.workHistory
+                        + "', '" + suitabilityForm.factorHealth
+                        + "', '" + suitabilityForm.factorInstructions
+                        + "', '" + suitabilityForm.factorCommunication
+                        + "', '" + suitabilityForm.factorLanguage
+                        + "', '" + suitabilityForm.factorComputer
+                        + "', '" + suitabilityForm.factorHousing
+                        + "', '" + suitabilityForm.factorTransportation
+                        + "', '" + suitabilityForm.factorDaycare
+                        + "', '" + suitabilityForm.factorInternet
+                        + "', '" + suitabilityForm.factorPersonal
+                        + "', '" + suitabilityForm.factorOther
+                        + "', '" + suitabilityForm.summaryTransportation
+                        + "', '" + suitabilityForm.summaryHousing
+                        + "', '" + suitabilityForm.summaryChildcare
+                        + "', '" + suitabilityForm.summaryHealth
+                        + "', '" + suitabilityForm.summaryOther
+                        + "', '" + suitabilityForm.dbTotalPoints + "'";
+                    new sql.Request(connection)
+                        .query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")")
+                        .then(function() {
+                          new sql.Request(connection)
+                              .query("UPDATE Clients SET suitability = 'false' WHERE userID = " + _id + "")
+                              .then(function() {
+                                res.send({"success": "success"});
+                              }).catch();
+                        }).catch();
+                      }).catch(function(err) {
+                          console.log(err);
+                          res.send({ "error": "error" });
+                      });
+                    }
+                });
+              }
+              catch (e) {
+                  console.log(e);
+                  res.send({ "error": "error in your request" });
+              }
+          }
+
     update(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {
