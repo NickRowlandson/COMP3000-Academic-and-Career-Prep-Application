@@ -23,14 +23,36 @@
         </div>
         <div class="col-md-7">
           <div class="wrapper2">
-            <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
+            <p-dataTable [value]="students | userFilter : filterQuery" [responsive]="true">
+                <p-column field="studentNumber" header="Student Number" [sortable]="true" [style]="{'width': '160px'}"></p-column>
+                <p-column field="fullName" header="Name" [sortable]="true"></p-column>
+                <p-column field="email" header="Email" [sortable]="true"></p-column>
+                <p-column header="Action" [style]="{'width': '60px', 'overflow': 'visible'}">
+                  <template let-data="rowData" pTemplate="body">
+                    <div class="btn-group">
+                      <button type="button" class="dropToggle btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                    <ul class="dropdown-menu" role="menu" style="position:absolute;">
+                        <li><a (click)="viewInfo(data)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
+                        <li><a (click)="gotoEdit(data, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a></li>
+                        <li><a (click)="populatePRF(data)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</a></li>
+                        <li><a (click)="archiveAlert(data, $event)"><i class="fa fa-archive" aria-hidden="true"></i> Archive</a></li>
+                    </ul>
+                  </div>
+                  </template>
+                </p-column>
+            </p-dataTable>
+            <!-- <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
+                      <th>
+                          <mfDefaultSorter by="studentNumber">Student Number</mfDefaultSorter>
+                      </th>
                         <th>
                             <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
-                        </th>
-                        <th>
-                            <mfDefaultSorter by="email">Email</mfDefaultSorter>
                         </th>
                     </tr>
                     <tr>
@@ -41,8 +63,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let student of mf.data" [class.active]="student === selectedStudent">
+                        <td>{{student.studentNumber}}</td>
                         <td>{{student.firstName + " " + student.lastName}}</td>
-                        <td>{{student.email}}</td>
                         <td class="actionColumn middle">
                             <div class="inline">
                                 <button class="btn btn-primary" (click)="gotoEdit(student, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
@@ -66,7 +88,7 @@
                         </td>
                     </tr>
                 </tfoot>
-            </table>
+            </table> -->
             <div class="push"></div>
           </div>
           <div class="footer">

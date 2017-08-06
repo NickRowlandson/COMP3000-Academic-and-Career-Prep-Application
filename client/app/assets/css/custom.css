@@ -3,6 +3,9 @@ html, body {
   margin: 0;
 }
 
+.dropToggle {
+  width: 44px;
+}
 /* CSS Loading Animation */
 .cs-loader {
     position: absolute;

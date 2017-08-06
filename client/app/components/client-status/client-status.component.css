@@ -61,8 +61,15 @@ h2 {
     display: inline;
 }
 
-button {
-    min-width: 80px;
+.btn-group {
+    white-space: nowrap;
+}
+.btn-group .btn {
+    float: none;
+    display: inline-block;
+}
+ .btn + .dropdown-toggle {
+    margin-left: -4px;
 }
 
 .actionColumn {

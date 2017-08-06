@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-import { DataTableModule } from 'angular2-datatable';
+import { DataTableModule } from 'primeng/primeng';
 import { ScheduleModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { DropdownModule } from 'primeng/primeng';
@@ -13,7 +13,8 @@ import { CheckboxModule } from 'primeng/primeng';
 import { InputSwitchModule } from 'primeng/primeng';
 import { RadioButtonModule } from 'primeng/primeng';
 import { ToggleButtonModule } from 'primeng/primeng';
-import {DialogModule} from 'primeng/primeng';
+import { DialogModule } from 'primeng/primeng';
+import { SplitButtonModule } from 'primeng/primeng';
 
 //Import components
 import { LoginComponent } from './components/login/login.component';
@@ -71,7 +72,8 @@ import { CourseService } from './services/course.service';
     InputSwitchModule,
     RadioButtonModule,
     ToggleButtonModule,
-    DialogModule
+    DialogModule,
+    SplitButtonModule
     ],
   declarations: [
     AppComponent,

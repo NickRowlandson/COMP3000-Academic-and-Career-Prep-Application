@@ -23,7 +23,7 @@
             <h2>My Courses</h2>
             <hr>
             <div class="error" *ngIf="error">{{error}}</div>
-            <table class="table table-striped" [mfData]="data | courseFilter : courseQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <!-- <table class="table table-striped" [mfData]="data | courseFilter : courseQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
                         <th>
@@ -52,7 +52,7 @@
                         </td>
                     </tr>
                 </tfoot>
-            </table>
+            </table> -->
             <div class="push"></div>
         </div>
         <div class="footer">
@@ -73,7 +73,7 @@
                 <div class="double-bounce1"></div>
                 <div class="double-bounce2"></div>
             </div>
-            <table *ngIf="!loading" class="table table-striped" [mfData]="attendanceStudents | userFilter : studentQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
+            <!-- <table *ngIf="!loading" class="table table-striped" [mfData]="attendanceStudents | userFilter : studentQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
                 <thead>
                     <tr>
                         <th>
@@ -94,10 +94,10 @@
                         <td class="actionAttendance">
                             <p-radioButton class="attendanceRadioButtons" name="{{student.usedID}}" value="P" label="Present" [(ngModel)]="student.attendanceValue"></p-radioButton>
                             <p-radioButton class="attendanceRadioButtons" name="{{student.usedID}}" value="A" label="Absent" [(ngModel)]="student.attendanceValue"></p-radioButton>
-                            <p-radioButton class="attendanceRadioButtons" name="{{student.usedID}}" value="MC" label="Made Contact" [(ngModel)]="student.attendanceValue"></p-radioButton>
+                            <p-radioButton class="attendanceRadioButtons" name="{{student.usedID}}" value="MC" label="Made Contact" [(ngModel)]="student.attendanceValue"></p-radioButton> -->
                             <!-- <button *ngIf="!student.absent" type="button" (click)="markAbsent(student)" class="btn btn-success">Present</button>
                             <button *ngIf="student.absent" type="button" (click)="markAbsent(student)" class="btn btn-warning">Absent</button> -->
-                        </td>
+                        <!-- </td>
                         <td style="width: 10%;">
                           <div *ngIf="student.attendanceValue === 'A'" style="color: red; display: inline-block"><strong>{{student.attendanceValue}}</strong></div>
                           <div *ngIf="student.attendanceValue === 'P'" style="color: green; display: inline-block"><strong>{{student.attendanceValue}}</strong></div>
@@ -112,7 +112,7 @@
                         </td>
                     </tr>
                 </tfoot>
-            </table>
+            </table> -->
             <div *ngIf="!loading">
                 <button type="button" (click)="submitAttendance()" style="float:right;" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Submit</button>
             </div>

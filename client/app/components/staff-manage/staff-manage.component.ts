@@ -37,7 +37,10 @@ export class StaffManageComponent implements OnInit {
               this.users = null;
             } else {
               this.users = users;
-              this.usersBackup = users;
+              for (let user of this.users) {
+                user.fullName = user.firstName + " " + user.lastName;
+              }
+              this.usersBackup = this.users;
               this.usersLength = users.length;
               this.updateStats();
             }

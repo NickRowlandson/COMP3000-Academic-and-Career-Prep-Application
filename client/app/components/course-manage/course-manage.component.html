@@ -34,7 +34,26 @@
             </div>
         </div>
         <div class="col-md-12">
-            <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery | campusFilter : selectedCampusId" #mf="mfDataTable" [mfRowsOnPage]="10">
+          <p-dataTable [value]="courses | courseFilter : filterQuery | campusFilter : selectedCampusId" [responsive]="true">
+              <p-column field="courseName" header="Course Name" [sortable]="true"></p-column>
+              <p-column field="professorName" header="Instructor" [sortable]="true"></p-column>
+              <p-column field="classroom" header="Classroom" [sortable]="true"></p-column>
+              <p-column field="campusName" header="Campus" [sortable]="true"></p-column>
+              <p-column header="Action">
+                <template let-data="rowData" pTemplate="body">
+                  <div class="inline">
+                      <button class="btn btn-warning" (click)="gotoStudentEnrollment(data, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>
+                  </div>
+                  <div class="inline">
+                      <button class="btn btn-primary" (click)="gotoEdit(data, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                  </div>
+                  <div class="inline">
+                      <button class="btn btn-danger" (click)="deleteAlert(data, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                  </div>
+                </template>
+              </p-column>
+          </p-dataTable>
+            <!-- <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery | campusFilter : selectedCampusId" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
                         <th>
@@ -48,7 +67,7 @@
                         </th>
                         <th>
                             <mfDefaultSorter by="Campus">Campus</mfDefaultSorter>
-                        </th>
+                        </th> -->
                         <!-- <th>
                             <mfDefaultSorter by="courseStart">Course Start</mfDefaultSorter>
                         </th>
@@ -61,19 +80,19 @@
                         <th>
                             <mfDefaultSorter by="classStartTime">Class Start/End Time</mfDefaultSorter>
                         </th> -->
-                    </tr>
+                    <!-- </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let course of mf.data">
                         <td>{{ course.courseName?course.courseName:'none'}}</td>
                         <td>{{ course.professorName?course.professorName:'none' }}</td>
                         <td>{{ course.classroom?course.classroom:'none' }}</td>
-                        <td>{{ course.campusName?course.campusName:'none' }}</td>
+                        <td>{{ course.campusName?course.campusName:'none' }}</td> -->
                         <!-- <td>{{ course.courseStart?course.courseStart:'none' }}</td>
                         <td>{{ course.courseEnd?course.courseEnd:'none' }}</td>
                         <td>{{ course.classDay?course.classDay:'none' }}</td>
                         <td>{{ course.classStartTime }} - {{ course.classEndTime }}</td> -->
-                        <td class="actionColumn middle">
+                        <!-- <td class="actionColumn middle">
                             <div class="inline">
                                 <button class="btn btn-warning" (click)="gotoStudentEnrollment(course, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>
                             </div>
@@ -93,7 +112,7 @@
                         </td>
                     </tr>
                 </tfoot>
-            </table>
+            </table> -->
         </div>
     </div>
     <div class="push"></div>

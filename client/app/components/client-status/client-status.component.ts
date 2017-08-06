@@ -23,6 +23,7 @@ export class ClientStatusComponent implements OnInit {
     consentForms: ConsentForm[];
     learningStyleForms: LearningStyleForm[];
     clientTotal: any;
+    actionItems: any[];
     error: any;
 
     clientView: Client;
@@ -96,6 +97,10 @@ export class ClientStatusComponent implements OnInit {
 
     setData(objects) {
         this.data = objects.clients;
+        for (let client of this.data) {
+          client.fullName = client.firstName + " " + client.lastName;
+        }
+        console.log(this.data);
         this.allClients = objects.clients;
         this.clientTotal = objects.clients.length;
         this.suitabilityForms = objects.suitabilityForms;
@@ -110,6 +115,13 @@ export class ClientStatusComponent implements OnInit {
         this.doughnutChartType = 'doughnut';
         this.addSuitability = false;
         this.statusReport = true;
+        // this.actionItems = [
+        //   {label: 'Create as Student', icon: 'fa-refresh', command: (data) =>  this.createAsStudent(data)},
+        //   {label: 'Add Suitability Info', icon: 'fa-check', command: (data) => this.addSuitabilityInfo(data)},
+        //   {label: 'View Info', icon: 'fa-eye', command: (data) => this.showClientView(data)},
+        //   {label: 'Delete', icon: 'fa-trash-o', command: (data) => this.deleteAlert(data)}
+        // ];
+
     }
 
     addClient() {
@@ -120,7 +132,7 @@ export class ClientStatusComponent implements OnInit {
     //     this.router.navigate(['/clientEdit', client.clientID]);
     // }
 
-    deleteAlert(client, event) {
+    deleteAlert(client: Client) {
         swal({
             title: 'Delete client (' + client.firstName + ' ' + client.lastName + ')?',
             text: "You won't be able to revert this!",
@@ -131,14 +143,14 @@ export class ClientStatusComponent implements OnInit {
             confirmButtonText: 'Yes, delete it!'
         }).then(isConfirm => {
           if (isConfirm) {
-            this.deleteClient(client, event);
+            this.deleteClient(client);
           }
         }).catch(error => {
           //console.log("Canceled");
         });
     }
 
-    deleteClient(client: Client, event: any) {
+    deleteClient(client: Client) {
         event.stopPropagation();
         this.clientService
             .delete(client)
@@ -258,7 +270,6 @@ export class ClientStatusComponent implements OnInit {
       }).then(inputValue => {
         if (inputValue) {
           client.studentNumber = inputValue;
-          console.log(client);
           this.removeAlert(client);
         }
       }).catch(error => {

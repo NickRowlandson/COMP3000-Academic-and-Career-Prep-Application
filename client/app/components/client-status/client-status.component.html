@@ -27,7 +27,43 @@
                 <hr>
                 <div class="error" *ngIf="error">{{error}}</div>
                 <input placeholder="Filter by client name" class="form-control" [(ngModel)]="filterQuery" />
-                <table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+                <div style="overflow:visible; position:relative;">
+                <p-dataTable [value]="data | userFilter : filterQuery" [responsive]="true">
+                    <p-column field="status" header="Status" [style]="{'width': '60px'}">
+                      <template let-data="rowData" pTemplate="body">
+                          <div [class.statusStage1]="data.suitability" [class.statusStage2]="!data.suitability" [class.statusStage3]="!data.suitability && !data.consent && !data.learningStyle" [class.statusStage4]="!data.suitability && !data.consent && !data.learningStyle && banner && cam"></div>
+                      </template>
+                    </p-column>
+                    <p-column field="fullName" header="Name" [sortable]="true"></p-column>
+                    <p-column field="email" header="Email" [sortable]="true"></p-column>
+                    <p-column header="Banner/CAM" [style]="{'width': '110px'}">
+                      <template let-data="rowData" pTemplate="body">
+                        <div *ngIf="!data.suitability && !data.consent && !data.learningStyle">
+                            <p-checkbox [(ngModel)]="banner" label="B" binary="true" (onChange)="checkboxChange('banner')"></p-checkbox>
+                            <p-checkbox [(ngModel)]="cam" label="C" binary="true" (onChange)="checkboxChange('cam')"></p-checkbox>
+                        </div>
+                      </template>
+                    </p-column>
+                    <p-column header="Action" [style]="{'width': '60px','overflow': 'visible'}">
+                      <template let-data="rowData" pTemplate="body">
+                        <!-- <p-splitButton label="" [model]="actionItems" styleClass="ui-button-warning"></p-splitButton> -->
+                        <div class="btn-group">
+                          <button type="button" class="dropToggle btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                          </button>
+                        <ul class="dropdown-menu" role="menu" style="position:absolute;">
+                            <li *ngIf="!data.suitability && !data.consent && !data.learningStyle && banner && cam"><a (click)="createAsStudent(data)"><i class="fa fa-check" aria-hidden="true"></i> Create as Student</a></li>
+                            <li *ngIf="data.suitability"><a (click)="addSuitabilityInfo(data)"><i class="fa fa-check" aria-hidden="true"></i> Add Suitability Info</a></li>
+                            <li><a (click)="showClientView(data)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</a></li>
+                            <li class="deleteClient"><a (click)="deleteAlert(data, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
+                        </ul>
+                      </div>
+                      </template>
+                    </p-column>
+                </p-dataTable>
+              </div>
+                <!--<table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
                     <thead>
                         <tr>
                             <th>
@@ -51,10 +87,10 @@
                             <td>{{client.firstName + " " + client.lastName}}</td>
                             <td>{{client.email}}</td>
                             <td>
-                                <div *ngIf="!client.suitability && !client.consent && !client.learningStyle">
-                                    <p-checkbox [(ngModel)]="banner" label="Banner" binary="true" (onChange)="checkboxChange('banner')"></p-checkbox>
-                                    <p-checkbox [(ngModel)]="cam" label="CAM" binary="true" (onChange)="checkboxChange('cam')"></p-checkbox>
-                                </div>
+                            <div *ngIf="!client.suitability && !client.consent && !client.learningStyle">
+                                <p-checkbox [(ngModel)]="banner" label="Banner" binary="true" (onChange)="checkboxChange('banner')"></p-checkbox>
+                                <p-checkbox [(ngModel)]="cam" label="CAM" binary="true" (onChange)="checkboxChange('cam')"></p-checkbox>
+                            </div>
                             </td>
                             <td class="actionColumn middle">
                                 <div class="dropdown-toggle" id="actionMenu" title="Click to view options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -76,7 +112,7 @@
                             </td>
                         </tr>
                     </tfoot>
-                </table>
+                </table> -->
                 <div class="push"></div>
             </div>
             <div class="footer">

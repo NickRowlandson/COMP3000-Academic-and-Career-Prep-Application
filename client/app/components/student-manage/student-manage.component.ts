@@ -55,6 +55,9 @@ export class StudentManageComponent implements OnInit {
             this.students = null;
           } else {
             this.students = students;
+            for (let student of this.students) {
+              student.fullName = student.firstName + " " + student.lastName;
+            }
           }
         })
         .catch(error => this.error = error);

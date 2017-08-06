@@ -6,6 +6,7 @@ export class Client {
     inquiryDate: string;
     username: string;
     password: string;
+    fullName: string;
     firstName: string;
     lastName: string;
     birthday: string;

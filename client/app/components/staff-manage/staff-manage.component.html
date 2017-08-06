@@ -19,7 +19,23 @@
     </div>
     <div class="row" *ngIf="users">
         <div class="col-md-8">
-            <table class="table table-striped" [mfData]="users | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
+          <input placeholder="Filter by staff name" class="form-control" [(ngModel)]="filterQuery" />
+          <p-dataTable [value]="users | userFilter : filterQuery" [responsive]="true">
+              <p-column field="userType" header="Role" [sortable]="true" [style]="{'width': '100px'}"></p-column>
+              <p-column field="fullName" header="Name" [sortable]="true"></p-column>
+              <p-column field="email" header="Email" [sortable]="true"></p-column>
+              <p-column header="Action" [style]="{'width': '190px'}">
+                <template let-data="rowData" pTemplate="body">
+                  <div class="inline">
+                      <button class="btn btn-primary" (click)="gotoEdit(data, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                  </div>
+                  <div class="inline">
+                      <button class="btn btn-danger" (click)="deleteAlert(data, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                  </div>
+                </template>
+              </p-column>
+          </p-dataTable>
+            <!-- <table class="table table-striped" [mfData]="users | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
                 <thead>
                     <tr>
                         <th>
@@ -61,7 +77,7 @@
                         </td>
                     </tr>
                 </tfoot>
-            </table>
+            </table> -->
 
         </div>
         <div class="col-md-4">

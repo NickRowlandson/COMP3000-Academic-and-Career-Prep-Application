@@ -5,6 +5,7 @@ export class Student {
     inquiryDate: string;
     username: string;
     password: string;
+    fullName: string;
     firstName: string;
     lastName: string;
     birthdate: string;
