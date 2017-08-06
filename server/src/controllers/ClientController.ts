@@ -33,102 +33,127 @@ class ClientController {
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)
-                                .query("INSERT INTO Users VALUES ('" + client.username + "','" + client.password + "','Client')")
-                                .then(function() {
-                                    new sql.Request(connection)
-                                        .query("SELECT userID FROM Users WHERE username = '" + client.username + "' AND password = '" + client.password + "'")
-                                        .then(function(id) {
-                                            var clientQuery = "'" + id[0].userID + "', '" +
-                                                client.firstName + "', '" +
-                                                client.lastName + "', '" +
-                                                client.email + "', '" +
-                                                client.inquiryDate + "', '" +
-                                                client.birthday + "', '" +
-                                                client.phone + "', '" +
-                                                true + "', '" +
-                                                true + "', '" +
-                                                true + "'";
-                                            try {
-                                              new MailService().welcomeMessage(client);
-                                            } catch (e) {
-                                              console.log("Invalid email...");
-                                            }
-                                            console.log("User created");
-                                            new sql.Request().query("INSERT INTO Clients VALUES (" + clientQuery + ")").then(function() {
-                                                if (Object.keys(suitabilityForm).length != 0) {
-                                                    var suitabilityFormQuery = "'" + id[0].userID
-                                                        + "', '" + suitabilityForm.transcript
-                                                        + "', '" + suitabilityForm.courses
-                                                        + "', '" + suitabilityForm.goal
-                                                        + "', '" + suitabilityForm.transitionDate
-                                                        + "', '" + suitabilityForm.governmentID
-                                                        + "', '" + suitabilityForm.appropriateGoal
-                                                        + "', '" + suitabilityForm.isValidAge
-                                                        + "', '" + suitabilityForm.schoolRegistration
-                                                        + "', '" + suitabilityForm.availableDuringClass
-                                                        + "', '" + suitabilityForm.lastGrade
-                                                        + "', '" + suitabilityForm.level
-                                                        + "', '" + suitabilityForm.offerStartDate
-                                                        + "', '" + suitabilityForm.meetsGoal
-                                                        + "', '" + suitabilityForm.timeOutOfSchool
-                                                        + "', '" + suitabilityForm.inProgramBefore
-                                                        + "', '" + suitabilityForm.employment
-                                                        + "', '" + suitabilityForm.incomeSource
-                                                        + "', '" + suitabilityForm.ageRange
-                                                        + "', '" + suitabilityForm.hoursPerWeek
-                                                        + "', '" + suitabilityForm.workHistory
-                                                        + "', '" + suitabilityForm.factorHealth
-                                                        + "', '" + suitabilityForm.factorInstructions
-                                                        + "', '" + suitabilityForm.factorCommunication
-                                                        + "', '" + suitabilityForm.factorLanguage
-                                                        + "', '" + suitabilityForm.factorComputer
-                                                        + "', '" + suitabilityForm.factorHousing
-                                                        + "', '" + suitabilityForm.factorTransportation
-                                                        + "', '" + suitabilityForm.factorDaycare
-                                                        + "', '" + suitabilityForm.factorInternet
-                                                        + "', '" + suitabilityForm.factorPersonal
-                                                        + "', '" + suitabilityForm.factorOther
-                                                        + "', '" + suitabilityForm.summaryTransportation
-                                                        + "', '" + suitabilityForm.summaryHousing
-                                                        + "', '" + suitabilityForm.summaryChildcare
-                                                        + "', '" + suitabilityForm.summaryHealth
-                                                        + "', '" + suitabilityForm.summaryOther
-                                                        + "', '" + suitabilityForm.dbTotalPoints + "'";
-                                                    new sql.Request(connection)
-                                                        .query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")")
-                                                        .then(function() {
-                                                            console.log("Suitability inserted");
+                                .query("SELECT * FROM Users")
+                                .then(function(users) {
+                                    var validated = true;
+                                    var error;
+                                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                                    var emailValidation = re.test(client.email);
+                                    for (let user of users) {
+                                        if (user.username === client.username) {
+                                            validated = false;
+                                            error = "username in use";
+                                            break;
+                                        }
+                                    }
+                                    if (!emailValidation && validated) {
+                                        validated = false;
+                                        error = "incorrect email format";
+                                    }
+                                    if (validated) {
+                                        new sql.Request(connection)
+                                            .query("INSERT INTO Users VALUES ('" + client.username + "','" + client.password + "','Client')")
+                                            .then(function() {
+                                                new sql.Request(connection)
+                                                    .query("SELECT userID FROM Users WHERE username = '" + client.username + "' AND password = '" + client.password + "'")
+                                                    .then(function(id) {
+                                                        var clientQuery = "'" + id[0].userID + "', '" +
+                                                            client.firstName + "', '" +
+                                                            client.lastName + "', '" +
+                                                            client.email + "', '" +
+                                                            client.inquiryDate + "', '" +
+                                                            client.birthday + "', '" +
+                                                            client.phone + "', '" +
+                                                            true + "', '" +
+                                                            true + "', '" +
+                                                            true + "'";
+                                                        try {
+                                                            new MailService().welcomeMessage(client);
+                                                        } catch (e) {
+                                                            console.log("Invalid email address provided...");
+                                                        }
+                                                        new sql.Request().query("INSERT INTO Clients VALUES (" + clientQuery + ")").then(function() {
+                                                            if (Object.keys(suitabilityForm).length != 0) {
+                                                                var suitabilityFormQuery = "'" + id[0].userID
+                                                                    + "', '" + suitabilityForm.transcript
+                                                                    + "', '" + suitabilityForm.courses
+                                                                    + "', '" + suitabilityForm.goal
+                                                                    + "', '" + suitabilityForm.transitionDate
+                                                                    + "', '" + suitabilityForm.governmentID
+                                                                    + "', '" + suitabilityForm.appropriateGoal
+                                                                    + "', '" + suitabilityForm.isValidAge
+                                                                    + "', '" + suitabilityForm.schoolRegistration
+                                                                    + "', '" + suitabilityForm.availableDuringClass
+                                                                    + "', '" + suitabilityForm.lastGrade
+                                                                    + "', '" + suitabilityForm.level
+                                                                    + "', '" + suitabilityForm.offerStartDate
+                                                                    + "', '" + suitabilityForm.meetsGoal
+                                                                    + "', '" + suitabilityForm.timeOutOfSchool
+                                                                    + "', '" + suitabilityForm.inProgramBefore
+                                                                    + "', '" + suitabilityForm.employment
+                                                                    + "', '" + suitabilityForm.incomeSource
+                                                                    + "', '" + suitabilityForm.ageRange
+                                                                    + "', '" + suitabilityForm.hoursPerWeek
+                                                                    + "', '" + suitabilityForm.workHistory
+                                                                    + "', '" + suitabilityForm.factorHealth
+                                                                    + "', '" + suitabilityForm.factorInstructions
+                                                                    + "', '" + suitabilityForm.factorCommunication
+                                                                    + "', '" + suitabilityForm.factorLanguage
+                                                                    + "', '" + suitabilityForm.factorComputer
+                                                                    + "', '" + suitabilityForm.factorHousing
+                                                                    + "', '" + suitabilityForm.factorTransportation
+                                                                    + "', '" + suitabilityForm.factorDaycare
+                                                                    + "', '" + suitabilityForm.factorInternet
+                                                                    + "', '" + suitabilityForm.factorPersonal
+                                                                    + "', '" + suitabilityForm.factorOther
+                                                                    + "', '" + suitabilityForm.summaryTransportation
+                                                                    + "', '" + suitabilityForm.summaryHousing
+                                                                    + "', '" + suitabilityForm.summaryChildcare
+                                                                    + "', '" + suitabilityForm.summaryHealth
+                                                                    + "', '" + suitabilityForm.summaryOther
+                                                                    + "', '" + suitabilityForm.dbTotalPoints + "'";
+                                                                new sql.Request(connection)
+                                                                    .query("INSERT INTO SuitabilityForm VALUES (" + suitabilityFormQuery + ")")
+                                                                    .then(function() {
+                                                                        console.log("Suitability inserted");
+                                                                        new sql.Request(connection)
+                                                                            .query("UPDATE Clients SET suitability= 'false' WHERE userID = '" + id[0].userID + "'")
+                                                                            .then(function() {
+                                                                                res.send({ "success": "success" });
+                                                                            }).catch(function(err) {
+                                                                                res.send({ "error": "error" });
+                                                                                console.log("Update client " + err);
+                                                                            });
+                                                                    }).catch(function(err) {
+                                                                        res.send({ "error": "error" });
+                                                                        console.log("insert suitabilityForm " + err);
+                                                                    });
+                                                            } else {
+                                                                res.send({ "success": "success" });
+                                                                console.log("Suitability not provided.");
+                                                            }
+                                                        }).catch(function(err) {
+                                                            res.send({ "error": "error" }); console.log("insert client " + err);
                                                             new sql.Request(connection)
-                                                                .query("UPDATE Clients SET suitability= 'false' WHERE userID = '" + id[0].userID + "'")
+                                                                .query("DELETE FROM Users WHERE userID = '" + id[0] + "'")
                                                                 .then(function() {
                                                                     res.send({ "success": "success" });
                                                                 }).catch(function(err) {
-                                                                    res.send({ "error": "error" });
-                                                                    console.log("Update client " + err);
+                                                                    res.send({ "error": "error" }); console.log("Delete user with id " + id[0] + ". " + err);
                                                                 });
-                                                        }).catch(function(err) {
-                                                            res.send({ "error": "error" });
-                                                            console.log("insert suitabilityForm " + err);
                                                         });
-                                                } else {
-                                                    res.send({ "success": "success" });
-                                                    console.log("Suitability not provided.");
-                                                }
-                                            }).catch(function(err) {
-                                                res.send({ "error": "error" }); console.log("insert client " + err);
-                                                new sql.Request(connection)
-                                                    .query("DELETE FROM Users WHERE userID = '" + id[0] + "'")
-                                                    .then(function() {
-                                                        res.send({ "success": "success" });
                                                     }).catch(function(err) {
-                                                        res.send({ "error": "error" }); console.log("Delete user with id " + id[0] + ". " + err);
+                                                        res.send({ "error": "error" }); console.log("get user " + err);
                                                     });
+                                            }).catch(function(err) {
+                                                res.send({ "error": "error" }); console.log("insert user " + err);
                                             });
-                                        }).catch(function(err) {
-                                            res.send({ "error": "error" }); console.log("get user " + err);
-                                        });
+                                    } else {
+                                        res.send({ "error": error })
+                                    }
                                 }).catch(function(err) {
-                                    res.send({ "error": "error" }); console.log("insert user " + err);
+                                    console.log(err);
+                                    res.send({ "error": "error" });
                                 });
                         }).catch(function(err) {
                             console.log(err);

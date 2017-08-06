@@ -37,11 +37,19 @@ class StaffController {
                           .query("SELECT * FROM Users")
                           .then(function(users) {
                             var validated = true;
+                            var error;
+                            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            var emailValidation = re.test(staff.email);
                             for (let user of users) {
                               if (user.username === staff.username) {
                                 validated = false;
-                                break;
+                                error = "username in use";
+                                res.send({"error": error});
                               }
+                            }
+                            if (!emailValidation) {
+                              validated = false;
+                              error = "incorrect email format";
                             }
                             if (validated) {
                               new sql.Request(connection)
@@ -67,7 +75,7 @@ class StaffController {
                                       console.log("insert user " + err);
                                   });
                             } else {
-                              res.send({"error": "username in use"})
+                              res.send({"error": error})
                             }
                           }).catch(function(err) {
                               res.send({ "error": "error" });

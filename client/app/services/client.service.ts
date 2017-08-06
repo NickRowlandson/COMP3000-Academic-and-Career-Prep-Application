@@ -82,7 +82,10 @@ export class ClientService {
         return this.http
             .post(this.clientUrl, objects, options)
             .toPromise()
-            .then(response => response.json().data)
+            .then(response => {
+              console.log(response.json());
+              return response.json();
+            })
             .catch(this.handleError);
     }
 

@@ -46,14 +46,19 @@ export class StaffEditComponent implements OnInit {
               .then(user => {
                 if (user.error === "username in use") {
                   swal(
-                      'Username Taken',
+                      'Username taken',
                       'Please enter a differnet username.',
                       'warning'
                   );
-                } else if (user.success === "success") {
+                } else if (user.error === "incorrect email format") {
+                  swal(
+                      'Incorrect email format',
+                      'Please enter a proper email.',
+                      'warning'
+                  );
+                }  else if (user.success === "success") {
                   this.goBack();
                 } else {
-                  console.log("SAVING USER");
                   this.user = user; // saved user, w/ id if new
                   this.goBack();
                 }
