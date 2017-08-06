@@ -1,4 +1,5 @@
 export class Client {
+    studentNumber: number;
     clientID: string;
     userID: string;
     authLevel: string;

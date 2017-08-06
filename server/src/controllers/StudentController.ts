@@ -25,7 +25,7 @@ class StudentController {
                     sql.connect(config)
                         .then(function(connection) {
                             new sql.Request(connection)
-                                .query("INSERT INTO Students VALUES ('" + student.userID + "','" + student.firstName + "', '" + student.lastName + "','" + student.email + "','" + student.inquiryDate + "','" + student.birthdate + "','" + student.phone + "')")
+                                .query("INSERT INTO Students VALUES ('" + student.userID + "','" + student.studentNumber + "','" + student.firstName + "', '" + student.lastName + "','" + student.email + "','" + student.inquiryDate + "','" + student.birthdate + "','" + student.phone + "')")
                                 .then(function() {
                                     res.send({ "success": "success" });
                                 }).catch(function(err) {

@@ -240,18 +240,41 @@ export class ClientStatusComponent implements OnInit {
     }
 
     createAsStudent(client: Student) {
-      this.removeAlert(client);
+      this.studentNumber(client);
+    }
+
+    studentNumber(client) {
+      swal({
+          title: 'Student Number',
+          type: 'info',
+          text: 'Please enter student number for ' + client.firstName + ' ' + client.lastName + '',
+          input: "text",
+          inputPlaceholder: "Enter Student Number",
+          showCancelButton: true,
+          animation: "slide-from-top",
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Save'
+      }).then(inputValue => {
+        if (inputValue) {
+          client.studentNumber = inputValue;
+          console.log(client);
+          this.removeAlert(client);
+        }
+      }).catch(error => {
+        console.log("Canceled " + error); // TODO: Display error message
+      });
     }
 
     removeAlert(client) {
       swal({
           title: 'Transfer client (' + client.firstName + ' ' + client.lastName + ')?',
-          text: "You won't be able to revert this!",
-          type: 'warning',
+          text: 'Are you sure you want to create as student with #' + client.studentNumber + '?',
+          type: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, transfer it!'
+          confirmButtonText: 'Yes, transfer!'
       }).then(isConfirm => {
         if (isConfirm) {
           this.studentService
