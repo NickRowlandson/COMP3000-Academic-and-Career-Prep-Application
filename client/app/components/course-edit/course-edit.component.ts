@@ -12,20 +12,22 @@ declare var moment;
 
 
 export class CourseEditComponent implements OnInit {
+    //global variables
     @Input() course: Course;
+    weekDays: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
     newCourse = false;
     error: any;
     navigated = false; // true if navigated here
     private sub: any;
     id: any;
+
+
+    // calendar
     events: any[] = [];
     header: any;
     options: any;
     selectedDays: string[] = [];
-    // popup 
 
-    display: boolean = false;
-    tempPop = {start:'', end:''};
     // drop down
     professors: SelectItem[] = [];
     campuses: SelectItem[] = [];
@@ -69,11 +71,10 @@ export class CourseEditComponent implements OnInit {
 
     // check boxes onchange event 
     cb_onchange(e, weekday) {
-        console.log(e);
         if (e) {
             // import days
                 // check if user declare time range
-                if (this.course.courseStart === undefined && this.course.courseEnd === undefined) {
+                if (this.course.courseStart === undefined || this.course.courseEnd === undefined || this.course.courseStart === null || this.course.courseEnd == null) {
                 alert('you must pick a date!');
                 this.unCheck(weekday); // unselect element 
                 }else {
@@ -81,7 +82,6 @@ export class CourseEditComponent implements OnInit {
                 }
         } else {
            this.events =  this.events.filter(result => result.weekday !== weekday);
-           console.log(this.events);
         }
     }
  // this function will uncheck checkbox based on week day that given 
@@ -91,9 +91,9 @@ export class CourseEditComponent implements OnInit {
  // this function will generate days that maches specification
  generateDays(weekday, start_date, end_date) {
 // figure out what's next week day
-let weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'], momentIndex , nextDay;
-for (let i = 0; i < weekdays.length; i++) {
-    if (weekdays[i]  === weekday) {
+let  momentIndex , nextDay;
+for (let i = 0; i < this.weekDays.length; i++) {
+    if (this.weekDays[i]  === weekday) {
         momentIndex = i + 1;
     }
 }
@@ -104,7 +104,7 @@ nextDay = moment(start_date).isoWeekday(momentIndex);
 }
 let root = 0, tempDate;
  while ( !(moment(nextDay).add(7 * root, 'day')).isAfter(moment(end_date))) {
-     this.events.push({ title: "1", "start": moment(nextDay).add(7 * root, 'day'), weekday, "Weekday":weekday });
+this.events.push({ title: moment(nextDay).add(7 * root, 'day').format('YYYY-MM-DD'), "start": moment(nextDay).add(7 * root, 'day').format('YYYY-MM-DD'), "weekday":weekday });
      root++;
  }
 }
@@ -116,9 +116,15 @@ let root = 0, tempDate;
     }
  // event handler for day click 
     handleDayClick(e) {
+        let momentIndex = -1;
         let date = e.date.format();
+        for (let i = 0; i < this.weekDays.length; i++) {
+    if (i  === moment(date).isoWeekday() ) {
+        momentIndex = i - 1;
+    }
+}
         if (this.checkExist(date)) {
-            this.events.push({ title: "1", "start": date });
+            this.events.push({ title:date , "start": date, "weekday": this.weekDays[momentIndex] });
         } else {
             alert('event exist');
         }
@@ -126,13 +132,18 @@ let root = 0, tempDate;
 
     checkExist(date) {
         let ndate = this.events.filter(result => result.start === date);
-        console.log(ndate.length);
-        if (ndate.length === 1) {
+        if (ndate.length === 1) { // if found event exist then return false to prevent new arry.push
             return false;
         } else {
             return true;
         }
     }
+
+
+
+
+
+
     subscribeCourse() {
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
