@@ -12,20 +12,22 @@ declare var moment;
 
 
 export class CourseEditComponent implements OnInit {
+    //global variables
     @Input() course: Course;
+    weekDays: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
     newCourse = false;
     error: any;
     navigated = false; // true if navigated here
     private sub: any;
     id: any;
+
+
+    // calendar
     events: any[] = [];
     header: any;
     options: any;
     selectedDays: string[] = [];
-    // popup 
 
-    display: boolean = false;
-    tempPop = {start:'', end:''};
     // drop down
     professors: SelectItem[] = [];
     campuses: SelectItem[] = [];
@@ -68,63 +70,80 @@ export class CourseEditComponent implements OnInit {
     } // end of init 
 
     // check boxes onchange event 
-    cb_onchange(e, day) {
-        console.log(e);
+    cb_onchange(e, weekday) {
         if (e) {
             // import days
                 // check if user declare time range
-                if (this.course.courseStart === undefined && this.course.courseEnd === undefined) {
+                if (this.course.courseStart === undefined || this.course.courseEnd === undefined || this.course.courseStart === null || this.course.courseEnd == null) {
                 alert('you must pick a date!');
-                this.unCheck(day); // unselect element 
+                this.unCheck(weekday); // unselect element 
                 }else {
-                this.generateDays(day, this.course.courseStart, this.course.courseEnd);
-                console.log(moment());
-                 this.events.push({ title: "1", "start":'2017-08-07', "day":"Mon" });
-                    console.log(this.events);
+                this.generateDays(weekday, this.course.courseStart, this.course.courseEnd);
                 }
         } else {
-            //delete all mon
-            alert('deleting');
-           this.events =  this.events.filter(result => result.day !== day);
-           console.log(this.events);
+           this.events =  this.events.filter(result => result.weekday !== weekday);
         }
     }
  // this function will uncheck checkbox based on week day that given 
-  unCheck(day) {
-    this.selectedDays = this.selectedDays.filter(result => result !== day);
+  unCheck(weekday) {
+    this.selectedDays = this.selectedDays.filter(result => result !== weekday);
  }
  // this function will generate days that maches specification
- generateDays(day, start_date, end_date) {
-  alert('generateing days');
- }
-    handleEventClick(e) {
-        //    alert('Event: ' + calEvent.title);
-        // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-        // alert('View: ' + view.name);
-
-        // // change the border color just for fun
-        // $(this).css('border-color', 'red');
-        console.log(e);
+ generateDays(weekday, start_date, end_date) {
+// figure out what's next week day
+let  momentIndex , nextDay;
+for (let i = 0; i < this.weekDays.length; i++) {
+    if (this.weekDays[i]  === weekday) {
+        momentIndex = i + 1;
     }
-
+}
+if (moment(start_date).isoWeekday() > momentIndex ) {
+ nextDay = moment(start_date).isoWeekday(momentIndex + 7);
+}else {
+nextDay = moment(start_date).isoWeekday(momentIndex);
+}
+let root = 0, tempDate;
+ while ( !(moment(nextDay).add(7 * root, 'day')).isAfter(moment(end_date))) {
+this.events.push({ title: moment(nextDay).add(7 * root, 'day').format('YYYY-MM-DD'), "start": moment(nextDay).add(7 * root, 'day').format('YYYY-MM-DD'), "weekday":weekday });
+     root++;
+ }
+}
+ // event handler for event click 
+    handleEventClick(e) {
+        let event =  e.calEvent;
+        console.log(event);
+        this.events = this.events.filter(result => result !== event );
+    }
+ // event handler for day click 
     handleDayClick(e) {
+        let momentIndex = -1;
         let date = e.date.format();
+        for (let i = 0; i < this.weekDays.length; i++) {
+    if (i  === moment(date).isoWeekday() ) {
+        momentIndex = i - 1;
+    }
+}
         if (this.checkExist(date)) {
-            this.events.push({ title: "1", "start": date });
+            this.events.push({ title:date , "start": date, "weekday": this.weekDays[momentIndex] });
         } else {
             alert('event exist');
         }
-
     }
+
     checkExist(date) {
         let ndate = this.events.filter(result => result.start === date);
-        console.log(ndate.length);
-        if (ndate.length === 1) {
+        if (ndate.length === 1) { // if found event exist then return false to prevent new arry.push
             return false;
         } else {
             return true;
         }
     }
+
+
+
+
+
+
     subscribeCourse() {
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];

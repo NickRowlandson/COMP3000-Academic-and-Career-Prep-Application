@@ -42,21 +42,18 @@
         <p-checkbox name="group1" value="Fri" label="Friday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Fri')"></p-checkbox>
       </div>
     </div>
-
-       <p-dialog header="Edit time" [(visible)]="display"[responsive]="true"  [contentStyle]="{'overflow':'visible'}" >
+<!-- pop up dialog -->
+       <!-- <p-dialog header="Edit time" [(visible)]="display"[responsive]="true" [height]="300"  [contentStyle]="{'overflow':'visible'}" >
  
         <label class="control-label">Class Start/End Time:</label>
-        <p-calendar [(ngModel)]="tempPop.start" [timeOnly]="true" showTime="showTime" hourFormat="12" dateFormat="hh:mm"></p-calendar> -
-        <p-calendar [(ngModel)]="tempPop.end" [timeOnly]="true" showTime="showTime" hourFormat="12" dateFormat="hh:mm"></p-calendar>
+        <p-calendar [(ngModel)]="tempPop.start" [timeOnly]="true" showTime="showTime" hourFormat="24" dateFormat="hh:mm"></p-calendar> -
+        <p-calendar [(ngModel)]="tempPop.end" [timeOnly]="true" showTime="showTime" hourFormat="24" dateFormat="hh:mm"></p-calendar>
 
     <p-footer>
-            <button type="button" pButton icon="fa-check" (click)="dialogYes()" label="Yes"></button>
-            <button type="button" pButton icon="fa-close" (click)="dialogNo()" label="No"></button>
+            <button type="button" pButton icon="fa-check" (click)="dialogOkClick()" label="Yes"></button>
+            <button type="button" pButton icon="fa-close" (click)="dialogCancelClick()" label="No"></button>
         </p-footer>
-</p-dialog> 
- 
-   
-        FOr Debug{{selectedDays}},{{course.courseStart}}{{course.courseEnd}}
+</p-dialog>  -->
 
 
     <p-schedule *ngIf="events" [events]="events" [header]="header" [editable]="true" [weekends]="false" [options]="options" [eventLimit]="1"
