@@ -13,3 +13,7 @@
 .deleteNote{
   float: right;
 }
+
+.actionColumn {
+  cursor: pointer;
+}

@@ -42,7 +42,7 @@
           <tr *ngFor="let student of mf.data">
             <td>{{student.firstName + " " + student.lastName}}</td>
             <td>{{student.email}}</td>
-            <td class="actionColumn middle"><a (click)="showCaseNotes(student)"><i class="fa fa-eye" aria-hidden="true"></i>View Notes</a></td>
+            <td class="actionColumn middle"><a (click)="showCaseNotes(student)"><i class="fa fa-eye" aria-hidden="true"></i> View Notes</a></td>
           </tr>
         </tbody>
         <tfoot>
@@ -59,13 +59,13 @@
       <hr>
       <div>
         <label for="caseNote">New Case Note:</label>
-        <textarea class="form-control" rows="2" name="caseNote" [(ngModel)]="note"></textarea>
-        <button (click)="saveNote(notesView.studentID)" title="Save note"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i></button>
+        <textarea class="form-control" rows="3" name="caseNote" [(ngModel)]="note"></textarea>
+        <button class="btn btn-success" style="float: right; margin: 5px" (click)="saveNote(notesView.studentID)" title="Save note"><i class="fa fa-floppy-o " aria-hidden="true"></i> Save Note</button>
       </div>
-      <hr>
+      <hr style="clear:both">
       <div>
           <ul class="notesList">
-            <li *ngFor="let noteItem of notes"><b>{{noteItem.dateTime | date}}:</b> {{noteItem.caseNote}} <button class="deleteNote" (click)="deleteAlert(noteItem.caseNoteID)" title="Delete note"><i class="fa fa-trash-o"></i></button></li>
+            <li *ngFor="let noteItem of notes"><b>{{noteItem.dateTime | date}}:</b> {{noteItem.caseNote}} <button class="btn-danger deleteNote" (click)="deleteAlert(noteItem.caseNoteID)" title="Delete note"><i class="fa fa-trash-o"></i></button></li>
           </ul>
       </div>
     </div>
