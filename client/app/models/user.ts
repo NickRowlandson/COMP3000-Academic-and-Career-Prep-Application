@@ -8,4 +8,6 @@ export class User {
     email: string;
     userType: string;
     authLevel: string;
+    error: string;
+    success: string;
 }

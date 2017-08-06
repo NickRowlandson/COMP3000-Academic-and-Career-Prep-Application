@@ -50,7 +50,9 @@ export class StaffService {
       return this.http
           .post(this.usersUrl, user, options)
           .toPromise()
-          .then(response => response.json().data)
+          .then(response => {
+              return response.json();
+          })
           .catch(this.handleError);
     }
 
