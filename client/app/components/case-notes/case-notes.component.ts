@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentService } from "../../services/student.service";
 import { Student } from "../../models/student";
+declare var swal: any;
 
 @Component({
   selector: 'caseNotes',
@@ -39,10 +40,6 @@ export class CaseNotesComponent implements OnInit {
       .catch(error => this.error = error);
   }
 
-  addCaseNotes() {
-    this.newNote = true;
-  }
-
   saveNote(studentID) {
     console.log(this.note);
     this.studentService
@@ -68,6 +65,39 @@ export class CaseNotesComponent implements OnInit {
           this.notes = notes;
         })
         .catch(error => console.log(error));
+  }
+
+  deleteNote(noteID) {
+      event.stopPropagation();
+      this.studentService
+          .deleteNote(noteID)
+          .then(res => {
+              this.notes = this.notes.filter(h => h.caseNoteID !== noteID);
+              swal(
+                  'Deleted!',
+                  'Case note has been successfully removed.',
+                  'success'
+              );
+          })
+          .catch(error => this.error = error);
+  }
+
+  deleteAlert(noteID) {
+      swal({
+          title: 'Delete note?',
+          text: "You won't be able to revert this!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+      }).then(isConfirm => {
+        if (isConfirm) {
+          this.deleteNote(noteID);
+        }
+      }).catch(error => {
+        //console.log("Canceled");
+      });
   }
 
   goBack() {
