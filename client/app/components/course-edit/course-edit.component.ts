@@ -68,45 +68,53 @@ export class CourseEditComponent implements OnInit {
     } // end of init 
 
     // check boxes onchange event 
-    cb_onchange(e, day) {
+    cb_onchange(e, weekday) {
         console.log(e);
         if (e) {
             // import days
                 // check if user declare time range
                 if (this.course.courseStart === undefined && this.course.courseEnd === undefined) {
                 alert('you must pick a date!');
-                this.unCheck(day); // unselect element 
+                this.unCheck(weekday); // unselect element 
                 }else {
-                this.generateDays(day, this.course.courseStart, this.course.courseEnd);
-                console.log(moment());
-                 this.events.push({ title: "1", "start":'2017-08-07', "day":"Mon" });
-                    console.log(this.events);
+                this.generateDays(weekday, this.course.courseStart, this.course.courseEnd);
                 }
         } else {
-            //delete all mon
-            alert('deleting');
-           this.events =  this.events.filter(result => result.day !== day);
+           this.events =  this.events.filter(result => result.weekday !== weekday);
            console.log(this.events);
         }
     }
  // this function will uncheck checkbox based on week day that given 
-  unCheck(day) {
-    this.selectedDays = this.selectedDays.filter(result => result !== day);
+  unCheck(weekday) {
+    this.selectedDays = this.selectedDays.filter(result => result !== weekday);
  }
  // this function will generate days that maches specification
- generateDays(day, start_date, end_date) {
-  alert('generateing days');
- }
-    handleEventClick(e) {
-        //    alert('Event: ' + calEvent.title);
-        // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-        // alert('View: ' + view.name);
-
-        // // change the border color just for fun
-        // $(this).css('border-color', 'red');
-        console.log(e);
+ generateDays(weekday, start_date, end_date) {
+// figure out what's next week day
+let weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'], momentIndex , nextDay;
+for (let i = 0; i < weekdays.length; i++) {
+    if (weekdays[i]  === weekday) {
+        momentIndex = i + 1;
     }
-
+}
+if (moment(start_date).isoWeekday() > momentIndex ) {
+ nextDay = moment(start_date).isoWeekday(momentIndex + 7);
+}else {
+nextDay = moment(start_date).isoWeekday(momentIndex);
+}
+let root = 0, tempDate;
+ while ( !(moment(nextDay).add(7 * root, 'day')).isAfter(moment(end_date))) {
+     this.events.push({ title: "1", "start": moment(nextDay).add(7 * root, 'day'), weekday, "Weekday":weekday });
+     root++;
+ }
+}
+ // event handler for event click 
+    handleEventClick(e) {
+        let event =  e.calEvent;
+        console.log(event);
+        this.events = this.events.filter(result => result !== event );
+    }
+ // event handler for day click 
     handleDayClick(e) {
         let date = e.date.format();
         if (this.checkExist(date)) {
@@ -114,8 +122,8 @@ export class CourseEditComponent implements OnInit {
         } else {
             alert('event exist');
         }
-
     }
+
     checkExist(date) {
         let ndate = this.events.filter(result => result.start === date);
         console.log(ndate.length);
