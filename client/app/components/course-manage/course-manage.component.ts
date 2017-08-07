@@ -63,8 +63,6 @@ export class CourseManageComponent implements OnInit {
                     result.forEach((item) => {
                         item.courseStart = moment(item.courseStart).format('YYYY-MM-DD');
                         item.courseEnd = moment(item.courseEnd).format('YYYY-MM-DD');
-                        item.classStartTime = moment(item.classStartTime).format('hh:mm A');
-                        item.classEndTime = moment(item.classEndTime).format('hh:mm A');
                     });
                     this.courses = result;
 

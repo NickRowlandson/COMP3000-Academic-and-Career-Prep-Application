@@ -115,7 +115,9 @@ left join staff on staff.userID = course.professorId`)
                     var course = req.body;
                     var _id: string = req.params._id;
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-                        new sql.Request().query(`UPDATE Course SET courseName='${course.courseName}', classroom='${course.classroom}',campusId='${course.campusId}',professorId='${course.professorId}'
+                        new sql.Request().query(`UPDATE Course SET courseName='${course.courseName}', classroom='${course.classroom}',
+                        campusId='${course.campusId}',professorId='${course.professorId}',classTimeStr = '${course.classTimeStr}'
+                        ,courseStart ='${course.courseStart}',courseEnd ='${course.courseEnd}'
                           WHERE courseID =${_id};`).then(function() {
                                 res.send({ "success": "success" });
                             }).catch(function(err) {
@@ -175,8 +177,9 @@ left join campus on campus.campusId = course.campusId
                     var course = req.body;
 
                     sql.connect(config).then(() => {
-                        return sql.query`INSERT INTO Course (courseName, professorId, campusId, classroom, courseStart, courseEnd, classDay, classStartTime, classEndTime)
-                          VALUES(${course.courseName}, ${course.professorId}, ${course.campusId}, ${course.classroom}, ${course.courseStart}, ${course.courseEnd}, ${course.classDay}, ${course.classStartTime}, ${course.classEndTime})`
+                        return sql.query`INSERT INTO Course (courseName, professorId, campusId, classroom, classTimeStr,courseStart,courseEnd)
+                          VALUES(${course.courseName}, ${course.professorId}, ${course.campusId}, ${course.classroom}, ${course.classTimeStr},
+                          ${course.courseStart},${course.courseEnd})`;
                     }).then(result => {
                         console.dir(`insert ${course.courseName} complete`);
                         res.send({ "success": "success" });

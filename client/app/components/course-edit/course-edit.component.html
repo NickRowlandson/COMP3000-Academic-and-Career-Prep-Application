@@ -15,14 +15,14 @@
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">Course Start Date: </label>
-      <p-calendar [(ngModel)]="course.courseStart" dateFormat="yy-mm-dd"></p-calendar>
+      <p-calendar [(ngModel)]="course.courseStart" dateFormat="yy-mm-dd" readonlyInput="readonlyInput">></p-calendar>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Course End Date: </label>
-      <p-calendar [(ngModel)]="course.courseEnd" dateFormat="yy-mm-dd"></p-calendar>
+      <p-calendar [(ngModel)]="course.courseEnd" dateFormat="yy-mm-dd" readonlyInput="readonlyInput"> ></p-calendar>
     </div>
-
+{{course.courseStart}}
         
     <h3 class="first">Week Days</h3>
     <div class="ui-g" style="margin-bottom:10px">
@@ -42,18 +42,6 @@
         <p-checkbox name="group1" value="Fri" label="Friday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Fri')"></p-checkbox>
       </div>
     </div>
-<!-- pop up dialog -->
-       <!-- <p-dialog header="Edit time" [(visible)]="display"[responsive]="true" [height]="300"  [contentStyle]="{'overflow':'visible'}" >
- 
-        <label class="control-label">Class Start/End Time:</label>
-        <p-calendar [(ngModel)]="tempPop.start" [timeOnly]="true" showTime="showTime" hourFormat="24" dateFormat="hh:mm"></p-calendar> -
-        <p-calendar [(ngModel)]="tempPop.end" [timeOnly]="true" showTime="showTime" hourFormat="24" dateFormat="hh:mm"></p-calendar>
-
-    <p-footer>
-            <button type="button" pButton icon="fa-check" (click)="dialogOkClick()" label="Yes"></button>
-            <button type="button" pButton icon="fa-close" (click)="dialogCancelClick()" label="No"></button>
-        </p-footer>
-</p-dialog>  -->
 
 
 
@@ -80,21 +68,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <p-schedule *ngIf="events" [events]="events" [header]="header" [editable]="true" [weekends]="false" [options]="options" [eventLimit]="1"
+    <p-schedule *ngIf="events" [events]="events" [header]="header" [editable]="true" [weekends]="false" [options]="options" 
       (onEventClick)="handleEventClick($event)" (onDayClick)="handleDayClick($event)"></p-schedule>
-
 
 
     <!-- Class start and end time selection -->

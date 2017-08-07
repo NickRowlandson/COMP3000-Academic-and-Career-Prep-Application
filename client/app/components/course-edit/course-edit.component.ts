@@ -17,7 +17,6 @@ export class CourseEditComponent implements OnInit {
     weekDays: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
     newCourse = false;
     error: any;
-    navigated = false; // true if navigated here
     private sub: any;
     id: any;
     weekDay: string;
@@ -93,6 +92,7 @@ export class CourseEditComponent implements OnInit {
     }
     // this function will generate days that maches specification 
     private generateDays(weekday, start_date, end_date) {
+
         // figure out what's next week day
         let momentIndex, nextDay;
         for (let i = 0; i < this.weekDays.length; i++) {
@@ -111,10 +111,14 @@ export class CourseEditComponent implements OnInit {
         while (!(moment(nextDay).add(7 * root, 'day')).isAfter(moment(end_date))) {
             this.event = new MyEvent();
             this.event.id = this.idGen++;
-            this.event.start = moment(nextDay).add(7 * root, 'day').format('YYYY-MM-DD') + ' ' + moment(tempStart).format('HH:mm');
-            this.event.end = moment(nextDay).add(7 * root, 'day').format('YYYY-MM-DD') + ' ' + moment(tempEnd).format('HH:mm');
+            this.event.dayStart = tempStart;
+            this.event.dayEnd = tempEnd;
             this.event.weekday = weekday;
             this.event.title = moment(nextDay).add(7 * root, 'day').format('YYYY-MM-DD');
+            this.event.dayStart_correct = moment(tempStart).isValid() ? moment(tempStart).format('HH:mm') : '';
+            this.event.dayEnd_correct = moment(tempEnd).isValid() ? moment(tempEnd).format('HH:mm') : '';
+            this.event.start = moment(nextDay).add(7 * root, 'day').format('YYYY-MM-DD') + ' ' + this.event.dayStart_correct;
+            this.event.end = moment(nextDay).add(7 * root, 'day').format('YYYY-MM-DD') + ' ' + this.event.dayEnd_correct;
             this.events.push(this.event);
             root++;
         }
@@ -130,9 +134,11 @@ export class CourseEditComponent implements OnInit {
                 }
             }
             this.event.weekday = this.weekDays[momentIndex];
-            this.event.id = this.idGen++;  // title, id , weekday,dayStart,dayEnd
-            this.event.start = this.event.title + ' ' + moment(this.event.dayStart).format('HH:mm');
-            this.event.end = this.event.title + ' ' + moment(this.event.dayEnd).format('HH:mm');
+            this.event.id = this.idGen++;  // title, id , weekday,dayStart,dayEn
+            this.event.dayStart_correct = moment(this.event.dayStart).isValid() ? moment(this.event.dayStart).format('HH:mm') : '';
+            this.event.dayEnd_correct = moment(this.event.dayEnd).isValid() ? moment(this.event.dayEnd).format('HH:mm') : '';
+            this.event.start = this.event.title + ' ' + this.event.dayStart_correct;
+            this.event.end = this.event.title + ' ' + this.event.dayEnd_correct;
             if (this.checkExist(this.event.title)) {
                 this.events.push(this.event);
                 console.log('adding event');
@@ -144,8 +150,10 @@ export class CourseEditComponent implements OnInit {
         } else if (this.event.type === 'edit') {
 
             if (this.event.id) {
-                this.event.start = this.event.title + ' ' + moment(this.event.dayStart).format('HH:mm');
-                this.event.end = this.event.title + ' ' + moment(this.event.dayEnd).format('HH:mm');
+                this.event.dayStart_correct = moment(this.event.dayStart).isValid() ? moment(this.event.dayStart).format('HH:mm') : '';
+                this.event.dayEnd_correct = moment(this.event.dayEnd).isValid() ? moment(this.event.dayEnd).format('HH:mm') : '';
+                this.event.start = this.event.title + ' ' + this.event.dayStart_correct;
+                this.event.end = this.event.title + ' ' + this.event.dayEnd_correct;
 
                 let index: number = this.findEventIndexById(this.event.id);
 
@@ -191,10 +199,14 @@ export class CourseEditComponent implements OnInit {
         this.event = new MyEvent();
         this.event.type = 'edit';
         this.event.title = e.calEvent.title;
-        let start = e.calEvent.start;
-        let end = e.calEvent.end;
+        this.event.dayStart = e.calEvent.dayStart;
+        this.event.dayEnd = e.calEvent.dayEnd;
+        this.event.start = e.calEvent.start;
+        this.event.end = e.calEvent.end;
         this.event.id = e.calEvent.id;
+        this.event.weekday = e.calEvent.weekday;
         this.dialogVisible = true;
+        console.log(this.event);
         // this.events = this.events.filter(result => result !== event );
     }
     // event handler for day click 
@@ -217,10 +229,6 @@ export class CourseEditComponent implements OnInit {
     }
 
 
-
-
-
-
     subscribeCourse() {
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
@@ -231,20 +239,55 @@ export class CourseEditComponent implements OnInit {
                 this.newCourse = false;
                 this.courseService.getCourse(this.id).then((result) => {
                     result.forEach((item) => {
-                        // item.courseStart = moment(item.courseStart).format('YYYY-MM-DD');
-                        // item.courseEnd = moment(item.courseEnd).format('YYYY-MM-DD');
-                        // item.classStartTime = moment(item.classStartTime).format('hh:mm A');
-                        // item.classEndTime = moment(item.classEndTime).format('hh:mm A');
+                        console.log(item.courseStart);
+                        console.log(moment(item.courseStart).format());
+                        item.courseStart = moment(item.courseStart).isValid() ? moment(item.courseStart).add(1 , 'day').format('YYYY-MM-DD ') : '';
+                        item.courseEnd = moment(item.courseEnd).isValid() ? moment(item.courseEnd).add(1 , 'day').format('YYYY-MM-DD') : '';
                     });
                     this.course = result[0];
                     console.log(this.course);
+                  if (this.course.classTimeStr !== null) {
+this.events = this.detachCourseStr(this.course.classTimeStr);
+                  }
                 });
             }
         });
     }
-
+    detachCourseStr(str) { // temp solution
+        let myEvents = [];
+        let strArry = str.split(',');
+        strArry.forEach(element => {
+            let myEvent = new MyEvent();
+            myEvent.title = element.split(' ')[0];
+            myEvent.id = this.idGen++;
+            myEvent.weekday = this.weekDays[moment(myEvent.title).isoWeekday() - 1];
+            myEvent.dayStart_correct = element.split(' ')[1].split('-')[0];
+            myEvent.dayEnd_correct = element.split(' ')[1].split('-')[1];
+            myEvent.start = myEvent.title + ' ' + myEvent.dayStart_correct;
+            myEvent.end = myEvent.title + ' ' + myEvent.dayEnd_correct;
+            myEvent.dayStart = moment(myEvent.start).isValid() ? moment(myEvent.start).format() : '';
+            myEvent.dayEnd = moment(myEvent.end).isValid() ? moment(myEvent.end).format() : '';
+            myEvents.push(myEvent);
+        });
+        return myEvents;
+    }
+    generateClassTimeStr() {
+        let str = '', tempStart, tempEnd, tempDate;
+        for (let i = 0; i < this.events.length; i++) {
+            tempDate = this.events[i].title;
+            tempStart = this.events[i].dayStart_correct;
+            tempEnd = this.events[i].dayEnd_correct;
+            if (i === 0) {
+                str += `${tempDate} ${tempStart}-${tempEnd}`;
+            } else {
+                str += `,${tempDate} ${tempStart}-${tempEnd}`;
+            }
+        }
+        return str;
+    }
     save() {
-        // **** need validation
+        this.course.classTimeStr = this.generateClassTimeStr();
+        //**** need validation
         this.courseService
             .save(this.course)
             .then(course => {
@@ -253,16 +296,8 @@ export class CourseEditComponent implements OnInit {
             })
             .catch(error => this.error = error); // TODO: Display error message
     }
-    handleDateFromChange(e) {
-
-    }
     goBack() {
         window.history.back();
-    }
-
-
-    gCalendar() {
-
     }
 
 
@@ -273,6 +308,8 @@ export class MyEvent {
     title: string;
     dayStart: string;
     dayEnd: string;
+    dayStart_correct: string;
+    dayEnd_correct: string;
     start: string;
     end: string;
     weekday: string;
