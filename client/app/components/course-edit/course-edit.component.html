@@ -56,6 +56,42 @@
 </p-dialog>  -->
 
 
+
+<p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
+    [style]="{'overflow':'visible'}" [resizable]="false">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="event">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="start">Start</label></div>
+            <div class="ui-grid-col-8"><p-calendar [(ngModel)]="event.dayStart" [timeOnly]="true" hourFormat="24" dateFormat="hh:mm"></p-calendar></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="end">End</label></div>
+            <div class="ui-grid-col-8"><p-calendar [(ngModel)]="event.dayEnd" [timeOnly]="true"  hourFormat="24" dateFormat="hh:mm" ></p-calendar></div>
+        </div>     
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="deleteEvent()" label="Delete"  [disabled]="!event?.id"></button>
+            <button type="button" pButton icon="fa-check" (click)="saveEvent()" label="Save" [disabled]="!event?.dayStart"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <p-schedule *ngIf="events" [events]="events" [header]="header" [editable]="true" [weekends]="false" [options]="options" [eventLimit]="1"
       (onEventClick)="handleEventClick($event)" (onDayClick)="handleDayClick($event)"></p-schedule>
 
