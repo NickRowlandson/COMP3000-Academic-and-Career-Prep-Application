@@ -19,8 +19,19 @@
   </div>
   <div class="row" *ngIf="data">
     <div class="col-md-6">
+      <div class="wrapper">
       <h2>Case Notes</h2>
       <hr>
+      <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
+      <p-dataTable [value]="data | userFilter : filterQuery" [responsive]="true">
+          <p-column field="studentNumber" header="Number" [sortable]="true" [style]="{'width': '120px'}"></p-column>
+          <p-column field="fullName" header="Name" [sortable]="true"></p-column>
+          <p-column header="Action" [style]="{'width': '150px'}">
+            <template let-data="rowData" pTemplate="body">
+              <button class="btn btn-primary" (click)="showCaseNotes(data)"><i class="fa fa-eye" aria-hidden="true"></i> View Notes</button>
+            </template>
+          </p-column>
+      </p-dataTable>
       <!-- <table class="table table-striped" [mfData]="data | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
         <thead>
           <tr>
@@ -53,7 +64,15 @@
           </tr>
         </tfoot>
       </table> -->
+      <div class="push"></div>
     </div>
+    <div class="footer">
+      <div>
+        <button (click)="goBack()" class="btn btn-default">Back</button>
+      </div>
+    </div>
+    </div>
+
     <div *ngIf="notesView" class="col-md-6">
       <h2>Case Notes for {{notesView.firstName + " " + notesView.lastName}}</h2>
       <hr>
@@ -68,11 +87,6 @@
             <li *ngFor="let noteItem of notes"><b>{{noteItem.dateTime | date}}:</b> {{noteItem.caseNote}} <button class="btn-danger deleteNote" (click)="deleteAlert(noteItem.caseNoteID)" title="Delete note"><i class="fa fa-trash-o"></i></button></li>
           </ul>
       </div>
-    </div>
-  </div>
-  <div class="backButton">
-    <div>
-      <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>
   </div>
 </div>

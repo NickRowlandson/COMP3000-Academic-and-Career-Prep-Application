@@ -1,6 +1,6 @@
 <div class="">
     <div *ngIf="!data">
-        <h2>My Courses</h2>
+        <h1>Take Attendance</h1>
         <hr>
         <div class="cs-loader">
             <div class="cs-loader-inner">
@@ -18,11 +18,21 @@
         </div>
     </div>
     <div class="row" *ngIf="data">
-        <div class="col-md-6">
-          <div class="wrapper3">
+      <h1>Take Attendance</h1>
+      <hr>
+        <div class="col-md-3">
+          <div class="wrapper2">
             <h2>My Courses</h2>
             <hr>
-            <div class="error" *ngIf="error">{{error}}</div>
+            <input placeholder="Filter by course name" class="form-control" [(ngModel)]="courseQuery" />
+            <p-dataTable [value]="data | courseFilter : courseQuery" [responsive]="true">
+                <p-column field="courseName" header="Name" [sortable]="true"></p-column>
+                <p-column header="Action" [style]="{'width': '140px'}">
+                  <template let-data="rowData" pTemplate="body">
+                    <button type="button" (click)="doAttendance(data)" class="btn btn-info">Attendance</button>
+                  </template>
+                </p-column>
+            </p-dataTable>
             <!-- <table class="table table-striped" [mfData]="data | courseFilter : courseQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
                 <thead>
                     <tr>
@@ -61,18 +71,36 @@
             </div>
         </div>
       </div>
-        <div *ngIf="!attendanceView" class="col-md-6">
+        <div *ngIf="!attendanceView" class="col-md-9">
             <h2>Status Report</h2>
             <hr>
             <h3>Total courses: {{ data.length }}</h3>
         </div>
-        <div *ngIf="attendanceView" class="col-md-6">
+        <div *ngIf="attendanceView" class="col-md-9">
             <h2>Attendance for {{ attendanceCourse }}</h2>
             <hr>
             <div *ngIf="loading" class="spinner">
                 <div class="double-bounce1"></div>
                 <div class="double-bounce2"></div>
             </div>
+            <input placeholder="Filter by student name" class="form-control" [(ngModel)]="studentQuery" />
+            <p-dataTable [value]="attendanceStudents | userFilter : studentQuery" [responsive]="true">
+                <p-column field="fullName" header="Name" [sortable]="true"></p-column>
+                <p-column header="Action" [style]="{'width': '330px'}">
+                  <template let-data="rowData" pTemplate="body">
+                    <p-radioButton class="attendanceRadioButtons" name="{{data.usedID}}" value="P" label="Present" [(ngModel)]="data.attendanceValue"></p-radioButton>
+                    <p-radioButton class="attendanceRadioButtons" name="{{data.usedID}}" value="A" label="Absent" [(ngModel)]="data.attendanceValue"></p-radioButton>
+                    <p-radioButton class="attendanceRadioButtons" name="{{data.usedID}}" value="MC" label="Made Contact" [(ngModel)]="data.attendanceValue"></p-radioButton>
+                  </template>
+                </p-column>
+                <p-column header="Value" [style]="{'width': '60px'}">
+                  <template let-data="rowData" pTemplate="body">
+                  <div *ngIf="data.attendanceValue === 'A'" style="color: red; display: inline-block"><strong>{{data.attendanceValue}}</strong></div>
+                  <div *ngIf="data.attendanceValue === 'P'" style="color: green; display: inline-block"><strong>{{data.attendanceValue}}</strong></div>
+                  <div *ngIf="data.attendanceValue === 'MC'" style="color: #FFA500; display: inline-block"><strong>{{data.attendanceValue}}</strong></div>
+                </template>
+                </p-column>
+            </p-dataTable>
             <!-- <table *ngIf="!loading" class="table table-striped" [mfData]="attendanceStudents | userFilter : studentQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
                 <thead>
                     <tr>

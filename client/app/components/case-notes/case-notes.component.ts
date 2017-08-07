@@ -35,6 +35,9 @@ export class CaseNotesComponent implements OnInit {
           this.data = null;
         } else {
           this.data = students;
+          for (let student of this.data) {
+            student.fullName = student.firstName + " " + student.lastName;
+          }
         }
       })
       .catch(error => this.error = error);

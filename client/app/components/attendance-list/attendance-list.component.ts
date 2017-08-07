@@ -80,6 +80,9 @@ export class AttendanceListComponent implements OnInit {
                   this.attendanceStudents = null;
               } else {
                   this.attendanceStudents = result;
+                  for (let student of this.attendanceStudents) {
+                    student.fullName = student.firstName + " " + student.lastName;
+                  }
                   this.loading = false;
               }
           })

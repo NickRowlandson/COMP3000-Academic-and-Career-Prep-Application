@@ -22,6 +22,7 @@ export class CourseManageComponent implements OnInit {
     //dropdown
     campuses: SelectItem[] = [{ label: ' -- All --', value: '' }];
     selectedCampusId: string;
+
     constructor(private router: Router, private CourseService: CourseService) {
     }
 

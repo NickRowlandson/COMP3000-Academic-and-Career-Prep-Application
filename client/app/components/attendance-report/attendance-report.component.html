@@ -19,13 +19,22 @@
     </div>
     <div class="row" *ngIf="data && studentReport">
         <h1>Attendance Report (Student)</h1>
-        <p-toggleButton onLabel="Course Report" offLabel="Student Report" [(ngModel)]="studentReport"></p-toggleButton>
         <hr>
 
         <div class="col-md-3">
           <div class="wrapper2">
             <h2>Students</h2>
+            <p-inputSwitch onLabel="Course Report" offLabel="Student Report" [(ngModel)]="studentReport"></p-inputSwitch>
             <hr>
+            <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
+            <p-dataTable [value]="students | userFilter : filterQuery" [responsive]="true">
+                <p-column field="fullName" header="Name" [sortable]="true"></p-column>
+                <p-column header="Action" [style]="{'width': '140px'}">
+                  <template let-data="rowData" pTemplate="body">
+                    <button class="btn btn-primary" (click)="viewStudentReport(data, $event)">View Report</button>
+                  </template>
+                </p-column>
+            </p-dataTable>
             <!-- <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
               <thead>
                 <tr>
@@ -93,13 +102,22 @@
     </div>
     <div class="row" *ngIf="data && !studentReport">
         <h1>Attendance Report (Course)</h1>
-        <p-toggleButton styleClass="viewToggle" onLabel="Course Report" offLabel="Student Report" [(ngModel)]="studentReport"></p-toggleButton>
         <hr>
 
         <div class="col-md-3">
           <div class="wrapper2">
             <h2>Courses</h2>
+            <p-inputSwitch onLabel="Course Report" offLabel="Student Report" [(ngModel)]="studentReport"></p-inputSwitch>
             <hr>
+            <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
+            <p-dataTable [value]="courses | courseFilter : filterQuery" [responsive]="true">
+                <p-column field="courseName" header="Name" [sortable]="true"></p-column>
+                <p-column header="Action" [style]="{'width': '140px'}">
+                  <template let-data="rowData" pTemplate="body">
+                    <button class="btn btn-primary" (click)="viewCourseReport(data, $event)">View Report</button>
+                  </template>
+                </p-column>
+            </p-dataTable>
             <!-- <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
               <thead>
                 <tr>

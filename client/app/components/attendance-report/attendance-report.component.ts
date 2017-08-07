@@ -66,6 +66,9 @@ export class AttendanceReportComponent implements OnInit {
           this.students = null;
         } else {
           this.students = students;
+          for (let student of this.students) {
+            student.fullName = student.firstName + " " + student.lastName;
+          }
         }
         this.getCourses();
       })

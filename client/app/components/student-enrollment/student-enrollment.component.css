@@ -9,5 +9,6 @@
 
 .remove {
   width: 79px;
+  right: -400px;
+  position: relative;
 }
- 

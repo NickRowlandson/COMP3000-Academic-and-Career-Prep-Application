@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row wrapper">
     <h2>{{courseName}} Enrollment</h2>
     <hr>
 
@@ -17,6 +17,23 @@
         </div>
     </div>
     <div class="col-lg-8">
+      <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
+      <p-dataTable [value]="students | userFilter : filterQuery" [responsive]="true">
+          <p-column field="studentNumber" header="Number" [sortable]="true" [style]="{'width': '120px'}"></p-column>
+          <p-column field="fullName" header="Name" [sortable]="true"></p-column>
+          <p-column header="Action" [style]="{'width': '500px'}">
+            <template let-data="rowData" pTemplate="body">
+              <div *ngIf="!loading" class="input-group">
+                <button *ngIf="data.enrolled" type="button" (click)="checkEnrolled(data)" class="btn btn-danger remove">Remove</button>
+                <div *ngIf="!data.enrolled">
+                    <p-calendar [(ngModel)]="data.studentStartDate" dateFormat="dd/mm/yy" placeholder="Student Start Date"></p-calendar> -
+                    <p-calendar [(ngModel)]="data.studentEndDate" dateFormat="dd/mm/yy"  placeholder="Student End Date"></p-calendar>
+                    <button type="button" (click)="checkEnrolled(data)" class="btn btn-success enroll">Enroll</button>
+                </div>
+              </div>
+            </template>
+          </p-column>
+      </p-dataTable>
         <!-- <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
             <thead>
                 <tr>
@@ -59,8 +76,9 @@
             </tfoot>
         </table> -->
     </div>
+    <div class="push"></div>
 </div>
-<div class="backButton">
+<div class="backButton footer">
     <div>
         <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>

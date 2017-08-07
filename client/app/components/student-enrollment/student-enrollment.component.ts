@@ -44,6 +44,9 @@ export class StudentEnrollmentComponent implements OnInit {
                     this.students = null;
                 } else {
                     this.students = result;
+                    for (let student of this.students) {
+                      student.fullName = student.firstName + " " + student.lastName;
+                    }
                     this.getTimetables();
                 }
             }).catch(error => error);
