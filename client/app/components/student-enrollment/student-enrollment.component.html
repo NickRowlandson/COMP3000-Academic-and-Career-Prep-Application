@@ -21,7 +21,7 @@
       <p-dataTable [value]="students | userFilter : filterQuery" [responsive]="true">
           <p-column field="studentNumber" header="Number" [sortable]="true" [style]="{'width': '120px'}"></p-column>
           <p-column field="fullName" header="Name" [sortable]="true"></p-column>
-          <p-column header="Action" [style]="{'width': '500px'}">
+          <p-column header="Action" [style]="{'width': '500px', 'overflow': 'visible'}">
             <template let-data="rowData" pTemplate="body">
               <div *ngIf="!loading" class="input-group">
                 <button *ngIf="data.enrolled" type="button" (click)="checkEnrolled(data)" class="btn btn-danger remove">Remove</button>

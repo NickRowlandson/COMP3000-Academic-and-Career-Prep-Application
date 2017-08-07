@@ -74,15 +74,22 @@ export class StudentService {
             .catch(err => this.handleError(err, "Delete"));
     }
 
-    courseEnroll(userID, courseID, instructorID) {
+    courseEnroll(userID, startDate, endDate, courseID, instructorID) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
         let options = new RequestOptions({ headers: headers });
 
-        let url = `api/enroll/${userID}/${courseID}/${instructorID}`;
+        let url = `api/enroll`;
+        var info = [{
+          userID: userID,
+          courseID: courseID,
+          instructorID: instructorID,
+          startDate: startDate,
+          endDate: endDate
+        }];
 
         return this.http
-            .post(url, options)
+            .post(url, info, options)
             .toPromise()
             .then(response => response.json().data)
             .catch(err => this.handleError(err, "Course enroll"));
