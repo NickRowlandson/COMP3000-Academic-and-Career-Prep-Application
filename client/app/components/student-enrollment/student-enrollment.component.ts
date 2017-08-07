@@ -102,7 +102,7 @@ export class StudentEnrollmentComponent implements OnInit {
       var endDate = moment(student.studentEndDate, "DDD MMM YYYY h:mm:ss LT").isValid();
         if (startDate && endDate) {
           this.studentService
-              .courseEnroll(student.userID, this.courseID, this.instructorID)
+              .courseEnroll(student.userID, student.studentStartDate, student.studentEndDate, this.courseID, this.instructorID)
               .then(result => {
                   student.enrolled = true;
                   swal(

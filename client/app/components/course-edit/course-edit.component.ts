@@ -32,8 +32,10 @@ export class CourseEditComponent implements OnInit {
     // drop down
     professors: SelectItem[] = [];
     campuses: SelectItem[] = [];
+
     constructor(private courseService: CourseService, private route: ActivatedRoute) {
     }
+
     ngOnInit() {
         this.subscribeCourse();
 
@@ -68,14 +70,14 @@ export class CourseEditComponent implements OnInit {
             height: "auto",
             selectable: true
         };
-    } // end of init 
+    } // end of init
 
-    // check boxes onchange event 
+    // check boxes onchange event
     cb_onchange(e, weekday) {
         if (e) {
             if (this.course.courseStart === undefined || this.course.courseEnd === undefined || this.course.courseStart === null || this.course.courseEnd == null) {
                 alert('you must pick a date!');
-                this.unCheck(weekday); // unselect element 
+                this.unCheck(weekday); // unselect element
             } else {
                 this.weekDay = weekday;
                 this.event = new MyEvent();
@@ -86,11 +88,11 @@ export class CourseEditComponent implements OnInit {
             this.events = this.events.filter(result => result.weekday !== weekday);
         }
     }
-    // this function will uncheck checkbox based on week day that given 
+    // this function will uncheck checkbox based on week day that given
     unCheck(weekday) {
         this.selectedDays = this.selectedDays.filter(result => result !== weekday);
     }
-    // this function will generate days that maches specification 
+    // this function will generate days that maches specification
     private generateDays(weekday, start_date, end_date) {
 
         // figure out what's next week day
@@ -192,7 +194,7 @@ export class CourseEditComponent implements OnInit {
     }
 
 
-    // event handler for event click 
+    // event handler for event click
     handleEventClick(e) {
         console.log(e.calEvent);
 
@@ -209,7 +211,7 @@ export class CourseEditComponent implements OnInit {
         console.log(this.event);
         // this.events = this.events.filter(result => result !== event );
     }
-    // event handler for day click 
+    // event handler for day click
     handleDayClick(e) {
         let date = e.date.format();
         this.event = new MyEvent();
@@ -239,8 +241,6 @@ export class CourseEditComponent implements OnInit {
                 this.newCourse = false;
                 this.courseService.getCourse(this.id).then((result) => {
                     result.forEach((item) => {
-                        console.log(item.courseStart);
-                        console.log(moment(item.courseStart).format());
                         item.courseStart = moment(item.courseStart).isValid() ? moment(item.courseStart).add(1 , 'day').format('YYYY-MM-DD ') : '';
                         item.courseEnd = moment(item.courseEnd).isValid() ? moment(item.courseEnd).add(1 , 'day').format('YYYY-MM-DD') : '';
                     });

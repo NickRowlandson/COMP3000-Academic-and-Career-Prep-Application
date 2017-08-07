@@ -20,7 +20,6 @@
     <div class="row" *ngIf="data && studentReport">
         <h1>Attendance Report (Student View)</h1>
         <hr>
-
         <div class="col-md-3">
           <div class="wrapper2">
             <h2>Students</h2>
@@ -35,39 +34,6 @@
                   </template>
                 </p-column>
             </p-dataTable>
-            <!-- <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
-              <thead>
-                <tr>
-                  <th>
-                    <mfDefaultSorter by="studentNumber">Student Number</mfDefaultSorter>
-                  </th>
-                  <th>
-                    <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
-                  </th>
-                  <th>Action</th>
-                </tr>
-                <tr>
-                  <th colspan="5">
-                    <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let student of mf.data">
-                  <td>{{student.firstName + " " + student.lastName}}</td>
-                  <td>
-                      <button class="btn btn-primary" (click)="viewStudentReport(student, $event)">View Report</button>
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="5">
-                    <mfBootstrapPaginator></mfBootstrapPaginator>
-                  </td>
-                </tr>
-              </tfoot>
-            </table> -->
             <div class="push"></div>
         </div>
         <div class="footer">
@@ -103,7 +69,6 @@
     <div class="row" *ngIf="data && !studentReport">
         <h1>Attendance Report (Course View)</h1>
         <hr>
-
         <div class="col-md-3">
           <div class="wrapper2">
             <h2>Courses</h2>
@@ -118,39 +83,6 @@
                   </template>
                 </p-column>
             </p-dataTable>
-            <!-- <table class="table table-striped" [mfData]="courses | courseFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
-              <thead>
-                <tr>
-                  <th>
-                    <mfDefaultSorter by="studentNumber">Student Number</mfDefaultSorter>
-                  </th>
-                  <th>
-                    <mfDefaultSorter by="courseName">Name</mfDefaultSorter>
-                  </th>
-                  <th>Action</th>
-                </tr>
-                <tr>
-                  <th colspan="5">
-                    <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let course of mf.data">
-                  <td>{{course.courseName}}</td>
-                  <td>
-                      <button class="btn btn-primary" (click)="viewCourseReport(course, $event)">View Report</button>
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="5">
-                    <mfBootstrapPaginator></mfBootstrapPaginator>
-                  </td>
-                </tr>
-              </tfoot>
-            </table> -->
             <div class="push"></div>
         </div>
         <div class="footer">
@@ -168,16 +100,21 @@
           <h2>{{ course.courseName }} Report</h2>
           <div (click)="overallStatus($event)" class="statusButton" title="View overall status"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
           <hr>
-          <table class="table table-striped">
+          <table *ngIf="!noStudentsEnrolled" class="table table-striped">
             <thead>
-                <th></th>
+                <th>Student</th>
+                <th>Expected Start/End</th>
                 <th *ngFor="let day of days">{{ day.date }}</th>
             </thead>
             <tbody>
                 <tr></tr>
-                <tr *ngFor="let student of courseStudents">{{ student[0].student.firstName }} {{ student[0].student.lastName }}
-                  <td *ngFor="let item of student[0].attendanceInfo">
-                    {{ item.attendanceValue }}
+                <tr *ngFor="let student of courseStudents">
+                  <td>{{ student.student.firstName }} {{ student.student.lastName }}</td>
+                  <td>{{ student.startDate | date }} - {{ student.endDate | date }}</td>
+                  <td *ngFor="let item of student.attendanceInfo">
+                    <span *ngIf="item.attendanceValue === 'P'" style="color:green">{{ item.attendanceValue }}</span>
+                    <span *ngIf="item.attendanceValue === 'A'" style="color:red">{{ item.attendanceValue }}</span>
+                    <span *ngIf="item.attendanceValue === 'MC'" style="color:#FFA500">{{ item.attendanceValue }}</span>
                   </td>
                 </tr>
             </tbody>

@@ -119,42 +119,42 @@ export class SuitabilityFormComponent {
         this.partAWarning = false;
         this.partBWarning = false;
         // PART A
-        if (this.suitabilityForm.offerStartDate === '< 1 year') { this.partAPoints += 3; } else if
-        (this.suitabilityForm.offerStartDate === '1 year') { this.partAPoints += 2; } else if
-        (this.suitabilityForm.offerStartDate === '> 1 year') { this.partAPoints += 1; }
+        if (this.suitabilityForm.offerStartDate === 'Less than one year') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.offerStartDate === 'In one year') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.offerStartDate === 'More than a Year') { this.partAPoints += 1; }
 
-        if (this.suitabilityForm.meetsGoal === 'no') { this.partAPoints += 3; } else if
-        (this.suitabilityForm.meetsGoal === 'lacking') { this.partAPoints += 2; } else if
-        (this.suitabilityForm.meetsGoal === 'yes') { this.partAPoints += 1; }
+        if (this.suitabilityForm.meetsGoal === 'No') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.meetsGoal === 'Yes but lacks skills/high enough marks') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.meetsGoal === 'Yes') { this.partAPoints += 1; }
 
-        if (this.suitabilityForm.timeOutOfSchool === '6+') { this.partAPoints += 3; } else if
-        (this.suitabilityForm.timeOutOfSchool === '1-6') { this.partAPoints += 2; } else if
-        (this.suitabilityForm.timeOutOfSchool === '<1') { this.partAPoints += 1; }
+        if (this.suitabilityForm.timeOutOfSchool === '6 or more years') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.timeOutOfSchool === '1-6 years') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.timeOutOfSchool === 'Less than 1 year') { this.partAPoints += 1; }
 
-        if (this.suitabilityForm.inProgramBefore === 'no') { this.partAPoints += 3; } else if
-        (this.suitabilityForm.inProgramBefore === 'yesWithApp') { this.partAPoints += 2; } else if
-        (this.suitabilityForm.inProgramBefore === 'yes') { this.partAPoints += 1; }
+        if (this.suitabilityForm.inProgramBefore === 'No/Left with appropriate reasons') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.inProgramBefore === 'Yes - Appropriate progress') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.inProgramBefore === 'Yes – No progress') { this.partAPoints += 1; }
 
-        if (this.suitabilityForm.employment === 'no') { this.partAPoints += 3; } else if
-        (this.suitabilityForm.employment === 'part') { this.partAPoints += 2; } else if
-        (this.suitabilityForm.employment === 'full') { this.partAPoints += 1; }
+        if (this.suitabilityForm.employment === 'Not working') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.employment === 'Working part time') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.employment === 'Working full time') { this.partAPoints += 1; }
 
-        if (this.suitabilityForm.incomeSource === 'no') { this.partAPoints += 3; } else if
-        (this.suitabilityForm.incomeSource === 'noInc') { this.partAPoints += 2; } else if
-        (this.suitabilityForm.incomeSource === 'yes') { this.partAPoints += 1; }
+        if (this.suitabilityForm.incomeSource === 'OW  ODSP  EI  SC') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.incomeSource === 'No income') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.incomeSource === 'Employed') { this.partAPoints += 1; }
 
-        if (this.suitabilityForm.ageRange === '45-65') { this.partAPoints += 3; } else if
-        (this.suitabilityForm.ageRange === '19-29') { this.partAPoints += 2; } else if
-        (this.suitabilityForm.ageRange === '30-44') { this.partAPoints += 1; }
+        if (this.suitabilityForm.ageRange === '45-65 years old') { this.partAPoints += 3; } else if
+        (this.suitabilityForm.ageRange === '19-29 years old') { this.partAPoints += 2; } else if
+        (this.suitabilityForm.ageRange === '30-44 years old') { this.partAPoints += 1; }
 
         //PART B
         if (this.suitabilityForm.hoursPerWeek === '10-20') { this.partBPoints += 3; } else if
         (this.suitabilityForm.hoursPerWeek === '5-10') { this.partBPoints += 2; } else if
-        (this.suitabilityForm.hoursPerWeek === '<5') { this.partBPoints += 1; }
+        (this.suitabilityForm.hoursPerWeek === 'Less than 5') { this.partBPoints += 1; }
 
-        if (this.suitabilityForm.workHistory === '<1') { this.partBPoints += 3; } else if
-        (this.suitabilityForm.workHistory === '1-4') { this.partBPoints += 2; } else if
-        (this.suitabilityForm.workHistory === '>4') { this.partBPoints += 1; }
+        if (this.suitabilityForm.workHistory === 'Less than 1 year experience in the field') { this.partBPoints += 3; } else if
+        (this.suitabilityForm.workHistory === '1-4 years experience in the field') { this.partBPoints += 2; } else if
+        (this.suitabilityForm.workHistory === '4+ years experience in the field') { this.partBPoints += 1; }
 
         if (this.suitabilityForm.factorHealth) { factorPoints++; }
         if (this.suitabilityForm.factorInstructions) { factorPoints++; }

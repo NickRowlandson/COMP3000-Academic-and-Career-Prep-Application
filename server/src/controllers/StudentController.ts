@@ -204,13 +204,16 @@ class StudentController {
 
     addToTimetable(req: express.Request, res: express.Response): void {
         try {
-            var _userID = req.params._userID;
-            var _courseID = req.params._courseID;
-            var _instructorID = req.params._instructorID;
+            var info = req.body[0];
+            var _userID = info.userID;
+            var _startDate = info.startDate;
+            var _endDate = info.endDate;
+            var _courseID = info.courseID;
+            var _instructorID = info.instructorID;
             sql.connect(config)
                 .then(function(connection) {
                     new sql.Request(connection)
-                        .query("INSERT INTO Timetables (userID,courseID,instructorID) VALUES ('" + _userID + "','" + _courseID + "','" + _instructorID + "')")
+                        .query("INSERT INTO Timetables (userID,startDate,endDate,courseID,instructorID) VALUES ('" + _userID + "','" + _startDate + "','" + _endDate + "','" + _courseID + "','" + _instructorID + "')")
                         .then(function() {
                             res.send({ "success": "success" });
                         }).catch(function(err) {
