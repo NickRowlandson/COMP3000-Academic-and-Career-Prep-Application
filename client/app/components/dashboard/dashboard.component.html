@@ -68,6 +68,30 @@
                 </a>
             </div>
         </div>
+        <div class="col-md-4 dashboardItem" *ngIf="attendanceList">
+           <div class="itemBorder">
+               <a routerLink="/attendance-list" routerLinkActive="active">
+                   <div>
+                       <i class="fa fa-check-square-o fa-lg-icon" aria-hidden="true"></i>
+                   </div>
+                   <div>
+                       <h1 class="dashboardItemText">Take Attendance</h1>
+                   </div>
+               </a>
+           </div>
+       </div>
+       <div class="col-md-4 dashboardItem" *ngIf="attendanceReport">
+          <div class="itemBorder">
+              <a routerLink="/attendance-report" routerLinkActive="active">
+                  <div>
+                      <i class="fa fa-calendar fa-lg-icon" aria-hidden="true"></i>
+                  </div>
+                  <div>
+                      <h1 class="dashboardItemText">Attendance Report</h1>
+                  </div>
+              </a>
+          </div>
+      </div>
         <div class="col-md-4 dashboardItem" *ngIf="caseNotes">
             <div class="itemBorder">
                 <a routerLink="/case-notes" routerLinkActive="active">
@@ -128,30 +152,6 @@
                 </a>
             </div>
         </div>
-         <div class="col-md-4 dashboardItem" *ngIf="attendanceList">
-            <div class="itemBorder">
-                <a routerLink="/attendance-list" routerLinkActive="active">
-                    <div>
-                        <i class="fa fa-check-square-o fa-lg-icon" aria-hidden="true"></i>
-                    </div>
-                    <div>
-                        <h1 class="dashboardItemText">My Courses</h1>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-4 dashboardItem" *ngIf="attendanceReport">
-           <div class="itemBorder">
-               <a routerLink="/attendance-report" routerLinkActive="active">
-                   <div>
-                       <i class="fa fa-calendar fa-lg-icon" aria-hidden="true"></i>
-                   </div>
-                   <div>
-                       <h1 class="dashboardItemText">Attendance Report</h1>
-                   </div>
-               </a>
-           </div>
-       </div>
     </div>
   </div>
 </div>

@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="row" *ngIf="data && studentReport">
-        <h1>Attendance Report (Student)</h1>
+        <h1>Attendance Report (Student View)</h1>
         <hr>
 
         <div class="col-md-3">
@@ -29,7 +29,7 @@
             <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
             <p-dataTable [value]="students | userFilter : filterQuery" [responsive]="true">
                 <p-column field="fullName" header="Name" [sortable]="true"></p-column>
-                <p-column header="Action" [style]="{'width': '140px'}">
+                <p-column header="Action" [style]="{'width': '130px'}">
                   <template let-data="rowData" pTemplate="body">
                     <button class="btn btn-primary" (click)="viewStudentReport(data, $event)">View Report</button>
                   </template>
@@ -86,7 +86,7 @@
           <div (click)="overallStatus($event)" class="statusButton" title="View overall status"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
           <hr>
           <h3>Present: {{ totalPresent }} Absent: {{ totalAbsent }} Made Contact: {{ totalMadeContact }}</h3>
-          <div *ngIf="noAttendance" style="color:green;"><h2>Student has attended all classes so far!</h2></div>
+          <div *ngIf="noAttendance" style="color:red;"><h2>No attendance data yet...</h2></div>
           <div *ngFor="let info of records">
             <div class="well col-md-12">
               <label class="control-label">Date: </label> {{ info.date | date }}
@@ -101,7 +101,7 @@
         </div>
     </div>
     <div class="row" *ngIf="data && !studentReport">
-        <h1>Attendance Report (Course)</h1>
+        <h1>Attendance Report (Course View)</h1>
         <hr>
 
         <div class="col-md-3">
@@ -112,7 +112,7 @@
             <input placeholder="Filter by course name" class="form-control" [(ngModel)]="filterQuery" />
             <p-dataTable [value]="courses | courseFilter : filterQuery" [responsive]="true">
                 <p-column field="courseName" header="Name" [sortable]="true"></p-column>
-                <p-column header="Action" [style]="{'width': '140px'}">
+                <p-column header="Action" [style]="{'width': '130px'}">
                   <template let-data="rowData" pTemplate="body">
                     <button class="btn btn-primary" (click)="viewCourseReport(data, $event)">View Report</button>
                   </template>

@@ -34,7 +34,7 @@
                           <div [class.statusStage1]="data.suitability" [class.statusStage2]="!data.suitability" [class.statusStage3]="!data.suitability && !data.consent && !data.learningStyle" [class.statusStage4]="!data.suitability && !data.consent && !data.learningStyle && banner && cam"></div>
                       </template>
                     </p-column>
-                    <p-column field="fullName" header="Name" [sortable]="true"></p-column>
+                    <p-column field="fullName" header="Name" [sortable]="true" [style]="{'width': '170px'}"></p-column>
                     <p-column field="email" header="Email" [sortable]="true"></p-column>
                     <p-column header="Banner/CAM" [style]="{'width': '110px'}">
                       <template let-data="rowData" pTemplate="body">

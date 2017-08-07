@@ -39,7 +39,7 @@
               <p-column field="professorName" header="Instructor" [sortable]="true"></p-column>
               <p-column field="classroom" header="Classroom" [sortable]="true"></p-column>
               <p-column field="campusName" header="Campus" [sortable]="true"></p-column>
-              <p-column header="Action">
+              <p-column header="Action" [style]="{'width': '281px'}">
                 <template let-data="rowData" pTemplate="body">
                   <div class="inline">
                       <button class="btn btn-warning" (click)="gotoStudentEnrollment(data, $event)"><i class="fa fa-institution" aria-hidden="true"></i> Enroll</button>

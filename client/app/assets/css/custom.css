@@ -3,9 +3,19 @@ html, body {
   margin: 0;
 }
 
+.btn {
+  height: 36px;
+}
+
 .dropToggle {
   width: 44px;
+  height: 36px;
 }
+
+.dropdown-menu>li {
+  cursor:pointer;
+}
+
 /* CSS Loading Animation */
 .cs-loader {
     position: absolute;
