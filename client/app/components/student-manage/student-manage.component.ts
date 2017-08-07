@@ -130,6 +130,7 @@ export class StudentManageComponent implements OnInit {
             this.consentView = forms.consentForm[0];
             this.learningStyleView = forms.learningStyleForm[0];
             this.suitabilityView = forms.suitabilityForm[0];
+            this.barChartData = [{ data: [this.learningStyleView.hearing, this.learningStyleView.seeing, this.learningStyleView.doing]}];
           }
         })
         .catch(error => this.error = error);

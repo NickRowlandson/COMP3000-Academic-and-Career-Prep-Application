@@ -25,7 +25,7 @@
           <div class="wrapper2">
             <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
             <p-dataTable [value]="students | userFilter : filterQuery" [responsive]="true">
-                <p-column field="studentNumber" header="Student Number" [sortable]="true" [style]="{'width': '160px'}"></p-column>
+                <p-column field="studentNumber" header="Number" [sortable]="true" [style]="{'width': '120px'}"></p-column>
                 <p-column field="fullName" header="Name" [sortable]="true"></p-column>
                 <p-column field="email" header="Email" [sortable]="true"></p-column>
                 <p-column header="Action" [style]="{'width': '60px', 'overflow': 'visible'}">

@@ -1,9 +1,9 @@
-<div class="suitability wrapper">
+<div class="suitability">
     <h1>Client Suitability</h1>
     <hr>
-    <div *ngIf="client" class="form-horizontal">
+    <div *ngIf="client" class="form-horizontal wrapper2">
         <div class="row">
-            <ul class="sectionBtnGroup col-sm-12">
+            <ul class="sectionBtnGroup col-md-12">
                 <li *ngIf="showSectionBtn1" class="sectionButtons" [ngClass]="{active: showSection1}" title="General Info" (click)="clicked('section1')">
                     <h4>Client Info</h4></li>
                 <li *ngIf="showSectionBtn2" class="sectionButtons" [ngClass]="{active: showSection2}" title="Question Group 2" (click)="clicked('section2')">
@@ -17,22 +17,22 @@
                 <li *ngIf="showSectionBtn6" class="sectionButtons" [ngClass]="{active: showSection6}" title="Review" (click)="clicked('section6')">
                     <h4>Review</h4></li>
             </ul>
-            <div id="section1" *ngIf="showSection1" class="col-sm-12">
+            <div id="section1" *ngIf="showSection1" class="col-md-12">
                 <div class="form-group">
-                    <div class="col-sm-offset-10 col-sm-1">
+                    <div class="col-md-offset-10 col-md-1">
                         <div (click)="next($event, 'section2')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Date: </label>
-                    <div class="col-sm-8 formInput">
+                    <label class="col-md-2 control-label">Date: </label>
+                    <div class="col-md-4 formInput">
                         {{date | date: format}}
                         <input type="hidden" name="date" value="{{date | date: format}}" [(ngModel)]="client.inquiryDate" required/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">First Name: </label>
-                    <div class="col-sm-8">
+                    <label class="col-md-2 control-label">First Name: </label>
+                    <div class="col-md-4">
                         <input class="form-control" id="firstName" [(ngModel)]="client.firstName" placeholder="First Name" required #firstName="ngModel" />
                         <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)"class="alert alert-danger">
                                 <div [hidden]="!firstName.errors.required">
@@ -44,8 +44,8 @@
              </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Last Name: </label>
-                    <div class="col-sm-8">
+                    <label class="col-md-2 control-label">Last Name: </label>
+                    <div class="col-md-4">
                         <input class="form-control" [(ngModel)]="client.lastName" placeholder="Last Name" required #lastName="ngModel" />
                          <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)"class="alert alert-danger">
                                 <div [hidden]="!lastName.errors.required">
@@ -56,14 +56,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Date of Birth: </label>
-                    <div class="col-sm-8">
+                    <label class="col-md-2 control-label">Date of Birth: </label>
+                    <div class="col-md-4">
                         <input class="form-control" type="date" [(ngModel)]="client.birthday" placeholder="DD/MM/YYYY" required />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Email: </label>
-                    <div class="col-sm-8">
+                    <label class="col-md-2 control-label">Email: </label>
+                    <div class="col-md-4">
                         <input class="form-control" type="email" [(ngModel)]="client.email" placeholder="Email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel"/>
                          <div *ngIf="email.errors && (email.dirty || email.touched)"class="alert alert-danger">
                              <div [hidden]="!email.errors.required">
@@ -76,8 +76,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Phone: </label>
-                    <div class="col-sm-8">
+                    <label class="col-md-2 control-label">Phone: </label>
+                    <div class="col-md-4">
                         <input class="form-control" type="number" [(ngModel)]="client.phone" placeholder="Phone" required #phone="ngModel" />
                         <div *ngIf="phone.errors && (phone.dirty || phone.touched)"class="alert alert-danger">
                              <div [hidden]="!phone.errors.required">
@@ -91,67 +91,71 @@
                 </div>
             </div>
             <!-- end of section 1 -->
-            <div id="section2" *ngIf="showSection2" class="col-sm-12">
+            <div id="section2" *ngIf="showSection2" class="col-md-12">
                 <div class="form-group">
-                    <div class="col-sm-offset-10 col-sm-1">
+                    <div class="col-md-offset-10 col-md-1">
                         <button (click)="next($event, 'section3')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></button>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Courses: </label>
-                    <div class="col-sm-8">
+                    <label class="col-md-2 control-label">Courses: </label>
+                    <div class="col-md-4">
                         <input class="form-control" type="text" [(ngModel)]="suitabilityForm.courses" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Goal: </label>
-                    <div class="col-sm-8">
+                    <label class="col-md-2 control-label">Goal: </label>
+                    <div class="col-md-4">
                         <input class="form-control" type="text" [(ngModel)]="suitabilityForm.goal" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Transition Date: </label>
-                    <div class="col-sm-8">
+                    <label class="col-md-2 control-label">Transition Date: </label>
+                    <div class="col-md-4">
                         <input class="form-control" type="date" [(ngModel)]="suitabilityForm.transitionDate" />
                     </div>
                 </div>
                 <br />
-                <div class="col-md-offset-3">
-                    <div class="col-sm-5">
-                        <label class="checkbox">
-                            <input type="checkbox" [(ngModel)]="suitabilityForm.transcript"> Transcript
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox" [(ngModel)]="suitabilityForm.governmentID"> Gov't ID
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox" [(ngModel)]="suitabilityForm.appropriateGoal"> Appropriate Occupational Goal
-                        </label>
+                <div class="col-md-offset-2">
+                    <div class="col-md-3">
+                        <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.transcript"></p-inputSwitch>
+                        <label class="control-label labelVerticalAlign">Transcript</label>
+                        <br />
+
+                        <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.governmentID"></p-inputSwitch>
+                        <label class="control-label labelVerticalAlign">Gov't ID</label>
+                        <br />
+
+                        <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.appropriateGoal"></p-inputSwitch>
+                        <label class="control-label labelVerticalAlign">Appropriate Occupational Goal</label>
+                        <br />
                     </div>
-                    <div class="col-sm-5">
-                        <label class="checkbox">
-                            <input type="checkbox" [(ngModel)]="suitabilityForm.isValidAge"> 19+ Years Old
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox" [(ngModel)]="suitabilityForm.schoolRegistration"> Not Registered In High School or Post-Sec
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox" [(ngModel)]="suitabilityForm.availableDuringClass"> Available During Class Time
-                        </label>
+                    <div class="col-md-6">
+                        <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.isValidAge"></p-inputSwitch>
+                        <label class="control-label labelVerticalAlign">19+ Years Old</label>
+                        <br />
+
+                        <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.schoolRegistration"></p-inputSwitch>
+                        <label class="control-label labelVerticalAlign">Registered In High School or Post-Sec</label>
+                        <br />
+
+                        <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.availableDuringClass"></p-inputSwitch>
+                        <label class="control-label labelVerticalAlign">Available During Class Time</label>
+                        <br />
                     </div>
                 </div>
 
             </div>
             <!-- end of section 2 -->
-            <div id="section3" *ngIf="showSection3" class="col-sm-12">
+            <div id="section3" *ngIf="showSection3" class="col-md-12">
                 <div class="form-group">
-                    <div class="col-sm-offset-10 col-sm-1">
+                    <div class="col-md-offset-10 col-md-1">
                         <button (click)="next($event, 'section4')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></button>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Last Grade Completed: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Last Grade Completed: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.lastGrade" required #lastGrade="ngModel">
                         <option value="10">Less than grade 10</option>
                         <option value="10-11">Grade 10-11</option>
@@ -163,8 +167,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Level: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Level: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.level" required #level="ngModel">
                         <option value="aca">Academic/Advanced</option>
                         <option value="app">Applied/General</option>
@@ -177,8 +181,8 @@
                 </div>
                 <!-- PART A: START -->
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Post-Secondary/Job Offer start date: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Post-Secondary/Job Offer start date: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.offerStartDate" required #offerStartDate="ngModel">
                         <option value="< 1 year">Less than one year</option>
                         <option value="1 year">In one year</option>
@@ -190,8 +194,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Meets Next Goals Requirements: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Meets Next Goals Requirements: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.meetsGoal" required #meetsGoals="ngModel">
                         <option value="no">No</option>
                         <option value="lacking">Yes but lacks skills/high enough marks</option>
@@ -203,8 +207,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Time out of School/Training: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Time out of School/Training: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.timeOutOfSchool" required #school="ngModel">
                         <option value="6+">6 or more years</option>
                         <option value="1-6">1-6 years</option>
@@ -216,8 +220,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Has Been In Program Before: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Has Been In Program Before: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.inProgramBefore" required #program="ngModel">
                         <option value="no">No/Left with appropriate reasons</option>
                         <option value="yesWithApp">Yes - Appropriate progress</option>
@@ -229,8 +233,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Employment: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Employment: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.employment" required #employment="ngModel">
                         <option value="no">Not working</option>
                         <option value="part">Working part time</option>
@@ -242,8 +246,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Income Source: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Income Source: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.incomeSource" required #income="ngModel">
                         <option value="no">OW  ODSP  EI  SC</option>
                         <option value="noInc">No income</option>
@@ -255,8 +259,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Age: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Age: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.ageRange" required #age="ngModel">
                         <option value="45-65">45-65 years old</option>
                         <option value="19-29">19-29 years old</option>
@@ -270,8 +274,8 @@
                 <!-- PART A: ENDS -->
                 <!-- PART B: START -->
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label"># of Hours/Week: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label"># of Hours/Week: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.hoursPerWeek" required #hours="ngModel">
                         <option value="10-20">10-20</option>
                         <option value="5-10">5-10</option>
@@ -284,8 +288,8 @@
                 </div>
                 <!-- Apply judgement? -->
                 <div class="form-group">
-                    <label class="col-sm-3 text-nowrap control-label">Work History: </label>
-                    <div class="col-sm-4">
+                    <label class="col-md-2 text-nowrap control-label">Work History: </label>
+                    <div class="col-md-4">
                         <select class="form-control" [(ngModel)]="suitabilityForm.workHistory"  required #history="ngModel">
                         <option value="<1">Less than 1 year experience in the field</option>
                         <option value="1-4">1-4 years experience in the field</option>
@@ -298,105 +302,115 @@
                 </div>
             </div>
             <!-- end of section 3 -->
-            <div id="section4" *ngIf="showSection4" class="col-sm-12">
+            <div id="section4" *ngIf="showSection4" class="col-md-12">
               <div class="form-group">
-                  <div class="col-sm-offset-10 col-sm-1">
+                  <div class="col-md-offset-10 col-md-1">
                       <button (click)="next($event, 'section5')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></button>
                   </div>
               </div>
-              <h3>Factors Affecting Client Success</h3>
-              <h4>Check all options that apply.</h4>
+              <div class="col-md-offset-1">
+                <h3>Factors Affecting Client Success</h3>
+                <hr>
+                <h4>Check all options that apply.</h4>
                 <label class="checkbox">
-                    <input type="checkbox" value="health problems" [(ngModel)]="suitabilityForm.factorHealth">Client has health problems that may prevent client from working effectively
+                    <p-checkbox [(ngModel)]="suitabilityForm.factorHealth" binary="true"></p-checkbox> Client has health problems that may prevent client from working effectively
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" value="difficulty understanding instructions" [(ngModel)]="suitabilityForm.factorInstructions">Client has difficulty understanding instructions
+                  <p-checkbox [(ngModel)]="suitabilityForm.factorInstructions" binary="true"></p-checkbox> Client has difficulty understanding instructions
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" value="difficulty communicating" [(ngModel)]="suitabilityForm.factorCommunication">Client has difficulty communicating
+                    <p-checkbox [(ngModel)]="suitabilityForm.factorCommunication" binary="true"></p-checkbox> Client has difficulty communicating
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" value="language barrier" [(ngModel)]="suitabilityForm.factorLanguage">Client has language barrier
+                    <p-checkbox [(ngModel)]="suitabilityForm.factorLanguage" binary="true"></p-checkbox> Client has language barrier
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" value="limited computer skills" [(ngModel)]="suitabilityForm.factorComputer">Client has limited computer skills
+                    <p-checkbox [(ngModel)]="suitabilityForm.factorComputer" binary="true"></p-checkbox> Client has limited computer skills
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" value="housing instability" [(ngModel)]="suitabilityForm.factorHousing">Client has housing instability
+                    <p-checkbox [(ngModel)]="suitabilityForm.factorHousing" binary="true"></p-checkbox> Client has housing instability
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" value="transportation limited" [(ngModel)]="suitabilityForm.factorTransportation">Transportation is limited restricted (no license/ no $s for bus/gas)
+                    <p-checkbox [(ngModel)]="suitabilityForm.factorTransportation" binary="true"></p-checkbox> Transportation is limited restricted (no license/ no $ for bus/gas)
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" value="unreliable daycare" [(ngModel)]="suitabilityForm.factorDaycare">Client does not have reliable daycare
+                    <p-checkbox [(ngModel)]="suitabilityForm.factorDaycare" binary="true"></p-checkbox> Client does not have reliable daycare
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" value="no phone or internet" [(ngModel)]="suitabilityForm.factorInternet">Client does not have phone/internet access
+                    <p-checkbox [(ngModel)]="suitabilityForm.factorInternet" binary="true"></p-checkbox> Client does not have phone/internet access
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" value="personal problems" [(ngModel)]="suitabilityForm.factorPersonal">Client is going through difficulties in his/her personal life, (legal, family, substance abuse, financial)
+                    <p-checkbox [(ngModel)]="suitabilityForm.factorPersonal" binary="true"></p-checkbox> Client is going through difficulties in his/her personal life (legal, family, substance abuse, financial)
                 </label>
                 <br />
-                <div class="col-sm-8">
+
+                <div class="col-md-8">
                   <label class="textbox">
                     Other:<input class="form-control" type="text" name="other" [(ngModel)]="suitabilityForm.factorOther" />
                   </label>
                 </div>
+                </div>
               </div>
             <!-- PART B: ENDS -->
             <!-- end of section 4 -->
-            <div id="section5" *ngIf="showSection5" class="col-sm-12">
+            <div id="section5" *ngIf="showSection5" class="col-md-12">
               <div class="form-group">
-                  <div class="col-sm-offset-10 col-sm-1">
+                  <div class="col-md-offset-10 col-md-1">
                       <button (click)="next($event, 'section6')" class="nextButton" title="Next section"><h4>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></h4></button>
                   </div>
               </div>
+              <div class="col-md-offset-1">
               <h3>Summary Notes</h3>
-                <div class="form-group col-sm-8">
+              <hr>
+                <div class="form-group col-md-7">
                   <label for="comment">Transportation:</label>
-                  <textarea class="form-control" rows="2" name="transportation" [(ngModel)]="suitabilityForm.summaryTransportation"></textarea>
+                  <textarea style="max-width:500px;" class="form-control" rows="2" name="transportation" [(ngModel)]="suitabilityForm.summaryTransportation"></textarea>
                 </div>
-                <div class="form-group col-sm-8">
+                <div class="form-group col-md-7">
                   <label for="comment">Housing:</label>
-                  <textarea class="form-control" rows="2" name="housing" [(ngModel)]="suitabilityForm.summaryHousing"></textarea>
+                  <textarea style="max-width:500px;" class="form-control" rows="2" name="housing" [(ngModel)]="suitabilityForm.summaryHousing"></textarea>
                 </div>
-                <div class="form-group col-sm-8">
+                <div class="form-group col-md-7">
                   <label for="comment">Childcare:</label>
-                  <textarea class="form-control" rows="2" name="childcare" [(ngModel)]="suitabilityForm.summaryChildcare"></textarea>
+                  <textarea style="max-width:500px;" class="form-control" rows="2" name="childcare" [(ngModel)]="suitabilityForm.summaryChildcare"></textarea>
                 </div>
-                <div class="form-group col-sm-8">
+                <div class="form-group col-md-7">
                   <label for="comment">Health:</label>
-                  <textarea class="form-control" rows="2" name="health" [(ngModel)]="suitabilityForm.summaryHealth"></textarea>
+                  <textarea style="max-width:500px;" class="form-control" rows="2" name="health" [(ngModel)]="suitabilityForm.summaryHealth"></textarea>
                 </div>
-                <div class="form-group col-sm-8">
+                <div class="form-group col-md-7">
                   <label for="comment">Other:</label>
-                  <textarea class="form-control" rows="2" name="summaryother" [(ngModel)]="suitabilityForm.summaryOther"></textarea>
+                  <textarea style="max-width:500px;" class="form-control" rows="2" name="summaryother" [(ngModel)]="suitabilityForm.summaryOther"></textarea>
                 </div>
+              </div>
             </div>
             <!-- end of section 5 -->
-            <div id="section6" *ngIf="showSection6" class="col-sm-12">
+            <div id="section6" *ngIf="showSection6" class="col-md-12">
                 <div class="form-group">
-                    <div class="col-sm-offset-10 col-sm-1">
+                    <div class="col-md-offset-10 col-md-1">
                         <button (click)="save()" class="saveButton" title="Save client"><h4><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</h4></button>
                     </div>
                 </div>
+                <div class="col-md-offset-1">
+                <h3>Review</h3>
+                <hr>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Part A total: </label>
-                    <div class="col-sm-2">
+                    <label class="col-md-2 control-label">Part A total: </label>
+                    <div class="col-md-2">
                         <input class="form-control" value="{{partAPoints}}" type="number" name="partA" disabled>
                         <div *ngIf="partAWarning"><label>Warning</label></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Part B total: </label>
-                    <div class="col-sm-2">
+                    <label class="col-md-2 control-label">Part B total: </label>
+                    <div class="col-md-2">
                         <input class="form-control" value="{{partBPoints}}" type="number" name="partB" disabled>
                         <div *ngIf="partBWarning"><label>Warning</label></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Total: </label>
-                    <div class="col-sm-2">
+                    <label class="col-md-2 control-label">Total: </label>
+                    <div class="col-md-2">
                         <input class="form-control" value="{{totalPoints}}" type="number" name="totalPoints" disabled>
                         <input class="form-control" value="{{totalPoints}}" type="hidden" name="totalPoints" [(ngModel)]="suitabilityForm.dbTotalPoints">
                     </div>
@@ -408,7 +422,7 @@
     </div>
     <div class="push"></div>
 </div>
-<div class="backButton">
+<div class="footer">
     <div>
         <button (click)="goBack()" class="btn btn-default">Back</button>
     </div>

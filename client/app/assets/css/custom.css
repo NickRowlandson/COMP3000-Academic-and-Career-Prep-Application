@@ -129,10 +129,10 @@ html, body {
 }
 
 .saveButton {
+  background-color: #DDDDDD;
   position: absolute;
   top: -79px;
   cursor:pointer;
-  background-color: #fff;
   color: #64a70b;
   display: inline;
   padding: 0 10 0 10;
@@ -170,7 +170,7 @@ html, body {
 }
 
 .wrapper2 {
-  min-height: 60%;
+  min-height: 65%;
 }
 
 .wrapper3 {

@@ -2,7 +2,14 @@
     font-family: Avenir, Calibri, Minion;
 }
 
+.labelVerticalAlign{
+  bottom: 6px;
+  margin-left: 10px;
+  position: relative;
+}
+
 .sectionButtons {
+    background-color: #DDDDDD;
     display: inline;
     padding: 0 10 0 10;
     margin: 0 2 0 2;
@@ -36,10 +43,11 @@
 }
 
 .nextButton {
+  background-color: #DDDDDD;
+  min-width: 74px;
   position: absolute;
   top:-78px;
   cursor:pointer;
-  background-color: #fff;
   color: #333f48;
   display: inline;
   padding: 0 10 0 10;
