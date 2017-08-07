@@ -102,14 +102,15 @@
           <hr>
           <table *ngIf="!noStudentsEnrolled" class="table table-striped">
             <thead>
-                <th style="width:200px"></th>
+                <th>Student</th>
+                <th>Expected Start/End</th>
                 <th *ngFor="let day of days">{{ day.date }}</th>
             </thead>
             <tbody>
                 <tr></tr>
                 <tr *ngFor="let student of courseStudents">
-                  <strong>{{ student.student.firstName }} {{ student.student.lastName }}</strong>
-                  <span style="float:right; padding-right:15px">({{ student.startDate | date }} - {{ student.endDate | date }})</span>
+                  <td>{{ student.student.firstName }} {{ student.student.lastName }}</td>
+                  <td>{{ student.startDate | date }} - {{ student.endDate | date }}</td>
                   <td *ngFor="let item of student.attendanceInfo">
                     <span *ngIf="item.attendanceValue === 'P'" style="color:green">{{ item.attendanceValue }}</span>
                     <span *ngIf="item.attendanceValue === 'A'" style="color:red">{{ item.attendanceValue }}</span>

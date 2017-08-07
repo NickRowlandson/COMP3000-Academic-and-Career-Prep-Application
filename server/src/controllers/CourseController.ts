@@ -115,7 +115,7 @@ left join staff on staff.userID = course.professorId`)
                     var course = req.body;
                     var _id: string = req.params._id;
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-                        new sql.Request().query(`UPDATE Course SET courseName='${course.courseName}', classroom='${course.classroom}',campusId='${course.campusId}',professorId='${course.professorId}'
+                        new sql.Request().query(`UPDATE Course SET courseName='${course.courseName}', professorId='${course.professorId}',campusId='${course.campusId}', classroom='${course.classroom}', classDays='${course.classDays}', courseStart='${course.courseStart}', courseEnd='${course.courseEnd}', coursesString='${course.coursesString}'
                           WHERE courseID =${_id};`).then(function() {
                                 res.send({ "success": "success" });
                             }).catch(function(err) {

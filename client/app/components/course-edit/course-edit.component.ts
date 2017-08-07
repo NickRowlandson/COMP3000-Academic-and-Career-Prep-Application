@@ -31,8 +31,10 @@ export class CourseEditComponent implements OnInit {
     // drop down
     professors: SelectItem[] = [];
     campuses: SelectItem[] = [];
+
     constructor(private courseService: CourseService, private route: ActivatedRoute) {
     }
+
     ngOnInit() {
         this.subscribeCourse();
 
@@ -67,16 +69,16 @@ export class CourseEditComponent implements OnInit {
             height: "auto",
             selectable: true
         };
-    } // end of init 
+    } // end of init
 
-    // check boxes onchange event 
+    // check boxes onchange event
     cb_onchange(e, weekday) {
         if (e) {
             // import days
                 // check if user declare time range
                 if (this.course.courseStart === undefined || this.course.courseEnd === undefined || this.course.courseStart === null || this.course.courseEnd == null) {
                 alert('you must pick a date!');
-                this.unCheck(weekday); // unselect element 
+                this.unCheck(weekday); // unselect element
                 }else {
                 this.generateDays(weekday, this.course.courseStart, this.course.courseEnd);
                 }
@@ -84,7 +86,7 @@ export class CourseEditComponent implements OnInit {
            this.events =  this.events.filter(result => result.weekday !== weekday);
         }
     }
- // this function will uncheck checkbox based on week day that given 
+ // this function will uncheck checkbox based on week day that given
   unCheck(weekday) {
     this.selectedDays = this.selectedDays.filter(result => result !== weekday);
  }
@@ -108,13 +110,13 @@ this.events.push({ title: moment(nextDay).add(7 * root, 'day').format('YYYY-MM-D
      root++;
  }
 }
- // event handler for event click 
+ // event handler for event click
     handleEventClick(e) {
         let event =  e.calEvent;
         console.log(event);
         this.events = this.events.filter(result => result !== event );
     }
- // event handler for day click 
+ // event handler for day click
     handleDayClick(e) {
         let momentIndex = -1;
         let date = e.date.format();
@@ -154,8 +156,8 @@ this.events.push({ title: moment(nextDay).add(7 * root, 'day').format('YYYY-MM-D
                 this.newCourse = false;
                 this.courseService.getCourse(this.id).then((result) => {
                     result.forEach((item) => {
-                        // item.courseStart = moment(item.courseStart).format('YYYY-MM-DD');
-                        // item.courseEnd = moment(item.courseEnd).format('YYYY-MM-DD');
+                        item.courseStart = moment(item.courseStart).format('YYYY-MM-DD');
+                        item.courseEnd = moment(item.courseEnd).format('YYYY-MM-DD');
                         // item.classStartTime = moment(item.classStartTime).format('hh:mm A');
                         // item.classEndTime = moment(item.classEndTime).format('hh:mm A');
                     });
