@@ -31,6 +31,8 @@ export class ClientStatusComponent implements OnInit {
     suitabilityView: SuitabilityForm;
     learningStyleView: LearningStyleForm;
 
+    showSuitabilityEdit: boolean;
+
     addSuitability: boolean = false;
     @Input() suitabilityForm: SuitabilityForm;
     clientSuitability: Client[];
@@ -168,12 +170,8 @@ export class ClientStatusComponent implements OnInit {
 
     showClientView(client: Client) {
         this.clientView = client;
-        this.addSuitability = false;
-        this.statusReport = false;
+        this.resetView();
         this.showGeneral = true;
-        this.showSuitability = false;
-        this.showConsent = false;
-        this.showLearningStyle = false;
 
         var suitabilityForm = this.getSuitabilityFormByFilter(client.userID);
         this.suitabilityView = suitabilityForm[0];
@@ -202,24 +200,16 @@ export class ClientStatusComponent implements OnInit {
 
     sectionBtnClicked(event, section) {
         if (section === "general") {
+          this.resetView();
             this.showGeneral = true;
-            this.showSuitability = false;
-            this.showConsent = false;
-            this.showLearningStyle = false;
         } else if (section === "suitability") {
-            this.showGeneral = false;
+          this.resetView();
             this.showSuitability = true;
-            this.showConsent = false;
-            this.showLearningStyle = false;
         } else if (section === "consent") {
-            this.showGeneral = false;
-            this.showSuitability = false;
+          this.resetView();
             this.showConsent = true;
-            this.showLearningStyle = false;
         } else if (section === "learningStyle") {
-            this.showGeneral = false;
-            this.showSuitability = false;
-            this.showConsent = false;
+          this.resetView();
             this.showLearningStyle = true;
         }
     }
@@ -343,15 +333,25 @@ export class ClientStatusComponent implements OnInit {
       this.clientSuitability = client;
     }
 
+    editSuitability(id) {
+      this.resetView();
+      this.showSuitabilityEdit = true;
+      this.suitabilityForm = this.getSuitabilityFormByFilter(id)[0];
+    }
+
     saveSuitability() {
-      this.tallyPoints();
-      this.suitabilityForm.dbTotalPoints = this.totalPoints;
-      this.clientService
-        .addSuitability(this.clientSuitability, this.suitabilityForm)
-        .then( res => {
-          this.ngOnInit();
-        })
-        .catch();
+      if (this.suitabilityForm.suitabilityID) {
+      } else {
+        this.tallyPoints();
+        this.suitabilityForm.dbTotalPoints = this.totalPoints;
+        this.clientService
+          .addSuitability(this.clientSuitability, this.suitabilityForm)
+          .then( res => {
+            this.ngOnInit();
+          })
+          .catch();
+      }
+
     }
 
     calculate() {
@@ -436,6 +436,16 @@ export class ClientStatusComponent implements OnInit {
       }
 
       this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length, this.stage4.length];
+    }
+
+    resetView() {
+      this.statusReport = false;
+      this.showGeneral = false;
+      this.showConsent = false;
+      this.showLearningStyle = false;
+      this.showSuitability = false;
+      this.showSuitabilityEdit = false;
+      this.addSuitability = false;
     }
 
     goBack() {
