@@ -51,7 +51,17 @@
           <h2>Report for {{ student.firstName }}</h2>
           <div (click)="overallStatus($event)" class="statusButton" title="View overall status"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
           <hr>
-          <h3>Present: {{ totalPresent }} Absent: {{ totalAbsent }} Made Contact: {{ totalMadeContact }}</h3>
+          <div class="col-md-12" style="text-align:center">
+            <div class="well col-md-4" (click)="filterStaff('total')">
+                <h2><strong style="color:red">{{ totalAbsent }}</strong> Total Absences</h2>
+            </div>
+            <div class="well col-md-4" (click)="filterStaff('total')">
+                <h2><strong style="color:green">{{ totalPresent }}</strong> Total Presences</h2>
+            </div>
+            <div class="well col-md-4" (click)="filterStaff('total')">
+                <h2><strong style="color:#FFA500">{{ totalMadeContact }}</strong> Total Made Contact</h2>
+            </div>
+          </div>
           <div *ngIf="noAttendance" style="color:red;"><h2>No attendance data yet...</h2></div>
           <div *ngFor="let info of records">
             <div class="well col-md-12">

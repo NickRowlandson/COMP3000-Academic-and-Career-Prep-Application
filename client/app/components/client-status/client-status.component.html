@@ -233,24 +233,52 @@
                     <input class="form-control" type="date" [(ngModel)]="suitabilityForm.transitionDate" />
                 </div>
 
-                <div style="height: 25px;clear:both"></div>
-                <label class="col-md-5 control-label">Transcript: </label>
-                <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.transcript"></p-inputSwitch>
-                <br />
-                <label class="col-md-5 control-label">Gov't ID: </label>
-                <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.governmentID"></p-inputSwitch>
-                <br />
-                <label class="col-md-5 control-label">Appropriate Occupational Goal</label>
-                <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.appropriateGoal"></p-inputSwitch>
-                <br />
-                <label class="col-md-5 control-label">19+ Years Old</label>
-                <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.isValidAge"></p-inputSwitch>
-                <br />
-                <label class="col-md-5 control-label">Registered In High School/Post-Sec</label>
-                <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.schoolRegistration"></p-inputSwitch>
-                <br />
-                <label class="col-md-5 control-label">Available During Class Time</label>
-                <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.availableDuringClass"></p-inputSwitch>
+                <div *ngIf="!suitabilityForm.suitabilityID">
+                  <div style="height: 25px;clear:both"></div>
+                  <label class="col-md-5 control-label">Transcript: </label>
+                  <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.transcript"></p-inputSwitch>
+                  <br />
+                  <label class="col-md-5 control-label">Gov't ID: </label>
+                  <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.governmentID"></p-inputSwitch>
+                  <br />
+                  <label class="col-md-5 control-label">Appropriate Occupational Goal</label>
+                  <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.appropriateGoal"></p-inputSwitch>
+                  <br />
+                  <label class="col-md-5 control-label">19+ Years Old</label>
+                  <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.isValidAge"></p-inputSwitch>
+                  <br />
+                  <label class="col-md-5 control-label">Registered In High School/Post-Sec</label>
+                  <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.schoolRegistration"></p-inputSwitch>
+                  <br />
+                  <label class="col-md-5 control-label">Available During Class Time</label>
+                  <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="suitabilityForm.availableDuringClass"></p-inputSwitch>
+                </div>
+                <div *ngIf="suitabilityForm.suitabilityID">
+                  <div style="height: 25px;clear:both"></div>
+                  <label class="col-md-5 control-label">Transcript: </label>
+                  <button *ngIf="suitabilityForm.transcript === 'true'" (click)="suitabilityForm.transcript = 'false'" class="btn btn-success">Yes</button>
+                  <button *ngIf="suitabilityForm.transcript === 'false'" (click)="suitabilityForm.transcript = 'true'" class="btn btn-warning">No</button>
+                  <br />
+                  <label class="col-md-5 control-label">Gov't ID: </label>
+                  <button *ngIf="suitabilityForm.governmentID === 'true'" (click)="suitabilityForm.governmentID = 'false'" class="btn btn-success">Yes</button>
+                  <button *ngIf="suitabilityForm.governmentID === 'false'" (click)="suitabilityForm.governmentID = 'true'" class="btn btn-warning">No</button>
+                  <br />
+                  <label class="col-md-5 control-label">Appropriate Occupational Goal</label>
+                  <button *ngIf="suitabilityForm.appropriateGoal === 'true'" (click)="suitabilityForm.appropriateGoal = 'false'" class="btn btn-success">Yes</button>
+                  <button *ngIf="suitabilityForm.appropriateGoal === 'false'" (click)="suitabilityForm.appropriateGoal = 'true'" class="btn btn-warning">No</button>
+                  <br />
+                  <label class="col-md-5 control-label">19+ Years Old</label>
+                  <button *ngIf="suitabilityForm.isValidAge === 'true'" (click)="suitabilityForm.isValidAge = 'false'" class="btn btn-success">Yes</button>
+                  <button *ngIf="suitabilityForm.isValidAge === 'false'" (click)="suitabilityForm.isValidAge = 'true'" class="btn btn-warning">No</button>
+                  <br />
+                  <label class="col-md-5 control-label">Registered In High School/Post-Sec</label>
+                  <button *ngIf="suitabilityForm.schoolRegistration === 'true'" (click)="suitabilityForm.schoolRegistration = 'false'" class="btn btn-success">Yes</button>
+                  <button *ngIf="suitabilityForm.schoolRegistration === 'false'" (click)="suitabilityForm.schoolRegistration = 'true'" class="btn btn-warning">No</button>
+                  <br />
+                  <label class="col-md-5 control-label">Available During Class Time</label>
+                  <button *ngIf="suitabilityForm.availableDuringClass === 'true'" (click)="suitabilityForm.availableDuringClass = 'false'" class="btn btn-success">Yes</button>
+                  <button *ngIf="suitabilityForm.availableDuringClass === 'false'" (click)="suitabilityForm.availableDuringClass = 'true'" class="btn btn-warning">No</button>
+                </div>
                 <div style="height: 25px;clear:both"></div>
                 <div class="form-group">
                     <label class="col-md-5 text-nowrap control-label">Last Grade Completed: </label>
