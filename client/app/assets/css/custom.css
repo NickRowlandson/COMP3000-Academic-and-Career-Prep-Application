@@ -149,7 +149,7 @@ html, body {
 
 .submitForm {
   cursor:pointer;
-  background-color: #fff;
+  background-color: #ddd;
   color: #64a70b;
   display: inline;
   padding: 0 10 0 10;

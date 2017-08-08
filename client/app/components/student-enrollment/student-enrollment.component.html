@@ -24,7 +24,8 @@
           <p-column header="Action" [style]="{'width': '500px', 'overflow': 'visible'}">
             <template let-data="rowData" pTemplate="body">
               <div *ngIf="!loading" class="input-group">
-                <button *ngIf="data.enrolled" type="button" (click)="checkEnrolled(data)" class="btn btn-danger remove">Remove</button>
+                <button *ngIf="data.enrolled" type="button" class="btn btn-primary courseComplete">Course Complete</button>
+                <button *ngIf="data.enrolled" type="button" (click)="checkEnrolled(data)" class="btn btn-danger remove">Drop</button>
                 <div *ngIf="!data.enrolled">
                     <p-calendar [(ngModel)]="data.studentStartDate" dateFormat="dd/mm/yy" placeholder="Student Start Date"></p-calendar> -
                     <p-calendar [(ngModel)]="data.studentEndDate" dateFormat="dd/mm/yy"  placeholder="Student End Date"></p-calendar>

@@ -9,6 +9,11 @@
 
 .remove {
   width: 79px;
-  right: -400px;
+  right: -250px;
+  position: relative;
+}
+
+.courseComplete {
+  right: -245px;
   position: relative;
 }

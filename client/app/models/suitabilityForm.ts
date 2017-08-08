@@ -1,4 +1,5 @@
 export class SuitabilityForm {
+  suitabilityID: number;
   userID: any;
   transcript: boolean;
   courses: string;
