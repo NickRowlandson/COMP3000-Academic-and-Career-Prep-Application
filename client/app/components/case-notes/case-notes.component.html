@@ -1,7 +1,7 @@
 <div class="caseNotes">
+  <h1><strong>Case Notes</strong></h1>
+  <hr>
   <div *ngIf="!data">
-    <h2>Case Notes</h2>
-    <hr>
     <div class="cs-loader">
       <div class="cs-loader-inner">
         <label>	L</label>
@@ -20,7 +20,7 @@
   <div class="row" *ngIf="data">
     <div class="col-md-6">
       <div class="wrapper">
-      <h2>Case Notes</h2>
+      <h2>Students</h2>
       <hr>
       <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
       <p-dataTable [value]="data | userFilter : filterQuery" [responsive]="true">

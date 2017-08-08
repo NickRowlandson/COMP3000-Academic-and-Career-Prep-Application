@@ -33,13 +33,16 @@ export class AttendanceReportComponent implements OnInit {
 
     courseAttendanceView: boolean = false;
     course: any;
+    classTimeStr: any;
     courseData: any[];
     courseStudents: any[];
     courseTimetables: any[];
     studentRecord: any[];
     noStudentsEnrolled: boolean = false;
 
-    days = [{ date: "Week 1" }, { date: "Week 2" }, { date: "Week 3" }, { date: "Week 4" }, { date: "Week 5" }];
+    classAbsenceTotal: any;
+    classPresenceTotal: any;
+    classMadeContactTotal: any;
 
     constructor(private router: Router, private studentService: StudentService, private courseService: CourseService) {
 
@@ -87,8 +90,8 @@ export class AttendanceReportComponent implements OnInit {
                     result.forEach((item) => {
                         item.courseStart = moment(item.courseStart).format('YYYY-MM-DD');
                         item.courseEnd = moment(item.courseEnd).format('YYYY-MM-DD');
-                        item.classStartTime = moment(item.classStartTime).format('hh:mm A');
-                        item.classEndTime = moment(item.classEndTime).format('hh:mm A');
+                        // item.classStartTime = moment(item.classStartTime).format('hh:mm A');
+                        // item.classEndTime = moment(item.classEndTime).format('hh:mm A');
                     });
                     this.courses = result;
                     this.getTimetables();
@@ -143,6 +146,25 @@ export class AttendanceReportComponent implements OnInit {
         this.courseStudents = [];
         this.courseAttendanceView = true;
         this.course = course;
+        this.classTimeStr = this.course.classTimeStr;
+
+        this.classAbsenceTotal = this.data.filter(x => x.courseID === course.courseID && x.attendanceValue === 'A').length;
+        this.classPresenceTotal = this.data.filter(x => x.courseID === course.courseID && x.attendanceValue === 'P').length;
+        this.classMadeContactTotal = this.data.filter(x => x.courseID === course.courseID && x.attendanceValue === 'MC').length;
+
+        if (this.classTimeStr) {
+          var array = this.classTimeStr.split(',');
+          this.classTimeStr = [];
+          for (let item of array) {
+            var date = item.split(' ');
+            // var day = date[0];
+            // var time = date[1];
+            // var startTime = time.split('-')[0];
+            // var endTime = time.split('-')[1];
+            this.classTimeStr.push(date);
+          }
+        }
+
         var studentInfo;
 
         if (this.data.length === 0) {

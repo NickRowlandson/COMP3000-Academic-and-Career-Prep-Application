@@ -516,6 +516,9 @@ class StudentController {
                             new sql.Request(connection)
                                 .query("SELECT * FROM Attendance")
                                 .then(function(recordset) {
+                                    for (let item of recordset) {
+                                      item.date = item.date.split(' ');
+                                    }
                                     res.send(recordset);
                                 }).catch(function(err) {
                                     res.send({ "error": "error" });

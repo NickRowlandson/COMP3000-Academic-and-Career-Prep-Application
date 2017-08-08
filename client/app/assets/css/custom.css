@@ -177,6 +177,10 @@ html, body {
   min-height: 70%;
 }
 
+.wrapper4 {
+  min-height: 60%;
+}
+
 .footer, .push {
   height: 0px;
 }

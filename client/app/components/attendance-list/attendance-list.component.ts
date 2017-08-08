@@ -23,6 +23,7 @@ export class AttendanceListComponent implements OnInit {
     timetables: any;
     attendance: any;
     absentStudents = [];
+    attendanceDates: any[] = [];
 
     constructor(private router: Router, private CourseService: CourseService, private StudentService: StudentService) {
       this.date = new Date();
@@ -67,8 +68,18 @@ export class AttendanceListComponent implements OnInit {
           })
           .catch(error => console.log(error));
 
-      this.attendanceCourse = course.courseName;
+      this.attendanceCourse = course;
+      var array = this.attendanceCourse.classTimeStr.split(',');
+      for (let item of array) {
+        var date = item.split(' ');
+        var day = date[0];
+        var time = date[1];
+        var startTime = time.split('-')[0];
+        var endTime = time.split('-')[1];
+        this.attendanceDates.push(date);
+      }
       this.attendanceView = true;
+      console.log(this.attendanceDates);
     }
 
     getStudentsById(timetables) {
@@ -109,7 +120,14 @@ export class AttendanceListComponent implements OnInit {
         }
       }
 
-      if (count === this.attendanceStudents.length) {
+      if (!this.attendanceCourse.attendanceDate) {
+        console.log(this.attendanceCourse);
+        swal(
+            'Attendance Incomplete',
+            'Please enter an attendance date',
+            'warning'
+        );
+      } else if (count === this.attendanceStudents.length && this.attendanceCourse.attendanceDate) {
         swal({
             title: 'Submit Attendance?',
             text: "You won't be able to revert this!",
@@ -123,7 +141,7 @@ export class AttendanceListComponent implements OnInit {
             this.attendance = {
               students: this.attendanceStudents,
               courseID: this.courseID,
-              date: this.date
+              date: this.attendanceCourse.attendanceDate
             };
             this.StudentService
                 .insertAttendance(this.attendance)

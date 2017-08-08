@@ -1,6 +1,6 @@
-<div class="">
+<div class="attendanceReport">
     <div *ngIf="!data">
-        <h1>Attendance Report</h1>
+        <h1><strong>Attendance Report</strong></h1>
         <hr>
         <div class="cs-loader">
             <div class="cs-loader-inner">
@@ -18,10 +18,10 @@
         </div>
     </div>
     <div class="row" *ngIf="data && studentReport">
-        <h1>Attendance Report (Student View)</h1>
+        <h1><strong>Attendance Report (Student View)</strong></h1>
         <hr>
         <div class="col-md-3">
-          <div class="wrapper2">
+          <div class="wrapper4">
             <h2>Students</h2>
             <p-inputSwitch onLabel="Course Report" offLabel="Student Report" [(ngModel)]="studentReport"></p-inputSwitch>
             <hr>
@@ -30,7 +30,7 @@
                 <p-column field="fullName" header="Name" [sortable]="true"></p-column>
                 <p-column header="Action" [style]="{'width': '130px'}">
                   <template let-data="rowData" pTemplate="body">
-                    <button class="btn btn-primary" (click)="viewStudentReport(data, $event)">View Report</button>
+                    <button class="btn btn-success" (click)="viewStudentReport(data, $event)">View Report</button>
                   </template>
                 </p-column>
             </p-dataTable>
@@ -67,7 +67,7 @@
         </div>
     </div>
     <div class="row" *ngIf="data && !studentReport">
-        <h1>Attendance Report (Course View)</h1>
+        <h1><strong>Attendance Report (Course View)</strong></h1>
         <hr>
         <div class="col-md-3">
           <div class="wrapper2">
@@ -100,21 +100,36 @@
           <h2>{{ course.courseName }} Report</h2>
           <div (click)="overallStatus($event)" class="statusButton" title="View overall status"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
           <hr>
+          <div class="col-md-12" style="text-align:center">
+            <div class="well col-md-4" (click)="filterStaff('total')">
+                <h2><strong style="color:red">{{ classAbsenceTotal }}</strong> Total Absences</h2>
+            </div>
+            <div class="well col-md-4" (click)="filterStaff('total')">
+                <h2><strong style="color:green">{{ classPresenceTotal }}</strong> Total Presences</h2>
+            </div>
+            <div class="well col-md-4" (click)="filterStaff('total')">
+                <h2><strong style="color:#FFA500">{{ classMadeContactTotal }}</strong> Total Made Contact</h2>
+            </div>
+          </div>
           <table *ngIf="!noStudentsEnrolled" class="table table-striped">
             <thead>
-                <th>Student</th>
-                <th>Expected Start/End</th>
-                <th *ngFor="let day of days">{{ day.date }}</th>
+                <th style="width:200px">Student</th>
+                <th style="width:200px">Expected Start/End</th>
+                <th *ngFor="let date of classTimeStr">{{ date[0] | date}}</th>
             </thead>
             <tbody>
                 <tr></tr>
                 <tr *ngFor="let student of courseStudents">
-                  <td>{{ student.student.firstName }} {{ student.student.lastName }}</td>
-                  <td>{{ student.startDate | date }} - {{ student.endDate | date }}</td>
-                  <td *ngFor="let item of student.attendanceInfo">
-                    <span *ngIf="item.attendanceValue === 'P'" style="color:green">{{ item.attendanceValue }}</span>
-                    <span *ngIf="item.attendanceValue === 'A'" style="color:red">{{ item.attendanceValue }}</span>
-                    <span *ngIf="item.attendanceValue === 'MC'" style="color:#FFA500">{{ item.attendanceValue }}</span>
+                  <td>{{ student.student.firstName }} {{ student.student.lastName }} {{i}}</td>
+                  <td>{{ student.startDate | date :  "dd/MM/yy" }} - {{ student.endDate |  date :  "dd/MM/yy" }}</td>
+                  <td *ngFor="let check of classTimeStr" style="border:1px solid #DDDDDD; text-align:center">
+                    <div *ngFor="let item of student.attendanceInfo">
+                      <div *ngIf="item.date[0] === check[0]">
+                        <span *ngIf="item.attendanceValue === 'P'" style="color:green">{{ item.attendanceValue }}</span>
+                        <span *ngIf="item.attendanceValue === 'A'" style="color:red">{{ item.attendanceValue }}</span>
+                        <span *ngIf="item.attendanceValue === 'MC'" style="color:#FFA500">{{ item.attendanceValue }}</span>
+                      </div>
+                    </div>
                   </td>
                 </tr>
             </tbody>

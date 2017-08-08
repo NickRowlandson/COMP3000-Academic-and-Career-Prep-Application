@@ -5,7 +5,7 @@
 .addClient {
   position:absolute;
   top: 25;
-  right: 50;
+  right: 15;
   float: right;
   min-width: 0px
 }

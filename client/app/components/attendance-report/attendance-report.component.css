@@ -1,3 +1,7 @@
+.attendanceReport {
+  font-family: Avenir, Calibri, Minion;
+}
+
 .viewToggle {
   display: inline-block;
 }

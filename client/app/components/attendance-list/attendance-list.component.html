@@ -1,6 +1,6 @@
-<div class="">
+<div class="attendanceList">
     <div *ngIf="!data">
-        <h1>Take Attendance</h1>
+        <h1><strong>Take Attendance</strong></h1>
         <hr>
         <div class="cs-loader">
             <div class="cs-loader-inner">
@@ -18,10 +18,10 @@
         </div>
     </div>
     <div class="row" *ngIf="data">
-      <h1>Take Attendance</h1>
+      <h1><strong>Take Attendance</strong></h1>
       <hr>
         <div class="col-md-3">
-          <div class="wrapper2">
+          <div class="wrapper4">
             <h2>My Courses</h2>
             <hr>
             <input placeholder="Filter by course name" class="form-control" [(ngModel)]="courseQuery" />
@@ -47,10 +47,14 @@
             <h3>Total courses: {{ data.length }}</h3>
         </div>
         <div *ngIf="attendanceView" class="col-md-9">
-          <div class="wrapper2">
-            <h2>Attendance for {{ attendanceCourse }}</h2>
+          <div class="wrapper4">
+            <h2>Attendance for {{ attendanceCourse.courseName }}</h2>
             <hr>
             <input placeholder="Filter by student name" class="form-control" [(ngModel)]="studentQuery" />
+            <select class="form-control" [(ngModel)]="attendanceCourse.attendanceDate" placeholder="Select attendance date">
+              <option value="">Attendance Dates</option>
+              <option *ngFor="let date of attendanceDates" value="{{ date[0] }} {{ date[1] }}">{{ date[0] | date }} from {{ date[1] }}</option>
+            </select>
             <p-dataTable [value]="attendanceStudents | userFilter : studentQuery" [responsive]="true">
                 <p-column field="fullName" header="Name" [sortable]="true"></p-column>
                 <p-column header="Action" [style]="{'width': '330px'}">
@@ -71,7 +75,7 @@
         </div>
         <div class="push"></div>
       </div>
-        <div *ngIf="!loading" class="footer">
+        <div *ngIf="!loading && attendanceView" class="footer">
             <button type="button" (click)="submitAttendance()" style="float:right;" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Submit</button>
         </div>
     </div>

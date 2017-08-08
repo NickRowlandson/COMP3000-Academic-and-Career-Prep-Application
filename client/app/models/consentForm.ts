@@ -1,8 +1,7 @@
 export class ConsentForm {
   userID: string;
   date: string;
-  detailedMessageYes: string;
-  detailedMessageNo: string;
+  allowDetailedMessage: boolean;
   ontarioWorks: string;
   ontarioDisabilityProgram: string;
   employmentInsurance: string;

@@ -29,8 +29,7 @@ class ClientFormsController {
                         .then(function(connection) {
                             var consentQuery = "'" + _id + "', '" +
                                 consentForm.date + "', '" +
-                                consentForm.detailedMessageYes + "', '" +
-                                consentForm.detailedMessageNo + "', '" +
+                                consentForm.allowDetailedMessage + "', '" +
                                 consentForm.ontarioWorks + "', '" +
                                 consentForm.ontarioDisabilityProgram + "', '" +
                                 consentForm.employmentInsurance + "', '" +
