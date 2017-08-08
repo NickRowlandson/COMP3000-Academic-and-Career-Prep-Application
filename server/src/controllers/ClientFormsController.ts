@@ -73,7 +73,8 @@ class ClientFormsController {
                             var learningStyleQuery = "'" + _id + "', '" +
                                 learningStyleForm.seeing + "', '" +
                                 learningStyleForm.hearing + "', '" +
-                                learningStyleForm.doing + "'";
+                                learningStyleForm.doing + "', '" +
+                                learningStyleForm.learnBy + "'";
                             new sql.Request(connection)
                                 .query("INSERT INTO LearningStyle VALUES (" + learningStyleQuery + ")")
                                 .then(function() {

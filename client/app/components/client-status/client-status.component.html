@@ -201,11 +201,10 @@
             </div>
             <div *ngIf="showLearningStyle" class="infoPanel">
                 <br />
+                <p><strong>I learn best through: {{ learningStyleView.learnBy }}</strong></p>
                 <div class="form-group">
-                    <div>
-                        <div style="display: block">
-                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-                        </div>
+                    <div style="display: block">
+                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
                     </div>
                 </div>
             </div>

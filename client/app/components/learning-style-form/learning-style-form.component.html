@@ -1,8 +1,14 @@
 <div class="learningStyle">
-    <h1><strong>Learning Style</strong></h1>
-    <hr>
-    <div class="padding jumbotron form-horizontal">
-        <h2> Check the boxes beside the statements that describe you </h2>
+  <div class="row">
+
+    <hr class="col-md-4">
+    <div class="col-md-4" style="text-align:center">
+      <h1 class="" style="position: relative;top: 50%;transform: translateY(-50%);"><strong>Learning Style</strong></h1>
+    </div>
+    <hr style="col-md-4;">
+
+    <div class="col-md-8 col-md-offset-2 padding jumbotron form-horizontal">
+        <h2 style="margin-left:-10px;"> Check the boxes beside the statements that describe you </h2>
         <h3> Learning through seeing: </h3>
         <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing1" name="" value="1" /> I remember something better if I write it down. <br />
         <input type="checkbox" (change)="tallyPoints()" [(ngModel)]="learningStyleForm.seeing2" name="" value="1" /> I enjoy doodling. I draw pictures or doodles in my notebooks. <br />
@@ -37,7 +43,7 @@
         <input class="form-control" value="{{totalDoingPoints}}" type="hidden" name="doing" [(ngModel)]="learningStyleForm.doing">
         <br>
         Learning Style:
-        <input type="text" name="" value="" />
+        <input type="text" value="{{learnBy}}" />
         <br>
         <br>
         <br>
@@ -51,4 +57,4 @@
             </div>
         </div>
     </div>
-</div>
+</div></div>

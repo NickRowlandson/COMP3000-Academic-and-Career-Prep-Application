@@ -24,4 +24,5 @@ export class LearningStyleForm {
   doing5: number;
   doing6: number;
   doing7: number;
+  learnBy: any;
 }
