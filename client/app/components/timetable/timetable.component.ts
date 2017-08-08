@@ -26,7 +26,6 @@ export class TimetableComponent implements OnInit {
   ngOnInit() {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     var userID = currentUser.userID;
-    console.log(userID);
 
     this.studentService.getEventsById(userID).then(result => {
       result.forEach((i) => {
@@ -43,34 +42,44 @@ export class TimetableComponent implements OnInit {
         } else if (i.classDay === "Friday") {
           classDay = 5;
         }
+
         i.courseStart = moment(i.courseStart).format('YYYY-MM-DD');
         i.courseEnd = moment(i.courseEnd).format('YYYY-MM-DD');
         i.classStartTime = moment(i.classStartTime).format('hh:mm A');
         i.classEndTime = moment(i.classEndTime).format('hh:mm A');
 
-        this.events.push(
-          {
-            "title": i.courseName,
-            "start": i.courseStart,
-            "end": i.courseEnd,
-            "dow": [ classDay ]
-          });
-
-          console.log(this.events);
+        if (i.classTimeStr) {
+          var array = i.classTimeStr.split(',');
+          for (let item of array) {
+            var date = item.split(' ');
+            var day = date[0];
+            var time = date[1];
+            var startTime = time.split('-')[0];
+            var endTime = time.split('-')[1];
+            this.events.push(
+              {
+                "title": i.courseName,
+                "start": day + "T" + startTime,
+                "end": day + "T" + endTime
+              });
+          }
+        } else {
+          console.log("No class date string available");
+        }
       });
     });
 
-    this.header = {
-      left: 'prev',
-      center: 'title',
-      right: 'next'
-    };
+    // this.header = {
+    //   left: 'prev',
+    //   center: 'title',
+    //   right: 'next'
+    // };
 
     this.options = {
       selectable:true,
       prev: 'circle-triangle-w',
       defaultView: "agendaWeek",
-      minTime: "06:00:00",
+      minTime: "08:00:00",
       maxTime: "22:00:00",
       height: "auto"
     };

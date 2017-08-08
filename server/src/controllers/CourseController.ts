@@ -115,14 +115,10 @@ left join staff on staff.userID = course.professorId`)
                     var course = req.body;
                     var _id: string = req.params._id;
                     sql.connect("mssql://NickRowlandson:georgianTest1@nr-comp2007.database.windows.net/GeorgianApp?encrypt=true").then(function() {
-<<<<<<< HEAD
-                        new sql.Request().query(`UPDATE Course SET courseName='${course.courseName}', classroom='${course.classroom}',
-                        campusId='${course.campusId}',professorId='${course.professorId}',classTimeStr = '${course.classTimeStr}'
-                        ,courseStart ='${course.courseStart}',courseEnd ='${course.courseEnd}'
-=======
-                        new sql.Request().query(`UPDATE Course SET courseName='${course.courseName}', professorId='${course.professorId}',campusId='${course.campusId}', classroom='${course.classroom}', classDays='${course.classDays}', courseStart='${course.courseStart}', courseEnd='${course.courseEnd}', coursesString='${course.coursesString}'
->>>>>>> ff79ad3aae30d89626ea588f0b83195c35f9ef57
-                          WHERE courseID =${_id};`).then(function() {
+                        new sql.Request().query(`UPDATE Course SET courseName='${course.courseName}',professorId='${course.professorId}',
+                        campusId='${course.campusId}',classroom='${course.classroom}',classDays ='${course.classDays}',courseStart ='${course.courseStart}',
+                        courseEnd ='${course.courseEnd}',classTimeStr = '${course.classTimeStr}'
+                        WHERE courseID =${_id};`).then(function() {
                                 res.send({ "success": "success" });
                             }).catch(function(err) {
                                 res.send({ "error": "error" }); console.log("Update course " + err);

@@ -53,12 +53,12 @@ class StudentController {
                     var query = "SELECT * FROM Students WHERE userID =";
                     var count = 0;
                     for (let timetable of timetables) {
-                      if(count === 0) {
-                        query += " " + timetable.userID;
-                      } else {
-                        query += " OR userID = " + timetable.userID;
-                      }
-                      count ++;
+                        if (count === 0) {
+                            query += " " + timetable.userID;
+                        } else {
+                            query += " OR userID = " + timetable.userID;
+                        }
+                        count++;
                     }
                     sql.connect(config)
                         .then(function(connection) {
@@ -265,7 +265,7 @@ class StudentController {
     }
 
     getTimetables(req: express.Request, res: express.Response): void {
-      console.log("Getting Timetables");
+        console.log("Getting Timetables");
         try {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Instructor", "Admin", "Staff"], done: function() {
@@ -321,12 +321,12 @@ class StudentController {
             res.send({ "error": "error in your request" });
         }
     }
-   getTimetablesByUserId(req: express.Request, res: express.Response): void {
-   try {
+    getTimetablesByUserId(req: express.Request, res: express.Response): void {
+        try {
             new AuthController().authUser(req, res, {
                 requiredAuth: ["Student", "Admin", "Staff"], done: function() {
                     var _id: string = req.params.userID;
-                        console.log('param userID: '+_id)
+                    console.log('param userID: ' + _id)
                     // sql.connect(config).then(() => {
                     //     return sql.query`select * FROM Timetables WHERE studentId = ${_id}`
                     // }).then(result => {
@@ -343,24 +343,24 @@ class StudentController {
                     //     console.log(err);
                     //     res.send({ "error": "error in your request" });
                     // })
- sql.connect(config).then(function(connection) {
-                new sql.Request(connection)
-                    .query(`select * FROM Timetables WHERE userID = ${_id}`)
-                    .then((result)=>{
-                  let query='select * from course where';
-for (let i=0;i<result.length;i++) {
-                      if(i === 0) {
-                        query += ' courseId = ' + result[i].courseID;
-                      } else {
-                        query += " OR courseId = " + result[i].courseID;
-                      }
-                    }
-                      new sql.Request(connection).query(query).then((result)=>{
-                        console.log(result);
-                        res.send(result);
-                      });
+                    sql.connect(config).then(function(connection) {
+                        new sql.Request(connection)
+                            .query(`select * FROM Timetables WHERE userID = ${_id}`)
+                            .then((result) => {
+                                let query = 'select * from course where';
+                                for (let i = 0; i < result.length; i++) {
+                                    if (i === 0) {
+                                        query += ' courseId = ' + result[i].courseID;
+                                    } else {
+                                        query += " OR courseId = " + result[i].courseID;
+                                    }
+                                }
+                                new sql.Request(connection).query(query).then((result) => {
+                                    console.log(result);
+                                    res.send(result);
+                                });
+                            })
                     })
-            })
                 }
             });
         }
@@ -382,7 +382,7 @@ for (let i=0;i<result.length;i++) {
 
                     sql.connect(config)
                         .then(function(connection) {
-                          console.log(dateTime);
+                            console.log(dateTime);
                             new sql.Request(connection)
                                 .query("INSERT INTO CaseNotes VALUES ('" + _id + "', '" + caseNote + "', '" + dateTime + "')")
                                 .then(function() {
@@ -467,36 +467,36 @@ for (let i=0;i<result.length;i++) {
                     var attendance = req.body;
                     var query = "INSERT INTO Attendance (courseID, date, userID, attendanceValue) VALUES ";
                     var count = 0;
-                    if(attendance.students.length > 0) {
-                      var date = attendance.date;
-                      for (let student of attendance.students) {
-                        if(count === 0) {
-                          query += "('" + attendance.courseID + "', '" + date + "', '" + student.userID + "', '" + student.attendanceValue + "' )";
-                        } else {
-                          query += ", ('" + attendance.courseID + "', '" + date + "', '" + student.userID + "', '" + student.attendanceValue + "' )";
+                    if (attendance.students.length > 0) {
+                        var date = attendance.date;
+                        for (let student of attendance.students) {
+                            if (count === 0) {
+                                query += "('" + attendance.courseID + "', '" + date + "', '" + student.userID + "', '" + student.attendanceValue + "' )";
+                            } else {
+                                query += ", ('" + attendance.courseID + "', '" + date + "', '" + student.userID + "', '" + student.attendanceValue + "' )";
+                            }
+                            count++;
                         }
-                        count ++;
-                      }
-                      console.log(query);
-                      sql.connect(config)
-                          .then(function(connection) {
-                              new sql.Request(connection)
-                                  .query(query)
-                                  .then(function(recordset) {
-                                      // set schedule check on DB
-                                      console.log("attendance record inserted");
-                                      res.send(recordset);
-                                  }).catch(function(err) {
-                                      res.send({ "error": "error" });
-                                      console.log("Attendance " + err);
-                                  });
-                          }).catch(function(err) {
-                              console.log(err);
-                              res.send({ "error": "error" });
-                          });
+                        console.log(query);
+                        sql.connect(config)
+                            .then(function(connection) {
+                                new sql.Request(connection)
+                                    .query(query)
+                                    .then(function(recordset) {
+                                        // set schedule check on DB
+                                        console.log("attendance record inserted");
+                                        res.send(recordset);
+                                    }).catch(function(err) {
+                                        res.send({ "error": "error" });
+                                        console.log("Attendance " + err);
+                                    });
+                            }).catch(function(err) {
+                                console.log(err);
+                                res.send({ "error": "error" });
+                            });
                     } else {
-                      console.log("No absent students");
-                      res.send({status: "No absent students"});
+                        console.log("No absent students");
+                        res.send({ status: "No absent students" });
                     }
                 }
             });
