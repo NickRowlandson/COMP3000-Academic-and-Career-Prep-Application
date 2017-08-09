@@ -78,7 +78,6 @@ export class CourseEditComponent implements OnInit {
     cb_onchange(e, weekday) {
         if (e) {
             if (this.course.courseStart === undefined || this.course.courseEnd === undefined || this.course.courseStart === null || this.course.courseEnd == null) {
-                swal('you must pick a date!');
                 swal(
                     'Whoops!',
                     'Please pick a course start/end date first.',
