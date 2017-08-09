@@ -70,9 +70,6 @@ export class ClientStatusComponent implements OnInit {
     barChartData:any;
     barChartColors: any[] = [{ backgroundColor: ["#FF4207", "#F8E903", "#2AD308"] }];
 
-    banner: boolean = false;
-    cam: boolean = false;
-
     constructor(private router: Router, private clientService: ClientService, private studentService: StudentService, private authService: AuthService) {
     }
 
@@ -111,7 +108,7 @@ export class ClientStatusComponent implements OnInit {
         this.stage1 = this.data.filter(x => x.suitability);
         this.stage2 = this.data.filter(x => !x.suitability);
         this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle);
-        this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
+        this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && x.banner && x.cam);
         this.doughnutChartLabels = ['Suitability', 'Consent/Learning Style', 'Banner/CAM', 'Transfer Ready'];
         this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length, this.stage4.length];
         this.doughnutChartType = 'doughnut';
@@ -230,7 +227,7 @@ export class ClientStatusComponent implements OnInit {
             } else if (index === 2) {
                 this.data = this.allClients.filter(x => !x.suitability && !x.consent && !x.learningStyle);
             } else if (index === 3) {
-                this.data = this.allClients.filter(x => !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
+                this.data = this.allClients.filter(x => !x.suitability && !x.consent && !x.learningStyle && x.banner && x.cam);
             }
         } catch (err) {
             this.data = this.allClients;
@@ -297,7 +294,7 @@ export class ClientStatusComponent implements OnInit {
           .then(res => {
               this.data = this.data.filter(h => h.userID !== userID);
               this.stage3 = this.data.filter(x => x.userID !== userID && !x.suitability && !x.consent && !x.learningStyle);
-              this.stage4 = this.data.filter(x => x.userID !== userID && !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
+              this.stage4 = this.data.filter(x => x.userID !== userID && !x.suitability && !x.consent && !x.learningStyle && x.banner && x.cam);
               this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length, this.stage4.length];
               swal(
                   'Transfered',
@@ -426,13 +423,13 @@ export class ClientStatusComponent implements OnInit {
     }
 
 
-    checkboxChange(checkbox) {
-      if (this.banner && this.cam) {
-        this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && !this.banner && !this.cam);
-        this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
+    checkboxChange(client) {
+      if (client.banner && client.cam) {
+        this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && !x.banner && !x.cam);
+        this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && x.banner && x.cam);
       } else {
         this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle);
-        this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && this.banner && this.cam);
+        this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && x.banner && x.cam);
       }
 
       this.doughnutChartData = [this.stage1.length, this.stage2.length, this.stage3.length, this.stage4.length];

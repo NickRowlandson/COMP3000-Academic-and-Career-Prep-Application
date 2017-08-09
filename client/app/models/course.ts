@@ -5,8 +5,6 @@ export class Course {
     courseName: string;
     classroom:string;
     campusId:string;
-
-
     classDay:string; // will save week days as 'Mon,Fri' as example.
     courseStart: Date; // inital start day of that course
     courseEnd: Date; // offcial end day

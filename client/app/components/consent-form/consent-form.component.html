@@ -1,9 +1,9 @@
 <div class="consentForm">
-  <hr class="col-md-4">
-  <div class="col-md-4" style="text-align:center">
-    <h1 class="" style="position: relative;top: 50%;transform: translateY(-50%);"><strong>Consent Form</strong></h1>
-  </div>
-  <hr style="col-md-4">
+    <hr class="col-md-4">
+    <div class="col-md-4" style="text-align:center">
+        <h1 class="" style="position: relative;top: 50%;transform: translateY(-50%);"><strong>Consent Form</strong></h1>
+    </div>
+    <hr style="col-md-4">
     <div class="jumbotron col-md-10 col-md-offset-1">
         <div class="margin">
             <div class="col-md-11 col-md-offset-1">
@@ -26,71 +26,76 @@
                         <p-inputSwitch onLabel="Yes" offLabel="No" binary="true" [(ngModel)]="consentForm.allowDetailedMessage"></p-inputSwitch>
                     </div>
                     <div *ngIf="!consentForm.allowDetailedMessage">
-                      <div class="col-md-3">
-                          <input type="tel" class="form-control" placeholder="Alternate Phone #" />
-                      </div>
+                        <div class="col-md-3">
+                            <input type="tel" class="form-control" placeholder="Alternate Phone #" />
+                        </div>
                     </div>
-
-
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-md-12">
                 <ul>
                     <p style="width:100%;"></p>
                 </ul>
             </div>
-            <div class="col-sm-12">
+            <div class="col-md-12">
                 <ul>
                     <p style="width:100%;"></p>
                 </ul>
             </div>
 
-            <div class="form-group col-sm-12">
-                <h2 class="col-sm-12" style="text-align:center"> Release of Information within Georgian College </h2>
-              <b><em>  <p class="col-md-10 col-md-offset-1">
+            <div class="form-group col-md-12">
+                <h2 class="col-md-12" style="text-align:center"> Release of Information within Georgian College </h2>
+                <b><em>  <p class="col-md-10 col-md-offset-1">
                     I consent to the exchange of information with Georgian College faculty and staff.<br> <br> I agree that records of progress and attendance can be shared with the appropriate staff and faculty in the Academic and Career Preparation
                     program for the duration of the time I am a student in this department.<br> <br> I consent to Academic & Career Preparation Program staff using my personal email account to send progress and attendance updates, program updates and
                     any curriculum material that I may need from time to time.<br>
                 </p></em></b>
             </div>
 
-            <div class="form-group col-sm-12" >
-                <h2 class="col-sm-12" style="text-align:center">Release Of information to outside agencies </h2>
+            <div class="form-group col-md-12">
+                <h2 class="col-md-12" style="text-align:center">Release Of information to outside agencies </h2>
                 <b><em><p class="col-md-10 col-md-offset-1">I also authorize Academic and Career Preparation, Georgian College, to provide information concerning my academic status and progress to:</p></em></b>
                 <div style="text-align:center" class=" col-md-10 col-md-offset-1">
-                  <label><input type="checkbox" class="form-check " [(ngModel)]="consentForm.ontarioWorks"> Ontario Works</label>
-                  <label><input type="checkbox" class=" col-md-offset-1 form-check" [(ngModel)]="consentForm.ontarioDisabilityProgram">  Ontario Disability Program</label>
-                  <div class="col-sm-12"></div><label><input type="checkbox" class=" col-md-offset-1 form-check" [(ngModel)]="consentForm.employmentInsurance"> Employment Insurance</label>
-                  <label><input type="checkbox" class="col-md-offset-1 form-check " [(ngModel)]="consentForm.employmentServices">  Employment Services</label>
-                  <label><input type="checkbox" class="col-md-offset-1 form-check " [(ngModel)]="consentForm.other">  Other</label>
+                    <label><input type="checkbox" class="form-check " [(ngModel)]="consentForm.ontarioWorks"> Ontario Works</label>
+                    <label><input type="checkbox" class=" col-md-offset-1 form-check" [(ngModel)]="consentForm.ontarioDisabilityProgram">  Ontario Disability Program</label>
+                    <div class="col-md-12"></div><label><input type="checkbox" class=" col-md-offset-1 form-check" [(ngModel)]="consentForm.employmentInsurance"> Employment Insurance</label>
+                    <label><input type="checkbox" class="col-md-offset-1 form-check " [(ngModel)]="consentForm.employmentServices">  Employment Services</label>
+                    <label><input type="checkbox" class="col-md-offset-1 form-check " [(ngModel)]="consentForm.other">  Other</label>
                 </div>
             </div>
 
-            <div class="form-group col-sm-10 col-sm-offset-1">
-                <h2 class="col-sm-12" style="text-align:center">Other contact for follow up</h2>
-            <b><em>  <p> If, during the first twelve months after I leave the program, I cannot be reached at the telephone number(s) and/or email address in my file,
+            <div class="form-group col-md-10 col-md-offset-1">
+                <h2 class="col-md-12" style="text-align:center">Other contact for follow up</h2>
+                <b><em>  <p> If, during the first twelve months after I leave the program, I cannot be reached at the telephone number(s) and/or email address in my file,
                    Georgian College staff may call the following person to get my current number and/or address:</p></em></b>
-                <input class="col-sm-5 form-control" [(ngModel)]="consentForm.contactName" placeholder="Contact Name" required #contactName="ngModel" />
-                <div *ngIf="contactName.errors && (contactName.dirty || contactName.touched)" class="alert alert-danger">
-                    <div [hidden]="!contactName.errors.required">
-                        First name is required
+                   <div class="col-md-6">
+                      <input class="form-control" [(ngModel)]="consentForm.contactName" placeholder="Contact Name" required #contactName="ngModel" />
+                      <div *ngIf="contactName.errors && (contactName.dirty || contactName.touched)" class="alert alert-danger">
+                          <div [hidden]="!contactName.errors.required">
+                              First name is required
+                          </div>
+                      </div>
                     </div>
-                </div>
-                <input class="col-sm-5 form-control" [(ngModel)]="consentForm.contactNum" placeholder="Phone Number" required #contactNum="ngModel" />
-                <div *ngIf="contactNum.errors && (contactNum.dirty || contactNum.touched)" class="alert alert-danger">
-                    <div [hidden]="!contactNum.errors.required">
-                        Example Phone number format 1-777-777-7777
+                    <div class="col-md-6">
+                      <input class="form-control" [(ngModel)]="consentForm.contactNum" placeholder="Phone Number" required #contactNum="ngModel" />
+                      <div *ngIf="contactNum.errors && (contactNum.dirty || contactNum.touched)" class="alert alert-danger">
+                          <div [hidden]="!contactNum.errors.required">
+                              Example Phone number format 1-777-777-7777
+                          </div>
+                      </div>
                     </div>
-                </div>
             </div>
 
-            <div class="form-group col-sm-10 col-sm-offset-1">
-              <h2 class="col-sm-12" style="text-align:center">Other literacy agencies</h2>
-            <b><em>  <p>I agree that my assessment and personal information may be forwarded to another literacy agency if I am to be referred
+            <div class="form-group col-md-10 col-md-offset-1">
+                <h2 class="col-md-12" style="text-align:center">Other literacy agencies</h2>
+                <b><em>  <p>I agree that my assessment and personal information may be forwarded to another literacy agency if I am to be referred
                  to that agency for more appropriate literacy training.</p></em></b>
-                <input class="col-sm-5 form-control" [(ngModel)]="consentForm.literacyAgencies" placeholder="Signature" required />
-
-                <input class="col-sm-5 form-control" [(ngModel)]="consentForm.literacyWitness" placeholder="Witness" required />
+                 <div class="col-md-6">
+                   <input class="form-control" [(ngModel)]="consentForm.literacyAgencies" placeholder="Signature" required />
+                 </div>
+                <div class="col-md-6">
+                  <input class="form-control" [(ngModel)]="consentForm.literacyWitness" placeholder="Witness" required />
+                </div>
             </div>
             <div class="col-md-12" style="margin-top:50px;margin-left:-15px;">
                 <div style="float: left;">

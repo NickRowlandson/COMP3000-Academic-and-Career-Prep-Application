@@ -125,7 +125,7 @@
             <thead>
                 <th style="width:200px">Student</th>
                 <th style="width:200px">Expected Start/End</th>
-                <th *ngFor="let date of classTimeStr">{{ date[0] | date}}</th>
+                <th *ngFor="let date of classTimeStr" style="border-left:1px solid #DDDDDD; text-align:center">{{ date[0] | date :  "dd/MM/yy" }}</th>
             </thead>
             <tbody>
                 <tr></tr>

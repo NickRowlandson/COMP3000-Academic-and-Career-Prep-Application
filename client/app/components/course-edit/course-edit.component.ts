@@ -3,7 +3,9 @@ import { Course } from "../../models/Course";
 import { ActivatedRoute, Params } from '@angular/router';
 import { CourseService } from "../../services/course.service";
 import { SelectItem } from 'primeng/primeng';
+declare var swal: any;
 declare var moment;
+
 @Component({
     selector: 'course-edit',
     templateUrl: './app/components/course-edit/course-edit.component.html',
@@ -30,8 +32,8 @@ export class CourseEditComponent implements OnInit {
     // pop up
     dialogVisible: boolean = false;
     // drop down
-    professors: SelectItem[] = [];
-    campuses: SelectItem[] = [];
+    professors: SelectItem[] = [{ label: '-- select --', value: ''}];
+    campuses: SelectItem[] = [{ label: '-- select --', value: ''}];
 
     constructor(private courseService: CourseService, private route: ActivatedRoute) {
     }
@@ -76,7 +78,12 @@ export class CourseEditComponent implements OnInit {
     cb_onchange(e, weekday) {
         if (e) {
             if (this.course.courseStart === undefined || this.course.courseEnd === undefined || this.course.courseStart === null || this.course.courseEnd == null) {
-                alert('you must pick a date!');
+                swal('you must pick a date!');
+                swal(
+                    'Whoops!',
+                    'Please pick a course start/end date first.',
+                    'warning'
+                );
                 this.unCheck(weekday); // unselect element
             } else {
                 this.weekDay = weekday;
@@ -88,10 +95,12 @@ export class CourseEditComponent implements OnInit {
             this.events = this.events.filter(result => result.weekday !== weekday);
         }
     }
+
     // this function will uncheck checkbox based on week day that given
     unCheck(weekday) {
         this.selectedDays = this.selectedDays.filter(result => result !== weekday);
     }
+
     // this function will generate days that maches specification
     private generateDays(weekday, start_date, end_date) {
 
@@ -175,6 +184,7 @@ export class CourseEditComponent implements OnInit {
         this.dialogVisible = false;
         this.event = null;
     }
+
     deleteEvent() {
         let index: number = this.findEventIndexById(this.event.id);
         if (index >= 0) {
@@ -182,6 +192,7 @@ export class CourseEditComponent implements OnInit {
         }
         this.dialogVisible = false;
     }
+
     findEventIndexById(id: number) {
         let index = -1;
         for (let i = 0; i < this.events.length; i++) {
@@ -211,6 +222,7 @@ export class CourseEditComponent implements OnInit {
         console.log(this.event);
         // this.events = this.events.filter(result => result !== event );
     }
+
     // event handler for day click
     handleDayClick(e) {
         let date = e.date.format();
@@ -253,6 +265,7 @@ this.events = this.detachCourseStr(this.course.classTimeStr);
             }
         });
     }
+
     detachCourseStr(str) { // temp solution
         let myEvents = [];
         let strArry = str.split(',');
@@ -271,6 +284,7 @@ this.events = this.detachCourseStr(this.course.classTimeStr);
         });
         return myEvents;
     }
+
     generateClassTimeStr() {
         let str = '', tempStart, tempEnd, tempDate;
         for (let i = 0; i < this.events.length; i++) {
@@ -285,7 +299,15 @@ this.events = this.detachCourseStr(this.course.classTimeStr);
         }
         return str;
     }
+
     save() {
+      if (!this.course.courseName || !this.course.courseStart || !this.course.courseEnd || !this.course.professorId || !this.course.campusId || !this.course.classroom) {
+        swal(
+            'Form Incomplete',
+            'Please fill out all fields in the form.',
+            'warning'
+        );
+      }  else {
         this.course.classTimeStr = this.generateClassTimeStr();
         //**** need validation
         this.courseService
@@ -295,7 +317,9 @@ this.events = this.detachCourseStr(this.course.classTimeStr);
                 this.goBack();
             })
             .catch(error => this.error = error); // TODO: Display error message
+      }
     }
+
     goBack() {
         window.history.back();
     }

@@ -17,4 +17,6 @@ export class Client {
     learningStyle: boolean;
     error: string;
     success: string;
+    banner: boolean;
+    cam: boolean;
 }

@@ -18,46 +18,63 @@ export class LearningStyleComponent {
   totalHearingPoints: number;
   totalDoingPoints: number;
   learnBy: any;
+  multiChoice: any;
 
   constructor(private clientService: ClientService, private router: Router, private authService: AuthService) {
     this.learningStyleForm = new LearningStyleForm();
   }
+
   saveLearningStyle() {
-    if (!this.learnBy) {
+    if (!this.learnBy && !this.multiChoice) {
       swal(
           'Incomplete form',
           'Please fill out the form',
           'warning'
       );
-    } else if (this.learnBy !== 'Doing' && this.learnBy !== 'Seeing' && this.learnBy !== 'Hearing') {
-      console.log(this.learnBy);
+    } else if (this.multiChoice) {
       swal({
-          title: 'Tie!',
-          text: "Please pick one that suits you better",
-          type: 'info',
+          title: 'You learn best by ' + this.multiChoice.firstChoice + ' and ' + this.multiChoice.secondChoice + '',
+          text: "Is this correct?",
+          type: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#3085d6',
-          cancelButtonText: this.learnBy.firstChoice,
-          confirmButtonText: this.learnBy.secondChoice
+          cancelButtonColor: '#d33',
+          allowOutsideClick: false,
+          confirmButtonText: 'Yes!'
       }).then(isConfirm => {
         if (isConfirm) {
-          this.learningStyleForm.learnBy = this.learnBy.secondChoice;
-          this.clientService
-              .saveLearningStyle(this.learningStyleForm)
-              .then(client => {
-                  this.router.navigate(['/dashboard']);
-              })
-              .catch(error => this.error = error);
+          swal({
+              title: 'Tie!',
+              text: "Please pick one that suits you better",
+              type: 'info',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#3085d6',
+              allowOutsideClick: false,
+              cancelButtonText: this.multiChoice.firstChoice,
+              confirmButtonText: this.multiChoice.secondChoice
+          }).then(isConfirm => {
+            if (isConfirm) {
+              this.learningStyleForm.learnBy = this.multiChoice.secondChoice;
+              this.clientService
+                  .saveLearningStyle(this.learningStyleForm)
+                  .then(client => {
+                      this.router.navigate(['/dashboard']);
+                  })
+                  .catch(error => this.error = error);
+            }
+          }).catch(error => {
+            this.learningStyleForm.learnBy  = this.multiChoice.firstChoice;
+            this.clientService
+                .saveLearningStyle(this.learningStyleForm)
+                .then(client => {
+                    this.router.navigate(['/dashboard']);
+                })
+                .catch(error => this.error = error);
+          });
         }
       }).catch(error => {
-        this.learningStyleForm.learnBy  = this.learnBy.firstChoice;
-        this.clientService
-            .saveLearningStyle(this.learningStyleForm)
-            .then(client => {
-                this.router.navigate(['/dashboard']);
-            })
-            .catch(error => this.error = error);
+
       });
     } else {
       swal({
@@ -122,23 +139,29 @@ export class LearningStyleComponent {
     this.learningStyleForm.doing = this.totalDoingPoints;
 
     if (this.totalSeeingPoints > this.totalHearingPoints && this.totalSeeingPoints > this.totalDoingPoints) {
+      this.multiChoice = null;
       this.learnBy = "Seeing";
     } else if (this.totalHearingPoints > this.totalSeeingPoints && this.totalHearingPoints > this.totalDoingPoints) {
+      this.multiChoice = null;
       this.learnBy = "Hearing";
     } else if (this.totalDoingPoints > this.totalHearingPoints && this.totalDoingPoints > this.totalSeeingPoints) {
+      this.multiChoice = null;
       this.learnBy = "Doing";
     } else if (this.totalDoingPoints === this.totalSeeingPoints) {
-      this.learnBy = {
+      this.learnBy = null;
+      this.multiChoice = {
         firstChoice: 'Doing',
         secondChoice: 'Seeing'
       };
     } else if (this.totalDoingPoints === this.totalHearingPoints) {
-      this.learnBy = {
+      this.learnBy = null;
+      this.multiChoice = {
         firstChoice: 'Doing',
         secondChoice: 'Hearing'
       };
     } else if (this.totalSeeingPoints === this.totalHearingPoints) {
-      this.learnBy = {
+      this.learnBy = null;
+      this.multiChoice = {
         firstChoice: 'Seeing',
         secondChoice: 'Hearing'
       };

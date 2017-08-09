@@ -1,4 +1,4 @@
-<div class="courseEdit form-horizontal">
+<div class="courseEdit form-horizontal wrapper3">
   <div *ngIf="!newCourse && course">
     <h2>Edit Details for {{course.courseName}}</h2>
   </div>
@@ -6,46 +6,63 @@
     <h2>Add New Course</h2>
   </div>
   <hr>
-  <div *ngIf="course">
+  <div class="col-md-4">
     <div class="form-group">
-      <label class="col-sm-2 control-label">Course Name: </label>
+      <label class="col-md-4 control-label">Course Name: </label>
       <div style="max-width:200px; display: inline-block;">
         <input class="form-control" [(ngModel)]="course.courseName" placeholder="Course Name" required />
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-2 control-label">Course Start Date: </label>
+      <label class="col-md-4 control-label">Course Start Date: </label>
       <p-calendar [(ngModel)]="course.courseStart" dateFormat="yy-mm-dd" readonlyInput="readonlyInput">></p-calendar>
     </div>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label">Course End Date: </label>
+      <label class="col-md-4 control-label">Course End Date: </label>
       <p-calendar [(ngModel)]="course.courseEnd" dateFormat="yy-mm-dd" readonlyInput="readonlyInput"> ></p-calendar>
     </div>
-{{course.courseStart}}
-        
-    <h3 class="first">Week Days</h3>
-    <div class="ui-g" style="margin-bottom:10px">
-      <div class="ui-g-2">
-        <p-checkbox name="group1" value="Mon" label="Monday" [(ngModel)]="selectedDays"(onChange)="cb_onchange($event,'Mon')"></p-checkbox>
-      </div>
-      <div class="ui-g-2">
-        <p-checkbox name="group1" value="Tue" label="Tuesday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Tue')"></p-checkbox>
-      </div>
-      <div class="ui-g-2">
-        <p-checkbox name="group1" value="Wed" label="Wedsday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Wed')"></p-checkbox>
-      </div>
-      <div class="ui-g-2">
-        <p-checkbox name="group1" value="Thu" label="Thursday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Thu')"></p-checkbox>
-      </div>
-      <div class="ui-g-2">
-        <p-checkbox name="group1" value="Fri" label="Friday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Fri')"></p-checkbox>
+
+    <!-- Class start and end time selection -->
+
+    <!-- Instructor dropdown selection -->
+    <div class="form-group">
+      <label class="col-md-4 control-label">Instructor: </label>
+      <p-dropdown [style]="{'width':'175px'}" [options]="professors" [(ngModel)]="course.professorId"></p-dropdown>
+    </div>
+    <!-- Campus dropdown selection -->
+    <div class="form-group">
+      <label class="col-md-4 control-label">Campus: </label>
+      <p-dropdown [style]="{'width':'175px'}" [options]="campuses" [(ngModel)]="course.campusId"></p-dropdown>
+    </div>
+    <!-- Classroom input -->
+    <div class="form-group">
+      <label class="col-md-4 control-label">Classroom: </label>
+      <div style="max-width:200px; display: inline-block;">
+        <input class="form-control" [(ngModel)]="course.classroom" placeholder="Classroom" required />
       </div>
     </div>
+  </div>
 
-
-
-<p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
+<div class="col-md-6">
+  <div class="ui-g" style="margin-bottom:10px">
+    <div class="ui-g-2">
+      <p-checkbox name="group1" value="Mon" label="Monday" [(ngModel)]="selectedDays"(onChange)="cb_onchange($event,'Mon')"></p-checkbox>
+    </div>
+    <div class="ui-g-2">
+      <p-checkbox name="group1" value="Tue" label="Tuesday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Tue')"></p-checkbox>
+    </div>
+    <div class="ui-g-2">
+      <p-checkbox name="group1" value="Wed" label="Wedsday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Wed')"></p-checkbox>
+    </div>
+    <div class="ui-g-2">
+      <p-checkbox name="group1" value="Thu" label="Thursday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Thu')"></p-checkbox>
+    </div>
+    <div class="ui-g-2">
+      <p-checkbox name="group1" value="Fri" label="Friday" [(ngModel)]="selectedDays" (onChange)="cb_onchange($event,'Fri')"></p-checkbox>
+    </div>
+  </div>
+  <p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
     [style]="{'overflow':'visible'}" [resizable]="false">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="event">
         <div class="ui-grid-row">
@@ -55,7 +72,7 @@
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="end">End</label></div>
             <div class="ui-grid-col-8"><p-calendar [(ngModel)]="event.dayEnd" [timeOnly]="true"  hourFormat="24" dateFormat="hh:mm" ></p-calendar></div>
-        </div>     
+        </div>
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
@@ -63,40 +80,18 @@
             <button type="button" pButton icon="fa-check" (click)="saveEvent()" label="Save" [disabled]="!event?.dayStart"></button>
         </div>
     </p-footer>
-</p-dialog>
+  </p-dialog>
 
-
-
-
-    <p-schedule *ngIf="events" [events]="events" [header]="header" [editable]="true" [weekends]="false" [options]="options" 
+    <p-schedule *ngIf="events" [events]="events" [editable]="true" [weekends]="false" [options]="options"
       (onEventClick)="handleEventClick($event)" (onDayClick)="handleDayClick($event)"></p-schedule>
-
-
-    <!-- Class start and end time selection -->
-
-    <!-- Instructor dropdown selection -->
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Instructor: </label>
-      <p-dropdown [style]="{'width':'175px'}" [options]="professors" [(ngModel)]="course.professorId"></p-dropdown>
-    </div>
-    <!-- Campus dropdown selection -->
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Campus: </label>
-      <p-dropdown [style]="{'width':'175px'}" [options]="campuses" [(ngModel)]="course.campusId"></p-dropdown>
-    </div>
-    <!-- Classroom input -->
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Classroom: </label>
-      <div style="max-width:200px; display: inline-block;">
-        <input class="form-control" [(ngModel)]="course.classroom" placeholder="Classroom" required />
-      </div>
-    </div>
   </div>
+  <div class="push"></div>
+</div>
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button (click)="goBack()" class="btn btn-default">Back</button>
-      <button (click)="save()" class="btn btn-primary">Save</button>
-    </div>
+<div class="form-group footer">
+  <br>
+  <div class="col-md-10">
+    <button (click)="goBack()" class="btn btn-default">Back</button>
+    <button (click)="save()" class="btn btn-primary">Save</button>
   </div>
 </div>
