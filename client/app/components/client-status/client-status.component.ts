@@ -212,7 +212,10 @@ export class ClientStatusComponent implements OnInit {
     }
 
     showStatusReport(event) {
+        this.showSuitabilityEdit = false;
+        this.addSuitability = false;
         this.statusReport = true;
+        this.clientSuitability = null;
         this.clientView = null;
         this.addSuitability = false;
     }
@@ -309,6 +312,7 @@ export class ClientStatusComponent implements OnInit {
     addSuitabilityInfo(client) {
       this.clientView = null;
       this.addSuitability = true;
+      this.showSuitabilityEdit = false;
       this.statusReport = false;
       this.suitabilityForm = new SuitabilityForm();
       this.suitabilityForm.transcript = false;
@@ -330,14 +334,27 @@ export class ClientStatusComponent implements OnInit {
       this.clientSuitability = client;
     }
 
-    editSuitability(id) {
-      this.resetView();
+    editSuitability(client) {
+      this.statusReport = false;
+      this.clientView = null;
+      this.addSuitability = false;
       this.showSuitabilityEdit = true;
-      this.suitabilityForm = this.getSuitabilityFormByFilter(id)[0];
+      this.suitabilityForm = this.getSuitabilityFormByFilter(client.userID)[0];
+      this.clientSuitability = client;
     }
 
     saveSuitability() {
       if (this.suitabilityForm.suitabilityID) {
+        this.tallyPoints();
+        this.suitabilityForm.dbTotalPoints = this.totalPoints;
+        this.clientService
+          .updateSuitability(this.suitabilityForm)
+          .then( res => {
+            this.showSuitabilityEdit = false;
+            this.clientView = null;
+            this.ngOnInit();
+          })
+          .catch();
       } else {
         this.tallyPoints();
         this.suitabilityForm.dbTotalPoints = this.totalPoints;

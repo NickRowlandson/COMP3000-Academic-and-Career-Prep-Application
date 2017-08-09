@@ -266,6 +266,70 @@ class ClientController {
         }
     }
 
+    updateSuitability(req: express.Request, res: express.Response): void {
+        try {
+            new AuthController().authUser(req, res, {
+                requiredAuth: auth, done: function() {
+                    var suitability = req.body;
+                    sql.connect(config)
+                        .then(function(connection) {
+                          var query = "UPDATE SuitabilityForm SET transcript='" + suitability.transcript
+                          + "', courses='" + suitability.courses
+                          + "', goal='" + suitability.goal
+                          + "', transitionDate='" + suitability.transitionDate
+                          + "', governmentID='" + suitability.governmentID
+                          + "', appropriateGoal='" + suitability.appropriateGoal
+                          + "', isValidAge='" + suitability.isValidAge
+                          + "', schoolRegistration='" + suitability.schoolRegistration
+                          + "', availableDuringClass='" + suitability.availableDuringClass
+                          + "', lastGrade='" + suitability.lastGrade
+                          + "', level='" + suitability.level
+                          + "', offerStartDate='" + suitability.offerStartDate
+                          + "', meetsGoal='" + suitability.meetsGoal
+                          + "', timeOutOfSchool='" + suitability.timeOutOfSchool
+                          + "', inProgramBefore='" + suitability.inProgramBefore
+                          + "', employment='" + suitability.employment
+                          + "', incomeSource='" + suitability.incomeSource
+                          + "', ageRange='" + suitability.ageRange
+                          + "', hoursPerWeek='" + suitability.hoursPerWeek
+                          + "', workHistory='" + suitability.workHistory
+                          + "', factorHealth='" + suitability.factorHealth
+                          + "', factorInstructions='" + suitability.factorInstructions
+                          + "', factorCommunication='" + suitability.factorCommunication
+                          + "', factorLanguage='" + suitability.factorLanguage
+                          + "', factorComputer='" + suitability.factorComputer
+                          + "', factorHousing='" + suitability.factorHousing
+                          + "', factorTransportation='" + suitability.factorTransportation
+                          + "', factorDaycare='" + suitability.factorDaycare
+                          + "', factorInternet='" + suitability.factorInternet
+                          + "', factorPersonal='" + suitability.factorPersonal
+                          + "', factorOther='" + suitability.factorOther
+                          + "', summaryTransportation='" + suitability.summaryTransportation
+                          + "', summaryChildcare='" + suitability.summaryChildcare
+                          + "', summaryHealth='" + suitability.summaryHealth
+                          + "', summaryOther='" + suitability.summaryOther
+                          + "', points='" + suitability.points
+                          + "' WHERE suitabilityID = '" + suitability.suitabilityID +"'"
+                            new sql.Request(connection)
+                                .query(query)
+                                .then(function(recordset) {
+                                    res.send({ "success": "success" });
+                                }).catch(function(err) {
+                                    res.send({ "error": "error" }); console.log("Update suitability " + err);
+                                });
+                        }).catch(function(err) {
+                            console.log(err);
+                            res.send({ "error": "error" });
+                        });
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
     delete(req: express.Request, res: express.Response): void {
         try {
             new AuthController().authUser(req, res, {

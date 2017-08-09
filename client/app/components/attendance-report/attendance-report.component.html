@@ -21,7 +21,7 @@
         <h1><strong>Attendance Report (Student View)</strong></h1>
         <hr>
         <div class="col-md-3">
-          <div class="wrapper4">
+          <div class="wrapper2">
             <h2>Students</h2>
             <p-inputSwitch onLabel="Course Report" offLabel="Student Report" [(ngModel)]="studentReport"></p-inputSwitch>
             <hr>
@@ -45,7 +45,7 @@
         <div *ngIf="!studentAttendanceView" class="col-md-9">
           <h2>Overall Status</h2>
           <hr>
-          <h3>Total student records: {{ data.length }}</h3>
+          <h3 class="well">Total student attendance records: {{ data.length }}</h3>
         </div>
         <div *ngIf="studentAttendanceView" class="col-md-9">
           <h2>Report for {{ student.firstName }}</h2>
@@ -69,7 +69,10 @@
               <br />
               <label class="control-label">Course Name: </label> {{ info.course[0].courseName }}
               <br />
-              <label class="control-label">Attendance:  </label> {{ info.attendanceValue }}
+              <label class="control-label">Attendance:  </label>
+              <span *ngIf="info.attendanceValue === 'P'" style="color:green">Present</span>
+              <span *ngIf="info.attendanceValue === 'A'" style="color:red">Attendance</span>
+              <span *ngIf="info.attendanceValue === 'MC'" style="color:#FFA500">Made Contact</span>
               <br />
             </div>
             <br />
@@ -104,7 +107,7 @@
         <div *ngIf="!courseAttendanceView" class="col-md-9">
           <h2>Overall Status</h2>
           <hr>
-          <h3>Total student records: {{ data.length }}</h3>
+          <h3 class="well">Total student attendance records: {{ data.length }}</h3>
         </div>
         <div *ngIf="courseAttendanceView" class="col-md-9">
           <h2>{{ course.courseName }} Report</h2>

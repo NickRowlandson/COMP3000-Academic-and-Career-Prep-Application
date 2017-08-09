@@ -24,6 +24,7 @@ export class AttendanceListComponent implements OnInit {
     attendance: any;
     absentStudents = [];
     attendanceDates: any[] = [];
+    previousAttendance: any;
 
     constructor(private router: Router, private CourseService: CourseService, private StudentService: StudentService) {
       this.date = new Date();
@@ -33,6 +34,19 @@ export class AttendanceListComponent implements OnInit {
       var currentUser = JSON.parse(localStorage.getItem('currentUser'));
       var userID = currentUser.userID;
       this.getCourses(userID);
+      this.StudentService
+          .getAllAttendance()
+          .then(attendance => {
+              if (attendance.status === "403") {
+                  this.previousAttendance = null;
+              } else {
+                  this.previousAttendance = attendance;
+                  for (let item of this.previousAttendance) {
+                    item.date = item.date[0] + " " + item.date[1];
+                  }
+              }
+          })
+          .catch(error => console.log(error));
     }
 
     getCourses(instructorID) {
@@ -52,6 +66,7 @@ export class AttendanceListComponent implements OnInit {
 
     doAttendance(course: Course) {
       this.loading = true;
+      this.previousAttendance = this.previousAttendance.filter(x => x.courseID === course.courseID);
       this.courseID = course.courseID;
       this.StudentService
           .getTimetablesByCourseId(course.courseID)
@@ -71,12 +86,15 @@ export class AttendanceListComponent implements OnInit {
       this.attendanceCourse = course;
       var array = this.attendanceCourse.classTimeStr.split(',');
       for (let item of array) {
-        var date = item.split(' ');
-        var day = date[0];
-        var time = date[1];
-        var startTime = time.split('-')[0];
-        var endTime = time.split('-')[1];
-        this.attendanceDates.push(date);
+        var attendanceHistory = this.previousAttendance;
+        attendanceHistory = attendanceHistory.filter(x => x.date === item);
+        console.log(attendanceHistory);
+        if (attendanceHistory.length !== 0) {
+          console.log("Attendance already taken");
+        } else {
+          var date = item.split(' ');
+          this.attendanceDates.push(date);
+        }
       }
       this.attendanceView = true;
       console.log(this.attendanceDates);
@@ -152,6 +170,7 @@ export class AttendanceListComponent implements OnInit {
                       'success'
                   );
                   this.attendanceView = false;
+                  this.router.navigate(['/attendance-report']);
                 })
                 .catch(error => console.log(error));
           }

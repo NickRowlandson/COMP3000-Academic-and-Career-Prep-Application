@@ -50,9 +50,8 @@
           <div class="wrapper4">
             <h2>Attendance for {{ attendanceCourse.courseName }}</h2>
             <hr>
-            <input placeholder="Filter by student name" class="form-control" [(ngModel)]="studentQuery" />
-            <select class="form-control" [(ngModel)]="attendanceCourse.attendanceDate" placeholder="Select attendance date">
-              <option value="">Attendance Dates</option>
+            Date:
+            <select class="form-control" style="display: inline-block;max-width: 200px;" [(ngModel)]="attendanceCourse.attendanceDate" placeholder="Select attendance date">
               <option *ngFor="let date of attendanceDates" value="{{ date[0] }} {{ date[1] }}">{{ date[0] | date }} from {{ date[1] }}</option>
             </select>
             <p-dataTable [value]="attendanceStudents | userFilter : studentQuery" [responsive]="true">

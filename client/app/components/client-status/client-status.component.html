@@ -84,6 +84,7 @@
             <h2>Information for {{clientView.firstName + " " + clientView.lastName}}</h2>
             <div (click)="showStatusReport($event)" class="statusButton" title="View status report"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
             <hr>
+            <div class="well">
             <ul class="sectionBtnGroup col-sm-12">
                 <li class="sectionButtons" [ngClass]="{active: showGeneral}" title="General Info" (click)="sectionBtnClicked($event, 'general')">
                     <h4>General Info</h4></li>
@@ -94,7 +95,8 @@
                 <li class="sectionButtons" *ngIf="!clientView.learningStyle" [ngClass]="{active: showLearningStyle}" title="Consent" (click)="sectionBtnClicked($event, 'learningStyle')">
                     <h4>Learning Style</h4></li>
             </ul>
-            <div *ngIf="showGeneral" class="infoPanel">
+            <br>
+            <div *ngIf="showGeneral">
                 <br />
                 <div class="form-group">
                     <label class="control-label">id: </label> {{clientView.userID}} <br />
@@ -106,9 +108,10 @@
                     <label class="control-label">Phone: </label> {{clientView.phone}} <br />
                 </div>
             </div>
-            <div *ngIf="showSuitability" class="infoPanel">
+            <div *ngIf="showSuitability" class="">
                 <br />
                 <div class="form-group">
+                    <button (click)="editSuitability(clientView)" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button><br><br>
                     <label class="control-label">Transcript: </label> {{suitabilityView.transcript}} <br />
                     <label class="control-label">Courses: </label> {{suitabilityView.courses}} <br />
                     <label class="control-label">Goal: </label> {{suitabilityView.goal}} <br />
@@ -126,13 +129,28 @@
                     <label class="control-label">Has Been In Program Before: </label> {{suitabilityView.inProgramBefore}} <br />
                     <label class="control-label">Employment: </label> {{suitabilityView.employment}} <br />
                     <label class="control-label">Income Source: </label> {{suitabilityView.incomeSource}} <br />
-                    <label class="control-label">Age: </label> {{suitabilityView.age}} <br />
+                    <label class="control-label">Age: </label> {{suitabilityView.ageRange}} <br />
                     <label class="control-label"># of Hours/Week: </label> {{suitabilityView.hoursPerWeek}} <br />
                     <label class="control-label">Work History: </label> {{suitabilityView.workHistory}} <br />
-                    <button (click)="editSuitability(clientView.userID)" class="btn btn-default">Edit</button>
+                    <label class="control-label">Health a Factor: </label> {{suitabilityView.factorHealth}} <br />
+                    <label class="control-label">Instructions a Factor: </label> {{suitabilityView.factorInstructions}} <br />
+                    <label class="control-label">Communication a Factor: </label> {{suitabilityView.factorCommunication}} <br />
+                    <label class="control-label">Language a Factor: </label> {{suitabilityView.factorLanguage}} <br />
+                    <label class="control-label">Computer a Factor: </label> {{suitabilityView.factorComputer}} <br />
+                    <label class="control-label">Housing a Factor: </label> {{suitabilityView.factorHousing}} <br />
+                    <label class="control-label">Transportation a Factor: </label> {{suitabilityView.factorTransportation}} <br />
+                    <label class="control-label">Daycare a Factor: </label> {{suitabilityView.factorDaycare}} <br />
+                    <label class="control-label">Internet a Factor: </label> {{suitabilityView.factorInternet}} <br />
+                    <label class="control-label">Personal a Factor: </label> {{suitabilityView.factorPersonal}} <br />
+                    <label class="control-label">Other Factor : </label> {{suitabilityView.factorOther}} <br />
+                    <label class="control-label">Transportation Summary: </label> {{suitabilityView.summaryTransportation}} <br />
+                    <label class="control-label">Housing Summary: </label> {{suitabilityView.summaryHousing}} <br />
+                    <label class="control-label">Health Summary: </label> {{suitabilityView.summaryHealth}} <br />
+                    <label class="control-label">Other Summary: </label> {{suitabilityView.summaryOther}} <br />
+                    <label class="control-label">Suitability Points: </label> {{suitabilityView.points}} <br />
                 </div>
             </div>
-            <div *ngIf="showConsent" class="infoPanel">
+            <div *ngIf="showConsent" class="">
                 <br />
                 <div class="form-group">
                     <label class="control-label">Date: </label> {{consentView.date}} <br />
@@ -148,7 +166,7 @@
                     <label class="control-label">Literacy Witness: </label> {{consentView.literacyWitness}} <br />
                 </div>
             </div>
-            <div *ngIf="showLearningStyle" class="infoPanel">
+            <div *ngIf="showLearningStyle" class="">
                 <br />
                 <p><strong>I learn best through: {{ learningStyleView.learnBy }}</strong></p>
                 <div class="form-group">
@@ -157,16 +175,22 @@
                     </div>
                 </div>
             </div>
+          </div>
         </div>
         <div *ngIf="addSuitability || showSuitabilityEdit">
             <!-- end of section 1 -->
             <div class="col-md-6">
               <div *ngIf="addSuitability" class="addSuitability">
-                <h2>Suitability for {{ clientSuitability.firstName }}</h2>
+                <h2>Add Suitability for {{ clientSuitability.firstName }}</h2>
                 <div (click)="showStatusReport($event)" class="statusButton" title="View status report"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
                 <hr>
               </div>
-
+              <div *ngIf="showSuitabilityEdit" class="addSuitability">
+                <h2>Edit Suitability for {{ clientSuitability.firstName }}</h2>
+                <div (click)="showStatusReport($event)" class="statusButton" title="View status report"><i class="fa fa-pie-chart fa-2x" aria-hidden="true"></i></div>
+                <hr>
+              </div>
+              <div class="well">
                 <label class="col-md-2 control-label">Courses: </label>
                 <div class="col-md-10">
                     <input class="form-control" type="text" [(ngModel)]="suitabilityForm.courses" />
@@ -206,27 +230,27 @@
                   <div style="height: 25px;clear:both"></div>
                   <label class="col-md-5 control-label">Transcript: </label>
                   <button *ngIf="suitabilityForm.transcript === 'true'" (click)="suitabilityForm.transcript = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.transcript === 'false'" (click)="suitabilityForm.transcript = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.transcript === 'false' || suitabilityForm.transcript === 'undefined'" (click)="suitabilityForm.transcript = 'true'" class="btn btn-warning">No</button>
                   <br />
                   <label class="col-md-5 control-label">Gov't ID: </label>
                   <button *ngIf="suitabilityForm.governmentID === 'true'" (click)="suitabilityForm.governmentID = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.governmentID === 'false'" (click)="suitabilityForm.governmentID = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.governmentID === 'false' || suitabilityForm.governmentID === 'undefined'" (click)="suitabilityForm.governmentID = 'true'" class="btn btn-warning">No</button>
                   <br />
                   <label class="col-md-5 control-label">Appropriate Occupational Goal</label>
                   <button *ngIf="suitabilityForm.appropriateGoal === 'true'" (click)="suitabilityForm.appropriateGoal = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.appropriateGoal === 'false'" (click)="suitabilityForm.appropriateGoal = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.appropriateGoal === 'false' || suitabilityForm.appropriateGoal === 'undefined'" (click)="suitabilityForm.appropriateGoal = 'true'" class="btn btn-warning">No</button>
                   <br />
                   <label class="col-md-5 control-label">19+ Years Old</label>
                   <button *ngIf="suitabilityForm.isValidAge === 'true'" (click)="suitabilityForm.isValidAge = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.isValidAge === 'false'" (click)="suitabilityForm.isValidAge = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.isValidAge === 'false' || suitabilityForm.isValidAge === 'undefined'" (click)="suitabilityForm.isValidAge = 'true'" class="btn btn-warning">No</button>
                   <br />
                   <label class="col-md-5 control-label">Registered In High School/Post-Sec</label>
                   <button *ngIf="suitabilityForm.schoolRegistration === 'true'" (click)="suitabilityForm.schoolRegistration = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.schoolRegistration === 'false'" (click)="suitabilityForm.schoolRegistration = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.schoolRegistration === 'false' || suitabilityForm.schoolRegistration === 'undefined'" (click)="suitabilityForm.schoolRegistration = 'true'" class="btn btn-warning">No</button>
                   <br />
                   <label class="col-md-5 control-label">Available During Class Time</label>
                   <button *ngIf="suitabilityForm.availableDuringClass === 'true'" (click)="suitabilityForm.availableDuringClass = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.availableDuringClass === 'false'" (click)="suitabilityForm.availableDuringClass = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.availableDuringClass === 'false' || suitabilityForm.availableDuringClass === 'undefined'" (click)="suitabilityForm.availableDuringClass = 'true'" class="btn btn-warning">No</button>
                 </div>
                 <div style="height: 25px;clear:both"></div>
                 <div class="form-group">
@@ -380,7 +404,7 @@
                 <h3>Factors Affecting Client Success</h3>
                 <hr>
                 <h4>Check all options that apply.</h4>
-                <div>
+                <div  *ngIf="!suitabilityForm.suitabilityID">
                     <label class="checkbox">
                       <p-checkbox [(ngModel)]="suitabilityForm.factorHealth" binary="true"></p-checkbox> Client has health problems that may prevent client from working effectively
                     </label>
@@ -411,6 +435,87 @@
                     <label class="checkbox">
                       <p-checkbox [(ngModel)]="suitabilityForm.factorPersonal" binary="true"></p-checkbox> Client is going through difficulties in his/her personal life (legal, family, substance abuse, financial)
                     </label>
+                </div>
+                <div *ngIf="suitabilityForm.suitabilityID">
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorHealth === 'true'" (click)="suitabilityForm.factorHealth = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorHealth === 'false' || suitabilityForm.factorHealth === 'undefined' " (click)="suitabilityForm.factorHealth = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Client has health problems that may prevent client from working effectively
+                      </label>
+                    </div>
+
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorInstructions === 'true'" (click)="suitabilityForm.factorInstructions = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorInstructions === 'false' || suitabilityForm.factorInstructions === 'undefined'" (click)="suitabilityForm.factorInstructions = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Client has difficulty understanding instructions
+                      </label>
+                    </div>
+
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorCommunication === 'true'" (click)="suitabilityForm.factorCommunication = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorCommunication === 'false' || suitabilityForm.factorCommunication === 'undefined'" (click)="suitabilityForm.factorCommunication = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Client has difficulty communicating
+                      </label>
+                    </div>
+
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorLanguage === 'true'" (click)="suitabilityForm.factorLanguage = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorLanguage === 'false' || suitabilityForm.factorLanguage === 'undefined'" (click)="suitabilityForm.factorLanguage = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Client has language barrier
+                      </label>
+                    </div>
+
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorComputer === 'true'" (click)="suitabilityForm.factorComputer = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorComputer === 'false' || suitabilityForm.factorComputer === 'undefined'" (click)="suitabilityForm.factorComputer = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Client has limited computer skills
+                      </label>
+                    </div>
+
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorHousing === 'true'" (click)="suitabilityForm.factorHousing = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorHousing === 'false' || suitabilityForm.factorHousing === 'undefined'" (click)="suitabilityForm.factorHousing = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Client has housing instability
+                      </label>
+                    </div>
+
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorTransportation === 'true'" (click)="suitabilityForm.factorTransportation = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorTransportation === 'false' || suitabilityForm.factorTransportation === 'undefined'" (click)="suitabilityForm.factorTransportation = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Transportation is limited restricted (no license/ no $ for bus/gas)
+                      </label>
+                    </div>
+
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorDaycare === 'true'" (click)="suitabilityForm.factorDaycare = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorDaycare === 'false' || suitabilityForm.factorDaycare === 'undefined'" (click)="suitabilityForm.factorDaycare = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Client does not have reliable daycare
+                      </label>
+                    </div>
+
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorInternet === 'true'" (click)="suitabilityForm.factorInternet = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorInternet === 'false' || suitabilityForm.factorInternet === 'undefined'" (click)="suitabilityForm.factorInternet = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Client does not have phone/internet access
+                      </label>
+                    </div>
+
+                    <div class="col-md-12">
+                      <button *ngIf="suitabilityForm.factorPersonal === 'true'" (click)="suitabilityForm.factorPersonal = 'false'" class="btn btn-success">Yes</button>
+                      <button *ngIf="suitabilityForm.factorPersonal === 'false' || suitabilityForm.factorPersonal === 'undefined'" (click)="suitabilityForm.factorPersonal = 'true'" class="btn btn-warning">No</button>
+                      <label class="control-label">
+                        Client is going through difficulties in his/her personal life (legal, family, substance abuse, financial)
+                      </label>
+                    </div>
                 </div>
                 <br />
                 <div class="col-md-12">
@@ -478,6 +583,7 @@
                       <button (click)="saveSuitability()" class="saveButton" title="Save suitability"><h4><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</h4></button>
                   </div>
               </div>
+            </div>
             </div>
         </div>
     </div>

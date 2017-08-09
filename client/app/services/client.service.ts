@@ -104,6 +104,22 @@ export class ClientService {
             .catch(this.handleError);
     }
 
+    updateSuitability(suitabilityForm: SuitabilityForm): Promise<Client> {
+        // add authorization header with jwt token
+        let headers = new Headers({ authorization: this.authService.token });
+        let options = new RequestOptions({ headers: headers });
+
+        var url = 'api/suitability-update';
+
+        return this.http
+            .put(url, suitabilityForm, options)
+            .toPromise()
+            .then(response => {
+              return response.json();
+            })
+            .catch(this.handleError);
+    }
+
     private put(client: Client, suitabilityForm: SuitabilityForm) {
         // add authorization header with jwt token
         let headers = new Headers({ authorization: this.authService.token });
