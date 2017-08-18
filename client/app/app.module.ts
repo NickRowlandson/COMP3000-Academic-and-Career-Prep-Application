@@ -15,6 +15,7 @@ import { RadioButtonModule } from 'primeng/primeng';
 import { ToggleButtonModule } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { SplitButtonModule } from 'primeng/primeng';
+import { InputMaskModule } from 'primeng/primeng';
 
 //Import components
 import { LoginComponent } from './components/login/login.component';
@@ -33,7 +34,6 @@ import { PrfFormComponent } from './components/prf-form/prf-form.component';
 import { LearningStyleComponent } from './components/learning-style-form/learning-style-form.component';
 import { StudentEnrollmentComponent } from './components/student-enrollment/student-enrollment.component';
 import { TimetableComponent } from './components/timetable/timetable.component';
-import { VisviewComponent } from './components/visview/visview.component';
 import { AttendanceListComponent } from './components/attendance-list/attendance-list.component';
 import { AttendanceReportComponent } from './components/attendance-report/attendance-report.component';
 
@@ -73,7 +73,8 @@ import { CourseService } from './services/course.service';
     RadioButtonModule,
     ToggleButtonModule,
     DialogModule,
-    SplitButtonModule
+    SplitButtonModule,
+    InputMaskModule
     ],
   declarations: [
     AppComponent,
@@ -95,7 +96,6 @@ import { CourseService } from './services/course.service';
     TimetableComponent,
     UserFilterPipe,
     CourseFilterPipe,
-    VisviewComponent,
     CampusFilterPipe,
     AttendanceListComponent,
     AttendanceReportComponent

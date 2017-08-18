@@ -18,7 +18,7 @@ welcomeMessage(client): void {
     to: client.email, // list of receivers
     subject: 'Welcome, ' + client.firstName, // Subject line
     text: '', // plain text body
-    html: 'Youre username is <b>' + client.username + '</b> and your password is your birthday in the following format: yyyymmdd<br /> Please login and complete the required forms. <br /><br /> Thankyou' // html body
+    html: 'Youre username is <b>' + client.username + '</b> and your password is your birthday in the following format: ddmmyyyy<br /> Please login and complete the required forms. <br /><br /> Thankyou' // html body
   };
 
   // send mail with defined transport object

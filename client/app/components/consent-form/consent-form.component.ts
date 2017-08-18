@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ConsentForm } from "../../models/consentForm";
 import { ClientService } from "../../services/client.service";
 import { AuthService } from '../../services/authentication.service';
+declare var swal: any;
 
 @Component({
     selector: 'consentForm',
@@ -32,16 +33,65 @@ export class ConsentFormComponent {
 
       this.consentForm = new ConsentForm();
       this.date = new Date();
+      this.consentForm.allowDetailedMessage = false;
+      this.consentForm.ontarioWorks = true;
+      this.consentForm.ontarioDisabilityProgram = true;
+      this.consentForm.employmentInsurance = true;
+      this.consentForm.employmentServices = true;
+      this.consentForm.other = true;
   }
 
   saveConsent() {
-    this.consentForm.date = this.date;
-    this.clientService
-        .saveConsent(this.consentForm)
-        .then(client => {
-            this.router.navigate(['/dashboard']);
-        })
-        .catch(error => this.error = error); // TODO: Display error message
+    // allowDetailedMessage: boolean;
+    // alternativeNumber: string;
+    // ontarioWorks: string;
+    // ontarioDisabilityProgram: string;
+    // employmentInsurance: string;
+    // employmentServices: string;
+    // other: string;
+    // contactName: string;
+    // contactNum: string;
+    if (!this.consentForm.allowDetailedMessage) {
+      if (!this.consentForm.alternateNumber) {
+        swal(
+            'Whoops!',
+            'Please enter an alternate phone number.',
+            'warning'
+        );
+      } else {
+        if (!this.consentForm.contactName || !this.consentForm.contactNum ) {
+          swal(
+              'Whoops!',
+              'Please fill out all form fields.',
+              'warning'
+          );
+        } else {
+          this.consentForm.date = this.date;
+          this.clientService
+              .saveConsent(this.consentForm)
+              .then(client => {
+                  this.router.navigate(['/dashboard']);
+              })
+              .catch(error => this.error = error);
+        }
+      }
+    } else {
+      if (!this.consentForm.contactName || !this.consentForm.contactNum ) {
+        swal(
+            'Whoops!',
+            'Please fill out all form fields.',
+            'warning'
+        );
+      } else {
+        this.consentForm.date = this.date;
+        this.clientService
+            .saveConsent(this.consentForm)
+            .then(client => {
+                this.router.navigate(['/dashboard']);
+            })
+            .catch(error => this.error = error);
+      }
+    }
   }
 
   goBack() {

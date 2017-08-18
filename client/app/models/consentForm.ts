@@ -1,12 +1,13 @@
 export class ConsentForm {
   userID: string;
-  date: string;
+  date: Date;
   allowDetailedMessage: boolean;
-  ontarioWorks: string;
-  ontarioDisabilityProgram: string;
-  employmentInsurance: string;
-  employmentServices: string;
-  other: string;
+  alternateNumber: string;
+  ontarioWorks: boolean;
+  ontarioDisabilityProgram: boolean;
+  employmentInsurance: boolean;
+  employmentServices: boolean;
+  other: boolean;
   contactName: string;
   contactNum: string;
   literacyAgencies: string;

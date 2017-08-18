@@ -45,50 +45,6 @@
                   </template>
                 </p-column>
             </p-dataTable>
-            <!-- <table class="table table-striped" [mfData]="students | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
-                <thead>
-                    <tr>
-                      <th>
-                          <mfDefaultSorter by="studentNumber">Student Number</mfDefaultSorter>
-                      </th>
-                        <th>
-                            <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="5">
-                            <input placeholder="Filter by student name" class="form-control" [(ngModel)]="filterQuery" />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let student of mf.data" [class.active]="student === selectedStudent">
-                        <td>{{student.studentNumber}}</td>
-                        <td>{{student.firstName + " " + student.lastName}}</td>
-                        <td class="actionColumn middle">
-                            <div class="inline">
-                                <button class="btn btn-primary" (click)="gotoEdit(student, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-                            </div>
-                            <div class="inline">
-                                <button class="btn btn-success" (click)="archiveAlert(student, $event)"><i class="fa fa-archive" aria-hidden="true"></i> Archive</button>
-                            </div>
-                            <div class="inline">
-                              <button class="btn btn-info" (click)="populatePRF(student)"><i class="fa fa-eye" aria-hidden="true"></i> Generate PRF</button>
-                            </div>
-                            <div class="inline">
-                              <button class="btn btn-warning" (click)="viewInfo(student)"><i class="fa fa-eye" aria-hidden="true"></i> View Info</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5">
-                            <mfBootstrapPaginator></mfBootstrapPaginator>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table> -->
             <div class="push"></div>
           </div>
           <div class="footer">

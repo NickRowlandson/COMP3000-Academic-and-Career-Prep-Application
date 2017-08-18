@@ -35,50 +35,6 @@
                 </template>
               </p-column>
           </p-dataTable>
-            <!-- <table class="table table-striped" [mfData]="users | userFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="15">
-                <thead>
-                    <tr>
-                        <th>
-                            <mfDefaultSorter by="userType">Role</mfDefaultSorter>
-                        </th>
-                        <th>
-                            <mfDefaultSorter by="firstName">Name</mfDefaultSorter>
-                        </th>
-                        <th>
-                            <mfDefaultSorter by="email">Email</mfDefaultSorter>
-                        </th>
-                        <th>Action</th>
-                    </tr>
-                    <tr>
-                        <th colspan="5">
-                            <input placeholder="Filter by staff name" class="form-control" [(ngModel)]="filterQuery" />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of mf.data" [class.active]="user === selectedUser">
-                        <td>{{item.userType}}</td>
-                        <td>{{item.firstName + " " + item.lastName}}</td>
-                        <td>{{item.email}}</td>
-                        <td class="actionColumn middle">
-                            <div class="inline">
-                                <button class="btn btn-primary" (click)="gotoEdit(item, $event)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-                            </div>
-                            <div class="inline">
-                                <button class="btn btn-danger" (click)="deleteAlert(item, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5">
-                            <mfBootstrapPaginator></mfBootstrapPaginator>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table> -->
-
         </div>
         <div class="col-md-4">
           <button class="btn btn-success pull-right" style="margin-bottom: 3px;" (click)="addUser()"><i class="fa fa-plus" ></i> Add Staff</button>

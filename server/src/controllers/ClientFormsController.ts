@@ -29,6 +29,7 @@ class ClientFormsController {
                         .then(function(connection) {
                             var consentQuery = "'" + _id + "', '" +
                                 consentForm.date + "', '" +
+                                consentForm.alternateNumber + "', '" +
                                 consentForm.allowDetailedMessage + "', '" +
                                 consentForm.ontarioWorks + "', '" +
                                 consentForm.ontarioDisabilityProgram + "', '" +
@@ -47,10 +48,11 @@ class ClientFormsController {
                                         .then(function() {
                                             res.send({ "success": "success" });
                                         }).catch(function(err) {
-                                            res.send({ "error": "error" }); console.log("Update client " + err);
+                                            res.send({ "error": "error" });
+                                              console.log("Update client " + err);
                                         });
                                 }).catch(function(err) {
-                                    console.log("Save consent form " + err);
+                                    console.log("Save consent form " + consentQuery);
                                     res.send({ "error": "error" });
                                 });
                         });

@@ -106,7 +106,7 @@ export class ClientStatusComponent implements OnInit {
         this.consentForms = objects.consentForms;
         this.learningStyleForms = objects.learningStyleForms;
         this.stage1 = this.data.filter(x => x.suitability);
-        this.stage2 = this.data.filter(x => !x.suitability);
+        this.stage2 = this.data.filter(x => !x.suitability && x.consent && x.learningStyle);
         this.stage3 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle);
         this.stage4 = this.data.filter(x => !x.suitability && !x.consent && !x.learningStyle && x.banner && x.cam);
         this.doughnutChartLabels = ['Suitability', 'Consent/Learning Style', 'Banner/CAM', 'Transfer Ready'];
@@ -114,22 +114,11 @@ export class ClientStatusComponent implements OnInit {
         this.doughnutChartType = 'doughnut';
         this.addSuitability = false;
         this.statusReport = true;
-        // this.actionItems = [
-        //   {label: 'Create as Student', icon: 'fa-refresh', command: (data) =>  this.createAsStudent(data)},
-        //   {label: 'Add Suitability Info', icon: 'fa-check', command: (data) => this.addSuitabilityInfo(data)},
-        //   {label: 'View Info', icon: 'fa-eye', command: (data) => this.showClientView(data)},
-        //   {label: 'Delete', icon: 'fa-trash-o', command: (data) => this.deleteAlert(data)}
-        // ];
-
     }
 
     addClient() {
         this.router.navigate(['/suitability']);
     }
-
-    // gotoEdit(client: Client, event: any) {
-    //     this.router.navigate(['/clientEdit', client.clientID]);
-    // }
 
     deleteAlert(client: Client) {
         swal({

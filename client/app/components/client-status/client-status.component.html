@@ -23,7 +23,7 @@
         <div class="col-md-6">
             <div class="wrapper2">
                 <h2>Clients</h2>
-                <button class="addClient btn btn-primary" (click)="addClient()" title="Add new client"><i class="fa fa-plus"> New Client</i></button>
+                <button class="addClient btn btn-primary" (click)="addClient()" title="Add new client"><i class="fa fa-plus"></i> New Client</button>
                 <hr>
                 <div class="error" *ngIf="error">{{error}}</div>
                 <input placeholder="Filter by client name" class="form-control" [(ngModel)]="filterQuery" />
@@ -73,11 +73,13 @@
         <div *ngIf="statusReport" class="col-md-6">
             <h2>Status Report</h2>
             <hr>
-            <div>
-                <h3>Total clients: {{ clientTotal }}</h3></div>
-            <div style="display: block">
-                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutChartColors" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
-                </canvas>
+            <div class="well">
+                <h3>Total clients: {{ clientTotal }}</h3>
+
+                <div style="display: block">
+                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [colors]="doughnutChartColors" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                </div>
             </div>
         </div>
         <div *ngIf="clientView" class="col-md-6">
@@ -168,7 +170,7 @@
             </div>
             <div *ngIf="showLearningStyle" class="">
                 <br />
-                <p><strong>I learn best through: {{ learningStyleView.learnBy }}</strong></p>
+                <p><strong>I learn best by: </strong>{{ learningStyleView.learnBy }}</p>
                 <div class="form-group">
                     <div style="display: block">
                         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
@@ -229,28 +231,28 @@
                 <div *ngIf="suitabilityForm.suitabilityID">
                   <div style="height: 25px;clear:both"></div>
                   <label class="col-md-5 control-label">Transcript: </label>
-                  <button *ngIf="suitabilityForm.transcript === 'true'" (click)="suitabilityForm.transcript = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.transcript === 'false' || suitabilityForm.transcript === 'undefined'" (click)="suitabilityForm.transcript = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.transcript === 'true'" (click)="suitabilityForm.transcript = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                  <button *ngIf="suitabilityForm.transcript === 'false' || suitabilityForm.transcript === 'undefined'" (click)="suitabilityForm.transcript = 'true'" class="btn btn-warning booleanBtn">No</button>
                   <br />
                   <label class="col-md-5 control-label">Gov't ID: </label>
-                  <button *ngIf="suitabilityForm.governmentID === 'true'" (click)="suitabilityForm.governmentID = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.governmentID === 'false' || suitabilityForm.governmentID === 'undefined'" (click)="suitabilityForm.governmentID = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.governmentID === 'true'" (click)="suitabilityForm.governmentID = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                  <button *ngIf="suitabilityForm.governmentID === 'false' || suitabilityForm.governmentID === 'undefined'" (click)="suitabilityForm.governmentID = 'true'" class="btn btn-warning booleanBtn">No</button>
                   <br />
                   <label class="col-md-5 control-label">Appropriate Occupational Goal</label>
-                  <button *ngIf="suitabilityForm.appropriateGoal === 'true'" (click)="suitabilityForm.appropriateGoal = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.appropriateGoal === 'false' || suitabilityForm.appropriateGoal === 'undefined'" (click)="suitabilityForm.appropriateGoal = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.appropriateGoal === 'true'" (click)="suitabilityForm.appropriateGoal = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                  <button *ngIf="suitabilityForm.appropriateGoal === 'false' || suitabilityForm.appropriateGoal === 'undefined'" (click)="suitabilityForm.appropriateGoal = 'true'" class="btn btn-warning booleanBtn">No</button>
                   <br />
                   <label class="col-md-5 control-label">19+ Years Old</label>
-                  <button *ngIf="suitabilityForm.isValidAge === 'true'" (click)="suitabilityForm.isValidAge = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.isValidAge === 'false' || suitabilityForm.isValidAge === 'undefined'" (click)="suitabilityForm.isValidAge = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.isValidAge === 'true'" (click)="suitabilityForm.isValidAge = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                  <button *ngIf="suitabilityForm.isValidAge === 'false' || suitabilityForm.isValidAge === 'undefined'" (click)="suitabilityForm.isValidAge = 'true'" class="btn btn-warning booleanBtn">No</button>
                   <br />
                   <label class="col-md-5 control-label">Registered In High School/Post-Sec</label>
-                  <button *ngIf="suitabilityForm.schoolRegistration === 'true'" (click)="suitabilityForm.schoolRegistration = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.schoolRegistration === 'false' || suitabilityForm.schoolRegistration === 'undefined'" (click)="suitabilityForm.schoolRegistration = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.schoolRegistration === 'true'" (click)="suitabilityForm.schoolRegistration = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                  <button *ngIf="suitabilityForm.schoolRegistration === 'false' || suitabilityForm.schoolRegistration === 'undefined'" (click)="suitabilityForm.schoolRegistration = 'true'" class="btn btn-warning booleanBtn">No</button>
                   <br />
                   <label class="col-md-5 control-label">Available During Class Time</label>
-                  <button *ngIf="suitabilityForm.availableDuringClass === 'true'" (click)="suitabilityForm.availableDuringClass = 'false'" class="btn btn-success">Yes</button>
-                  <button *ngIf="suitabilityForm.availableDuringClass === 'false' || suitabilityForm.availableDuringClass === 'undefined'" (click)="suitabilityForm.availableDuringClass = 'true'" class="btn btn-warning">No</button>
+                  <button *ngIf="suitabilityForm.availableDuringClass === 'true'" (click)="suitabilityForm.availableDuringClass = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                  <button *ngIf="suitabilityForm.availableDuringClass === 'false' || suitabilityForm.availableDuringClass === 'undefined'" (click)="suitabilityForm.availableDuringClass = 'true'" class="btn btn-warning booleanBtn">No</button>
                 </div>
                 <div style="height: 25px;clear:both"></div>
                 <div class="form-group">
@@ -261,9 +263,9 @@
                           <option value="Grade 10-11">Grade 10-11</option>
                           <option value="Grade 12">Grade 12</option>
                         </select>
-                        <div *ngIf="lastGrade.errors && lastGrade.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="lastGrade.errors && lastGrade.touched" class="alert alert-danger">
                             <div [hidden]="!lastGrade.errors.required">Please Select Last Grade</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="form-group">
@@ -274,9 +276,9 @@
                           <option value="Applied/General">Applied/General</option>
                           <option value="Workplace/Basic">Workplace/Basic</option>
                         </select>
-                        <div *ngIf="level.errors && level.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="level.errors && level.touched" class="alert alert-danger">
                             <div [hidden]="!level.errors.required">Please Select A Level</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- PART A: START -->
@@ -288,9 +290,9 @@
                           <option value="In one year">In one year</option>
                           <option value="More than a Year">More than a Year</option>
                         </select>
-                        <div *ngIf="offerStartDate.errors && offerStartDate.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="offerStartDate.errors && offerStartDate.touched" class="alert alert-danger">
                             <div [hidden]="!offerStartDate.errors.required">Please Select Offer Start Date</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="form-group">
@@ -301,9 +303,9 @@
                           <option value="Yes but lacks skills/high enough marks">Yes but lacks skills/high enough marks</option>
                           <option value="Yes">Yes</option>
                         </select>
-                        <div *ngIf="meetsGoals.errors && meetsGoals.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="meetsGoals.errors && meetsGoals.touched" class="alert alert-danger">
                             <div [hidden]="!meetsGoals.errors.required">Please Select Goal Requirements</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="form-group">
@@ -314,9 +316,9 @@
                           <option value="1-6 years">1-6 years</option>
                           <option value="Less than 1 year">Less than 1 year</option>
                         </select>
-                        <div *ngIf="school.errors && school.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="school.errors && school.touched" class="alert alert-danger">
                             <div [hidden]="!school.errors.required">Please Select Time Out Of School</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="form-group">
@@ -327,9 +329,9 @@
                           <option value="Yes - Appropriate progress">Yes - Appropriate progress</option>
                           <option value="Yes – No progress">Yes – No progress</option>
                         </select>
-                        <div *ngIf="program.errors && program.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="program.errors && program.touched" class="alert alert-danger">
                             <div [hidden]="!program.errors.required">Please Select An Option</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="form-group">
@@ -340,9 +342,9 @@
                           <option value="Working part time">Working part time</option>
                           <option value="Working full time">Working full time</option>
                         </select>
-                        <div *ngIf="employment.errors && employment.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="employment.errors && employment.touched" class="alert alert-danger">
                             <div [hidden]="!employment.errors.required">Please Select Employment Option</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="form-group">
@@ -353,9 +355,9 @@
                           <option value="No income">No income</option>
                           <option value="Employed">Employed</option>
                         </select>
-                        <div *ngIf="income.errors && income.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="income.errors && income.touched" class="alert alert-danger">
                             <div [hidden]="!income.errors.required">Please Select Income Option</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="form-group">
@@ -366,9 +368,9 @@
                           <option value="30-44 years old">30-44 years old</option>
                           <option value="45-65 years old">45-65 years old</option>
                         </select>
-                        <div *ngIf="age.errors && age.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="age.errors && age.touched" class="alert alert-danger">
                             <div [hidden]="!age.errors.required">Please Select Age Range</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- PART A: ENDS -->
@@ -381,9 +383,9 @@
                           <option value="5-10">5-10</option>
                           <option value="10-20">10-20</option>
                         </select>
-                        <div *ngIf="hours.errors && hours.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="hours.errors && hours.touched" class="alert alert-danger">
                             <div [hidden]="!hours.errors.required">Please Select Hours Range</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- Apply judgement? -->
@@ -391,13 +393,13 @@
                     <label class="col-md-5 text-nowrap control-label">Work History: </label>
                     <div class="col-md-7">
                         <select class="form-control" [(ngModel)]="suitabilityForm.workHistory" required #history="ngModel">
-                      <option value="Less than 1 year experience in the field">Less than 1 year experience in the field</option>
-                      <option value="1-4 years experience in the field">1-4 years experience in the field</option>
-                      <option value="4+ years experience in the field">4+ years experience in the field</option>
+                      <option value="Less than 1 year experience">Less than 1 year experience</option>
+                      <option value="1-4 years experience">1-4 years experience</option>
+                      <option value="4+ years experience">4+ years experience</option>
                     </select>
-                        <div *ngIf="history.errors && history.touched" class="alert alert-danger">
+                        <!-- <div *ngIf="history.errors && history.touched" class="alert alert-danger">
                             <div [hidden]="!history.errors.required">Please Select Work History</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div style="height: 25px;clear:both"></div>
@@ -438,80 +440,80 @@
                 </div>
                 <div *ngIf="suitabilityForm.suitabilityID">
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorHealth === 'true'" (click)="suitabilityForm.factorHealth = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorHealth === 'false' || suitabilityForm.factorHealth === 'undefined' " (click)="suitabilityForm.factorHealth = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorHealth === 'true'" (click)="suitabilityForm.factorHealth = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorHealth === 'false' || suitabilityForm.factorHealth === 'undefined' " (click)="suitabilityForm.factorHealth = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Client has health problems that may prevent client from working effectively
                       </label>
                     </div>
 
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorInstructions === 'true'" (click)="suitabilityForm.factorInstructions = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorInstructions === 'false' || suitabilityForm.factorInstructions === 'undefined'" (click)="suitabilityForm.factorInstructions = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorInstructions === 'true'" (click)="suitabilityForm.factorInstructions = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorInstructions === 'false' || suitabilityForm.factorInstructions === 'undefined'" (click)="suitabilityForm.factorInstructions = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Client has difficulty understanding instructions
                       </label>
                     </div>
 
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorCommunication === 'true'" (click)="suitabilityForm.factorCommunication = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorCommunication === 'false' || suitabilityForm.factorCommunication === 'undefined'" (click)="suitabilityForm.factorCommunication = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorCommunication === 'true'" (click)="suitabilityForm.factorCommunication = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorCommunication === 'false' || suitabilityForm.factorCommunication === 'undefined'" (click)="suitabilityForm.factorCommunication = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Client has difficulty communicating
                       </label>
                     </div>
 
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorLanguage === 'true'" (click)="suitabilityForm.factorLanguage = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorLanguage === 'false' || suitabilityForm.factorLanguage === 'undefined'" (click)="suitabilityForm.factorLanguage = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorLanguage === 'true'" (click)="suitabilityForm.factorLanguage = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorLanguage === 'false' || suitabilityForm.factorLanguage === 'undefined'" (click)="suitabilityForm.factorLanguage = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Client has language barrier
                       </label>
                     </div>
 
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorComputer === 'true'" (click)="suitabilityForm.factorComputer = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorComputer === 'false' || suitabilityForm.factorComputer === 'undefined'" (click)="suitabilityForm.factorComputer = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorComputer === 'true'" (click)="suitabilityForm.factorComputer = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorComputer === 'false' || suitabilityForm.factorComputer === 'undefined'" (click)="suitabilityForm.factorComputer = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Client has limited computer skills
                       </label>
                     </div>
 
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorHousing === 'true'" (click)="suitabilityForm.factorHousing = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorHousing === 'false' || suitabilityForm.factorHousing === 'undefined'" (click)="suitabilityForm.factorHousing = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorHousing === 'true'" (click)="suitabilityForm.factorHousing = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorHousing === 'false' || suitabilityForm.factorHousing === 'undefined'" (click)="suitabilityForm.factorHousing = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Client has housing instability
                       </label>
                     </div>
 
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorTransportation === 'true'" (click)="suitabilityForm.factorTransportation = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorTransportation === 'false' || suitabilityForm.factorTransportation === 'undefined'" (click)="suitabilityForm.factorTransportation = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorTransportation === 'true'" (click)="suitabilityForm.factorTransportation = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorTransportation === 'false' || suitabilityForm.factorTransportation === 'undefined'" (click)="suitabilityForm.factorTransportation = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Transportation is limited restricted (no license/ no $ for bus/gas)
                       </label>
                     </div>
 
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorDaycare === 'true'" (click)="suitabilityForm.factorDaycare = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorDaycare === 'false' || suitabilityForm.factorDaycare === 'undefined'" (click)="suitabilityForm.factorDaycare = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorDaycare === 'true'" (click)="suitabilityForm.factorDaycare = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorDaycare === 'false' || suitabilityForm.factorDaycare === 'undefined'" (click)="suitabilityForm.factorDaycare = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Client does not have reliable daycare
                       </label>
                     </div>
 
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorInternet === 'true'" (click)="suitabilityForm.factorInternet = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorInternet === 'false' || suitabilityForm.factorInternet === 'undefined'" (click)="suitabilityForm.factorInternet = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorInternet === 'true'" (click)="suitabilityForm.factorInternet = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorInternet === 'false' || suitabilityForm.factorInternet === 'undefined'" (click)="suitabilityForm.factorInternet = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Client does not have phone/internet access
                       </label>
                     </div>
 
                     <div class="col-md-12">
-                      <button *ngIf="suitabilityForm.factorPersonal === 'true'" (click)="suitabilityForm.factorPersonal = 'false'" class="btn btn-success">Yes</button>
-                      <button *ngIf="suitabilityForm.factorPersonal === 'false' || suitabilityForm.factorPersonal === 'undefined'" (click)="suitabilityForm.factorPersonal = 'true'" class="btn btn-warning">No</button>
+                      <button *ngIf="suitabilityForm.factorPersonal === 'true'" (click)="suitabilityForm.factorPersonal = 'false'" class="btn btn-success booleanBtn">Yes</button>
+                      <button *ngIf="suitabilityForm.factorPersonal === 'false' || suitabilityForm.factorPersonal === 'undefined'" (click)="suitabilityForm.factorPersonal = 'true'" class="btn btn-warning booleanBtn">No</button>
                       <label class="control-label">
                         Client is going through difficulties in his/her personal life (legal, family, substance abuse, financial)
                       </label>
@@ -551,6 +553,7 @@
                 <div style="height: 25px;clear:both"></div>
                 <h3>Review</h3>
                 <hr>
+                <div style="height:250px">
                 <div *ngIf="!calculated" class="col-md-12" style="margin-bottom:50px;">
                   <button class="btn btn-primary" (click)="calculate()"><i class="fa fa-refresh" aria-hidden="true"></i> Calculate</button>
                 </div>
@@ -583,6 +586,7 @@
                       <button (click)="saveSuitability()" class="saveButton" title="Save suitability"><h4><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</h4></button>
                   </div>
               </div>
+            </div>
             </div>
             </div>
         </div>

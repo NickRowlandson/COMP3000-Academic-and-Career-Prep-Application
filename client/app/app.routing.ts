@@ -24,7 +24,6 @@ import { PrfFormComponent } from './components/prf-form/prf-form.component';
 import { LearningStyleComponent } from './components/learning-style-form/learning-style-form.component';
 import { StudentEnrollmentComponent } from './components/student-enrollment/student-enrollment.component';
 import { TimetableComponent } from './components/timetable/timetable.component';
-import { VisviewComponent } from './components/visview/visview.component';
 import { AttendanceListComponent } from './components/attendance-list/attendance-list.component';
 import { AttendanceReportComponent } from './components/attendance-report/attendance-report.component';
 
@@ -112,11 +111,6 @@ const appRoutes: Routes = [
         path: 'student-enrollment/:courseID/:instructorID/:courseName',
         component: StudentEnrollmentComponent,
         canActivate: [AuthGuard, StaffGuard]
-    },
-    {
-        path: 'visview',
-        component: VisviewComponent,
-        canActivate: [AuthGuard]
     },
     {
         path: 'attendance-list',

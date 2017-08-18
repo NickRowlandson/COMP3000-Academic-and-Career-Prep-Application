@@ -27,7 +27,7 @@
                     </div>
                     <div *ngIf="!consentForm.allowDetailedMessage">
                         <div class="col-md-3">
-                            <input type="tel" class="form-control" placeholder="Alternate Phone #" />
+                            <input type="tel" class="form-control" placeholder="Alternate Phone #" [(ngModel)]="consentForm.alternateNumber"/>
                         </div>
                     </div>
                 </div>
@@ -53,18 +53,18 @@
             </div>
 
             <div class="form-group col-md-12">
-                <h2 class="col-md-12" style="text-align:center">Release Of information to outside agencies </h2>
+                <h2 class="col-md-12" style="text-align:center">Release of information to outside agencies </h2>
                 <b><em><p class="col-md-10 col-md-offset-1">I also authorize Academic and Career Preparation, Georgian College, to provide information concerning my academic status and progress to:</p></em></b>
                 <div style="text-align:center" class=" col-md-10 col-md-offset-1">
-                    <label><input type="checkbox" class="form-check " [(ngModel)]="consentForm.ontarioWorks"> Ontario Works</label>
-                    <label><input type="checkbox" class=" col-md-offset-1 form-check" [(ngModel)]="consentForm.ontarioDisabilityProgram">  Ontario Disability Program</label>
-                    <div class="col-md-12"></div><label><input type="checkbox" class=" col-md-offset-1 form-check" [(ngModel)]="consentForm.employmentInsurance"> Employment Insurance</label>
-                    <label><input type="checkbox" class="col-md-offset-1 form-check " [(ngModel)]="consentForm.employmentServices">  Employment Services</label>
-                    <label><input type="checkbox" class="col-md-offset-1 form-check " [(ngModel)]="consentForm.other">  Other</label>
+                    <label style="padding-right:10px"><input type="checkbox" class="form-check " [(ngModel)]="consentForm.ontarioWorks"> Ontario Works</label>
+                    <label style="padding-right:10px"><input type="checkbox" class=" col-md-offset-1 form-check" [(ngModel)]="consentForm.ontarioDisabilityProgram">  Ontario Disability Program</label>
+                    <label style="padding-right:10px"><input type="checkbox" class=" col-md-offset-1 form-check" [(ngModel)]="consentForm.employmentInsurance"> Employment Insurance</label>
+                    <label style="padding-right:10px"><input type="checkbox" class="col-md-offset-1 form-check " [(ngModel)]="consentForm.employmentServices">  Employment Services</label>
+                    <label style="padding-right:10px"><input type="checkbox" class="col-md-offset-1 form-check " [(ngModel)]="consentForm.other">  Other</label>
                 </div>
             </div>
 
-            <div class="form-group col-md-10 col-md-offset-1">
+            <div class="form-group col-md-8 col-md-offset-2">
                 <h2 class="col-md-12" style="text-align:center">Other contact for follow up</h2>
                 <b><em>  <p> If, during the first twelve months after I leave the program, I cannot be reached at the telephone number(s) and/or email address in my file,
                    Georgian College staff may call the following person to get my current number and/or address:</p></em></b>
@@ -86,7 +86,7 @@
                     </div>
             </div>
 
-            <div class="form-group col-md-10 col-md-offset-1">
+            <div class="form-group col-md-8 col-md-offset-2">
                 <h2 class="col-md-12" style="text-align:center">Other literacy agencies</h2>
                 <b><em>  <p>I agree that my assessment and personal information may be forwarded to another literacy agency if I am to be referred
                  to that agency for more appropriate literacy training.</p></em></b>

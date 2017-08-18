@@ -6,6 +6,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { ClientService } from "../../services/client.service";
 import { AuthService } from '../../services/authentication.service';
 declare var swal: any;
+declare var moment: any;
 
 @Component({
     selector: 'suitabilityForm',
@@ -204,12 +205,13 @@ export class SuitabilityFormComponent {
     }
 
     save() {
-        this.client["inquiryDate"] = this.date;
-        this.client["username"] = this.client.firstName + this.client.lastName;
-        if (this.client.birthday) {
-          this.client["password"] = this.client.birthday.replace(/-/g, "");
-        }
-        if (this.client.password && this.client.firstName && this.client.lastName && this.client.email && this.client.phone ) {
+        if (this.client.birthday && this.client.firstName && this.client.lastName && this.client.email && this.client.phone ) {
+          var birthday = new Date(this.client.birthday);
+          var birthdayFormat = moment(birthday).format('DD-MM-YYYY');
+          this.client["inquiryDate"] = this.date;
+          this.client["username"] = this.client.firstName + this.client.lastName;
+          this.client["password"] = birthdayFormat.replace(/-/g, "");
+          console.log(this.client.password);
           if (Object.keys(this.suitabilityForm).length === 0) {
             swal({
                 title: 'Suitability Incomplete',
