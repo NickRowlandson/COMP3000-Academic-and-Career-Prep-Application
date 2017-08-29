@@ -1,4 +1,4 @@
-#Academic and Career Preparation Administration Tool
+# Academic and Career Preparation Administration Tool
 Georgian College
 
 COMP3000
@@ -6,39 +6,36 @@ COMP3000
 February 1, 2017
 
 
-##Team Members:
+## Team Members:
 
-Nicholas Rowlandson
+* Nicholas Rowlandson
 
-Timothy Harasym
+* Timothy Harasym
 
-Di Zhou
+* Di Zhou
 
-Kyle Duffy
+* Kyle Duffy
 
-Nathan Siu
+* Nathan Siu
 
-Mike Meissner
+* Mike Meissner
 
-Anoyan Nithiananthan
+* Anoyan Nithiananthan
 
-Josh Mangoff
-
-Mark Vandenbroek
+* Josh Mangoff
 
 
-##Installation Instructions:
+## Dev Environment Install Instructions:
 
 1. git clone repository
 2. cd
 3. npm install
 4. bower install
-4. npm run build
-5. npm run deploy
+5. npm run quickstart
 6. http://localhost:3000
 
 
-##Project Info/Status:
+## Project Info/Status:
 
 https://comp3000-w2017-teamc.slack.com/messages/dev/
 https://trello.com/b/8JsIHLGs/comp3000-group-c
